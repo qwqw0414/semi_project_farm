@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
@@ -27,7 +28,7 @@ public class MemberEnrollServletEnd extends HttpServlet {
 		
 		Member m = new Member(memberId, password, memberName, birth, phone, zipcode, address, null, false);
 		
-		System.out.println(m);
+		int result = new MemberService().memberEnroll(m);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
