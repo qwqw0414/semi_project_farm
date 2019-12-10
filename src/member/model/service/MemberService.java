@@ -16,6 +16,13 @@ public class MemberService {
 		return m;
 	}
 
+	public int memberEnroll(Member m) {
+		
+		
+		
+		return 0;
+	}
+
 	
 	
 }
