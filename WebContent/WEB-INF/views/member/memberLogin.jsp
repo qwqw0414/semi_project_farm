@@ -6,6 +6,7 @@
 	        <div class="form-group">
 	            <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
 	            <small class="form-text text-muted">아이디를 입력해주세요.</small>
+	            <input type="checkbox" name="saveId" id="saveId" />아이디 저장
 	        </div>
 	        <div class="form-group">
 	            <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호">
