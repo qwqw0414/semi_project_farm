@@ -2,3 +2,4 @@
 .classpath
 .settings/
 WebContent/META-INF/MANIFEST.MF
+WebContent/WEB-INF/classes/
