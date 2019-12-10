@@ -12,6 +12,17 @@
     <servlet-name>MemberEnrollServlet</servlet-name>
     <url-pattern>/member/memberEnroll</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
+=======
+  <servlet>
+    <servlet-name>MemberLoginServlet</servlet-name>
+    <jsp-file>/WEB-INF/views/member/memberLogin.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLoginServlet</servlet-name>
+    <url-pattern>/member/memberLogin</url-pattern>
+  </servlet-mapping>
+>>>>>>> e575e646d519cc445fce25b8746d4ca2a0edf6e2
   <filter>
     <filter-name>EncodeFilter</filter-name>
     <filter-class>common.filter.EncodeFilter</filter-class>
