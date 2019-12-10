@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberLoginServletEnd
@@ -28,7 +29,7 @@ public class MemberLoginServletEnd extends HttpServlet {
 		System.out.println(password);
 		//2. 업무로직
 		MemberService ms = new MemberService();
-		int result = ms.memberLogin(memberId, password);
+		Member m = ms.selectOne(memberId);
 	}
 
 	/**

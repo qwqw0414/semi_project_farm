@@ -4,7 +4,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
+
+import member.model.vo.Member;
 
 public class MemberDAO {
 
@@ -12,7 +16,6 @@ public class MemberDAO {
 	
 	public MemberDAO() {
 		try {
-            //클래스객체 위치찾기 : 절대경로를 반환한다. 
             String fileName = MemberDAO.class.getResource("/member/member-query.properties").getPath();
             prop.load(new FileReader(fileName));
             
@@ -20,11 +23,23 @@ public class MemberDAO {
             e.printStackTrace();
         }
 	}
-	public int memberLogin(Connection conn, String memberId, String password) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		return 0;
-	}
 
+	public Member selectOne(Connection conn, String memberId) {
+		Member m = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("selectOne");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				m = new Member();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
 }
