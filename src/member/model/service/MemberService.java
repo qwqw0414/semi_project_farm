@@ -17,10 +17,20 @@ public class MemberService {
 	}
 
 	public int memberEnroll(Member m) {
+		Connection conn = getConnection();
 		
+		int result =  new MemberDAO().memberEnroll(conn,m);
 		
+		if(result > 0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
 		
-		return 0;
+		close(conn);
+		
+		return result;
 	}
 
 	
