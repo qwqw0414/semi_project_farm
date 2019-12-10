@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
+import static common.JDBCTemplate.close;
 import member.model.vo.Member;
 
 public class MemberDAO {
@@ -35,10 +35,21 @@ public class MemberDAO {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				m = new Member();
-				
+				m.setMemberId(rset.getString("memberId"));
+				m.setPassword(rset.getString("password"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				m.setAdmin(rset.getBoolean("isAdmin"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		return m;
 	}
