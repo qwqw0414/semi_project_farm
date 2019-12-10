@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import common.wrapper.EncryptWrapper;
 
-@WebFilter(servletNames = { "MemberEnrollEndServlet" })
+@WebFilter(servletNames = { "MemberEnrollEndServlet",
+											"MemberLoginEndServlet"})
 public class EncryptFilter implements Filter {
 
     public EncryptFilter() {
