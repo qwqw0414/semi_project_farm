@@ -35,6 +35,7 @@
 	        </div>
 	        <button type="submit" class="btn btn-primary">로그인</button>
 	        <button type="button" class="btn btn-primary">아이디 찾기</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/updatePassword'">비밀번호 찾기</button>
         </form>
 </div>
 <%} else { %>
