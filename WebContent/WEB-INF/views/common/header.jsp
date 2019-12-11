@@ -40,7 +40,10 @@
 				<%} %>
 			</li>
 			<li class="nav-item">
+			<%if(memberLoggedIn!=null){ %>
 				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a>
+			<%}  %>
+			
 			</li>
 		</ul>
 	</nav>
