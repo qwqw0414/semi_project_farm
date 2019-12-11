@@ -40,7 +40,7 @@
 				<%} %>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">회원 정보</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a>
 			</li>
 		</ul>
 	</nav>
