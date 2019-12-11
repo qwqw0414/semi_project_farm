@@ -34,7 +34,7 @@
 	            <small class="form-text text-muted">비밀번호를 입력해주세요.</small>
 	        </div>
 	        <button type="submit" class="btn btn-primary">로그인</button>
-	        <button type="button" class="btn btn-primary">아이디 찾기</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/memberFindId'">아이디 찾기</button>
 	        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/updatePassword'">비밀번호 찾기</button>
         </form>
 </div>
