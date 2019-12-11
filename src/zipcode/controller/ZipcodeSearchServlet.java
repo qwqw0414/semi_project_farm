@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import zipcode.model.service.ZipcodeService;
 import zipcode.model.vo.Zipcode;
 
 @WebServlet("/zipcode/search")
@@ -19,10 +20,14 @@ public class ZipcodeSearchServlet extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String keyWord = request.getParameter("keyWord");
 		
-		List<Zipcode> list = new ZipcodeService().search(searchType,keyWord);
+		if(keyWord != null) {
+			
+			List<Zipcode> list = new ZipcodeService().search(searchType,keyWord);
+			
+			request.setAttribute("list", list);
+		}
 		
 		request.getRequestDispatcher("/WEB-INF/views/member/zipcode.jsp").forward(request, response);
-		
 		
 	}
 
