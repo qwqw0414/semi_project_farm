@@ -16,7 +16,8 @@
 	        </div>
 	         <div class="form-group">
 	            <input type="password" class="form-control" id="pwd_check" name="password" placeholder="비밀번호">
-	            <small class="form-text text-muted">비밀번호 확인</small>
+	            <small class="form-text text-muted">비밀번호 확인</small><br />
+	       		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
 	        </div>
 	        
 	    </form>

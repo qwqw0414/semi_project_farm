@@ -30,7 +30,7 @@
 				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberFindId">아이디 찾기</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">비밀번호 찾기</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/member/updatePassword">비밀번호 찾기</a>
 			</li>
 			<li class="nav-item">
 				<%if(memberLoggedIn==null){ %>

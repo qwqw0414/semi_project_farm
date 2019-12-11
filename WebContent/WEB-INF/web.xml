@@ -40,4 +40,20 @@
     <servlet-name>MemberFindIdServlet</servlet-name>
     <url-pattern>/member/memberFindId</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>UpdatePasswordServlet</servlet-name>
+  	<jsp-file>/WEB-INF/views/member/updatePassword.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UpdatePasswordServlet</servlet-name>
+  	<url-pattern>/member/updatePassword</url-pattern>
+  </servlet-mapping>
 </web-app>
+
+
+
+
+
+
+
+
