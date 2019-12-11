@@ -3,6 +3,7 @@ package member.model.service;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
@@ -33,6 +34,20 @@ public class MemberService {
 		return result;
 	}
 
+
+
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
