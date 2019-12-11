@@ -40,16 +40,15 @@
 <%} else { %>
 <div class="container">
 	<table id="logged-in">
-			<tr>
-				<td><%=memberLoggedIn.getMemberName() %>님, 안녕하세요.</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="button" value="내 정보보기"
-									onclick="location.href='#" />
-								<input type="button" value="로그아웃" />
-							</td>
-						</tr>
+		<tr>
+			<td><%=memberLoggedIn.getMemberName() %>님, 안녕하세요.</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="button" value="내 정보보기" onclick="location.href='#" />
+				<input type="button" value="로그아웃" />
+			</td>
+		</tr>
 	</table>
 </div>
 <%} %>
