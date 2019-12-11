@@ -3,8 +3,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 
+
 <div class="container">
-	  <form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd" method="POST">
+	  <form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd" method="POST"
+	  					onsubmit="return password_validate();">
 	        <div class="form-group">
 	            <input type="text" class="form-control" id="memberId" name="memberId" value="" placeholder="아이디">
 	            <small class="form-text text-muted">아이디를 입력해주세요.</small>
@@ -22,7 +24,7 @@
 	         <div class="form-group">
 	            <input type="password" class="form-control" id="pwd_check" name="pwd_check" placeholder="비밀번호">
 	            <small class="form-text text-muted">비밀번호 확인</small><br />
-	       		<button type="submit" class="btn btn-primary" onclick="return password_validate()">비밀번호 변경</button>
+	       		<button type="submit" class="btn btn-primary" >비밀번호 변경</button>
 	        </div>
 	        
 	    </form>
@@ -35,7 +37,7 @@ function password_validate(){
 	var pwd_new = $("#pwd_new").val().trim();
 	var pwd_chk = $("#pwd_check").val().trim();
 	
-	if($memberId.length==0){
+	if($memberId){
 		alert("성명을 입력하세요.");
 		return false;
 	}

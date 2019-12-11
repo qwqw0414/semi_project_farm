@@ -37,6 +37,12 @@ public class MemberService {
 	public Member selectByPassword(String memberId, String birth) {
 		Connection conn = getConnection();
 		Member m = new MemberDAO().selectByPassword(conn, memberId,birth);
+		if(m!=null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
 		close(conn);
 		
 		
@@ -46,6 +52,12 @@ public class MemberService {
 	public int updatePassword(Member m, String pwd_new) {
 		Connection conn = getConnection();
 		int result = new MemberDAO().updatePassword(conn, m, pwd_new);
+	
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		close(conn);
 		
 		return result;

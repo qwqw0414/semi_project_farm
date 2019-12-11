@@ -133,7 +133,7 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		
-		System.out.println(pwd_new+"dao+11111111");
+		
 		return result;
 	}
 

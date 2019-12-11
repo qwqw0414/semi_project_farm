@@ -2,6 +2,7 @@ package member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,16 +25,27 @@ public class UpdatePasswordServletEnd extends HttpServlet {
 		
 
 		Member m = new MemberService().selectByPassword(memberId, birth);
-//		System.out.println(m+"servlet+11212121121");
-		
+
+		String msg = "";
+		String loc = "";
+		String view = "/WEB-INF/views/common/msg.jsp";
 		
 		if(m!=null) {
 			int result = new MemberService().updatePassword(m, pwd_new);
-			
-			System.out.println(result+"servlet+1123123123");
-			System.out.println(pwd_new+"servlet pwdnew");
+			if(result > 0) {
+				msg = "패스워드가 변경되었습니다.";
+				loc = "/member/memberLogin";
+			} else {
+				msg = "다시 작성해주세요.";
+			}
 		
-		}
+		} 
+		
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
+		reqDispatcher.forward(request, response);
 		
 	}
 
