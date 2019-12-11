@@ -43,7 +43,7 @@ public class MemberDAO {
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
-				m.setAdmin(rset.getBoolean("isAdmin"));
+				m.setAdmin(Boolean.parseBoolean(rset.getString("admin_yn")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,6 +76,64 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		
+		return result;
+	}
+
+	public Member selectByPassword(Connection conn, String memberId, String birth) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectByPassword");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, birth);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setPassword(rset.getString("password"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				m.setAdmin(Boolean.parseBoolean(rset.getString("admin_yn")));
+
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+//		System.out.println(m+"MemberDAO 333");
+		return m;
+	}
+
+	public int updatePassword(Connection conn, Member m, String pwd_new) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updatePassword");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pwd_new);
+			pstmt.setString(2, m.getMemberId());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println(pwd_new+"dao+11111111");
 		return result;
 	}
 

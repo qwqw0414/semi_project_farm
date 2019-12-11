@@ -34,8 +34,27 @@ public class MemberService {
 		return result;
 	}
 
+	public Member selectByPassword(String memberId, String birth) {
+		Connection conn = getConnection();
+		Member m = new MemberDAO().selectByPassword(conn, memberId,birth);
+		close(conn);
+		
+		
+		return m;
+	}
+
+	public int updatePassword(Member m, String pwd_new) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().updatePassword(conn, m, pwd_new);
+		close(conn);
+		
+		return result;
+	}
 
 
+
+	
+	
 	
 	
 }
