@@ -42,6 +42,7 @@ public class MemberLoginServletEnd extends HttpServlet {
 		if(m==null) {
 			//아이디가 존재하지 않아 로그인에 실패한 경우
 			msg = "존재하지 않는 아이디입니다.";
+			loc ="/member/memberLogin";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			reqDispatcher.forward(request, response);
@@ -49,6 +50,7 @@ public class MemberLoginServletEnd extends HttpServlet {
 			//비밀번호가 틀려서 로그인에 실패한 경우
 			if(!m.getPassword().equals(password)) {
 				msg = "비밀번호가 틀렸습니다.";
+				loc ="/member/memberLogin";
 				request.setAttribute("msg", msg);
 				request.setAttribute("loc", loc);
 				reqDispatcher.forward(request, response);
