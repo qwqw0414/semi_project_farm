@@ -3,5 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <h1>홈</h1>
+<h1>홈</h1>
+
 <!-- 하이루  -->
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
