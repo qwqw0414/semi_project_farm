@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <div class="container">
-    <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" method="POST" onsubmit="return enrollValidate();">
+    <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST" onsubmit="return enrollValidate();">
         <div class="form-group">
             <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
             <small class="form-text text-muted">아이디를 입력해주세요.</small>
@@ -29,9 +29,11 @@
             <small class="form-text text-muted">연락처를 입력해주세요.</small>
         </div>
 		<div class="form-group">
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" disabled="disabled"
-					placeholder="우편번호">
+			<div class="input-group">
+                <div class="input-group-prepend">
+                    <input type="text" class="form-control" disabled="disabled" name="zipcode" placeholder="우편번호">
+                </div>
+				<input type="text" class="form-control" disabled="disabled" name="addr">
 				<div class="input-group-append">
 					<button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
 						id="button-addon2">우편번호 검색</button>
