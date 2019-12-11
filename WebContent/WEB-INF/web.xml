@@ -33,11 +33,11 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <servlet>
-  	<servlet-name>MemberFindIdServlet</servlet-name>
-  	<jsp-file>/WEB-INF/views/member/memberFindId.jsp</jsp-file>
+    <servlet-name>MemberFindIdServlet</servlet-name>
+    <jsp-file>/WEB-INF/views/member/memberFindId.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>MemberFindIdServlet</servlet-name>
-  	<url-pattern>/member/memberFindId</url-pattern>
+    <servlet-name>MemberFindIdServlet</servlet-name>
+    <url-pattern>/member/memberFindId</url-pattern>
   </servlet-mapping>
 </web-app>

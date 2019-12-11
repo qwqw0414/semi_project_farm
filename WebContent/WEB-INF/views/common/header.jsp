@@ -1,5 +1,10 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	//로그인한 경우
+	Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +33,11 @@
 				<a class="nav-link" href="#">비밀번호 찾기</a>
 			</li>
 			<li class="nav-item">
+				<%if(memberLoggedIn==null){ %>
 				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogin">로그인</a>
+				<%} else { %>
+				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
+				<%} %>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">회원 정보</a>
