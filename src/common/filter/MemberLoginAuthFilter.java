@@ -17,12 +17,12 @@ import member.model.vo.Member;
  * Servlet Filter implementation class MemberAuthFilter
  */
 @WebFilter(servletNames = { "MemberLoginServlet" })
-public class MemberAuthFilter implements Filter {
+public class MemberLoginAuthFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public MemberAuthFilter() {
+    public MemberLoginAuthFilter() {
         // TODO Auto-generated constructor stub
     }
 
