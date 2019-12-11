@@ -47,7 +47,7 @@
 		<tr>
 			<td>
 				<input type="button" value="내 정보보기" onclick="location.href='#" />
-				<input type="button" value="로그아웃" />
+				<input type="button" value="로그아웃" onclick="location.href='<%=request.getContextPath()%>/member/memberLogout'"/>
 			</td>
 		</tr>
 	</table>
