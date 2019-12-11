@@ -27,21 +27,13 @@ public class MemberFindIdServletEnd extends HttpServlet {
 		String birth = request.getParameter("birth");
 		String phone = request.getParameter("phone");
 		//2. 업무로직
-		Member m = null;
-//		try {
-//			m = new MemberService().memberFindId(memberName, birth, phone);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		
 		//3.
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
 		String loc = "/";
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
-		
-		System.out.println(m+"find");
 		
 		
 		
