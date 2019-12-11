@@ -34,7 +34,6 @@ public class MemberFindIdServletEnd extends HttpServlet {
 		String loc = "/";
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
-
 		
 		
 		
