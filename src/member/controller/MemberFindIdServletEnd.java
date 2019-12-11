@@ -28,12 +28,12 @@ public class MemberFindIdServletEnd extends HttpServlet {
 		String phone = request.getParameter("phone");
 		//2. 업무로직
 		Member m = null;
-		try {
-			m = new MemberService().memberFindId(memberName, birth, phone);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			m = new MemberService().memberFindId(memberName, birth, phone);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		//3.
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
