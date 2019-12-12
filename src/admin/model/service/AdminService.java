@@ -61,4 +61,13 @@ public class AdminService {
 	
 	}
 
+	public List<Member> selectAll() {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectAll(conn);
+		
+		close(conn);
+		return list;
+		
+	}
+
 }

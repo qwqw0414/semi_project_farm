@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import member.model.vo.Member;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
 import static common.JDBCTemplate.close;
@@ -130,5 +131,46 @@ private Properties prop = new Properties();
         
         return list;
 	}
+	public List<Member> selectAll(Connection conn) {
+		Member m = null;
+		List<Member> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectAll");
+		list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				list.add(m);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
 
 }
+
+
+
+
+
+
+
+

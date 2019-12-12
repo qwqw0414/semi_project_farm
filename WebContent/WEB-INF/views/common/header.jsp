@@ -48,9 +48,11 @@
 	</nav>
 	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
 		<ul class="navbar-nav">
+			<%if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getMemberId())){ %>
 			<li class="nav-item">
-				<a class="nav-link" href="#">회원 정보 리스트</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/admin/memberList">회원 정보 리스트</a>
 			</li>
+			<% } %>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
 			</li>
