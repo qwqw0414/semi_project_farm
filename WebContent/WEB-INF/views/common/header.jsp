@@ -49,5 +49,21 @@
 			<%} %>
 		</ul>
 	</nav>
+	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="#">회원 정보 리스트</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">상품 등록</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">상품 입고</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">주문 리스트</a>
+			</li>
+		</ul>
+	</nav>
 </header>
 <div class="container text-center">
