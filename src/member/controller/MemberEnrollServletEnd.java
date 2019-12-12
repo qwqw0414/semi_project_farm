@@ -26,9 +26,12 @@ public class MemberEnrollServletEnd extends HttpServlet {
 		String birth = request.getParameter("birth");
 		String phone = request.getParameter("phone");
 		String zipcode = request.getParameter("zipcode");
+		String addr = request.getParameter("addr");
 		String address = request.getParameter("address");
 		
-		Member m = new Member(memberId, password, memberName, birth, phone, zipcode, address, null, false);
+		Member m = new Member(memberId, password, memberName, birth, phone, zipcode, addr + " " +address, null, false);
+		
+		System.out.println(m);
 		
 		int result = new MemberService().memberEnroll(m);
 		
