@@ -1,4 +1,5 @@
 
+<%@page import="com.sun.org.apache.bcel.internal.generic.GETSTATIC"%>
 <%@page import="product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -57,7 +58,7 @@
 </tr>
 
 </thead>
-</thead>
+
 		<tbody>
 		<% if(list==null || list.isEmpty()){ %>
             <tr>
@@ -68,21 +69,21 @@
             else {
                 for(Product p : list){ 
         %>
+        <tr>
+			<td><%=p.getpId() %></td>
+        	<td><%=p.getCategory() %></td>
+        	<td><%=p.getpName() %></td>
+        	<td><%=p.getpInfo() %></td>
+        	<td><%=p.getPrice() %></td>
+        	<td><%=p.getDiscount() %></td>
+        	<td><%=p.getStock() %></td>
+        	<td><%=p.getPhoto() %></td>
+        </tr>
 
  <%		} 
             }
         %>
-        <tr>
-			<td><%=p.getpID %></td>
-        	<td></td>
-        	<td></td>
-        	<td></td>
-        	<td></td>
-        	<td></td>
-        	<td></td>
-        	<td></td>
-        </tr>
-        
+     </tbody>   
 		
 
 

@@ -53,7 +53,7 @@ public class AdminService {
 		return result;
 	}
 
-	public List<Product> selectMemberList() {
+	public List<Product> selectProductList() {
 		Connection conn = getConnection();
 		List<Product> list= new AdminDAO().selectProdcutList(conn);
 		close(conn);

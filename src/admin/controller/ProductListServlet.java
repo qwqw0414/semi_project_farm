@@ -24,7 +24,10 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	List<Product>list = new AdminService().selectMemberList();
+	List<Product>list = new AdminService().selectProductList();
+	
+	request.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
+	   .forward(request, response);
 	
 	
 	}
