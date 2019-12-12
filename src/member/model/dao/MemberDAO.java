@@ -43,7 +43,11 @@ public class MemberDAO {
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
-				m.setAdmin(Boolean.parseBoolean(rset.getString("admin_yn")));
+				if("Y".equals(rset.getString("admin_yn"))) {
+					m.setAdmin(true);		
+				} else {
+					m.setAdmin(false);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,7 +105,11 @@ public class MemberDAO {
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
-				m.setAdmin(Boolean.parseBoolean(rset.getString("admin_yn")));
+				if("Y".equals(rset.getString("admin_yn"))) {
+					m.setAdmin(true);		
+				} else {
+					m.setAdmin(false);
+				}
 
 
 			}
