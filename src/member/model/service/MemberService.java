@@ -63,6 +63,16 @@ public class MemberService {
 		return result;
 	}
 
+	public Member memberFindId(String memberName, String birth, String phone) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDAO().findMemberId(conn, memberName, birth, phone);
+		
+		close(conn);
+		
+		return m;
+	}
+
 
 
 	

@@ -2,9 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
+<%
+	Member m = (Member)request.getAttribute("member");
+%>
+
 <div class="container">
 	<form action="<%=request.getContextPath()%>/member/memberFindIdEnd"
-		method="POST" onsubmit="return FindIdValidate();">
+		method="POST" onsubmit="return FindIdValidate();" <%=(m!=null)?"hidden":""%>>
 		<div class="form-group">
 			<input type="text" class="form-control" id="memberName"
 				name="memberName" placeholder="성명"> <small
@@ -22,8 +26,14 @@
         </div>
          <button type="submit" class="btn btn-primary">아이디 찾기</button>
 
-
 	</form>
+	
+	<%if(m != null){ %>
+	<div>
+		찾은 아이디는 <%=m.getMemberId() %>입니다.
+	</div>
+	
+	<%} %>
 
 </div>
 <script>

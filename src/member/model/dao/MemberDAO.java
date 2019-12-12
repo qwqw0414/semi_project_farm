@@ -145,6 +145,51 @@ public class MemberDAO {
 		return result;
 	}
 
+	public Member findMemberId(Connection conn, String memberName, String birth, String phone) {
+		Member m = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("findMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, birth);
+			pstmt.setString(3, phone);
+			
+			System.out.println("memberName="+memberName);
+			System.out.println("birth="+birth);
+			System.out.println("phone="+phone);
+			rset = pstmt.executeQuery();
+		
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setPassword(rset.getString("password"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				m.setAdmin("Y".equals(rset.getString("admin_yn"))?true:false);
+				//System.out.println("isAdmin="+rset.getString("admin_yn"));
+				
+			}
+			System.out.println("Member@dao="+m);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return m;
+	}
+
 
 }
 
