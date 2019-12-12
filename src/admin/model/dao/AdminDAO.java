@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import product.model.vo.Product;
 import product.model.vo.ProductIO;
 import static common.JDBCTemplate.close;
 public class AdminDAO {
@@ -41,6 +43,32 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		System.out.println(44444);
+		return result;
+	}
+	public int productReg(Connection conn, Product p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("productReg");
+		
+		try {
+			int cnt = 0;
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(++cnt, p.getpId());
+			pstmt.setString(++cnt, p.getCategory());
+			pstmt.setString(++cnt, p.getpName());
+			pstmt.setString(++cnt, p.getpInfo());
+			pstmt.setInt(++cnt, p.getPrice());
+			pstmt.setString(++cnt, p.getPhoto());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
 		return result;
 	}
 

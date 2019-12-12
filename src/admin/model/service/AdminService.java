@@ -1,5 +1,6 @@
 package admin.model.service;
 
+import product.model.vo.Product;
 import product.model.vo.ProductIO;
 import static common.JDBCTemplate.*;
 
@@ -18,6 +19,23 @@ public class AdminService {
 		} else {
 			rollback(conn);
 		}
+		return result;
+	}
+
+	public int productReg(Product p) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result = new AdminDAO().productReg(conn,p);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
 		return result;
 	}
 

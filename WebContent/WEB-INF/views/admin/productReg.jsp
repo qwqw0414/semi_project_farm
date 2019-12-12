@@ -19,7 +19,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="tag">분류</span>
         </div>
-        <select class="custom-select" id="category" required>
+        <select class="custom-select" name="category" required>
             <option selected disabled hidden>카테고리 선택</option>
             <option value="과일">과일</option>
             <option value="채소">채소</option>

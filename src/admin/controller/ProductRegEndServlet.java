@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
+import admin.model.service.AdminService;
 import common.MvcFileRenamePolicy;
 import product.model.vo.Product;
 
@@ -26,7 +27,7 @@ public class ProductRegEndServlet extends HttpServlet {
 		FileRenamePolicy mvcFileRenamePolicy = new MvcFileRenamePolicy();
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", mvcFileRenamePolicy);
 		
-		String pId = multiReq.getParameter("category");
+		String pId = multiReq.getParameter("pId");
 		String category = multiReq.getParameter("category");
 		String pName = multiReq.getParameter("pName");
 		String pInfo = multiReq.getParameter("pInfo");
@@ -35,6 +36,10 @@ public class ProductRegEndServlet extends HttpServlet {
 		
 		Product p = new Product(pId, category, pName, pInfo, price, 0, 0, photo);
 		
+		int result = new AdminService().productReg(p);
+		
+		request.getRequestDispatcher("/index.jsp")
+		   	   .forward(request, response);
 		
 	}
 
