@@ -21,4 +21,16 @@ public class AdminService {
 		return result;
 	}
 
+	public int productOutput(ProductIO pIO) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().productOutput(conn, pIO);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

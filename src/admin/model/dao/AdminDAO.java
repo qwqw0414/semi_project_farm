@@ -24,7 +24,7 @@ private Properties prop = new Properties();
 	public int productInput(Connection conn, ProductIO pIO) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("ProductInput");
+		String query = prop.getProperty("ProductIOUpdate");
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, pIO.getIoId());
@@ -34,6 +34,26 @@ private Properties prop = new Properties();
 			pstmt.setInt(5, pIO.getAmount());
 			result = pstmt.executeUpdate();
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int productOutput(Connection conn, ProductIO pIO) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("ProductIOUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pIO.getIoId());
+			pstmt.setString(2, pIO.getpId());
+			pstmt.setString(3, pIO.getMemberId());
+			pstmt.setString(4, pIO.getStatus());
+			pstmt.setInt(5, pIO.getAmount());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
