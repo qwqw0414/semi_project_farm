@@ -21,11 +21,10 @@ private Properties prop = new Properties();
             e.printStackTrace();
         }
 	}
-	public int ProductInput(Connection conn, ProductIO pIO) {
+	public int productInput(Connection conn, ProductIO pIO) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("ProductInput");
-		System.out.println(33333);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, pIO.getIoId());
@@ -34,13 +33,12 @@ private Properties prop = new Properties();
 			pstmt.setString(4, pIO.getStatus());
 			pstmt.setInt(5, pIO.getAmount());
 			result = pstmt.executeUpdate();
-			System.out.println("@adminDAO: "+result);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		System.out.println(44444);
 		return result;
 	}
 

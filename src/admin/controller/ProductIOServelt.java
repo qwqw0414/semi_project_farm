@@ -23,7 +23,6 @@ public class ProductIOServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
-		System.out.println(11111);
 		String pId = request.getParameter("pId");
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		String status = request.getParameter("selectIO");
@@ -39,15 +38,14 @@ public class ProductIOServelt extends HttpServlet {
 		int result;
 		String msg = "";
 		String loc ="/";
-		System.out.println(22222);
+
 		if("I".equals(status)) {
-			result = new AdminService().ProductInput(pIO);
+			result = new AdminService().productInput(pIO);
 			if(result>0) {
 				msg ="입고 성공";
 				loc = "/admin/productIOView";
 				request.setAttribute("msg", msg);
 				request.setAttribute("loc", loc);
-				
 			}
 		}
 		//3. view단처리
