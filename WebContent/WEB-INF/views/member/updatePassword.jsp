@@ -24,8 +24,8 @@
 	         <div class="form-group">
 	            <input type="password" class="form-control" id="pwd_check" name="pwd_check" placeholder="비밀번호">
 	            <small class="form-text text-muted">비밀번호 확인</small><br />
-	       		<button type="submit" class="btn btn-primary" >비밀번호 변경</button>
 	        </div>
+	       		<button type="submit" class="btn btn-primary" >비밀번호 변경</button>
 	        
 	    </form>
 	    
@@ -37,11 +37,11 @@ function password_validate(){
 	var pwd_new = $("#pwd_new").val().trim();
 	var pwd_chk = $("#pwd_check").val().trim();
 	
-	if($memberId){
-		alert("성명을 입력하세요.");
+	if(memberId.length == 0){
+		alert("아이디를 입력하세요.");
 		return false;
 	}
-	if($birth.length==0){
+	if(birth.length==0){
 		alert("생년월일을 입력하세요.");
 		return false;
 	}
