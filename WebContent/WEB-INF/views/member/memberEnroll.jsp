@@ -31,15 +31,17 @@
 		<div class="form-group">
 			<div class="input-group">
                 <div class="input-group-prepend">
-                    <input type="text" class="form-control" disabled="disabled" name="zipcode" placeholder="우편번호">
+                    <input type="text" class="form-control" disabled="disabled" name="zipcode_" placeholder="우편번호">
                 </div>
-				<input type="text" class="form-control" disabled="disabled" name="addr">
+				<input type="text" class="form-control" disabled="disabled" name="addr_">
 				<div class="input-group-append">
 					<button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
 						id="button-addon2">우편번호 검색</button>
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="zipcode">
+		<input type="hidden" name="addr">
 		<div class="form-group">
             <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요.">
         </div>

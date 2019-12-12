@@ -61,7 +61,9 @@ btnSelect.onclick = function(){
     var frm = opener.frmMemberEnroll;
     var codeArr = code.split("|");
     frm.zipcode.value = codeArr[0];
+    frm.zipcode_.value = codeArr[0];
     frm.addr.value = codeArr[1];
+    frm.addr_.value = codeArr[1];
     self.close();
 }
 </script>
