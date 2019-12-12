@@ -39,7 +39,9 @@ public class UpdatePasswordServletEnd extends HttpServlet {
 				msg = "다시 작성해주세요.";
 			}
 		
-		} 
+		} else {
+			msg = "아이디와 생년월일을 확인해 주세요. 입력한 아이디: "+memberId+", 입력한 생년월일: "+birth;
+		}
 		
 		
 		request.setAttribute("msg", msg);
