@@ -36,13 +36,14 @@ public class UpdatePasswordServletEnd extends HttpServlet {
 				msg = "패스워드가 변경되었습니다.";
 				loc = "/member/memberLogin";
 			} else {
-				msg = "다시 작성해주세요.";
+				
 			}
 		
 		} else {
-			msg = "아이디와 생년월일을 확인해 주세요. 입력한 아이디: "+memberId+", 입력한 생년월일: "+birth;
+				
+			msg = "아이디와 생년월일을 다시입력해주세요. 입력한 아이디: "+memberId+" 입력한 생년월일: "+birth;
+			loc = "/member/updatePassword";
 		}
-		
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
