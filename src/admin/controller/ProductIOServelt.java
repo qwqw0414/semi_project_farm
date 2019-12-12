@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import member.model.vo.Member;
 import product.model.vo.ProductIO;
 
 /**
@@ -23,34 +22,47 @@ public class ProductIOServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
-		System.out.println(11111);
 		String pId = request.getParameter("pId");
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		String status = request.getParameter("selectIO");
 		String memberId = request.getParameter("memberId");
 		//임시 ioid
 		int num = (int) (Math.random()*10000+1);
-		String ioid = pId+num;
+		String ioid = pId+status+num;
 		
 		ProductIO pIO = new ProductIO(ioid,pId,memberId,status,amount,null);
 		System.out.println(pIO);
 		//2. 업무로직
-		//2-1. 입고일 경우
 		int result;
 		String msg = "";
 		String loc ="/";
-		System.out.println(22222);
+
+		//2-1. 입고일 경우
 		if("I".equals(status)) {
-			result = new AdminService().ProductInput(pIO);
+			result = new AdminService().productInput(pIO);
 			if(result>0) {
 				msg ="입고 성공";
 				loc = "/admin/productIOView";
-				request.setAttribute("msg", msg);
-				request.setAttribute("loc", loc);
 				
+			} else {
+				msg ="입고 실패";
+				loc = "/admin/productIOView";
+			}
+		} else {
+		//2-2. 출고일 경우	
+			result = new AdminService().productOutput(pIO);
+			if(result>0) {
+				msg ="출고 성공";
+				loc = "/admin/productIOView";
+				
+			} else {
+				msg ="출고 실패";
+				loc = "/admin/productIOView";
 			}
 		}
 		//3. view단처리
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 	

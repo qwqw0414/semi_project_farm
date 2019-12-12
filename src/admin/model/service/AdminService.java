@@ -10,15 +10,27 @@ import admin.model.dao.AdminDAO;
 
 public class AdminService {
 
-	public int ProductInput(ProductIO pIO) {
+	public int productInput(ProductIO pIO) {
 		Connection conn = getConnection();
-		System.out.println("service");
-		int result = new AdminDAO().ProductInput(conn, pIO);
+		int result = new AdminDAO().productInput(conn, pIO);
 		if(result>0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+
+	public int productOutput(ProductIO pIO) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().productOutput(conn, pIO);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
 		return result;
 	}
 
