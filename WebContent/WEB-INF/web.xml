@@ -48,4 +48,12 @@
     <servlet-name>UpdatePasswordServlet</servlet-name>
     <url-pattern>/member/updatePassword</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductIOServlet</servlet-name>
+    <jsp-file>/WEB-INF/views/admin/productIO.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductIOServlet</servlet-name>
+    <url-pattern>/admin/productIO</url-pattern>
+  </servlet-mapping>
 </web-app>
