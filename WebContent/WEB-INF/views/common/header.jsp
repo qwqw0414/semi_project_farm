@@ -61,6 +61,9 @@
 				<a class="nav-link" href="#">상품 입고</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="#">상품 리스트</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="#">주문 리스트</a>
 			</li>
 		</ul>
