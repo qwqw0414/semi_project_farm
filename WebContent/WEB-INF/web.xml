@@ -60,4 +60,13 @@
 		<servlet-name>ProductRegServlet</servlet-name>
 		<url-pattern>/admin/productReg</url-pattern>
 	</servlet-mapping>
+	<!-- 상품 입출고 맵핑 -->
+		<servlet>
+		<servlet-name>ProductIOServlet</servlet-name>
+		<jsp-file>/WEB-INF/views/admin/productIO.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductIOServlet</servlet-name>
+		<url-pattern>/admin/productIOView</url-pattern>
+	</servlet-mapping>
 </web-app>
