@@ -8,8 +8,8 @@ public class ProductIO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String ioId;
-	private String pId;
+	private int ioId;
+	private int pId;
 	private String memberId;
 	private String status;
 	private int amount;
@@ -19,7 +19,8 @@ public class ProductIO implements Serializable {
 
 	}
 
-	public ProductIO(String ioId, String pId, String memberId, String status, int amount, Date ioDate) {
+	public ProductIO(int ioId, int pId, String memberId, String status, int amount, Date ioDate) {
+		super();
 		this.ioId = ioId;
 		this.pId = pId;
 		this.memberId = memberId;
@@ -28,25 +29,19 @@ public class ProductIO implements Serializable {
 		this.ioDate = ioDate;
 	}
 
-	@Override
-	public String toString() {
-		return "ProductIO [ioId=" + ioId + ", pId=" + pId + ", memberId=" + memberId + ", status=" + status
-				+ ", amount=" + amount + ", ioDate=" + ioDate + "]";
-	}
-
-	public String getIoId() {
+	public int getIoId() {
 		return ioId;
 	}
 
-	public void setIoId(String ioId) {
+	public void setIoId(int ioId) {
 		this.ioId = ioId;
 	}
 
-	public String getpId() {
+	public int getpId() {
 		return pId;
 	}
 
-	public void setpId(String pId) {
+	public void setpId(int pId) {
 		this.pId = pId;
 	}
 
@@ -84,6 +79,34 @@ public class ProductIO implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductIO [ioId=" + ioId + ", pId=" + pId + ", memberId=" + memberId + ", status=" + status
+				+ ", amount=" + amount + ", ioDate=" + ioDate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ioId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductIO other = (ProductIO) obj;
+		if (ioId != other.ioId)
+			return false;
+		return true;
 	}
 
 }

@@ -22,16 +22,13 @@ public class ProductIOServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
-		String pId = request.getParameter("pId");
+		int pId = Integer.parseInt(request.getParameter("pId"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		String status = request.getParameter("selectIO");
 		String memberId = request.getParameter("memberId");
-		//임시 ioid
-		int num = (int) (Math.random()*10000+1);
-		String ioid = pId+status+num;
 		
-		ProductIO pIO = new ProductIO(ioid,pId,memberId,status,amount,null);
-		System.out.println(pIO);
+		ProductIO pIO = new ProductIO(0,pId,memberId,status,amount,null);
+		
 		//2. 업무로직
 		int result;
 		String msg = "";

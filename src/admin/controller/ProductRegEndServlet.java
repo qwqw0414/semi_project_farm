@@ -27,14 +27,13 @@ public class ProductRegEndServlet extends HttpServlet {
 		FileRenamePolicy mvcFileRenamePolicy = new MvcFileRenamePolicy();
 		MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", mvcFileRenamePolicy);
 		
-		String pId = multiReq.getParameter("pId");
 		String category = multiReq.getParameter("category");
 		String pName = multiReq.getParameter("pName");
 		String pInfo = multiReq.getParameter("pInfo");
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		String photo = multiReq.getFilesystemName("photo");
 		
-		Product p = new Product(pId, category, pName, pInfo, price, 0, 0, photo);
+		Product p = new Product(0, category, pName, pInfo, price, 0, 0, photo);
 		
 		int result = new AdminService().productReg(p);
 		

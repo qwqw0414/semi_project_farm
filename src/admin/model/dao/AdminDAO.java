@@ -33,8 +33,8 @@ private Properties prop = new Properties();
 		String query = prop.getProperty("ProductIOUpdate");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, pIO.getIoId());
-			pstmt.setString(2, pIO.getpId());
+			pstmt.setInt(1, pIO.getIoId());
+			pstmt.setInt(2, pIO.getpId());
 			pstmt.setString(3, pIO.getMemberId());
 			pstmt.setString(4, pIO.getStatus());
 			pstmt.setInt(5, pIO.getAmount());
@@ -54,8 +54,8 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, pIO.getIoId());
-			pstmt.setString(2, pIO.getpId());
+			pstmt.setInt(1, pIO.getIoId());
+			pstmt.setInt(2, pIO.getpId());
 			pstmt.setString(3, pIO.getMemberId());
 			pstmt.setString(4, pIO.getStatus());
 			pstmt.setInt(5, pIO.getAmount());
@@ -75,7 +75,6 @@ private Properties prop = new Properties();
 		try {
 			int cnt = 0;
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(++cnt, p.getpId());
 			pstmt.setString(++cnt, p.getCategory());
 			pstmt.setString(++cnt, p.getpName());
 			pstmt.setString(++cnt, p.getpInfo());
@@ -106,7 +105,7 @@ private Properties prop = new Properties();
 			 
 			 while(rset.next()) {
 				 Product p = new Product();
-				 p.setpId(rset.getString("PID"));
+				 p.setpId(rset.getInt("PID"));
 				 p.setCategory(rset.getString("CATEGORY"));
 				 p.setpName(rset.getString("PNAME"));
 				 p.setpInfo(rset.getString("PINFO"));
