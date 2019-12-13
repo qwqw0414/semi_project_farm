@@ -33,11 +33,10 @@ private Properties prop = new Properties();
 		String query = prop.getProperty("ProductIOUpdate");
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, pIO.getIoId());
-			pstmt.setInt(2, pIO.getpId());
-			pstmt.setString(3, pIO.getMemberId());
-			pstmt.setString(4, pIO.getStatus());
-			pstmt.setInt(5, pIO.getAmount());
+			pstmt.setInt(1, pIO.getpId());
+			pstmt.setString(2, pIO.getMemberId());
+			pstmt.setString(3, pIO.getStatus());
+			pstmt.setInt(4, pIO.getAmount());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -54,11 +53,10 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, pIO.getIoId());
-			pstmt.setInt(2, pIO.getpId());
-			pstmt.setString(3, pIO.getMemberId());
-			pstmt.setString(4, pIO.getStatus());
-			pstmt.setInt(5, pIO.getAmount());
+			pstmt.setInt(1, pIO.getpId());
+			pstmt.setString(2, pIO.getMemberId());
+			pstmt.setString(3, pIO.getStatus());
+			pstmt.setInt(4, pIO.getAmount());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
