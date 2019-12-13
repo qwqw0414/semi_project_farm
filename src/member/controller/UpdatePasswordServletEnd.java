@@ -21,34 +21,22 @@ public class UpdatePasswordServletEnd extends HttpServlet {
 	
 		String memberId = request.getParameter("memberId");
 		String birth = request.getParameter("birth");
-		String pwd_new = request.getParameter("pwd_new");
+		String phone = request.getParameter("phone");
+//		String pwd_new = request.getParameter("pwd_new");
 		
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setBirth(birth);
+		m.setPhone(phone);
+		
+		Member member = new MemberService().selectByPassword(m);
 
-		Member m = new MemberService().selectByPassword(memberId, birth);
-
-		String msg = "";
-		String loc = "";
-		String view = "/WEB-INF/views/common/msg.jsp";
+		request.setAttribute("m", member);
 		
-		if(m!=null) {
-			int result = new MemberService().updatePassword(m, pwd_new);
-			if(result > 0) {
-				msg = "패스워드가 변경되었습니다.";
-				loc = "/member/memberLogin";
-			} else {
-				
-			}
-		
-		} else {
-				
-			msg = "아이디와 생년월일을 다시입력해주세요. 입력한 아이디: "+memberId+" 입력한 생년월일: "+birth;
-			loc = "/member/updatePassword";
+		if(member == null) {
+			request.setAttribute("str", "<script>alert('잘못된 입력');</script>");
 		}
-		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-		reqDispatcher.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/updatePassword.jsp").forward(request, response);
 		
 	}
 

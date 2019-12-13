@@ -20,19 +20,20 @@
 			<button type="submit" class="btn btn-primary" >검색</button>
 		</form>
 	</div>
-	<table id="tbl-member">
-		<thead>
-			<tr>
-				<th>아이디</th>
-				<th>성명</th>
-				<th>생년월일</th>
-				<th>전화번호</th>
-				<th>우편번호</th>
-				<th>주소</th>
-				<th>가입일자</th>
-			</tr>
-		</thead>
-		<tbody>
+
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>아이디</th>
+      <th>성명</th>
+      <th>생년월일</th>
+      <th>전화번호</th>
+      <th>우편번호</th>
+      <th>주소</th>
+      <th>가입일자</th>
+    </tr>
+  </thead>
+  <tbody>
 		 <%for(Member m: list){ %>
 			<tr>
 				<td><%=m.getMemberId() %></td>
@@ -45,7 +46,7 @@
 			</tr>
 			<%} %>
 		</tbody>
-
+</table>
 
 
 

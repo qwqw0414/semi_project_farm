@@ -83,32 +83,33 @@ public class MemberDAO {
 		return result;
 	}
 
-	public Member selectByPassword(Connection conn, String memberId, String birth) {
-		Member m = null;
+	public Member selectByPassword(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		Member member = null;
 		String query = prop.getProperty("selectByPassword");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, birth);
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getBirth());
+			pstmt.setString(3, m.getPhone());
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				m = new Member();
-				m.setMemberId(rset.getString("memberId"));
-				m.setPassword(rset.getString("password"));
-				m.setMemberName(rset.getString("memberName"));
-				m.setBirth(rset.getString("birth"));
-				m.setPhone(rset.getString("phone"));
-				m.setZipcode(rset.getString("zipcode"));
-				m.setAddress(rset.getString("address"));
-				m.setEnrolldate(rset.getDate("enrollDate"));
+				member = new Member();
+				member.setMemberId(rset.getString("memberId"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberName(rset.getString("memberName"));
+				member.setBirth(rset.getString("birth"));
+				member.setPhone(rset.getString("phone"));
+				member.setZipcode(rset.getString("zipcode"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrolldate(rset.getDate("enrollDate"));
 				if("Y".equals(rset.getString("admin_yn"))) {
-					m.setAdmin(true);		
+					member.setAdmin(true);		
 				} else {
-					m.setAdmin(false);
+					member.setAdmin(false);
 				}
 
 
@@ -121,7 +122,7 @@ public class MemberDAO {
 		}
 		
 //		System.out.println(m+"MemberDAO 333");
-		return m;
+		return member;
 	}
 
 	public int updatePassword(Connection conn, Member m, String pwd_new) {
