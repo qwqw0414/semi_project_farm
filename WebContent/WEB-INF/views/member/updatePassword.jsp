@@ -5,6 +5,7 @@
 <%
 	Member m = (Member)request.getAttribute("m");
 	String str= (String)request.getAttribute("str");
+	String str1= (String)request.getAttribute("str1");
 	System.out.println(str+"+"+m);
 %>
 <%=(str!=null)?str:"" %>
@@ -31,7 +32,8 @@
 		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
 	</form>
 	<% }else{%>
-	<form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd"
+	
+	<form action="<%=request.getContextPath()%>/member/PasswordUpdateEnd"
 		method="POST" onsubmit="return password2_validate();">
 		<input type="hidden" value="<%=m.getMemberId() %>" name="memberId" />
 		<div class="form-group">

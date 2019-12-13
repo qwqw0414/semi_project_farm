@@ -125,14 +125,14 @@ public class MemberDAO {
 		return member;
 	}
 
-	public int updatePassword(Connection conn, Member m, String pwd_new) {
+	public int updatePassword(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("updatePassword");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, pwd_new);
+			pstmt.setString(1, m.getPassword());
 			pstmt.setString(2, m.getMemberId());
 			result = pstmt.executeUpdate();
 			

@@ -30,7 +30,7 @@ public class UpdatePasswordServletEnd extends HttpServlet {
 		m.setPhone(phone);
 		
 		Member member = new MemberService().selectByPassword(m);
-
+		
 		request.setAttribute("m", member);
 		
 		if(member == null) {
