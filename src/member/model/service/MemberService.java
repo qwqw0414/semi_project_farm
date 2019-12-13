@@ -51,9 +51,9 @@ public class MemberService {
 		return member;
 	}
 
-	public int updatePassword(Member m, String pwd_new) {
+	public int updatePassword(Member m) {
 		Connection conn = getConnection();
-		int result = new MemberDAO().updatePassword(conn, m, pwd_new);
+		int result = new MemberDAO().updatePassword(conn, m);
 	
 		if(result>0) {
 			commit(conn);
