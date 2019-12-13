@@ -31,13 +31,15 @@ public class PasswordUpdateServletEnd extends HttpServlet {
 		int result = new MemberService().updatePassword(m);
 		
 		
-		String str1 = "";
+	
 		String view = "";
 		if(result > 0) {
-
-			request.setAttribute(str1, "<script>alert('비밀번호가 변경되었습니다.');</script>");
+			
+			request.setAttribute("str", "<script>alert('비밀번호가 변경되었습니다.');</script>");
 			view = "/WEB-INF/views/member/memberLogin.jsp";
 		}
+		
+		
 		System.out.println(m+"11212312");
 		
 

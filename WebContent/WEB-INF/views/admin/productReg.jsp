@@ -11,12 +11,6 @@
 	  
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="tag">아이디</span>
-        </div>
-        <input type="text" class="form-control" placeholder="상품 아이디를 입력해주세요." name="pId" required>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
             <span class="input-group-text" id="tag">분류</span>
         </div>
         <select class="custom-select" name="category" required>
