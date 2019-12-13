@@ -26,9 +26,7 @@ public class ProductListServlet extends HttpServlet {
 
 	List<Product>list = new AdminService().selectProductList();
 	request.setAttribute("list", list);
-	
-	
-	request.setAttribute("list", list);
+
 	request.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
 	   .forward(request, response);
 	
