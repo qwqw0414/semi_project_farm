@@ -14,19 +14,21 @@ import member.model.vo.Member;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
 import static common.JDBCTemplate.close;
+
 public class AdminDAO {
 
-private Properties prop = new Properties();
-	
+	private Properties prop = new Properties();
+
 	public AdminDAO() {
 		try {
-            String fileName = AdminDAO.class.getResource("/admin/admin-query.properties").getPath();
-            prop.load(new FileReader(fileName));
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+			String fileName = AdminDAO.class.getResource("/admin/admin-query.properties").getPath();
+			prop.load(new FileReader(fileName));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+
 	public int productInput(Connection conn, ProductIO pIO) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -46,11 +48,12 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
 	public int productOutput(Connection conn, ProductIO pIO) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("ProductIOUpdate");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, pIO.getpId());
@@ -65,11 +68,12 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
 	public int productReg(Connection conn, Product p) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("productReg");
-		System.out.println(p);
+
 		try {
 			int cnt = 0;
 			pstmt = conn.prepareStatement(query);
@@ -78,55 +82,54 @@ private Properties prop = new Properties();
 			pstmt.setString(++cnt, p.getpInfo());
 			pstmt.setInt(++cnt, p.getPrice());
 			pstmt.setString(++cnt, p.getPhoto());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
+
 	public List<Product> selectProdcutList(Connection conn) {
-		List<Product>list = new ArrayList<>();
+		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
-        ResultSet rset = null;
-        
-		String query=prop.getProperty("selectProductList");
-		
-		 try {
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectProductList");
+
+		try {
 			pstmt = conn.prepareStatement(query);
-			 rset = pstmt.executeQuery();
-			 
-			 while(rset.next()) {
-				 Product p = new Product();
-				 p.setpId(rset.getInt("PID"));
-				 p.setCategory(rset.getString("CATEGORY"));
-				 p.setpName(rset.getString("PNAME"));
-				 p.setpInfo(rset.getString("PINFO"));
-				 p.setPrice(rset.getInt("PRICE"));
-				 p.setDiscount(rset.getInt("DISCOUNT"));
-				 p.setStock(rset.getInt("STOCK"));
-				 p.setPhoto(rset.getString("PHOTO"));
-				 
-				 list.add(p);
-				 
-			 }
-			 
-			 
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-            close(rset);
-            close(pstmt);
-        }
-        
-        
-        return list;
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
 	}
+
 	public List<Member> selectAll(Connection conn) {
 		Member m = null;
 		List<Member> list = null;
@@ -134,11 +137,11 @@ private Properties prop = new Properties();
 		ResultSet rset = null;
 		String query = prop.getProperty("selectAll");
 		list = new ArrayList<>();
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				m = new Member();
 				m.setMemberId(rset.getString("memberId"));
 				m.setMemberName(rset.getString("memberName"));
@@ -149,30 +152,30 @@ private Properties prop = new Properties();
 				m.setEnrolldate(rset.getDate("enrollDate"));
 				list.add(m);
 			}
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
 		return list;
 	}
+
 	public List<Product> selectProductBypName(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Product> list = null;
 		String query = prop.getProperty("selectMemberByPname");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "%"+searchKeyword+"%");
+			pstmt.setString(1, "%" + searchKeyword + "%");
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				Product p = new Product();
 				p.setpId(rset.getInt("PID"));
 				p.setCategory(rset.getString("CATEGORY"));
@@ -182,33 +185,54 @@ private Properties prop = new Properties();
 				p.setDiscount(rset.getInt("DISCOUNT"));
 				p.setStock(rset.getInt("STOCK"));
 				p.setPhoto(rset.getString("PHOTO"));
-				
+
 				list.add(p);
 			}
-			System.out.println(list);
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
-		
-		
-		
-		
+
+		return list;
+	}
+
+	public List<Product> selectProductByCategory(Connection conn, String searchKeyword) {
+		List<Product> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectProductByCategory");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchKeyword);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
 		return list;
 	}
 
 }
-
-
-
-
-
-
-
-

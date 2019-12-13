@@ -34,7 +34,7 @@ public class AdminProductFinder extends HttpServlet {
 	
 		switch(searchType) {
 		case "pName": list = adminService.selectProductBypName(searchKeyword); break;
-//		case "Category": list = adminService.selectMemberByCategory(searchKeyword); break;
+		case "Category": list = adminService.selectProductByCategory(searchKeyword); break;
 		}
 		
 		//3.뷰단
