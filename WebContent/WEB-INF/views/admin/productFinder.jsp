@@ -1,16 +1,13 @@
-
-<%@page import="com.sun.org.apache.bcel.internal.generic.GETSTATIC"%>
 <%@page import="product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
-	/* String pageBar = (String)request.getAttribute("pageBar");	페이지바 */ 
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
-
 
 <style>
 #search-container{
@@ -18,10 +15,11 @@
 	padding: 3px;
 	background-color: rgba(0,188,212,.3);
 }
-#search-pName {display: inline-block;}
-#search-Category {display: none;}
-</style>
 
+div#search-pName {display:<%="pName".equals(searchType)||searchType==null?"inline-block":"none"%>;}
+div#search-Category {display:<%="Category".equals(searchType)?"inline-block":"none"%>;}
+	
+</style>
 <script>
 $(()=>{
 	var $searchpName = $("#search-pName");
@@ -38,48 +36,41 @@ $(()=>{
 
 </script>
 
-
-
-
-
-
-
-
-
-
-
-   
-
-
 <section id="productList-container">
 <h2>상품리스트</h2>
 <div id="search-container">
 		<label for="searchType">검색타입 : </label>
+		
 		<select id="searchType">
-			<option value="pName">상품명</option>
-			<option value="Category">카테고리</option>
+			<option value="pName"<%="pName".equals(searchType)?"selected":"" %>>상품명</option>
+			<option value="Category"<%="Category".equals(searchType)?"selected":""%>>카테고리</option>
 		</select>
+		
+		
+		
 		
 		
 		<!-- 상품명 검색 -->
 		<div id="search-pName">
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
 				<input type="hidden" name="searchType" value="pName" />
-				<input type="search" name="searchKeyword" 
-					   size="25" 
-					   placeholder="검색할 삼품명을 입력하세요"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 삼품명을 입력하세요"
+					value="<%="pName".equals(searchType)?searchKeyword:""%>"/>
 				<input type="submit" value="검색" />
 			</form>
 		</div>
+		
+		
+		
 		
 		
 		<!-- 	카테고리별 검색 -->
 		<div id="search-Category">
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
 				<input type="hidden" name="searchType" value="Category" />
-				<input type="radio" name="searchKeyword" value="V" checked/>
+				<input type="radio" name="searchKeyword" value="V" <%="Category".equals(searchType) && "V".equals(searchKeyword)?"checked":""%> />
 				채소
-				<input type="radio" name="searchKeyword" value="F"/>
+				<input type="radio" name="searchKeyword" value="F" <%="Category".equals(searchType) && "F".equals(searchKeyword)?"checked":""%>/>
 				과일
 				<input type="submit" value="검색" />
 			</form>
@@ -114,7 +105,7 @@ $(()=>{
                 for(Product p : list){ 
         %>
         <tr>
-        	<td><%=p.getCategory() %></td>
+        	<td><%="V".equals(p.getCategory())?"채소":"과일"%></td>
         	<td><%=p.getpName() %></td>
         	<td><%=p.getpInfo() %></td>
         	<td><%=p.getPrice() %></td>
@@ -140,6 +131,27 @@ $(()=>{
 
 
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

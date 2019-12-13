@@ -70,4 +70,12 @@ public class AdminService {
 		
 	}
 
+	public List<Product> selectProductBypName(String searchKeyword) {
+		List<Product> list = null;
+		Connection conn = getConnection();
+		list = new AdminDAO().selectProductBypName(conn, searchKeyword);
+		close(conn);
+		return list;
+	}
+
 }
