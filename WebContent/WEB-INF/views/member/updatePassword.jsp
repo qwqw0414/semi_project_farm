@@ -5,10 +5,11 @@
 <%
 	Member m = (Member)request.getAttribute("m");
 	String str= (String)request.getAttribute("str");
-	String str1= (String)request.getAttribute("str1");
-	System.out.println(str+"+"+m);
+	System.out.println("str"+"m");
+	
 %>
 <%=(str!=null)?str:"" %>
+
 <div class="container">
 	<%if(m==null){ %>
 	<form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd"
@@ -32,7 +33,6 @@
 		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
 	</form>
 	<% }else{%>
-	
 	<form action="<%=request.getContextPath()%>/member/PasswordUpdateEnd"
 		method="POST" onsubmit="return password2_validate();">
 		<input type="hidden" value="<%=m.getMemberId() %>" name="memberId" />
@@ -78,6 +78,14 @@ function password2_validate(){
 	var pwd_new = $("#pwd_new").val().trim();
 	var pwd_chk = $("#pwd_check").val().trim();
 	
+	if(pwd_new.length == 0){
+		alert("변경할 비밀번호를 입력하세요.");
+		return false;
+	}
+	if(pwd_chk.length == 0){
+		alert("비밀번호 확인을 입력하세요.");
+		return false;
+	}
 	if(pwd_new!=pwd_chk){
 	    alert("입력한 비밀번호가 일치하지 않습니다.");
 	    $("#pwd_new").select();
