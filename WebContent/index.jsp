@@ -19,7 +19,7 @@
     <div class="row">
     <%for(Product p : list){ %>
         <div class="card" style="width: 16rem;">
-            <img src="/farm/upload/product/<%=p.getPhoto()%>" class="card-img-top">
+            <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title"><%=p.getpName()%></h5>
                 <p class="card-text"><%=p.getPrice() %></p>

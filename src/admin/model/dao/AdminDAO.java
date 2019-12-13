@@ -69,7 +69,7 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("productReg");
-		
+		System.out.println(p);
 		try {
 			int cnt = 0;
 			pstmt = conn.prepareStatement(query);
