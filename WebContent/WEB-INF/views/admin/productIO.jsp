@@ -5,21 +5,28 @@
 <div class="container">
 	<form action="productIO" method="POST"
 		onsubmit="return productIOValidate();" id="selectIOFrm">
-		<select name="selectIO" id="selectIO">
-			<option value="I" selected>입고</option>
-			<option value="O">출고</option>
-		</select>
-		<label for="pId">상품아이디</label><input type="text" id="pId" name="pId" />
-		<label for="amount">수량</label><input type="number" id="amount" name="amount" />
-		<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
-		<input type="submit" value="확인" >
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<select class="custom-select" id="selectIO" name="selectIO">
+					<option value="I" selected>입고</option>
+					<option value="O">출고</option>
+				</select>
+			</div>
+			<select class="custom-select" id="pName"" name="pName" required>
+				<option value="" disabled selected hidden>상품 선택</option>
+				<option value="">감자</option>
+				<option value="">파</option>
+			</select>
+			<input type="number" id="amount" name="amount" placeholder="수량" min="0" required>
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="submit">확인</button>
+			</div>
+		</div>
 	</form>
 	<table>
 	
 	</table>
 </div>
-
-
 
 <script>
 function productIOValidate(){
