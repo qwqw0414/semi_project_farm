@@ -224,7 +224,8 @@ public class AdminDAO {
 
 				list.add(p);
 			}
-
+			
+			System.out.println("왜 아무것도 없냐고 dao"+list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

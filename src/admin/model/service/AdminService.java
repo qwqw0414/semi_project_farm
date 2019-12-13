@@ -79,9 +79,8 @@ public class AdminService {
 	}
 
 	public List<Product> selectProductByCategory(String searchKeyword) {
-		List<Product> list = null;
 		Connection conn = getConnection();
-		list = new AdminDAO().selectProductByCategory(conn, searchKeyword);
+		List<Product> list = new AdminDAO().selectProductByCategory(conn, searchKeyword);
 		close(conn);
 		return list;
 	}
