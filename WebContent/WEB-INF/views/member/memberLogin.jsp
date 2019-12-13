@@ -3,6 +3,10 @@
     pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
+	String str= (String)request.getAttribute("str");
+	System.out.println("str");
+%>
+<%
 	//로그인한 경우
 	/* Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn"); */
 	//아이디 저장 쿠키
@@ -21,6 +25,7 @@
 		}
 	}
 %>
+<%=(str!=null)?str:"" %>
 <%if(memberLoggedIn==null){ %>
 <div class="container">
 	  <form action="<%=request.getContextPath()%>/member/memberLoginEnd" method="POST" onsubmit="return loginValidate();">
