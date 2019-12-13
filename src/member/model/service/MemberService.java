@@ -34,9 +34,11 @@ public class MemberService {
 		return result;
 	}
 
-	public Member selectByPassword(String memberId, String birth) {
+	public Member selectByPassword(Member m) {
 		Connection conn = getConnection();
-		Member m = new MemberDAO().selectByPassword(conn, memberId,birth);
+		Member member = null;
+		member = new MemberDAO().selectByPassword(conn, m);
+		
 		if(m!=null) {
 			commit(conn);
 		} else {
@@ -46,7 +48,7 @@ public class MemberService {
 		close(conn);
 		
 		
-		return m;
+		return member;
 	}
 
 	public int updatePassword(Member m, String pwd_new) {
@@ -61,6 +63,16 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+	}
+
+	public Member memberFindId(String memberName, String birth, String phone) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDAO().findMemberId(conn, memberName, birth, phone);
+		
+		close(conn);
+		
+		return m;
 	}
 
 

@@ -27,15 +27,33 @@ public class MemberFindIdServletEnd extends HttpServlet {
 		String birth = request.getParameter("birth");
 		String phone = request.getParameter("phone");
 		//2. 업무로직
+		Member m = null;
 		
+		m = new MemberService().memberFindId(memberName, birth, phone);
+	
 		//3.
-		String view = "/WEB-INF/views/common/msg.jsp";
+
+		String view = "";
 		String msg = "";
 		String loc = "/";
+		
+		if(m != null) {
+			view = "/WEB-INF/views/member/memberFindId.jsp";		
+			
+		}
+		else {
+			view = "/WEB-INF/views/common/msg.jsp";
+			msg = "아이디를 찾을 수 없습니다.";
+			//loc = "/WEB-INF/views/member/memberFindId.jsp";
+			//loc = "/member/memberFindId.jsp";
+			loc = "/member/memberFindId";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.setAttribute("member", m);
+		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
-		
-		
 		
 	}
 

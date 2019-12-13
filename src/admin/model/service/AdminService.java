@@ -5,8 +5,10 @@ import product.model.vo.ProductIO;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 
 import admin.model.dao.AdminDAO;
+import member.model.vo.Member;
 
 public class AdminService {
 
@@ -49,6 +51,23 @@ public class AdminService {
 		close(conn);
 		
 		return result;
+	}
+
+	public List<Product> selectProductList() {
+		Connection conn = getConnection();
+		List<Product> list= new AdminDAO().selectProdcutList(conn);
+		close(conn);
+        return list;
+	
+	}
+
+	public List<Member> selectAll() {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectAll(conn);
+		
+		close(conn);
+		return list;
+		
 	}
 
 }
