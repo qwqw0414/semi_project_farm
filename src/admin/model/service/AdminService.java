@@ -86,6 +86,21 @@ public class AdminService {
 
 	
 
+	public List<Product> selectProductBypName(String searchKeyword) {
+		List<Product> list = null;
+		Connection conn = getConnection();
+		list = new AdminDAO().selectProductBypName(conn, searchKeyword);
+		close(conn);
+		return list;
+	}
+
+	public List<Product> selectProductByCategory(String searchKeyword) {
+		Connection conn = getConnection();
+		List<Product> list = new AdminDAO().selectProductByCategory(conn, searchKeyword);
+		close(conn);
+		return list;
+	}
+
 }
 
 
