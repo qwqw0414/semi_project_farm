@@ -5,19 +5,22 @@
 }
 
 #contents {
+	/* font-family: 'Jua', sans-serif; */
+	/* font-family: 'Do Hyeon', sans-serif; */
+	/* font-family: 'Noto Serif KR', serif; */
+	/* font-family: 'Black Han Sans', sans-serif; */
+	/* font-family: 'Gugi', cursive; */
+	/* font-family: 'Dokdo', cursive; */
+	/* font-family: 'Gaegu', cursive; */
+	/* font-family: 'Yeon Sung', cursive; */
+	/* font-family: 'Stylish', sans-serif; */
+	/* font-family: 'Gamja Flower', cursive; */
+	/* font-family: 'Kirang Haerang', cursive; */
+	/* font-family: 'Noto Sans KR', sans-serif; */
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+#productList{
 	font-family: 'Jua', sans-serif;
-/* 	font-family: 'Do Hyeon', sans-serif;
-	font-family: 'Noto Serif KR', serif;
-	font-family: 'Black Han Sans', sans-serif;
-	font-family: 'Gugi', cursive;
-	font-family: 'Dokdo', cursive;
-	font-family: 'Gaegu', cursive;
-	font-family: 'Yeon Sung', cursive;
-	font-family: 'Stylish', sans-serif;
-	font-family: 'Gamja Flower', cursive;
-	font-family: 'Kirang Haerang', cursive;
-	font-family: 'Noto Sans KR', sans-serif;
-	font-family: 'Nanum Gothic Coding', monospace; */
 }
 
 #slideProduct img{
