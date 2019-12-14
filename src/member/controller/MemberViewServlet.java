@@ -31,7 +31,6 @@ public class MemberViewServlet extends HttpServlet {
 		
 		//업무로직
 		Member m = new MemberService().selectOne(memberId);
-		System.out.println("(현규꺼ㅎ)member@memberViewServlet="+m);
 		
 		//뷰단 처리
 		String view = "";
