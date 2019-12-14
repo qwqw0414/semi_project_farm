@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import product.model.vo.Product;
+import product.model.vo.WishList;
 
 public class ProductDAO {
 
@@ -62,5 +63,59 @@ public class ProductDAO {
 		}
 
 		return list;
+	}
+
+	public List<WishList> selectWishListByMemberId(Connection conn, String memberId) {
+		List<WishList> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectWishListByMemberId");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				WishList w = new WishList();
+				w.setListId(rset.getInt("listid"));
+				w.setMemberId(rset.getString("memberId"));
+				w.setpId(rset.getInt("pid"));
+				w.setAmount(rset.getInt("amount"));
+
+				list.add(w);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public int insertWishList(Connection conn, WishList w) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertWishList");
+		int result = 0;
+		
+		try {
+			int cnt = 0;
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(++cnt, w.getMemberId());
+			pstmt.setInt(++cnt, w.getpId());
+			pstmt.setInt(++cnt, w.getAmount());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
