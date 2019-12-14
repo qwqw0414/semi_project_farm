@@ -7,6 +7,7 @@
 	List<Product> list = (List<Product>)request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
 
 <style>
@@ -123,7 +124,9 @@ $(()=>{
 
 </table>
 
-
+<div id="pageBar">
+		<%=pageBar %>
+	</div>
 
 
 

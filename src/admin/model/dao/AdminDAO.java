@@ -333,4 +333,32 @@ public class AdminDAO {
 		return list;
 	}
 
+	public int selectTotalContent(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContent");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+			
+			System.out.println("totalContent@dao="+totalContent);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return totalContent;
+	}
+
 }

@@ -8,7 +8,7 @@
 
 <%
 	List<Product> list = (List<Product>)request.getAttribute("list");
-	/* String pageBar = (String)request.getAttribute("pageBar");	페이지바 */ 
+	 String pageBar = (String)request.getAttribute("pageBar"); 
 %>
 
 
@@ -132,7 +132,9 @@ $(()=>{
 
 </table>
 
-
+<div id="pageBar">
+		<%=pageBar %>
+	</div>
 
 
 
