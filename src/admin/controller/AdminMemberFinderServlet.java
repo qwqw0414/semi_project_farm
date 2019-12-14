@@ -22,12 +22,19 @@ public class AdminMemberFinderServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
 		
-		//2. 업무로직
-//		List<Member> list= null;
-//		AdminService as = new AdminService();
-		
-		
+	List<Member> list = null;
+	AdminService as = new AdminService();
+	switch(searchType) {
+	case "memberId" : list = as.selectMemberByMemberId(searchKeyword);break;
+	case "memberName" : list = as.selectMemberByMemberName(searchKeyword); break;
+	}
+	
+	//3. 뷰단처리
+	request.setAttribute("list", list);
+	request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp").forward(request, response);
 	}
 
 	

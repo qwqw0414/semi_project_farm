@@ -7,20 +7,66 @@
 <%
 	List<Member> list = new ArrayList(); 
 	list = (ArrayList)request.getAttribute("list");
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
+	
 
 %>
-
+<style>
+#search-container{
+	margin: 0 0 10px 0;
+	padding: 3px;
+	background-color:lightgray;
+}
+#search-memberId {
+	display: inline-block;
+}
+#search-memberName {
+	display: none;
+}
+</style>
+<script>
+$(()=>{
+	var $searchMemberId = $("#search-memberId");
+	var $searchMemberName = $("#search-memberName");
+	
+	$("#searchType").change(function(){
+		$searchMemberId.hide();
+		$searchMemberName.hide();
+		
+		$("#search-"+$(this).val()).css("display","inline-block");
+	});
+});
+</script>
 
 <section id="memberList-container">
-	<h2>회원정보</h2>
-	<div class="form-group">
-		<form action="<%=request.getContextPath()%>/admin/memberFinder">
-			<input type="text" class="form-control" id="memberId" name="memberId" value="" placeholder="이름입력">
-			<small class="form-text text-muted">검색할 성명을 입력해주세요.</small>
-			<button type="submit" class="btn btn-primary" >검색</button>
-		</form>
+<div id="search-container">
+		<label for="searchType">검색타입: </label>
+		<select id="searchType">
+			
+			<option value="memberId" <%="memberId".equals(searchType)?"selected":""%>>아이디</option>
+			<option value="memberName" <%="memberName".equals(searchType)?"selected":""%>>이름</option>
+		</select>
+		<div id="search-memberId">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder">
+				<input type="hidden" name="searchType" value="memberId"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"/>
+				<input type="submit" value="검색" />
+			</form>
+		</div>
+		<div id="search-memberName">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder">
+				<input type="hidden" name="searchType" value="memberName"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 회원명을 입력하세요"/>
+				<input type="submit" value="검색" />
+			</form>
+		</div>
 	</div>
 
+	
+
+
+	
 	<table class="table table-hover">
   <thead>
     <tr>

@@ -162,6 +162,73 @@ public class AdminDAO {
 
 		return list;
 	}
+	public List<Member> selectMemberByMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		List<Member> list = null;
+		Member m = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberByMemberId");
+		list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+memberId+"%");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				list.add(m);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public List<Member> selectMemberByMemberName(Connection conn, String memberName) {
+		PreparedStatement pstmt = null;
+		List<Member> list = null;
+		Member m = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberByMemberName");
+		list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+memberName+"%");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				list.add(m);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 
 	public List<Product> selectProductBypName(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
