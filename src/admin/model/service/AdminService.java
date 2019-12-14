@@ -55,7 +55,7 @@ public class AdminService {
 
 	public List<Product> selectProductList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Product> list= new AdminDAO().selectProdcutList(conn,cPage, numPerPage);
+		List<Product> list= new AdminDAO().selectProductList(conn,cPage, numPerPage);
 		close(conn);
         return list;
 	
@@ -64,7 +64,6 @@ public class AdminService {
 	public List<Member> selectAll() {
 		Connection conn = getConnection();
 		List<Member> list = new AdminDAO().selectAll(conn);
-		
 		close(conn);
 		return list;
 		
@@ -83,8 +82,6 @@ public class AdminService {
 		return list;
 		
 	}
-
-	
 
 	public List<Product> selectProductBypName(String searchKeyword, int cPage, int numPerPage) {
 		Connection conn = getConnection();
@@ -135,7 +132,15 @@ public class AdminService {
 		close(conn);
 		return totalContent;
 	}
+
+	public List<Product> selectAllProductList() {
+		Connection conn = getConnection();
+		List<Product> list= new AdminDAO().selectAllProductList(conn);
+		close(conn);
+        return list;
 	}
+	
+}
 
 
 

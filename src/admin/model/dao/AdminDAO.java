@@ -94,7 +94,7 @@ public class AdminDAO {
 		return result;
 	}
 
-	public List<Product> selectProdcutList(Connection conn, int cPage, int numPerPage) {
+	public List<Product> selectProductList(Connection conn, int cPage, int numPerPage) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -451,6 +451,40 @@ public class AdminDAO {
 		}
 		
 		return totalContent;
+	}
+
+	public List<Product> selectAllProductList(Connection conn) {
+		List<Product> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectAllProductList");
+		list = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
