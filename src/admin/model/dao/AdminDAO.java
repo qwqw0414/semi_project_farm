@@ -210,6 +210,7 @@ public class AdminDAO {
 			pstmt.setString(1, searchKeyword);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
+			System.out.println(sql);
 
 			while (rset.next()) {
 				Product p = new Product();
