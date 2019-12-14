@@ -19,3 +19,12 @@
 	font-family: 'Noto Sans KR', sans-serif;
 	font-family: 'Nanum Gothic Coding', monospace; */
 }
+
+#slideProduct img{
+	height: 300px;
+
+}
+
+.wishList{
+	color: antiquewhite;
+}
