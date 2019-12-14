@@ -29,7 +29,7 @@ public class MemberDeleteServlet extends HttpServlet {
 		
 		//2.parameter handling
 		String memberId = request.getParameter("memberId");
-		System.out.println("memberId@MemberDeleteServlet="+memberId);		
+		//System.out.println("memberId@MemberDeleteServlet="+memberId);		
 		
 		//3.business logic
 		int result = 0;
@@ -38,8 +38,7 @@ public class MemberDeleteServlet extends HttpServlet {
 		
 		//4.view단 처리
 		String view = "/WEB-INF/views/common/msg.jsp";
-		String msg = "";
-		//String loc = "/member/memberView";
+		String msg = "";		
 		String loc = "/";
 		
 		
@@ -51,7 +50,7 @@ public class MemberDeleteServlet extends HttpServlet {
 			msg = "회원정보를 삭제하는데 실패했습니다.";
 			loc = "/member/memberView?memberId="+memberId;
 		}
-		System.out.println(msg);
+		//System.out.println(msg);
 		
 		System.out.println("처리확인");
 		request.setAttribute("msg", msg);

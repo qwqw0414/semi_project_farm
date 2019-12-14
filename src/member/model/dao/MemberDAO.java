@@ -194,8 +194,7 @@ public class MemberDAO {
 	}
 
 	public int deleteMember(Connection conn, String memberId) {
-		// TODO Auto-generated method stub
-		System.out.println("dao시작");
+		// TODO Auto-generated method stub		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteMember");
@@ -205,7 +204,7 @@ public class MemberDAO {
 			pstmt.setString(1, memberId);
 			
 			result = pstmt.executeUpdate();
-			System.out.println("result@dao="+result);
+			//System.out.println("result@dao="+result);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
