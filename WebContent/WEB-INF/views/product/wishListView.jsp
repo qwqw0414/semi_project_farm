@@ -28,10 +28,10 @@
 	%>
 		<tr>
 			<th scope="row"><%=++cnt%></th>
-			<td><%=w.getpName() %></td>
-			<td id="<%=w.getListId()%>" class="amount"><input type="number" min="0" max="10" step="1" value="<%=w.getAmount() %>" class="form-control"></td>
-			<td><%=w.getPrice() %></td>
-			<td><input type="button" class="btn btn-danger" value="취소" 
+			<td><%=w.getpName()%></td>
+			<td><%=w.getAmount()%> 개</td>
+			<td>￦ <%=w.getAmount()*w.getPrice()%></td>
+			<td><input type="button" class="btn btn-danger" value="x"" 
 			           onclick="location.href='<%=request.getContextPath()%>/product/deleteWishList?memberId=<%=memberLoggedIn.getMemberId()%>&listId=<%=w.getListId()%>'"></td>
 		</tr>
 	<%} %>
