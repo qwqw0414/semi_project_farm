@@ -4,6 +4,8 @@
 <%
 	//로그인한 경우
 	Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+
+	
 %>	
 <!DOCTYPE html>
 <html>
@@ -21,15 +23,15 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
 <title>semi-project</title>
 <script>
-    function wishListReg(pId){
-        var pName = $("[id="+pId+"]").siblings(".card-title").text();
-        var pNum = $("[id="+pId+"]").parent().find("#productNum").val();
-        var $bar = $("#wishListBar");
+function wishListReg(pId){
+    var pName = $("[id="+pId+"]").siblings(".card-title").text();
+    var pNum = $("[id="+pId+"]").parent().find("#productNum").val();
+    var $bar = $("#wishListBar");
 
-        /* $bar.append("<div class='col'><p class='wishList'>"+pName+"<br>x"+pNum+"</p></div>") */
+    /* $bar.append("<div class='col'><p class='wishList'>"+pName+"<br>x"+pNum+"</p></div>") */
 
-        location.href = "<%=request.getContextPath()%>/product/wishListInsert?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():""%>& pId="+pId+"&pNum="+pNum;        
-    }
+    location.href = "<%=request.getContextPath()%>/product/wishListInsert?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():""%>&pId="+pId+"&pNum="+pNum;        
+}
 </script>
 </head>
 <body>

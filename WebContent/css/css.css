@@ -29,5 +29,10 @@
 }
 
 .wishList{
+	width: 100px;
 	color: antiquewhite;
+}
+
+#wishListNav{
+	overflow: hidden;
 }

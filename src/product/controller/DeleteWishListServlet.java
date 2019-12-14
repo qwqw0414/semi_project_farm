@@ -30,7 +30,13 @@ public class DeleteWishListServlet extends HttpServlet {
 		list = new ProductService().selectWishListByMemberId(memberId);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/product/wishListView").forward(request, response);
+		String referer = request.getHeader("Referer");
+		
+		if(referer.contains("wishListView"))
+			request.getRequestDispatcher("/product/wishListView").forward(request, response);
+		else
+			request.getRequestDispatcher("/").forward(request, response);
+		
 		
 	}
 

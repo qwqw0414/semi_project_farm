@@ -1,3 +1,4 @@
+<%@page import="common.util.Utils"%>
 <%@page import="product.model.vo.WishListProduct"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -30,8 +31,8 @@
 			<th scope="row"><%=++cnt%></th>
 			<td><%=w.getpName()%></td>
 			<td><%=w.getAmount()%> 개</td>
-			<td>￦ <%=w.getAmount()*w.getPrice()%></td>
-			<td><input type="button" class="btn btn-danger" value="x"" 
+			<td>￦ <%=new Utils().numberFormat(w.getAmount()*w.getPrice()) %></td>
+			<td><input type="button" class="btn btn-danger" value="x"
 			           onclick="location.href='<%=request.getContextPath()%>/product/deleteWishList?memberId=<%=memberLoggedIn.getMemberId()%>&listId=<%=w.getListId()%>'"></td>
 		</tr>
 	<%} %>
