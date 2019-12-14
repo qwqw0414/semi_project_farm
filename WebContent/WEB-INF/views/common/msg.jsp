@@ -5,6 +5,7 @@
 	String loc = (String)request.getAttribute("loc");
 	
 	String script = (String)request.getAttribute("script");
+	System.out.println("msg.jsp 실행 확인");
 %>    
 <script>
 alert("<%=msg%>");

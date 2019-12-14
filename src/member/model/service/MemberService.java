@@ -75,6 +75,21 @@ public class MemberService {
 		return m;
 	}
 
+	public int deleteMember(String memberId) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().deleteMember(conn, memberId);
+		
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		
+		return result;
+	}
+
 
 
 	
