@@ -69,11 +69,27 @@ public class AdminService {
 		return list;
 		
 	}
+	public List<Member> selectMemberByMemberId(String memberId) {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectMemberByMemberId(conn,memberId);
+		close(conn);
+		return list;
+	}
 
-	public List<Product> selectProductBypName(String searchKeyword) {
+	public List<Member> selectMemberByMemberName(String memberName) {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectMemberByMemberName(conn,memberName);
+		close(conn);
+		return list;
+		
+	}
+
+	
+
+	public List<Product> selectProductBypName(String searchKeyword, int cPage, int numPerPage) {
 		List<Product> list = null;
 		Connection conn = getConnection();
-		list = new AdminDAO().selectProductBypName(conn, searchKeyword);
+		list = new AdminDAO().selectProductBypName(conn, searchKeyword,cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -85,4 +101,24 @@ public class AdminService {
 		return list;
 	}
 
+	public List<ProductIO> selectAllProductIO() {
+		Connection conn = getConnection();
+		List<ProductIO> list = new AdminDAO().selectAllProductIO(conn);
+		close(conn);
+		return list;
+	}
+
+	public int selectTotalContent() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContent(conn);
+		close(conn);
+		return totalContent;
+	}
+
 }
+
+
+
+
+
+

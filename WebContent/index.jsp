@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
 <div id="slideProduct" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -26,11 +25,9 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
 <%
 	ProductService ps = new ProductService();
 	List<Product> list = ps.selectAll();
-	
 	if(list == null){
 %>
         <h1>등록된 상품이 없다.</h1>
