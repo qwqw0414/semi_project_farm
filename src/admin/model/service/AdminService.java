@@ -86,10 +86,10 @@ public class AdminService {
 
 	
 
-	public List<Product> selectProductBypName(String searchKeyword) {
+	public List<Product> selectProductBypName(String searchKeyword, int cPage, int numPerPage) {
 		List<Product> list = null;
 		Connection conn = getConnection();
-		list = new AdminDAO().selectProductBypName(conn, searchKeyword);
+		list = new AdminDAO().selectProductBypName(conn, searchKeyword,cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -106,6 +106,13 @@ public class AdminService {
 		List<ProductIO> list = new AdminDAO().selectAllProductIO(conn);
 		close(conn);
 		return list;
+	}
+
+	public int selectTotalContent() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContent(conn);
+		close(conn);
+		return totalContent;
 	}
 
 }
