@@ -230,15 +230,20 @@ public class AdminDAO {
 	}
 	
 
-	public List<Product> selectProductBypName(Connection conn, String searchKeyword) {
+	public List<Product> selectProductBypName(Connection conn, String searchKeyword, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Product> list = null;
-		String query = prop.getProperty("selectMemberByPname");
+		String query = prop.getProperty("selectMemberByPnameByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + searchKeyword + "%");
+			
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
+			
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 
