@@ -22,7 +22,7 @@ public class ProductIOServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
-		int pId = Integer.parseInt(request.getParameter("pId"));
+		int pId = Integer.parseInt(request.getParameter("pName"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		String status = request.getParameter("selectIO");
 		String memberId = request.getParameter("memberId");
@@ -39,22 +39,22 @@ public class ProductIOServelt extends HttpServlet {
 			result = new AdminService().productInput(pIO);
 			if(result>0) {
 				msg ="입고 성공";
-				loc = "/admin/productIOView";
+				loc = "/admin/productIOList";
 				
 			} else {
 				msg ="입고 실패";
-				loc = "/admin/productIOView";
+				loc = "/admin/productIOList";
 			}
 		} else {
 		//2-2. 출고일 경우	
 			result = new AdminService().productOutput(pIO);
 			if(result>0) {
 				msg ="출고 성공";
-				loc = "/admin/productIOView";
+				loc = "/admin/productIOList";
 				
 			} else {
 				msg ="출고 실패";
-				loc = "/admin/productIOView";
+				loc = "/admin/productIOList";
 			}
 		}
 		//3. view단처리

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import product.model.vo.Product;
 import product.model.vo.ProductIO;
 
 /**
@@ -25,9 +26,11 @@ public class ProductIOListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 업무로직
 		AdminService as = new AdminService();
-		List<ProductIO> list = as.selectAllProductIO();
+		List<ProductIO> productIOList = as.selectAllProductIO();
+		List<Product> productList = as.selectProductList();
 		//2. view단 처리
-		request.setAttribute("productIOList", list);
+		request.setAttribute("productIOList", productIOList);
+		request.setAttribute("productList", productList);
 		request.getRequestDispatcher("/WEB-INF/views/admin/productIO.jsp").forward(request, response);
 	}
 

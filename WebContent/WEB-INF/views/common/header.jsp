@@ -76,7 +76,7 @@
 				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productIOView">상품 입출고</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productIOList">상품 입출고</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productList">상품 리스트</a>
