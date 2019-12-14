@@ -69,5 +69,27 @@ public class AdminService {
 		return list;
 		
 	}
+	public List<Member> selectMemberByMemberId(String memberId) {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectMemberByMemberId(conn,memberId);
+		close(conn);
+		return list;
+	}
+
+	public List<Member> selectMemberByMemberName(String memberName) {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectMemberByMemberName(conn,memberName);
+		close(conn);
+		return list;
+		
+	}
+
+	
 
 }
+
+
+
+
+
+

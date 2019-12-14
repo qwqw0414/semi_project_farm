@@ -21,7 +21,7 @@
         <div class="card" style="width: 16rem;">
             <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title"><%=p.getpName()%></h5>
+                <h5 <class></class>="card-title"><%=p.getpName()%></h5>
                 <p class="card-text"><%=p.getPrice() %></p>
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                     <button type="button" class="btn btn-outline-danger">구매하기</button>
