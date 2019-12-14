@@ -61,20 +61,19 @@ public class AdminProductFinder extends HttpServlet {
 		
 		
 		////////////////////////////////////////////////////////////////////////////
-		//노답
-//		//페이징바 영역
-//		int totalContent = 0;
-//		switch(searchType) {
-//		case "pName": list = adminService.selectTotalContentByBypName(searchKeyword); break;
-//		case "Category":
-//			if ("V".equals(searchKeyword)) {
-//				searchKeyword = "채소";
-//			}
-//			else {
-//				searchKeyword = "과일";
-//			}
-//			list = adminService.selectTotalContentByCategory(searchKeyword);break;
-//		}
+		//페이징바 영역
+		int totalContent = 0;
+		switch(searchType) {
+		case "pName": totalContent= adminService.selectTotalContentByBypName(searchKeyword); break;
+		case "Category":
+			if ("V".equals(searchKeyword)) {
+				searchKeyword = "채소";
+			}
+			else {
+				searchKeyword = "과일";
+			}
+			totalContent = adminService.selectTotalContentByCategory(searchKeyword);break;
+		}
 	///////////////////////////////////////////////////////////////////////////////////	
 		
 		
@@ -88,7 +87,6 @@ public class AdminProductFinder extends HttpServlet {
 		
 		
 		//totalPage구하기
-				int totalContent = 0;
 				int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
 				System.out.println("totalMember="+totalContent+", totalPage="+totalPage);
 		

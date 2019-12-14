@@ -122,7 +122,22 @@ public class AdminService {
 		return totalContent;
 	}
 
-}
+	public int selectTotalContentByBypName(String searchKeyword) {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContentByBypName(conn, searchKeyword);
+		close(conn);
+		return totalContent;
+	}
+
+	public int selectTotalContentByCategory(String searchKeyword) {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContentByCategory(conn, searchKeyword);
+		close(conn);
+		return totalContent;
+	}
+	}
+
+
 
 
 

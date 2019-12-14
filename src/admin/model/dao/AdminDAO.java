@@ -390,4 +390,62 @@ public class AdminDAO {
 		return totalContent;
 	}
 
+	public int selectTotalContentByBypName(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContentByBypName");
+		int totalContent = 0;
+
+		System.out.println(query);
+	
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				totalContent = rset.getInt("cnt");
+			
+			System.out.println("totalContent@dao="+totalContent);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContent;
+	
+	}
+
+	public int selectTotalContentByCategory(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContentByCategory");
+		int totalContent = 0;
+	
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchKeyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+			
+			System.out.println("totalContent@dao="+totalContent);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContent;
+	}
+
 }
