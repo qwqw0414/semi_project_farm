@@ -88,6 +88,7 @@ public class AdminProductFinder extends HttpServlet {
 		
 		
 		//totalPage구하기
+				int totalContent = 0;
 				int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
 				System.out.println("totalMember="+totalContent+", totalPage="+totalPage);
 		
