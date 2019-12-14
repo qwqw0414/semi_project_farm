@@ -94,9 +94,9 @@ public class AdminService {
 		return list;
 	}
 
-	public List<Product> selectProductByCategory(String searchKeyword) {
+	public List<Product> selectProductByCategory(String searchKeyword, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Product> list = new AdminDAO().selectProductByCategory(conn, searchKeyword);
+		List<Product> list = new AdminDAO().selectProductByCategory(conn, searchKeyword, cPage, numPerPage);
 		close(conn);
 		return list;
 	}

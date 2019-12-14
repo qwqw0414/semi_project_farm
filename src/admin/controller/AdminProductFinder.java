@@ -60,20 +60,32 @@ public class AdminProductFinder extends HttpServlet {
 		
 		
 		
+		////////////////////////////////////////////////////////////////////////////
+		//노답
+//		//페이징바 영역
+//		int totalContent = 0;
+//		switch(searchType) {
+//		case "pName": list = adminService.selectTotalContentByBypName(searchKeyword); break;
+//		case "Category":
+//			if ("V".equals(searchKeyword)) {
+//				searchKeyword = "채소";
+//			}
+//			else {
+//				searchKeyword = "과일";
+//			}
+//			list = adminService.selectTotalContentByCategory(searchKeyword);break;
+//		}
+	///////////////////////////////////////////////////////////////////////////////////	
 		
-		//페이징바 영역
-		int totalContent = 0;
-		switch(searchType) {
-		case "pName": list = adminService.selectTotalContentByBypName(searchKeyword); break;
-		case "Category":
-			if ("V".equals(searchKeyword)) {
-				searchKeyword = "채소";
-			}
-			else {
-				searchKeyword = "과일";
-			}
-			list = adminService.selectTotalContentByCategory(searchKeyword);break;
-		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//totalPage구하기
 				int totalPage = (int)Math.ceil((double)totalContent/numPerPage);

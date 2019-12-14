@@ -271,15 +271,17 @@ public class AdminDAO {
 		return list;
 	}
 
-	public List<Product> selectProductByCategory(Connection conn, String searchKeyword) {
+	public List<Product> selectProductByCategory(Connection conn, String searchKeyword, int cPage, int numPerPage) {
 		List<Product> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectProductByCategory");
+		String sql = prop.getProperty("selectProductByCategoryByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchKeyword);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 
