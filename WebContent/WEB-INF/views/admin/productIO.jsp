@@ -11,6 +11,7 @@
 	for(Product p:productList){
 		option += "<option value=\""+p.getpId()+"\">"+p.getpName()+"</option>";
 	}
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
 <h1>입·출고 수행</h1>
 <div class="container">
@@ -21,7 +22,6 @@
 				<select class="custom-select" id="selectIO" name="selectIO">
 					<option value="I" selected>입고</option>
 					<option value="O">출고</option>
-					
 				</select>
 			</div>
 			<select class="custom-select" id="pName"" name="pName" required>
@@ -29,6 +29,7 @@
 				<%=option %>
 			</select>
 			<input type="number" id="amount" name="amount" placeholder="수량" min="0" required>
+			<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary" type="submit">확인</button>
 			</div>
@@ -66,6 +67,9 @@
 		}%>
 		</tbody>
 	</table>
+	<div id="pageBar">
+		<%=pageBar %>
+	</div>
 </div>
 
 <script>

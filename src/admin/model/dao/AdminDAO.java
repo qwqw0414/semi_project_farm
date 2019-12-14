@@ -309,7 +309,7 @@ public class AdminDAO {
 		return list;
 	}
 
-	public List<ProductIO> selectAllProductIO(Connection conn) {
+	public List<ProductIO> selectAllProductIO(Connection conn, int cPage, int numPerPage) {
 		ProductIO pIO = null;
 		List<ProductIO> list = null;
 		PreparedStatement pstmt = null;
@@ -318,6 +318,8 @@ public class AdminDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(2, cPage*numPerPage);//end rownum
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 			while(rset.next()) {
@@ -348,14 +350,11 @@ public class AdminDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				totalContent = rset.getInt("cnt");
 			}
-			
-			System.out.println("totalContent@dao="+totalContent);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -365,6 +364,29 @@ public class AdminDAO {
 		}
 		
 		
+		return totalContent;
+	}
+
+	public int selectProductIOCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProductIOCount");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return totalContent;
 	}
 
