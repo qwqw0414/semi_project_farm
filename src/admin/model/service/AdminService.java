@@ -85,4 +85,11 @@ public class AdminService {
 		return list;
 	}
 
+	public List<ProductIO> selectAllProductIO() {
+		Connection conn = getConnection();
+		List<ProductIO> list = new AdminDAO().selectAllProductIO(conn);
+		close(conn);
+		return list;
+	}
+
 }

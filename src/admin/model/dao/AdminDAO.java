@@ -236,4 +236,35 @@ public class AdminDAO {
 		return list;
 	}
 
+	public List<ProductIO> selectAllProductIO(Connection conn) {
+		ProductIO pIO = null;
+		List<ProductIO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectAllProductIO");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rset.next()) {
+				pIO = new ProductIO();
+				pIO.setIoId(rset.getInt("ioid"));
+				pIO.setpId(rset.getInt("pId"));
+				pIO.setMemberId(rset.getString("memberId"));
+				pIO.setStatus(rset.getString("status"));
+				pIO.setAmount(rset.getInt("amount"));
+				pIO.setIoDate(rset.getDate("iodate"));
+				list.add(pIO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 }
