@@ -93,7 +93,7 @@ public class AdminProductFinder extends HttpServlet {
 				//페이지바 html코드
 				String pageBar = "";	
 				//페이지바 길이
-				int pageBarSize = 5;
+				int pageBarSize = 2;
 				//(공식3)시작페이지 번호 세팅
 				int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
 				//종료페이지 번호 세팅

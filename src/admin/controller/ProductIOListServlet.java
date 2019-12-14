@@ -36,7 +36,7 @@ public class ProductIOListServlet extends HttpServlet {
 		//2. 업무로직
 		AdminService as = new AdminService();
 		List<ProductIO> productIOList = as.selectAllProductIO(cPage, numPerPage);
-		List<Product> productList = as.selectProductList();
+		List<Product> productList = as.selectProductList(cPage, numPerPage );
 		
 		int totalContent = as.selectProductIOCount();
 		int totalPage =  (int)Math.ceil((double)totalContent/numPerPage);

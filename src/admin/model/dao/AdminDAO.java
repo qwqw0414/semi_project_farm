@@ -94,15 +94,20 @@ public class AdminDAO {
 		return result;
 	}
 
-	public List<Product> selectProdcutList(Connection conn) {
+	public List<Product> selectProdcutList(Connection conn, int cPage, int numPerPage) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectProductList");
+		String query = prop.getProperty("selectProductListByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(query);
+			
+			 pstmt.setInt(1, (cPage-1)*numPerPage+1);
+	            pstmt.setInt(2, cPage*numPerPage);
+			
+			
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
@@ -234,7 +239,7 @@ public class AdminDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Product> list = null;
-		String query = prop.getProperty("selectMemberByPnameByPaging");
+		String query = prop.getProperty("selectProductBypNameByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -393,7 +398,7 @@ public class AdminDAO {
 	public int selectTotalContentByBypName(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectTotalContentByBypName");
+		String query = prop.getProperty("selectTotalContentBypName");
 		int totalContent = 0;
 
 		System.out.println(query);
