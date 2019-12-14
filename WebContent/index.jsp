@@ -61,5 +61,9 @@
     </div>
 </div>
 <%}%>
-<%@ include file="/WEB-INF/views/common/wishList.jsp"%>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+    <div class="row" id="wishListBar">
+
+    </div>
+</nav>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

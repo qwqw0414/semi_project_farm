@@ -1,10 +1,16 @@
+<%@page import="product.model.vo.Product"%>
 <%@page import="product.model.vo.ProductIO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-	List<ProductIO> list = (List<ProductIO>)request.getAttribute("productIOList");
+	List<ProductIO> productIOlist = (List<ProductIO>)request.getAttribute("productIOList");
+	List<Product> productList = (List<Product>)request.getAttribute("productList");
+	String option = "";
+	for(Product p:productList){
+		option += "<option value=\""+p.getpId()+"\">"+p.getpName()+"</option>";
+	}
 %>
 <h1>입·출고 수행</h1>
 <div class="container">
@@ -15,12 +21,12 @@
 				<select class="custom-select" id="selectIO" name="selectIO">
 					<option value="I" selected>입고</option>
 					<option value="O">출고</option>
+					
 				</select>
 			</div>
 			<select class="custom-select" id="pName"" name="pName" required>
 				<option value="" disabled selected hidden>상품 선택</option>
-				<option value="">감자</option>
-				<option value="">파</option>
+				<%=option %>
 			</select>
 			<input type="number" id="amount" name="amount" placeholder="수량" min="0" required>
 			<div class="input-group-append">
@@ -29,25 +35,25 @@
 		</div>
 	</form>
 	<h1>입·출고 내역</h1>
-	<button class="btn btn-primary" onclick="viewProductIO();">조회</button>
+	<button class="btn btn-primary" onclick="viewProductIO();">새로고침</button>
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>입·출고번호</th>
-				<th>상품아이디</th>
-				<th>memberId</th>
+				<th>상품 아이디</th>
+				<th>담당자 아이디</th>
 				<th>입·출고</th>
 				<th>수량</th>
 				<th>입·출고일</th>
 			</tr>
 		</thead>
 		<tbody>
-			<%if(list==null||list.isEmpty()){ %>
+			<%if(productIOlist==null||productIOlist.isEmpty()){ %>
 			<tr>
 				<td>입·출고 내역이 없습니다</td>
 			</tr>
 		<%} else { 
-			for(ProductIO pIO: list){%>
+			for(ProductIO pIO: productIOlist){%>
 			<tr>
 				<td><%=pIO.getIoId() %></td>
 				<td><%=pIO.getpId() %></td>
