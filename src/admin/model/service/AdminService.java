@@ -61,24 +61,24 @@ public class AdminService {
 	
 	}
 
-	public List<Member> selectAll() {
+	public List<Member> selectAllByPaging(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Member> list = new AdminDAO().selectAll(conn);
+		List<Member> list = new AdminDAO().selectAllByPaging(conn, cPage, numPerPage);
 		
 		close(conn);
 		return list;
 		
 	}
-	public List<Member> selectMemberByMemberId(String memberId) {
+	public List<Member> selectMemberByMemberId(String memberId, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Member> list = new AdminDAO().selectMemberByMemberId(conn,memberId);
+		List<Member> list = new AdminDAO().selectMemberByMemberId(conn, memberId, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public List<Member> selectMemberByMemberName(String memberName) {
+	public List<Member> selectMemberByMemberName(String memberName, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Member> list = new AdminDAO().selectMemberByMemberName(conn,memberName);
+		List<Member> list = new AdminDAO().selectMemberByMemberName(conn, memberName, cPage, numPerPage);
 		close(conn);
 		return list;
 		
@@ -100,6 +100,28 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+
+	public int selectTotalContent() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContent(conn);
+		close(conn);
+		return totalContent;
+	}
+
+	public int selectTotalContentByMemberId(String memberId) {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContentByMemberId(conn, memberId);
+		close(conn);
+		return totalContent;
+	}
+
+	public int selectTotalContentByMemberName(String memberName) {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectTotalContentByMemberName(conn, memberName);
+		close(conn);
+		return totalContent;
+	}
+
 
 }
 

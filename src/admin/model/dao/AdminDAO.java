@@ -130,18 +130,19 @@ public class AdminDAO {
 		return list;
 	}
 
-	public List<Member> selectAll(Connection conn) {
+	public List<Member> selectAllByPaging(Connection conn, int cPage, int numPerPage ) {
 		Member m = null;
 		List<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectAll");
+		String query = prop.getProperty("selectAllByPaging");
 		list = new ArrayList<>();
-
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cPage*10-9);
+			pstmt.setInt(2, numPerPage*cPage);
 			rset = pstmt.executeQuery();
-			while (rset.next()) {
+			while(rset.next()) {
 				m = new Member();
 				m.setMemberId(rset.getString("memberId"));
 				m.setMemberName(rset.getString("memberName"));
@@ -150,6 +151,7 @@ public class AdminDAO {
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
+				
 				list.add(m);
 			}
 
@@ -159,20 +161,22 @@ public class AdminDAO {
 			close(rset);
 			close(pstmt);
 		}
-
+		System.out.println(list+"dao33333333333");
 		return list;
 	}
-	public List<Member> selectMemberByMemberId(Connection conn, String memberId) {
+	public List<Member> selectMemberByMemberId(Connection conn, String memberId, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		List<Member> list = null;
 		Member m = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectMemberByMemberId");
+		String query = prop.getProperty("selectMemberByMemberIdByPaging");
 		list = new ArrayList<>();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%"+memberId+"%");
+			pstmt.setInt(2, cPage*10-9);
+			pstmt.setInt(3, numPerPage*cPage);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -195,17 +199,19 @@ public class AdminDAO {
 		}
 		return list;
 	}
-	public List<Member> selectMemberByMemberName(Connection conn, String memberName) {
+	public List<Member> selectMemberByMemberName(Connection conn, String memberName, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		List<Member> list = null;
 		Member m = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectMemberByMemberName");
+		String query = prop.getProperty("selectMemberByMemberNameByPaging");
 		list = new ArrayList<>();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%"+memberName+"%");
+			pstmt.setInt(2, cPage*10-9);
+			pstmt.setInt(3, numPerPage*cPage);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -302,5 +308,81 @@ public class AdminDAO {
 
 		return list;
 	}
+
+	public int selectTotalContent(Connection conn) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContent");
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContent;
+	}
+
+	public int selectTotalContentByMemberId(Connection conn, String memberId) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContentByMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+memberId+"%");
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+
+	public int selectTotalContentByMemberName(Connection conn, String memberName) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContentByMemberName");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+memberName+"%");
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+
+
+
+
 
 }
