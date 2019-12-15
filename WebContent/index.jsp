@@ -1,3 +1,5 @@
+<%@page import="product.model.vo.WishListProduct"%>
+<%@page import="common.util.Utils"%>
 <%@page import="product.model.service.ProductService"%>
 <%@page import="product.model.vo.Product"%>
 <%@page import="java.util.List"%>
@@ -45,7 +47,7 @@
                 <h5 class="card-title"><%=p.getpName()%></h5>
                 <p class="card-text">
                     <div class="input-group">
-                        <span class="form-control">￦ <%=p.getPrice() %></span>
+                        <span class="form-control">￦ <%=new Utils().numberFormat(p.getPrice()) %></span>
                         <div class="input-group-append">
                             <input type="number" min="1" max="10" class="input-group-text" value="1" id="productNum">
                         </div>
@@ -61,5 +63,35 @@
     </div>
 </div>
 <%}%>
-<%@ include file="/WEB-INF/views/common/wishList.jsp"%>
+<%
+	if(memberLoggedIn != null){ 
+		
+		List<WishListProduct> wishList = null;
+		wishList = new ProductService().selectWishListByMemberId(memberLoggedIn.getMemberId());
+		
+  		if(wishList != null && wishList.size() > 0){
+  			
+%>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" id="wishListNav">
+    <div class="row" id="wishListBar">
+            <div class="btn-group-vertical col">
+            	<button class="btn btn-info btn-sm">전체 보기</button>
+            	<button class="btn btn-danger btn-sm">전부 구매</button>
+            </div>
+		<%
+			int cnt = 0;
+	
+			for(WishListProduct w : wishList){ 
+				if(cnt++ > 9) break;
+	%>
+        <div class="wishList">
+            <span><%=w.getpName()%>x<%=w.getAmount()%></span>
+            <br>
+            <span><input type="button" class="btn btn-sm btn-danger" value="x"
+                         onclick="location.href='<%=request.getContextPath()%>/product/deleteWishList?memberId=<%=memberLoggedIn.getMemberId()%>&listId=<%=w.getListId()%>'"></span>
+        </div>
+	<%} %>
+    </div>
+</nav>
+<%}} %>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

@@ -30,9 +30,22 @@
         </div>
         <button type="submit" class="btn btn-primary">수정 하기</button>
         <button type="submit" class="btn btn-primary">비밀번호 수정</button>
+        <button type="button" class="btn btn-primary btn-member-delete" onclick="return confirm_delete()">회원탈퇴</button>
     </form>
 </div>
 
+
+<script>
+function confirm_delete(){
+	var bool = confirm("정말로 탈퇴하시겠습니까?")
+	
+	if(bool){
+		location.href='<%=request.getContextPath()%>/member/memberDelete?memberId=<%=m.getMemberId()%>'
+	}
+}
+
+
+</script>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

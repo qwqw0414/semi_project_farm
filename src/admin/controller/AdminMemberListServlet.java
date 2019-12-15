@@ -34,7 +34,7 @@ public class AdminMemberListServlet extends HttpServlet {
 		}
 		System.out.println("cPage@list="+cPage);
 		//페이징바 영역처리
-		int totalContent = new AdminService().selectTotalContent();
+		int totalContent = new AdminService().selectMemberTotalContent();
 		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
 		System.out.printf("totalContent=%s, totalPage=%s%n",totalContent,totalPage);
 		String pageBar = "";

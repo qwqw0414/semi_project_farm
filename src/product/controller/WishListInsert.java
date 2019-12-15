@@ -33,13 +33,12 @@ public class WishListInsert extends HttpServlet {
 			
 		}
 		else {
-			
 			result = new ProductService().insertWishList(w);
-			
 		}
 		
-		request.getRequestDispatcher("/").forward(request, response);
+		String referer = request.getHeader("Referer");
 		
+		response.sendRedirect(referer);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

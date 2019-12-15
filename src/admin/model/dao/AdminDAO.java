@@ -94,15 +94,20 @@ public class AdminDAO {
 		return result;
 	}
 
-	public List<Product> selectProdcutList(Connection conn) {
+	public List<Product> selectProductList(Connection conn, int cPage, int numPerPage) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectProductList");
+		String query = prop.getProperty("selectProductListByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(query);
+			
+			 pstmt.setInt(1, (cPage-1)*numPerPage+1);
+	            pstmt.setInt(2, cPage*numPerPage);
+			
+			
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
@@ -236,15 +241,20 @@ public class AdminDAO {
 	}
 	
 
-	public List<Product> selectProductBypName(Connection conn, String searchKeyword) {
+	public List<Product> selectProductBypName(Connection conn, String searchKeyword, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<Product> list = null;
-		String query = prop.getProperty("selectMemberByPname");
+		String query = prop.getProperty("selectProductBypNameByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + searchKeyword + "%");
+			
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
+			
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 
@@ -272,15 +282,17 @@ public class AdminDAO {
 		return list;
 	}
 
-	public List<Product> selectProductByCategory(Connection conn, String searchKeyword) {
+	public List<Product> selectProductByCategory(Connection conn, String searchKeyword, int cPage, int numPerPage) {
 		List<Product> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectProductByCategory");
+		String sql = prop.getProperty("selectProductByCategoryByPaging");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchKeyword);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 
@@ -298,7 +310,6 @@ public class AdminDAO {
 				list.add(p);
 			}
 			
-			System.out.println("왜 아무것도 없냐고 dao"+list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -309,14 +320,71 @@ public class AdminDAO {
 		return list;
 	}
 
-	public int selectTotalContent(Connection conn) {
+	public int selectMemberTotalContent(Connection conn) {
 		int totalContent = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectTotalContent");
+		String query = prop.getProperty("selectMemberTotalContent");
 		try {
 			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
 			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+			
+
+	public List<ProductIO> selectAllProductIO(Connection conn, int cPage, int numPerPage) {
+		ProductIO pIO = null;
+		List<ProductIO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectAllProductIO");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(2, cPage*numPerPage);//end rownum
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rset.next()) {
+				pIO = new ProductIO();
+				pIO.setIoId(rset.getInt("ioid"));
+				pIO.setpId(rset.getInt("pId"));
+				pIO.setMemberId(rset.getString("memberId"));
+				pIO.setStatus(rset.getString("status"));
+				pIO.setAmount(rset.getInt("amount"));
+				pIO.setIoDate(rset.getDate("iodate"));
+				list.add(pIO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int selectTotalContent(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContent");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -330,6 +398,7 @@ public class AdminDAO {
 			close(pstmt);
 		}
 		
+
 		return totalContent;
 	}
 
@@ -347,7 +416,7 @@ public class AdminDAO {
 			if(rset.next()) {
 				totalContent = rset.getInt("cnt");
 			}
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -356,6 +425,33 @@ public class AdminDAO {
 		}
 		return totalContent;
 	}
+
+		
+	
+	public int selectProductIOCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProductIOCount");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+
 
 	public int selectTotalContentByMemberName(Connection conn, String memberName) {
 		int totalContent = 0;
@@ -371,18 +467,110 @@ public class AdminDAO {
 			if(rset.next()) {
 				totalContent = rset.getInt("cnt");
 			}
-		
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+		return totalContent;
+	}
+
+	public int selectTotalContentByBypName(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContentBypName");
+		int totalContent = 0;
+
+		System.out.println(query);
+	
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				totalContent = rset.getInt("cnt");
+			
+			System.out.println("totalContent@dao="+totalContent);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
+		
+		return totalContent;
+	
+	}
+
+	public int selectTotalContentByCategory(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalContentByCategory");
+		int totalContent = 0;
+	
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchKeyword);
+			
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+	
+			System.out.println("totalContent@dao="+totalContent);
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
 		return totalContent;
 	}
 
 
 
 
+	public List<Product> selectAllProductList(Connection conn) {
+		List<Product> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectAllProductList");
+		list = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 }
