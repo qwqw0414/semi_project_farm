@@ -60,11 +60,10 @@ public class AdminProductFinder extends HttpServlet {
 		
 		
 		
-		////////////////////////////////////////////////////////////////////////////
 		//페이징바 영역
 		int totalContent = 0;
 		switch(searchType) {
-		case "pName": totalContent= adminService.selectTotalContentByBypName(searchKeyword); break;
+		case "pName": totalContent= new AdminService().selectTotalContentByBypName(searchKeyword); break;
 		case "Category":
 			if ("V".equals(searchKeyword)) {
 				searchKeyword = "채소";
@@ -72,18 +71,8 @@ public class AdminProductFinder extends HttpServlet {
 			else {
 				searchKeyword = "과일";
 			}
-			totalContent = adminService.selectTotalContentByCategory(searchKeyword);break;
+			totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
 		}
-	///////////////////////////////////////////////////////////////////////////////////	
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		//totalPage구하기

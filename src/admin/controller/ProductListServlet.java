@@ -33,7 +33,6 @@ public class ProductListServlet extends HttpServlet {
 		} catch(NumberFormatException e) {
 			
 		}
-		System.out.println("cPage@list="+cPage);
 		
 		int totalContent = new AdminService().selectTotalContent();
 		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);

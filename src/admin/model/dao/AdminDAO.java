@@ -482,7 +482,6 @@ public class AdminDAO {
 		String query = prop.getProperty("selectTotalContentBypName");
 		int totalContent = 0;
 
-		System.out.println(query);
 	
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -493,7 +492,6 @@ public class AdminDAO {
 			if(rset.next())
 				totalContent = rset.getInt("cnt");
 			
-			System.out.println("totalContent@dao="+totalContent);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -523,7 +521,6 @@ public class AdminDAO {
 				totalContent = rset.getInt("cnt");
 			}
 	
-			System.out.println("totalContent@dao="+totalContent);
 			
 
 		} catch (SQLException e) {
