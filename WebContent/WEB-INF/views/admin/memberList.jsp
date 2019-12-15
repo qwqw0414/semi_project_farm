@@ -47,7 +47,7 @@ $(()=>{
 
 <section id="memberList-container">
 <h2>회원정보</h2>
- <div id="search-container">
+<div id="search-container">
 		<label for="searchType">검색타입: </label>
 		<select id="searchType">
 			<option value="memberId">아이디</option>
