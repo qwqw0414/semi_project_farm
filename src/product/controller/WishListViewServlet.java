@@ -20,12 +20,11 @@ public class WishListViewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		List<WishListProduct> list = null;
 		String memberId = request.getParameter("memberId");
 		
-		List<WishListProduct> list = null;
 		
-		request.setAttribute("list", list);
-		
+		//로그인 여부 처리
 		if(memberId == null) {
 			
 		}else {

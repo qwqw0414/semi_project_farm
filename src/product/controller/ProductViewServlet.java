@@ -12,34 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import common.BaseData;
 import product.model.service.ProductService;
 import product.model.vo.Product;
-import product.model.vo.WishList;
 
-/**
- * Servlet implementation class WishListInsert
- */
-@WebServlet("/product/wishListInsert")
-public class WishListInsert extends HttpServlet {
+@WebServlet("/product/productView")
+public class ProductViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		int pId = Integer.parseInt(request.getParameter("pId"));
-		int amount = Integer.parseInt(request.getParameter("pNum"));
-		
-		WishList w = new WishList();
-		w.setMemberId(memberId);
-		w.setpId(pId);
-		w.setAmount(amount);
-		
-		int result = 0;
-		
-		if("".equals(memberId)) {
-			
-		}
-		else {
-			result = new ProductService().insertWishList(w);
-		}
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// 1.파라미터 핸들링
 		int numPerPage = new BaseData().getIndexpagenum();
 		int cPage = 1;
 		int totalContent = 0;
@@ -95,10 +76,11 @@ public class WishListInsert extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
 		request.getRequestDispatcher("/WEB-INF/views/product/productView.jsp").forward(request, response);
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

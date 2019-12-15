@@ -30,6 +30,43 @@ public class ProductDAO {
 		}
 	}
 
+	public List<Product> selectProduct(Connection conn, String keyWord, int cPage, int numPerPage) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProduct");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+keyWord+"%");
+			
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	public List<Product> selectAll(Connection conn) {
 		List<Product> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -140,4 +177,29 @@ public class ProductDAO {
 		
 		return result;
 	}
+
+	public int countProductByName(Connection conn, String keyWord) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("countProductByName");
+		int total = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+keyWord+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				total = rset.getInt("cnt");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return total;
+	}
+
 }
