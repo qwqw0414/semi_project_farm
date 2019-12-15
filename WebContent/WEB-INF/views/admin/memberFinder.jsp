@@ -7,7 +7,8 @@
 <%
 	List<Member> list = new ArrayList(); 
 	list = (ArrayList)request.getAttribute("list");
-	
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
 	String pageBar = (String)request.getAttribute("pageBar");
 
 %>
@@ -23,22 +24,18 @@
 #search-memberName {
 	display: none;
 }
-
 div#pageBar span.cPage{
 	margin-right: 10px;
 }
-
 </style>
 <script>
 $(()=>{
 	var $searchMemberId = $("#search-memberId");
 	var $searchMemberName = $("#search-memberName");
-
 	
 	$("#searchType").change(function(){
 		$searchMemberId.hide();
 		$searchMemberName.hide();
-	
 		
 		$("#search-"+$(this).val()).css("display","inline-block");
 	});
@@ -50,8 +47,9 @@ $(()=>{
 <div id="search-container">
 		<label for="searchType">검색타입: </label>
 		<select id="searchType">
-			<option value="memberId">아이디</option>
-			<option value="memberName">이름</option>
+			
+			<option value="memberId" <%="memberId".equals(searchType)?"selected":""%>>아이디</option>
+			<option value="memberName" <%="memberName".equals(searchType)?"selected":""%>>이름</option>
 		</select>
 		<div id="search-memberId">
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
