@@ -18,7 +18,7 @@
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">상품명</th>
-			<th scope="col">구매수</th>
+			<th scope="col">수량</th>
 			<th scope="col">가격</th>
 			<th scope="col">취소</th>
 		</tr>
@@ -32,8 +32,13 @@
 			<td><%=w.getpName()%></td>
 			<td><%=w.getAmount()%> 개</td>
 			<td>￦ <%=new Utils().numberFormat(w.getAmount()*w.getPrice()) %></td>
-			<td><input type="button" class="btn btn-danger" value="x"
-			           onclick="location.href='<%=request.getContextPath()%>/product/deleteWishList?memberId=<%=memberLoggedIn.getMemberId()%>&listId=<%=w.getListId()%>'"></td>
+			<td>
+				<form action="<%=request.getContextPath()%>/product/deleteWishList" method="post">
+					<input type="hidden" value="<%=memberLoggedIn.getMemberId()%>" name="memberId">
+					<input type="hidden" value="<%=w.getListId()%>" name="listId">
+					<input type="submit" class="btn btn-danger" value="x">
+				</form>
+            </td>
 		</tr>
 	<%} %>
 	</tbody>

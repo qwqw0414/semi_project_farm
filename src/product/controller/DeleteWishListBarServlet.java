@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import product.model.service.ProductService;
 import product.model.vo.WishListProduct;
 
-@WebServlet("/product/deleteWishList")
-public class DeleteWishListServlet extends HttpServlet {
+@WebServlet("/product/deleteWishListBar")
+public class DeleteWishListBarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,10 +31,7 @@ public class DeleteWishListServlet extends HttpServlet {
 		list = new ProductService().selectWishListByMemberId(memberId);
 		request.setAttribute("list", list);
 
-//		String referer = request.getHeader("Referer");
-
-		request.getRequestDispatcher("/WEB-INF/views/product/wishListView.jsp").forward(request, response);
-
+		request.getRequestDispatcher("/product/productView").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
