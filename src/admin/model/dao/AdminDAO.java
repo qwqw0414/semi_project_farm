@@ -479,7 +479,7 @@ public class AdminDAO {
 		return totalContent;
 	}
 
-	public int selectTotalContentByBypName(Connection conn, String searchKeyword) {
+	public int selectTotalContentBypName(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("selectTotalContentBypName");

@@ -48,7 +48,7 @@ public class AdminProductFinder extends HttpServlet {
 		switch(searchType) {
 		case "pName": list = adminService.selectProductBypName(searchKeyword, cPage, numPerPage); break;
 		case "Category":
-			if ("V".equals(searchKeyword)) {
+			if ("V".equals(searchKeyword)||"채소".equals(searchKeyword)) {
 				searchKeyword = "채소";
 			}
 			else {
@@ -63,15 +63,8 @@ public class AdminProductFinder extends HttpServlet {
 		//페이징바 영역
 		int totalContent = 0;
 		switch(searchType) {
-		case "pName": totalContent= new AdminService().selectTotalContentByBypName(searchKeyword); break;
-		case "Category":
-			if ("V".equals(searchKeyword)) {
-				searchKeyword = "채소";
-			}
-			else {
-				searchKeyword = "과일";
-			}
-			totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
+		case "pName": totalContent= new AdminService().selectTotalContentBypName(searchKeyword); break;
+		case "Category": totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
 		}
 		
 		
