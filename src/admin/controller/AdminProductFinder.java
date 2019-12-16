@@ -48,7 +48,8 @@ public class AdminProductFinder extends HttpServlet {
 		switch(searchType) {
 		case "pName": list = adminService.selectProductBypName(searchKeyword, cPage, numPerPage); break;
 		case "Category":
-			if ("V".equals(searchKeyword)||"채소".equals(searchKeyword)) {
+
+			if ("V".equals(searchKeyword) || "채소".equals(searchKeyword)) {
 				searchKeyword = "채소";
 			}
 			else {
@@ -64,13 +65,16 @@ public class AdminProductFinder extends HttpServlet {
 		int totalContent = 0;
 		switch(searchType) {
 		case "pName": totalContent= new AdminService().selectTotalContentBypName(searchKeyword); break;
+<<<<<<< HEAD
 		case "Category": totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
+=======
+		case "Category":totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
+>>>>>>> 63c5fdca5a094ce1f18d9f4b43f74fe403eb0c38
 		}
 		
 		
 		//totalPage구하기
 				int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
-				System.out.println("totalMember="+totalContent+", totalPage="+totalPage);
 		
 				//페이지바 html코드
 				String pageBar = "";	
@@ -80,7 +84,6 @@ public class AdminProductFinder extends HttpServlet {
 				int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
 				//종료페이지 번호 세팅
 				int pageEnd = pageStart+pageBarSize-1;
-				System.out.println("pageStart["+pageStart+"] ~ pageEnd["+pageEnd+"]");
 				int pageNo = pageStart;		
 
 				//이전 section

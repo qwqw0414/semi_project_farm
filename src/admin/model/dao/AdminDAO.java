@@ -168,7 +168,6 @@ public class AdminDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(list+"dao33333333333");
 		return list;
 	}
 	public List<Member> selectMemberByMemberId(Connection conn, String memberId, int cPage, int numPerPage) {
