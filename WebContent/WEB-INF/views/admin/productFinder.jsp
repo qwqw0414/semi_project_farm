@@ -110,7 +110,7 @@ $(()=>{
                 for(Product p : list){ 
         %>
 			<tr>
-				<td><%="V".equals(p.getCategory())?"채소":"과일"%></td>
+				<td><%=p.getCategory() %></td>
 				<td><%=p.getpName() %></td>
 				<td><%=p.getpInfo() %></td>
 				<td><%=p.getPrice() %></td>
