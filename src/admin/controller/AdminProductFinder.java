@@ -65,11 +65,7 @@ public class AdminProductFinder extends HttpServlet {
 		int totalContent = 0;
 		switch(searchType) {
 		case "pName": totalContent= new AdminService().selectTotalContentBypName(searchKeyword); break;
-<<<<<<< HEAD
-		case "Category": totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
-=======
 		case "Category":totalContent = new AdminService().selectTotalContentByCategory(searchKeyword);break;
->>>>>>> 63c5fdca5a094ce1f18d9f4b43f74fe403eb0c38
 		}
 		
 		
