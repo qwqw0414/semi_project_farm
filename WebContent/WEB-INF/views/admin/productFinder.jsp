@@ -86,7 +86,7 @@ $(()=>{
 	</div>
 
 
-	<table id="table table-hover">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>카테고리</th>

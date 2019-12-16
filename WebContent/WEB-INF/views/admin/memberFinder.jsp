@@ -85,7 +85,7 @@ $(()=>{
   </thead>
   <tbody>
 		 <%for(Member m: list){ %>
-			<tr>
+			<tr onclick="location.href='<%=request.getContextPath()%>/member/memberView?memberId=<%=m.getMemberId()%>'">
 				<td><%=m.getMemberId() %></td>
 				<td><%=m.getMemberName()%></td>
 				<td><%=m.getBirth() %></td>

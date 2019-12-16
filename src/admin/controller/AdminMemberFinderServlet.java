@@ -83,7 +83,7 @@ public class AdminMemberFinderServlet extends HttpServlet {
 	request.setAttribute("pageBar", pageBar);
 	request.setAttribute("list", list);
 	//3. 뷰단처리
-	request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp").forward(request, response);
+	request.getRequestDispatcher("/WEB-INF/views/admin/memberFinder.jsp").forward(request, response);
 	
 	
 	

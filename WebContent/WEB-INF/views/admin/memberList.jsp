@@ -43,6 +43,7 @@ $(()=>{
 		$("#search-"+$(this).val()).css("display","inline-block");
 	});
 });
+
 </script>
 
 <section id="memberList-container">
@@ -69,7 +70,7 @@ $(()=>{
 		</div>
 	</div>  
 
-	<table class="table table-hover">
+	<table class="table table-hover" id="member-table">
   <thead>
     <tr>
       <th>아이디</th>
@@ -83,7 +84,7 @@ $(()=>{
   </thead>
   <tbody>
 		 <%for(Member m: list){ %>
-			<tr>
+			<tr onclick="location.href='<%=request.getContextPath()%>/member/memberView?memberId=<%=m.getMemberId()%>'">
 				<td><%=m.getMemberId() %></td>
 				<td><%=m.getMemberName()%></td>
 				<td><%=m.getBirth() %></td>
@@ -98,7 +99,28 @@ $(()=>{
 <div id="pageBar">
 		<%=pageBar %>
 </div>
-
-
 </section>
+
+
+
+
+
+
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
