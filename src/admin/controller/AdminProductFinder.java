@@ -48,6 +48,7 @@ public class AdminProductFinder extends HttpServlet {
 		switch(searchType) {
 		case "pName": list = adminService.selectProductBypName(searchKeyword, cPage, numPerPage); break;
 		case "Category":
+
 			if ("V".equals(searchKeyword) || "채소".equals(searchKeyword)) {
 				searchKeyword = "채소";
 			}
