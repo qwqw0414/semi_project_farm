@@ -1,3 +1,4 @@
+<%@page import="product.model.vo.ProductIOProduct"%>
 <%@page import="product.model.vo.Product"%>
 <%@page import="product.model.vo.ProductIO"%>
 <%@page import="java.util.List"%>
@@ -5,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-	List<ProductIO> productIOlist = (List<ProductIO>)request.getAttribute("productIOList");
+	List<ProductIOProduct> productIOlist = (List<ProductIOProduct>)request.getAttribute("productIOList");
 	List<Product> productList = (List<Product>)request.getAttribute("productList");
 	String option = "";
 	for(Product p:productList){
@@ -41,7 +42,7 @@
 		<thead>
 			<tr>
 				<th>입·출고번호</th>
-				<th>상품 아이디</th>
+				<th>상품명</th>
 				<th>담당자 아이디</th>
 				<th>입·출고</th>
 				<th>수량</th>
@@ -54,10 +55,10 @@
 				<td>입·출고 내역이 없습니다</td>
 			</tr>
 		<%} else { 
-			for(ProductIO pIO: productIOlist){%>
+			for(ProductIOProduct pIO: productIOlist){%>
 			<tr>
 				<td><%=pIO.getIoId() %></td>
-				<td><%=pIO.getpId() %></td>
+				<td><%=pIO.getpName() %></td>
 				<td><%=pIO.getMemberId() %></td>
 				<td><%=("I".equals(pIO.getStatus()))?"입고":"출고" %></td>
 				<td><%=pIO.getAmount() %></td>

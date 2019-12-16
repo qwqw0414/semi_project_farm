@@ -13,6 +13,8 @@ import java.util.Properties;
 import member.model.vo.Member;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
+import product.model.vo.ProductIOProduct;
+
 import static common.JDBCTemplate.close;
 
 public class AdminDAO {
@@ -344,7 +346,6 @@ public class AdminDAO {
 			
 
 	public List<ProductIO> selectAllProductIO(Connection conn, int cPage, int numPerPage) {
-		ProductIO pIO = null;
 		List<ProductIO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -357,13 +358,15 @@ public class AdminDAO {
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 			while(rset.next()) {
-				pIO = new ProductIO();
+				ProductIOProduct pIO = new ProductIOProduct();
 				pIO.setIoId(rset.getInt("ioid"));
 				pIO.setpId(rset.getInt("pId"));
 				pIO.setMemberId(rset.getString("memberId"));
 				pIO.setStatus(rset.getString("status"));
 				pIO.setAmount(rset.getInt("amount"));
 				pIO.setIoDate(rset.getDate("iodate"));
+				pIO.setpName(rset.getString("pname"));
+				pIO.setpName(rset.getString("pName"));
 				list.add(pIO);
 			}
 		} catch (SQLException e) {
