@@ -90,7 +90,7 @@ $(()=>{
 	</div>
 
 
-<table id="tbl-product">
+<table id="table table-hover">
 <thead>
 <tr>
 	<th>카테고리</th>
@@ -126,10 +126,6 @@ $(()=>{
             }
         %>
      </tbody>   
-		
-
-
-
 </table>
 
 <div id="pageBar">
@@ -137,15 +133,7 @@ $(()=>{
 	</div>
 
 
-
-
-
-
 </section>
-
-
-
-
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

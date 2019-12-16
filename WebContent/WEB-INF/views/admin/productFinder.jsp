@@ -4,10 +4,10 @@
 <%@ page import="java.util.*"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-	List<Product> list = (List<Product>)request.getAttribute("list");
+	List<Product> list = (List<Product>) request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
-	String pageBar = (String)request.getAttribute("pageBar");
+	String pageBar = (String) request.getAttribute("pageBar");
 %>
 
 <style>
@@ -18,11 +18,11 @@
 }
 
 div#search-pName {
-	display: <%="pName" .equals(searchType)||searchType==null?"inline-block":"none"%>;
+	display: <%="pName".equals(searchType) || searchType == null ? "inline-block" : "none"%>;
 }
 
 div#search-Category {
-	display: <%="Category" .equals(searchType)?"inline-block":"none"%>;
+	display: <%="Category".equals(searchType) ? "inline-block" : "none"%>;
 }
 </style>
 <script>
@@ -45,9 +45,9 @@ $(()=>{
 	<h2>상품리스트</h2>
 	<div id="search-container">
 		<label for="searchType">검색타입 : </label> <select id="searchType">
-			<option value="pName" <%="pName".equals(searchType)?"selected":"" %>>상품명</option>
+			<option value="pName" <%="pName".equals(searchType) ? "selected" : ""%>>상품명</option>
 			<option value="Category"
-				<%="Category".equals(searchType)?"selected":""%>>카테고리</option>
+				<%="Category".equals(searchType) ? "selected" : ""%>>카테고리</option>
 		</select>
 
 
@@ -60,7 +60,7 @@ $(()=>{
 				<input type="hidden" name="searchType" value="pName" /> <input
 					type="search" name="searchKeyword" size="25"
 					placeholder="검색할 삼품명을 입력하세요"
-					value="<%="pName".equals(searchType)?searchKeyword:""%>" /> <input
+					value="<%="pName".equals(searchType) ? searchKeyword : ""%>" /> <input
 					type="submit" value="검색" />
 			</form>
 		</div>
@@ -74,9 +74,9 @@ $(()=>{
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
 				<input type="hidden" name="searchType" value="Category" /> <input
 					type="radio" name="searchKeyword" value="V"
-					<%="Category".equals(searchType) && "V".equals(searchKeyword)?"checked":""%> />
+					<%="Category".equals(searchType) && "V".equals(searchKeyword) ? "checked" : ""%> />
 				채소 <input type="radio" name="searchKeyword" value="F"
-					<%="Category".equals(searchType) && "F".equals(searchKeyword)?"checked":""%> />
+					<%="Category".equals(searchType) && "F".equals(searchKeyword) ? "checked" : ""%> />
 				과일 <input type="submit" value="검색" />
 			</form>
 		</div>
@@ -86,7 +86,7 @@ $(()=>{
 	</div>
 
 
-	<table id="tbl-product">
+	<table id="table table-hover">
 		<thead>
 			<tr>
 				<th>카테고리</th>
@@ -100,68 +100,41 @@ $(()=>{
 		</thead>
 
 		<tbody>
-			<% if(list==null || list.isEmpty()){ %>
+			<%
+				if (list == null || list.isEmpty()) {
+			%>
 			<tr>
 				<td colspan="8" align="center">검색 결과가 없습니다.</td>
 			</tr>
-			<% 
-            } 
-            else {
-                for(Product p : list){ 
-        %>
+			<%
+				} else {
+					for (Product p : list) {
+			%>
 			<tr>
-				<td><%=p.getCategory() %></td>
-				<td><%=p.getpName() %></td>
-				<td><%=p.getpInfo() %></td>
-				<td><%=p.getPrice() %></td>
-				<td><%=p.getDiscount() %></td>
-				<td><%=p.getStock() %></td>
+				<td><%=p.getCategory()%></td>
+				<td><%=p.getpName()%></td>
+				<td><%=p.getpInfo()%></td>
+				<td><%=p.getPrice()%></td>
+				<td><%=p.getDiscount()%></td>
+				<td><%=p.getStock()%></td>
 			</tr>
 
-			<%		} 
-            }
-        %>
+			<%
+				}
+				}
+			%>
 		</tbody>
-
-
 
 
 	</table>
 
 	<div id="pageBar">
-		<%=pageBar %>
+		<%=pageBar%>
 	</div>
 
 
 
-
-
-
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
