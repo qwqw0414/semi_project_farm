@@ -138,9 +138,9 @@ public class AdminService {
 		close(conn);
 		return totalContent;
 	}
-	public int selectTotalContentByBypName(String searchKeyword) {
+	public int selectTotalContentBypName(String searchKeyword) {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContentByBypName(conn, searchKeyword);
+		int totalContent = new AdminDAO().selectTotalContentBypName(conn, searchKeyword);
 		close(conn);
 		return totalContent;
 	}
