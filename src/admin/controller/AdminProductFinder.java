@@ -70,7 +70,6 @@ public class AdminProductFinder extends HttpServlet {
 		
 		//totalPage구하기
 				int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
-				System.out.println("totalMember="+totalContent+", totalPage="+totalPage);
 		
 				//페이지바 html코드
 				String pageBar = "";	
@@ -80,7 +79,6 @@ public class AdminProductFinder extends HttpServlet {
 				int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
 				//종료페이지 번호 세팅
 				int pageEnd = pageStart+pageBarSize-1;
-				System.out.println("pageStart["+pageStart+"] ~ pageEnd["+pageEnd+"]");
 				int pageNo = pageStart;		
 
 				//이전 section
