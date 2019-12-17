@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -34,7 +35,10 @@ public class PasswordUpdateServletEnd extends HttpServlet {
 	
 		String view = "";
 		if(result > 0) {
-			
+			HttpSession session = request.getSession(false);
+			if(session!=null) {
+				session.invalidate();
+			}
 			request.setAttribute("str", "<script>alert('비밀번호가 변경되었습니다.');</script>");
 			view = "/WEB-INF/views/member/memberLogin.jsp";
 		}

@@ -22,6 +22,11 @@ public class AdminMemberFinderServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String searchType = request.getParameter("searchType");
+		String searchKeyword = request.getParameter("searchKeyword");
+		System.out.println(searchType);
+		System.out.println(searchKeyword);
+		
 	int cPage = 1;//현재페이지번호
 	final int numPerPage = 10;//페이지당 게시물 수
 	try {
@@ -30,8 +35,6 @@ public class AdminMemberFinderServlet extends HttpServlet {
 		
 	}
 		
-	String searchType = request.getParameter("searchType");
-	String searchKeyword = request.getParameter("searchKeyword");
 		
 	List<Member> list = null;
 	AdminService as = new AdminService();
@@ -58,7 +61,7 @@ public class AdminMemberFinderServlet extends HttpServlet {
 
 	//1. 이전
 	if(pageNo!=1) {
-		pageBar = "<a href='"+request.getContextPath()+"/admin/memberList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+		pageBar = "<a href='"+request.getContextPath()+"/admin/memberFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+(pageNo-1)+"'>[이전]</a>\n";
 	}
 	//2. pageNo
 	while(pageNo<=pageEnd&&pageNo<=totalPage) {
@@ -66,13 +69,13 @@ public class AdminMemberFinderServlet extends HttpServlet {
 		if(cPage==pageNo) {
 			pageBar += "<span class='cPage'>"+pageNo+"</span>";
 		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/admin/memberList?cPage="+pageNo+"'>"+pageNo+"</a>\n";
+			pageBar += "<a href='"+request.getContextPath()+"/admin/memberFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
 		}
 		pageNo++;
 	}
 	//3. 다음
 	if(pageNo<totalPage) {
-		pageBar += "<a href='"+request.getContextPath()+"/admin/memberList?cPage="+pageNo+"'>[다음]</a>\n";
+		pageBar += "<a href='"+request.getContextPath()+"/admin/memberFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>[다음]</a>\n";
 	}
 	
 
