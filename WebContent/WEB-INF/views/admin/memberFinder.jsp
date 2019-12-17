@@ -65,6 +65,8 @@ $(()=>{
 				<input type="submit" value="검색" />
 			</form>
 		</div>
+		<button onclick="location.href='<%=request.getContextPath()%>/admin/memberList'">전체검색</button>
+		
 	</div>
 
 	

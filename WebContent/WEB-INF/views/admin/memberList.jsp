@@ -62,12 +62,13 @@ $(()=>{
 			</form>
 		</div>
 		<div id="search-memberName">
-			<form action="<%=request.getContextPath()%>/admin/memberFinder">
+			<form action="'<%=request.getContextPath()%>'/admin/memberFinder">
 				<input type="hidden" name="searchType" value="memberName"/>
 				<input type="search" name="searchKeyword" size="25" placeholder="검색할 회원명을 입력하세요"/>
 				<input type="submit" value="검색" />
 			</form>
 		</div>
+		<button onclick="location.href='<%=request.getContextPath()%>/admin/memberList'">전체검색</button>
 	</div>  
 
 	<table class="table table-hover" id="member-table">

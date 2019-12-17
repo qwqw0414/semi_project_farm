@@ -11,7 +11,7 @@
 <%=(str!=null)?str:"" %>
 
 <div class="container">
-	<%if(m==null){ %>
+	<%if(m==null ){ %>
 	<form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd"
 		method="POST" onsubmit="return password_validate();">
 
@@ -32,7 +32,7 @@
 		</div>
 		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
 	</form>
-	<% }else{%>
+	<% }else {%>
 	<form action="<%=request.getContextPath()%>/member/PasswordUpdateEnd"
 		method="POST" onsubmit="return password2_validate();">
 		<input type="hidden" value="<%=m.getMemberId() %>" name="memberId" />
