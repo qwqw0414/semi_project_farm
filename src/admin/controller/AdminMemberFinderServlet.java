@@ -36,8 +36,9 @@ public class AdminMemberFinderServlet extends HttpServlet {
 	List<Member> list = null;
 	AdminService as = new AdminService();
 	switch(searchType) {
-		case "memberId" : list = as.selectMemberByMemberId(searchKeyword, cPage, numPerPage);break;
 		case "memberName" : list = as.selectMemberByMemberName(searchKeyword,cPage, numPerPage); break;
+		case "memberId" : list = as.selectMemberByMemberId(searchKeyword, cPage, numPerPage);break;
+		case "phone" : list = as.selectMemberByMemberPhone(searchKeyword, cPage, numPerPage);break;
 	}
 	
 	//페이징바 영역
@@ -58,7 +59,8 @@ public class AdminMemberFinderServlet extends HttpServlet {
 
 	//1. 이전
 	if(pageNo!=1) {
-		pageBar = "<a href='"+request.getContextPath()+"/admin/memberList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+		pageBar = "<a href='"+request.getContextPath()+"/admin/memberFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+(pageNo-1)+"'>[이전]</a>\n";
+		
 	}
 	//2. pageNo
 	while(pageNo<=pageEnd&&pageNo<=totalPage) {
@@ -66,19 +68,20 @@ public class AdminMemberFinderServlet extends HttpServlet {
 		if(cPage==pageNo) {
 			pageBar += "<span class='cPage'>"+pageNo+"</span>";
 		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/admin/memberList?cPage="+pageNo+"'>"+pageNo+"</a>\n";
+			pageBar += "<a href='"+request.getContextPath()+"/admin/memberFinder?searchType="+searchType+"$searchKeyword="+searchKeyword+"$cPage="+pageNo+"'>"+pageNo+"</a>\n";
+			
 		}
 		pageNo++;
 	}
 	//3. 다음
 	if(pageNo<totalPage) {
-		pageBar += "<a href='"+request.getContextPath()+"/admin/memberList?cPage="+pageNo+"'>[다음]</a>\n";
+		pageBar += "<a href='"+request.getContextPath()+"/admin/memberFinder?searchType="+searchType+"$searchKeyword="+searchKeyword+"$cPage="+pageNo+"'>[다음]</a>\n";
 	}
 	
 
 
 	
-	
+	System.out.println(list);
 	System.out.println(pageBar+"servlet1212");
 	request.setAttribute("pageBar", pageBar);
 	request.setAttribute("list", list);

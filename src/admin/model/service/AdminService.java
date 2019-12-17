@@ -83,6 +83,13 @@ public class AdminService {
 		
 	}
 
+	public List<Member> selectMemberByMemberPhone(String phone, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Member> list = new AdminDAO().selectMemberByMemberPhone(conn, phone, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+	
 	public List<Product> selectProductBypName(String searchKeyword, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Product> list = null;
@@ -158,6 +165,8 @@ public class AdminService {
 		close(conn);
         return list;
 	}
+
+	
 	
 }
 

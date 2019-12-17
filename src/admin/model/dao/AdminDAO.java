@@ -241,6 +241,41 @@ public class AdminDAO {
 		return list;
 	}
 	
+	public List<Member> selectMemberByMemberPhone(Connection conn, String phone, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		List<Member> list = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = prop.getProperty("selectMemberByPhonByPaging");
+		list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+phone+"%");
+			pstmt.setInt(2, cPage*10-9);
+			pstmt.setInt(3, numPerPage*cPage);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 	public List<Product> selectProductBypName(Connection conn, String searchKeyword, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
@@ -571,5 +606,7 @@ public class AdminDAO {
 		
 		return list;
 	}
+
+	
 
 }

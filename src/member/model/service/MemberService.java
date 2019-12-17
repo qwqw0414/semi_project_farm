@@ -90,6 +90,33 @@ public class MemberService {
 		return result;
 	}
 
+	public Member changeByPassword(String memberId, String password) {
+		Connection conn = getConnection();
+		Member m = new MemberDAO().changeByPassword(conn, memberId, password);
+		if(m != null) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return m;
+	}
+
+	public int changeUpdate(Member m, String pwd_new) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().changeUpdate(conn,m, pwd_new);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		
+		return result;
+
+	}
+
 
 
 	

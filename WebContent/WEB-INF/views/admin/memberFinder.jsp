@@ -19,9 +19,12 @@
 	background-color:lightgray;
 }
 #search-memberId {
-	display: inline-block;
+	display: none;
 }
 #search-memberName {
+	display: inline-block;
+}
+#search-phone{
 	display: none;
 }
 div#pageBar span.cPage{
@@ -32,14 +35,22 @@ div#pageBar span.cPage{
 $(()=>{
 	var $searchMemberId = $("#search-memberId");
 	var $searchMemberName = $("#search-memberName");
+	var $searchPhone = $("#search-phone");
+	$searchMemberId.hide();
+	$searchMemberName.hide();
+	$searchPhone.hide();
+	$("#search-<%=searchType%>").css("display", "inline-block");
 	
 	$("#searchType").change(function(){
-		$searchMemberId.hide();
 		$searchMemberName.hide();
+		$searchMemberId.hide();
+		$searchPhone.hide();
 		
 		$("#search-"+$(this).val()).css("display","inline-block");
+		$("[type=search]").val("");
 	});
 });
+
 </script>
 
 <section id="memberList-container">
@@ -48,9 +59,17 @@ $(()=>{
 		<label for="searchType">검색타입: </label>
 		<select id="searchType">
 			
-			<option value="memberId" <%="memberId".equals(searchType)?"selected":""%>>아이디</option>
 			<option value="memberName" <%="memberName".equals(searchType)?"selected":""%>>이름</option>
+			<option value="memberId" <%="memberId".equals(searchType)?"selected":""%>>아이디</option>
+			<option value="phone" <%="phone".equals(searchType)?"selected":""%>>전화번호</option>
 		</select>
+		<div id="search-memberName">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder">
+				<input type="hidden" name="searchType" value="memberName"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 회원명을 입력하세요"/>
+				<input type="submit" value="검색" />
+			</form>
+		</div>
 		<div id="search-memberId">
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="memberId"/>
@@ -58,10 +77,10 @@ $(()=>{
 				<input type="submit" value="검색" />
 			</form>
 		</div>
-		<div id="search-memberName">
+		<div id="search-phone">
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
-				<input type="hidden" name="searchType" value="memberName"/>
-				<input type="search" name="searchKeyword" size="25" placeholder="검색할 회원명을 입력하세요"/>
+				<input type="hidden" name="searchType" value="phone"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 전화번호 입력하세요"/>
 				<input type="submit" value="검색" />
 			</form>
 		</div>
