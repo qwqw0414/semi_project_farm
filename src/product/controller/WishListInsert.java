@@ -1,6 +1,7 @@
 package product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,14 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import common.BaseData;
 import product.model.service.ProductService;
 import product.model.vo.Product;
 import product.model.vo.WishList;
+import product.model.vo.WishListProduct;
 
-/**
- * Servlet implementation class WishListInsert
- */
 @WebServlet("/product/wishListInsert")
 public class WishListInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,62 +41,21 @@ public class WishListInsert extends HttpServlet {
 		else {
 			result = new ProductService().insertWishList(w);
 		}
+		JSONArray jsonArray = new JSONArray();
 		
-		int numPerPage = new BaseData().getIndexpagenum();
-		int cPage = 1;
-		int totalContent = 0;
-
-		String keyWord = request.getParameter("keyWord");
-		if(keyWord == null) keyWord = "";
+		List<WishListProduct> wishList = new ProductService().selectWishListByMemberId(memberId);
 		
-		try {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		} catch (NumberFormatException e) {
+		for(WishListProduct wp : wishList) {
+			JSONObject jsonWishList = new JSONObject();
+			jsonWishList.put("pName", wp.getpName());
+			jsonWishList.put("amount", wp.getAmount());
+			jsonWishList.put("pId", wp.getpId());
+			jsonWishList.put("photo", wp.getPhoto());
+			jsonArray.add(jsonWishList);
 		}
-		// 2.업무로직
-		List<Product> list = null;
-		ProductService ps = new ProductService();
-		list = ps.selectProduct(keyWord ,cPage, numPerPage);
-
-		//총 수
-		totalContent = ps.countProductByName(keyWord);
-		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
 		
-		// 페이지바 html 코드 생성
-		String pageBar = "";
-		int pageBarSize = new BaseData().getPAGEBARSIZE();
-		int pageStart = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
-		int pageEnd = pageStart + pageBarSize - 1;
-		int pageNo = pageStart;
-
-		if (pageNo == 1) {
-
-		} else {
-			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord + "&cPage="
-					+ (pageNo - pageBarSize) + "'>이전</a></li>";
-		}
-
-		while (pageNo <= pageEnd && pageNo <= totalPage) {
-			if (cPage == pageNo) {
-				pageBar += "<li class='page-item active'><a class='page-link'>" + pageNo + "</a></li>";
-			} else {
-				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord
-						+ "&cPage=" + pageNo + "'>" + pageNo + "</a></li>";
-			}
-			pageNo++;
-		}
-
-		if (pageNo > totalPage) {
-
-		} else {
-			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord + "&cPage="
-					+ pageNo + "'>다음</a></li>";
-		}
-		//3.view단 처리
-		request.setAttribute("list", list);
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("cPage", cPage);
-		request.getRequestDispatcher("/WEB-INF/views/product/productView.jsp").forward(request, response);
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().append(jsonArray.toString());
 		
 	}
 
