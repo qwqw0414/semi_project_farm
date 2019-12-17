@@ -8,14 +8,16 @@ public class WishListProduct extends WishList implements Serializable{
 
 	private String pName;
 	private int price;
+	private String photo;
 	
 	public WishListProduct() {
 	}
 
-	public WishListProduct(int listId, String memberId, int pId, int amount, String pName, int price) {
+	public WishListProduct(int listId, String memberId, int pId, int amount, String pName, int price, String photo) {
 		super(listId, memberId, pId, amount);
 		this.pName = pName;
 		this.price = price;
+		this.photo = photo;
 	}
 
 	public String getpName() {
@@ -34,14 +36,22 @@ public class WishListProduct extends WishList implements Serializable{
 		this.price = price;
 	}
 
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "WishListProduct [pName=" + pName + ", price=" + price + "]";
+		return "WishListProduct [pName=" + pName + ", price=" + price + ", photo=" + photo + "]";
 	}
-	
+
 	
 }

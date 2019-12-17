@@ -36,6 +36,7 @@ $(()=>{
 	var $searchMemberId = $("#search-memberId");
 	var $searchMemberName = $("#search-memberName");
 	var $searchPhone = $("#search-phone");
+
 	
 	$("#searchType").change(function(){
 		$searchMemberName.hide();
@@ -67,7 +68,7 @@ $(()=>{
 		<div id="search-memberId">
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="memberId"/>
-				<input type="search" name="searchKeyword" size="25" placeholde r="검색할 아이디를 입력하세요"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"/>
 				<input type="submit" value="검색" />
 			</form>
 		</div>
@@ -76,6 +77,13 @@ $(()=>{
 				<input type="hidden" name="searchType" value="phone"/>
 				<input type="search" name="searchKeyword" size="25" placeholder="검색할 전화번호 입력하세요"/>
 				<input type="submit" value="검색" />
+			</form>
+		</div>
+		<div id="search-memberId">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder" onsubmit="return searchValidate();">
+				<input type="hidden" name="searchType" value="memberId"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"/>
+				<input type="submit" value="검색" onclick="searchValidate();" />
 			</form>
 		</div>
 		<button onclick="location.href='<%=request.getContextPath()%>/admin/memberList'">전체검색</button>

@@ -39,7 +39,7 @@ public class PasswordUpdateServletEnd extends HttpServlet {
 			if(session!=null) {
 				session.invalidate();
 			}
-			
+
 			request.setAttribute("str", "<script>alert('비밀번호가 변경되었습니다.');</script>");
 			view = "/WEB-INF/views/member/memberLogin.jsp";
 		}

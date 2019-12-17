@@ -99,11 +99,11 @@
   			
 %>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" id="wishListNav">
+    <div class="btn-group-vertical" style="margin-right: 20px;">
+        <button class="btn btn-info btn-sm">전체 보기</button>
+        <button class="btn btn-danger btn-sm">구매 하기</button>
+    </div>
     <div class="row" id="wishListBar">
-        <div class="btn-group-vertical col">
-            <button class="btn btn-info btn-sm">전체 보기</button>
-            <button class="btn btn-danger btn-sm">구매 하기</button>
-        </div>
 <%
 			int cnt = 0;
 	
@@ -126,4 +126,50 @@
     </div>
 </nav>
 <%}} %>
+<script>
+function wishListReg(pId){
+    var pName = $("[id="+pId+"]").siblings(".card-title").text();
+    var pNum = $("[id="+pId+"]").parent().find("#productNum").val();
+    var $bar = $("#wishListBar");
+
+<%
+	if(memberLoggedIn != null){
+%>	
+    var memberId = '<%=memberLoggedIn.getMemberId()%>';
+
+    $.ajax({
+        url:"<%=request.getContextPath()%>/product/wishListInsert",
+        type: "post",
+        data: { pNum: pNum,
+                pId: pId,
+                memberId: memberId},
+        dataType: "json",
+        success: data =>{
+            var cnt = 0;
+            let html = "<div class='row' id='wishListBar'>";
+
+            $(data).each((idx,wishList)=>{
+                if(cnt++ > 9) return;
+                
+                html += "<div class='wishList'><span>"+wishList.pName+"x"+wishList.amount+"</span><br>";
+                html += "<span><input type='hidden' name='memberId' value='<%=memberLoggedIn.getMemberId()%>'>";
+                html += "<input type='hidden' name='listId' value='"+wishList.pId+"'>";
+                html += "<input type='button' class='btn btn-sm btn-danger' value='x'></span></div>";
+            });
+            html += "</div>";
+            $bar.html(html);
+            alert(pName + " " + pNum + "개를 장바구니에 담았습니다.");
+        },
+        error: (jqxhr, textStatus, errorThrown)=>{
+            console.log(jqxhr, textStatus, errorThrown);
+        }
+    });
+<%
+	}
+%>
+    /* $bar.append("<div class='col'><p class='wishList'>"+pName+"<br>x"+pNum+"</p></div>") */
+
+    // location.href = "<%=request.getContextPath()%>/product/wishListInsert?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():""%>&pId="+pId+"&pNum="+pNum;        
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
