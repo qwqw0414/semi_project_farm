@@ -47,8 +47,8 @@
 				<a class="nav-link" href="#">알뜰쇼핑</a>
 			</li>
 			<!-- 검색창 -->
-			<form class="form-inline" action="#">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<form class="form-inline" action="<%=request.getContextPath()%>/product/productView">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
 				<button class="btn btn-success" type="submit">Search</button>
 			</form>
 			<!-- 회원 관련 -->
@@ -57,6 +57,9 @@
 %>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogin">로그인</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberEnroll">회원가입</a>
 			</li>
 <%
 			}else if(memberLoggedIn.isAdmin()){
@@ -98,4 +101,26 @@
 		</ul>
 	</nav>
 </header>
+<!-- 소개 슬라이드 -->
+<div id="slideProduct" class="carousel slide" data-ride="carousel" style="margin-top: 55px;">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/farm/images/logo1.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="/farm/images/logo2.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="/farm/images/logo3.png" class="d-block w-100">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#slideProduct" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#slideProduct" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 <div class="container text-center" id="contents">
