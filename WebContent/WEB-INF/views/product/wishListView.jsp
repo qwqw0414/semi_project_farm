@@ -41,10 +41,6 @@
 	<%} %>
 	</tbody>
 </table>
-<%}else{%>
-<h1>로그인 필요</h1>
-<%} %>
-
 <script>
 function deleteWishList(btn){
 	var listId = $(btn).siblings("[name=listId]").val();
@@ -83,6 +79,11 @@ function deleteWishList(btn){
 
 }
 </script>
+<%}else{%>
+<h1>로그인 필요</h1>
+<%} %>
+
+
 
 
 

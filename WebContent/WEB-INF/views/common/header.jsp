@@ -28,6 +28,9 @@
 		<ul class="navbar-nav">
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/product/productView">Farm</a>
 			<!-- 검색 분류 -->
+			<li class="nav-item">
+				<a class="nav-link" href="<%=request.getContextPath()%>/mam/one">절대 클릭 금지!!</a>
+			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 					카테고리
@@ -50,7 +53,7 @@
 			<!-- 검색창 -->
 			<form class="form-inline" action="<%=request.getContextPath()%>/product/productView">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
-				<button class="btn btn-success" type="submit">Search</button>
+				<button class="btn btn-success" type="submit" style="margin-right: 100px;">Search</button>
 			</form>
 			<!-- 회원 관련 -->
 <%
