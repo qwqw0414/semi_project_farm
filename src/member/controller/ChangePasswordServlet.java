@@ -41,17 +41,18 @@ public class ChangePasswordServlet extends HttpServlet {
 				msg = "비밀번호가 변경되었습니다.";
 				loc = "/";
 			}
-			else {
-				msg = "비밀번호를 다시 확인해주세요.";
-				loc = "/WEB-INF/views/member/changePassword.jsp";
-			}
+			
+		}else {
+			msg = "비밀번호를 다시 확인해주세요.";
+			loc = "/member/ChangePassword";
+		}
+		
+		
+	
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
-		
-		
-	}
 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
