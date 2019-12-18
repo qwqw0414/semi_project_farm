@@ -4,8 +4,6 @@
 <%
 	//로그인한 경우
 	Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
-
-	
 %>	
 <!DOCTYPE html>
 <html>
@@ -21,61 +19,112 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
+<script src="<%=request.getContextPath()%>/js/js.js"></script>
 <title>semi-project</title>
 </head>
 <body>
 <header>
-	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
 		<ul class="navbar-nav">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/product/productView">Farm</a>
+			<!-- 검색 분류 -->
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/">홈</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/mam/one">절대 클릭 금지!!</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					카테고리
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">채소</a>
+					<a class="dropdown-item" href="#">과일</a>
+				</div>
+			</li>
+	
+			<li class="nav-item">
+				<a class="nav-link" href="#">신상품</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">베스트</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">알뜰쇼핑</a>
+			</li>
+			<!-- 검색창 -->
+			<form class="form-inline" action="<%=request.getContextPath()%>/product/productView">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
+				<button class="btn btn-success" type="submit" style="margin-right: 100px;">Search</button>
+			</form>
+			<!-- 회원 관련 -->
+<%
+			if(memberLoggedIn == null){
+%>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogin">로그인</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberEnroll">회원가입</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberFindId">아이디 찾기</a>
+<%
+			}else if(memberLoggedIn.isAdmin()){
+%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						<%=memberLoggedIn.getMemberName()%>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productIOList">상품 입출고</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productList">상품 리스트</a>
+					<a class="dropdown-item" href="#">주문 관리</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/memberList">회원 정보</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">내 정보</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
+				</div>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/updatePassword">비밀번호 찾기</a>
+<%
+			}else{
+%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						<%=memberLoggedIn.getMemberName()%>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">내 정보</a>
+					<a class="dropdown-item" href="#">구매한 상품</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
+				</div>
 			</li>
-			<li class="nav-item">
-				<%if(memberLoggedIn==null){ %>
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogin">로그인</a>
-				<%} else { %>
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
-				<%} %>
-			</li>
-			<%if(memberLoggedIn!=null){ %>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a>
-			</li>
-			<%} %>
+<%			
+			}
+%>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/product/wishListView?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():null%>">장바구니</a>
 			</li>
 		</ul>
 	</nav>
-	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
-		<ul class="navbar-nav">
-			<%if(memberLoggedIn!=null && memberLoggedIn.isAdmin()){ %>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/memberList">회원 정보 리스트</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productIOList">상품 입출고</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productList">상품 리스트</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">주문 리스트</a>
-			</li>
-			<% } %>
-		</ul>
-	</nav>
 </header>
+<!-- 소개 슬라이드 -->
+<div id="slideProduct" class="carousel slide" data-ride="carousel" style="margin-top: 55px;">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/farm/images/logo1.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="/farm/images/logo2.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="/farm/images/logo3.png" class="d-block w-100">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#slideProduct" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#slideProduct" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 <div class="container text-center" id="contents">

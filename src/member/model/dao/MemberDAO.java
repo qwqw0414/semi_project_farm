@@ -217,6 +217,65 @@ public class MemberDAO {
 		return result;
 	}
 
+	public Member changeByPassword(Connection conn, String memberId, String password) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = prop.getProperty("changeByPassword");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, password);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("memberId"));
+				m.setPassword(rset.getString("password"));
+				m.setMemberName(rset.getString("memberName"));
+				m.setBirth(rset.getString("birth"));
+				m.setPhone(rset.getString("phone"));
+				m.setZipcode(rset.getString("zipcode"));
+				m.setAddress(rset.getString("address"));
+				m.setEnrolldate(rset.getDate("enrollDate"));
+				if("Y".equals(rset.getString("admin_yn"))) {
+					m.setAdmin(true);		
+				} else {
+					m.setAdmin(false);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+
+	public int changeUpdate(Connection conn, Member m, String pwd_new) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("changeUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pwd_new);
+			pstmt.setString(2, m.getMemberId());
+			result = pstmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }
 

@@ -18,12 +18,14 @@
 	background-color:lightgray;
 }
 #search-memberId {
-	display: inline-block;
-}
-#search-memberName {
 	display: none;
 }
-
+#search-memberName {
+	display: inline-block;
+}
+#search-phone {
+	display: none;
+}
 div#pageBar span.cPage{
 	margin-right: 10px;
 }
@@ -33,12 +35,13 @@ div#pageBar span.cPage{
 $(()=>{
 	var $searchMemberId = $("#search-memberId");
 	var $searchMemberName = $("#search-memberName");
+	var $searchPhone = $("#search-phone");
 
 	
 	$("#searchType").change(function(){
-		$searchMemberId.hide();
 		$searchMemberName.hide();
-	
+		$searchMemberId.hide();
+		$searchPhone.hide();
 		
 		$("#search-"+$(this).val()).css("display","inline-block");
 	});
@@ -51,9 +54,17 @@ $(()=>{
 <div id="search-container">
 		<label for="searchType">검색타입: </label>
 		<select id="searchType">
-			<option value="memberId">아이디</option>
 			<option value="memberName">이름</option>
+			<option value="memberId">아이디</option>
+			<option value="phone">전화번호</option>
 		</select>
+		<div id="search-memberName">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder">
+				<input type="hidden" name="searchType" value="memberName"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 회원명을 입력하세요"/>
+				<input type="submit" value="검색" />
+			</form>
+		</div>
 		<div id="search-memberId">
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="memberId"/>
@@ -61,11 +72,18 @@ $(()=>{
 				<input type="submit" value="검색" />
 			</form>
 		</div>
-		<div id="search-memberName">
-			<form action="'<%=request.getContextPath()%>'/admin/memberFinder">
-				<input type="hidden" name="searchType" value="memberName"/>
-				<input type="search" name="searchKeyword" size="25" placeholder="검색할 회원명을 입력하세요"/>
+		<div id="search-phone">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder">
+				<input type="hidden" name="searchType" value="phone"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 전화번호 입력하세요"/>
 				<input type="submit" value="검색" />
+			</form>
+		</div>
+		<div id="search-memberId">
+			<form action="<%=request.getContextPath()%>/admin/memberFinder" onsubmit="return searchValidate();">
+				<input type="hidden" name="searchType" value="memberId"/>
+				<input type="search" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요"/>
+				<input type="submit" value="검색"/>
 			</form>
 		</div>
 		<button onclick="location.href='<%=request.getContextPath()%>/admin/memberList'">전체검색</button>

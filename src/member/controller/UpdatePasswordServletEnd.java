@@ -34,7 +34,7 @@ public class UpdatePasswordServletEnd extends HttpServlet {
 		request.setAttribute("m", member);
 		
 		if(member == null) {
-			request.setAttribute("str", "<script>alert('잘못된 입력');</script>");
+			request.setAttribute("str", "<script>alert('잘 못 입력하셨습니다.');</script>");
 		}
 		request.getRequestDispatcher("/WEB-INF/views/member/updatePassword.jsp").forward(request, response);
 		

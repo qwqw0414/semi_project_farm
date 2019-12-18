@@ -29,7 +29,7 @@
             <input type="text"" class="form-control" id="address" name="address" placeholder="나머지 주소" value=<%=m.getAddress() %>>
         </div>
         <button type="submit" class="btn btn-primary">수정 하기</button>
-        <button type="button" class="btn btn-primary">비밀번호 수정</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword'">비밀번호 수정</button>
         <button type="button" class="btn btn-primary btn-member-delete" onclick="return confirm_delete()">회원탈퇴</button>
     </form>
 </div>
@@ -43,6 +43,7 @@ function confirm_delete(){
 		location.href='<%=request.getContextPath()%>/member/memberDelete?memberId=<%=m.getMemberId()%>'
 	}
 }
+
 
 
 </script>
