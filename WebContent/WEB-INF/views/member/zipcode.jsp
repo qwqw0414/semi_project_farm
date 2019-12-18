@@ -4,6 +4,12 @@
     pageEncoding="UTF-8"%>
 <%
 	List<Zipcode> list = (List)request.getAttribute("list");
+	int searchType = 0;
+
+	if(request.getParameter("searchType") != null){
+    	searchType = Integer.parseInt(request.getParameter("searchType"));
+	}
+    String keyWord = request.getParameter("keyWord");
 %>
 <!DOCTYPE html>
 <html>
@@ -21,12 +27,12 @@
                 <div class="input-group-prepend">
                     <select class="custom-select" name="searchType">
                         <!-- <option value="1">시/도</option> -->
-                        <option value="2">시/군/구</option>
-                        <option value="3">읍/면</option>
-                        <option value="4">길</option>
+                        <option value="2" <%=(searchType == 2)?"selected":""%>>시/군/구</option>
+                        <option value="3" <%=(searchType == 3)?"selected":""%>>읍/면</option>
+                        <option value="4" <%=(searchType == 4)?"selected":""%>>길</option>
                     </select>
                 </div>
-                <input type="text" class="form-control" name="keyWord" required>
+                <input type="text" class="form-control" name="keyWord" value="<%=(keyWord!=null)?keyWord:""%>" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="submit">검색</button>
                 </div>
@@ -37,13 +43,13 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="zipcodeSel">주소 선택</label>
             </div>
-            <select class="custom-select" id="zipcodeSel">
+            <select class="custom-select" id="zipcodeSel" size="8">
             <%for(Zipcode z : list){ 
             	String str = "";
-            	str += (z.getSido()==null?" ":z.getSido()+" ");
-            	str += (z.getSigungu()==null?" ":z.getSigungu()+" ");
-            	str += (z.getMyun()==null?" ":z.getMyun()+" ");
-            	str += (z.getRo()==null?" ":z.getRo()+" ");
+            	str += (z.getSido()==null?"":z.getSido()+" ");
+            	str += (z.getSigungu()==null?"":z.getSigungu()+" ");
+            	str += (z.getMyun()==null?"":z.getMyun()+" ");
+            	str += (z.getRo()==null?"":z.getRo()+" ");
             	str += (z.getName()==null?"":z.getName());
             %><option value="<%=z.getCode()%>|<%=str%>"><%=str%></option><%} %>
             

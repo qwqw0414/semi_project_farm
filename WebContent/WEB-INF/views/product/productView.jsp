@@ -7,39 +7,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-<!-- 소개 슬라이드 -->
-<div id="slideProduct" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/farm/images/logo1.png" class="d-block w-100">
-        </div>
-        <div class="carousel-item">
-            <img src="/farm/images/logo2.png" class="d-block w-100">
-        </div>
-        <div class="carousel-item">
-            <img src="/farm/images/logo3.png" class="d-block w-100">
-        </div>
-    </div>
-    <a class="carousel-control-prev" href="#slideProduct" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#slideProduct" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+
 <%
 	String keyWord = null;
 %>
-
-<!-- 상품 검색 바 -->
-<nav class="navbar navbar-center bg-light">
-    <form class="form-inline" method="get" action="<%=request.getContextPath()%>/product/productView">
-        <input class="form-control mr-sm-2" type="search" placeholder="검색" name="keyWord">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-    </form>
-</nav>
 
 <!-- 상품 출력 -->
 <%
@@ -116,9 +87,6 @@ function wishListReg(pId){
 <%
 	}
 %>
-    /* $bar.append("<div class='col'><p class='wishList'>"+pName+"<br>x"+pNum+"</p></div>") */
-
-    // location.href = "<%=request.getContextPath()%>/product/wishListInsert?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():""%>&pId="+pId+"&pNum="+pNum;        
 }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
