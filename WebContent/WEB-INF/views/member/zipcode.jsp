@@ -9,6 +9,7 @@
 	if(request.getParameter("searchType") != null){
     	searchType = Integer.parseInt(request.getParameter("searchType"));
 	}
+	
     String keyWord = request.getParameter("keyWord");
 %>
 <!DOCTYPE html>
@@ -38,7 +39,7 @@
                 </div>
             </div>
         </form>
-		<%if(list != null) {%>
+		<%if(list != null && list.size() > 0) {%>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="zipcodeSel">주소 선택</label>
@@ -59,7 +60,10 @@
             <button type="button" class="btn btn-secondary" onclick="self.close()">취소</button>
             <button type="button" class="btn btn-secondary" id="btnSelect">확인</button>
         </div>
-       	<%} %>
+       	<%}else if(list != null){ %>
+       	<h2>해당 주소와 일치하는 우편번호가 없습니다.<br> 다시 입력해주세요.</h2>
+       	<button type="button" class="btn btn-secondary" onclick="self.close()">취소</button>
+<%		  }%>
     </div>
 <script>
 btnSelect.onclick = function(){

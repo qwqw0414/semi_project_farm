@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import product.model.service.ProductService;
 import product.model.vo.WishListProduct;
 
@@ -18,6 +21,7 @@ public class DeleteWishListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		int listId = Integer.parseInt(request.getParameter("listId"));
 		int result = 0;
 
@@ -28,13 +32,23 @@ public class DeleteWishListServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		List<WishListProduct> list = null;
 
+		//json 처리
 		list = new ProductService().selectWishListByMemberId(memberId);
-		request.setAttribute("list", list);
+		JSONArray jsonArray = new JSONArray();
+		
+		for(WishListProduct wp : list) {
+			JSONObject jsonWishList = new JSONObject();
+			jsonWishList.put("pName", wp.getpName());
+			jsonWishList.put("amount", wp.getAmount());
+			jsonWishList.put("pId", wp.getpId());
+			jsonWishList.put("photo", wp.getPhoto());
+			jsonWishList.put("listId", wp.getListId());
+			jsonWishList.put("price", wp.getPrice());
+			jsonArray.add(jsonWishList);
+		}
 
-//		String referer = request.getHeader("Referer");
-
-		request.getRequestDispatcher("/WEB-INF/views/product/wishListView.jsp").forward(request, response);
-
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().append(jsonArray.toString());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

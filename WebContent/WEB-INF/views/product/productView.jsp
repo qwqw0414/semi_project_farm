@@ -29,6 +29,7 @@
     <div class="row w-100" style="margin: auto;">
     <%for(Product p : list){ %>
         <div class="card" style="width: 16rem;">
+        	<!-- 상품 이미지 -->
             <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top">
             <div class="card-body">
                 <input type="hidden" id="<%=p.getpId()%>">
@@ -41,8 +42,8 @@
                         </div>
                     </div>
                 </p>
+				<!-- 장바구니 & 구매 버튼 -->                
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                
                     <button type="button" class="btn btn-outline-danger">구매하기</button>
                     <button type="button" class="btn btn-outline-info" onclick="wishListReg('<%=p.getpId()%>');">장바구니</button>
                 </div>
