@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<%
-	String memberId = request.getParameter("memberId");
-%>
+
 <div class="container">
-	<form action="<%=request.getContextPath()%>/member/ChangePassword"
-		method="POST" onsubmit="return password_validate();">
-		<input type="text" name="password" id="password" class="from-control" placeholder="현재 비밀번호" />
-		<small class="form-text text-muted">현재 비밀번호</small>
-	</form>
-	<form action="<%=request.getContextPath()%>/member/ChangePassword"
+	<form action="<%=request.getContextPath()%>/member/ChangePasswordEnd"
 		method="POST" onsubmit="return password2_validate();">
+		<div class="form-group">
+		<input type="password" name="password" id="password" class="form-control" placeholder="현재 비밀번호" />
+		<small class="form-text text-muted">현재 비밀번호</small>
+		</div>
 		<div class="form-group">
 			<input type="password" class="form-control" id="pwd_new"
 				name="pwd_new" placeholder="비밀번호"> <small
@@ -22,7 +19,7 @@
 				name="pwd_check" placeholder="비밀번호 확인"> <small
 				class="form-text text-muted">비밀번호 확인</small><br />
 		</div>
-		<input type="hidden" name="memberId" value="<%=memberId %>" />
+		<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
 		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
 	</form>
 

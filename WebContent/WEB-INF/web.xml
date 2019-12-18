@@ -67,4 +67,13 @@
     <servlet-name>ProductIOServlet</servlet-name>
     <url-pattern>/admin/productIOView</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ChangePasswordServlet</servlet-name>
+    <jsp-file>/WEB-INF/views/member/changePassword.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangePasswordServlet</servlet-name>
+    <url-pattern>/member/ChangePassword</url-pattern>
+  </servlet-mapping>
 </web-app>

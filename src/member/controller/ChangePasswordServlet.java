@@ -15,7 +15,8 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class ChangePasswordServlet
  */
-@WebServlet("/member/ChangePassword")
+@WebServlet(urlPatterns="/member/ChangePasswordEnd",
+			name ="ChangeMemberPasswordServlet")
 public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,8 +26,11 @@ public class ChangePasswordServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String pwd_new	= request.getParameter("pwd_new");
 		
+		System.out.println(memberId+"123123123");
+		System.out.println(password+"123123123");
+		
 		Member m = new MemberService().changeByPassword(memberId, password);
-
+		System.out.println(m+"23123123123");
 		String msg = "";
 		String loc = "";
 		String view = "/WEB-INF/views/common/msg.jsp";
@@ -34,6 +38,12 @@ public class ChangePasswordServlet extends HttpServlet {
 		if(m != null) {
 			int result = new MemberService().changeUpdate(m,pwd_new);
 			if(result > 0) {
+				msg = "비밀번호가 변경되었습니다.";
+				loc = "/";
+			}
+			else {
+				msg = "비밀번호를 다시 확인해주세요.";
+				loc = "/WEB-INF/views/member/changePassword.jsp";
 			}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
