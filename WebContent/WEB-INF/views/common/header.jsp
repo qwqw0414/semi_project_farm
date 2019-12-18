@@ -4,8 +4,6 @@
 <%
 	//로그인한 경우
 	Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
-
-	
 %>	
 <!DOCTYPE html>
 <html>
@@ -25,56 +23,78 @@
 </head>
 <body>
 <header>
-	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
 		<ul class="navbar-nav">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/product/productView">Farm</a>
+			<!-- 검색 분류 -->
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					카테고리
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">채소</a>
+					<a class="dropdown-item" href="#">과일</a>
+				</div>
+			</li>
+	
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/">홈</a>
+				<a class="nav-link" href="#">신상품</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberEnroll">회원가입</a>
+				<a class="nav-link" href="#">베스트</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberFindId">아이디 찾기</a>
+				<a class="nav-link" href="#">알뜰쇼핑</a>
 			</li>
+			<!-- 검색창 -->
+			<form class="form-inline" action="#">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+				<button class="btn btn-success" type="submit">Search</button>
+			</form>
+			<!-- 회원 관련 -->
+<%
+			if(memberLoggedIn == null){
+%>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/updatePassword">비밀번호 찾기</a>
-			</li>
-			<li class="nav-item">
-				<%if(memberLoggedIn==null){ %>
 				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogin">로그인</a>
-				<%} else { %>
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
-				<%} %>
 			</li>
-			<%if(memberLoggedIn!=null){ %>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a>
+<%
+			}else if(memberLoggedIn.isAdmin()){
+%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						<%=memberLoggedIn.getMemberName()%>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productIOList">상품 입출고</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productList">상품 리스트</a>
+					<a class="dropdown-item" href="#">주문 관리</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/memberList">회원 정보</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">내 정보</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
+				</div>
 			</li>
-			<%} %>
+<%
+			}else{
+%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						<%=memberLoggedIn.getMemberName()%>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">내 정보</a>
+					<a class="dropdown-item" href="#">구매한 상품</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
+				</div>
+			</li>
+<%			
+			}
+%>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/product/wishListView?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():null%>">장바구니</a>
 			</li>
-		</ul>
-	</nav>
-	<nav class="navbar navbar-expand-sm bg-light justify-content-center">
-		<ul class="navbar-nav">
-			<%if(memberLoggedIn!=null && memberLoggedIn.isAdmin()){ %>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/memberList">회원 정보 리스트</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productIOList">상품 입출고</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/admin/productList">상품 리스트</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">주문 리스트</a>
-			</li>
-			<% } %>
 		</ul>
 	</nav>
 </header>

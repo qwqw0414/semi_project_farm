@@ -87,45 +87,7 @@
 </ul>
 <%}%>
 
-<!-- 장바구니 -->
-<%
-	if(memberLoggedIn != null){ 
-		
-		List<WishListProduct> wishList = null;
-		wishList = new ProductService().selectWishListByMemberId(memberLoggedIn.getMemberId());
 
-		
-  		if(wishList != null && wishList.size() > 0){
-  			
-%>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" id="wishListNav">
-    <div class="btn-group-vertical" style="margin-right: 20px;">
-        <button class="btn btn-info btn-sm">전체 보기</button>
-        <button class="btn btn-danger btn-sm">구매 하기</button>
-    </div>
-    <div class="row" id="wishListBar">
-<%
-			int cnt = 0;
-	
-			for(WishListProduct w : wishList){ 
-				if(cnt++ > 9) break;
-%>
-        <div class="wishList">
-            <span><%=w.getpName()%>x<%=w.getAmount()%></span>
-            <br>
-            <form action="<%=request.getContextPath()%>/product/deleteWishListBar" method="POST">
-            	<span>
-            		<input type="hidden" name="keyWord" value='<%=(keyWord==null)?"":keyWord%>'>
-                    <input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
-                    <input type="hidden" name="listId" value="<%=w.getListId()%>">
-                    <input type="submit" class="btn btn-sm btn-danger" value="x">
-            	</span>
-            </form>
-        </div>
-	<%} %>
-    </div>
-</nav>
-<%}} %>
 <script>
 function wishListReg(pId){
     var pName = $("[id="+pId+"]").siblings(".card-title").text();
@@ -145,19 +107,6 @@ function wishListReg(pId){
                 memberId: memberId},
         dataType: "json",
         success: data =>{
-            var cnt = 0;
-            let html = "<div class='row' id='wishListBar'>";
-
-            $(data).each((idx,wishList)=>{
-                if(cnt++ > 9) return;
-                
-                html += "<div class='wishList'><span>"+wishList.pName+"x"+wishList.amount+"</span><br>";
-                html += "<span><input type='hidden' name='memberId' value='<%=memberLoggedIn.getMemberId()%>'>";
-                html += "<input type='hidden' name='listId' value='"+wishList.pId+"'>";
-                html += "<input type='button' class='btn btn-sm btn-danger' value='x'></span></div>";
-            });
-            html += "</div>";
-            $bar.html(html);
             alert(pName + " " + pNum + "개를 장바구니에 담았습니다.");
         },
         error: (jqxhr, textStatus, errorThrown)=>{
