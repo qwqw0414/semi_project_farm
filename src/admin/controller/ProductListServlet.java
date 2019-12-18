@@ -47,41 +47,39 @@ public class ProductListServlet extends HttpServlet {
 		int pageNo = pageStart;
 		
 		
+		
 		//1.이전
-				if(pageNo != 1) {
-					pageBar += "<a href='"+request.getContextPath()+"/admin/productList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
-				}
-				
-				//2.pageNo
-				while(pageNo<=pageEnd && pageNo<=totalPage) {
-					//현재페이지인 경우
-					if(cPage == pageNo) {
-						pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
-					}
-					else {
-						pageBar += "<a href='"+request.getContextPath()+"/admin/productList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
-					}
-					
-					pageNo++;
-				}
-				
-				//3.다음
-				if(pageNo <= totalPage) {
-					pageBar += "<a href='"+request.getContextPath()+"/admin/productList?cPage="+pageNo+"'>[다음]</a>\n";							
-				}
+		if(pageNo != 1) {
+			pageBar += "<a href='"+request.getContextPath()+"/admin/productList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+		}
+		
+		//2.pageNo
+		while(pageNo<=pageEnd && pageNo<=totalPage) {
+			//현재페이지인 경우
+			if(cPage == pageNo) {
+				pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
+			}
+			else {
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
+			}
+			
+			pageNo++;
+		}
+		
+		//3.다음
+		if(pageNo <= totalPage) {
+			pageBar += "<a href='"+request.getContextPath()+"/admin/productList?cPage="+pageNo+"'>[다음]</a>\n";							
+		}
 		
 		
 		
+			
+		List<Product>list = new AdminService().selectProductList(cPage, numPerPage);
+		request.setAttribute("list", list);
 		
-		
-		
-		
-	List<Product>list = new AdminService().selectProductList(cPage, numPerPage);
-	request.setAttribute("list", list);
+		request.setAttribute("pageBar", pageBar);
 	
-	request.setAttribute("pageBar", pageBar);
-
-	request.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
 	   .forward(request, response);
 	
 	

@@ -158,7 +158,53 @@ public class AdminService {
 		close(conn);
         return list;
 	}
+
 	
+
+	
+
+	public Product selectProductByPName(String pName) {
+		// TODO Auto-generated method stub
+		Product p = null;
+		Connection conn = getConnection();
+		p = new AdminDAO().selectProductByPName(pName, conn);
+		close(conn);
+		
+		return p;
+	}
+
+	public int updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+
+		int result = new AdminDAO().updateProduct(p, conn);
+		if(result>0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+	public int deleteProduct(Product p) {
+		
+		Connection conn = getConnection();
+
+		int result = new AdminDAO().deleteProduct(p, conn);
+		if(result>0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
 }
 
 

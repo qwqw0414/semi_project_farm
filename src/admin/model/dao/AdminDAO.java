@@ -119,7 +119,7 @@ public class AdminDAO {
 				p.setpName(rset.getString("PNAME"));
 				p.setpInfo(rset.getString("PINFO"));
 				p.setPrice(rset.getInt("PRICE"));
-				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
 				p.setStock(rset.getInt("STOCK"));
 				p.setPhoto(rset.getString("PHOTO"));
 
@@ -266,7 +266,7 @@ public class AdminDAO {
 				p.setpName(rset.getString("PNAME"));
 				p.setpInfo(rset.getString("PINFO"));
 				p.setPrice(rset.getInt("PRICE"));
-				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
 				p.setStock(rset.getInt("STOCK"));
 				p.setPhoto(rset.getString("PHOTO"));
 
@@ -304,7 +304,7 @@ public class AdminDAO {
 				p.setpName(rset.getString("PNAME"));
 				p.setpInfo(rset.getString("PINFO"));
 				p.setPrice(rset.getInt("PRICE"));
-				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
 				p.setStock(rset.getInt("STOCK"));
 				p.setPhoto(rset.getString("PHOTO"));
 
@@ -555,7 +555,7 @@ public class AdminDAO {
 				p.setpName(rset.getString("PNAME"));
 				p.setpInfo(rset.getString("PINFO"));
 				p.setPrice(rset.getInt("PRICE"));
-				p.setDiscount(rset.getInt("DISCOUNT"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
 				p.setStock(rset.getInt("STOCK"));
 				p.setPhoto(rset.getString("PHOTO"));
 
@@ -571,5 +571,97 @@ public class AdminDAO {
 		
 		return list;
 	}
+
+
+	public Product selectProductByPName(String pName, Connection conn) {
+		// TODO Auto-generated method stub
+		
+		Product p = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberByPname");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pName);
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return p;
+	}
+	
+	
+	
+	public int updateProduct(Product p, Connection conn) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		List<Product> list = null;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateProduct");
+		//System.out.println("query="+query);
+		//updateProduct=update product set category=?, pname=?, pinfo=?, price=?, photo=? where pid=?
+		list = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p.getCategory());
+			pstmt.setString(2, p.getpName());
+			pstmt.setString(3, p.getpInfo());
+			pstmt.setInt(4, p.getPrice());
+			pstmt.setDouble(5, p.getDiscount());			
+			pstmt.setString(6, p.getPhoto());
+			pstmt.setInt(7, p.getpId());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteProduct(Product p, Connection conn) {
+		
+		int result = 0;		
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteProduct");
+		//System.out.println("query="+query);
+		//deleteProduct=DELETE FROM PRODUCT WHERE PID=?
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, p.getpId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }

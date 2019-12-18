@@ -33,6 +33,7 @@ public class ProductRegEndServlet extends HttpServlet {
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		String photo = multiReq.getFilesystemName("photo");
 		
+		System.out.println(photo);
 		System.out.println(category);
 		
 		Product p = new Product(0, category, pName, pInfo, price, 0, 0, photo);

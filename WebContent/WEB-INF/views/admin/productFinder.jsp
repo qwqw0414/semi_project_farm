@@ -37,7 +37,29 @@ $(()=>{
 		$("#search-"+$(this).val()).css("display", "inline-block");
 	});
 	
+	
+	
+	$("tr").on("click",function(){		
+		if( !$(this).parent().is($("thead")) ){
+			var objectArr = $(this).children();
+			console.log(objectArr);
+			var pName=objectArr.eq(1).text();
+			console.log(objectArr.eq(1).text());
+			
+			location.href='<%=request.getContextPath()%>/admin/productUpdate?pName='+pName;
+			
+		}
+		
+	});
+	
+	
+	
 });
+
+
+
+
+
 
 </script>
 
@@ -73,11 +95,13 @@ $(()=>{
 		<div id="search-Category">
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
 				<input type="hidden" name="searchType" value="Category" /> <input
-					type="radio" name="searchKeyword" value="V"
+					type="radio" id="vegetable" name="searchKeyword" value="V"
 					<%="Category".equals(searchType) && "V".equals(searchKeyword) ? "checked" : ""%> />
-				채소 <input type="radio" name="searchKeyword" value="F"
+					<label for="vegetable">채소</label>
+					<input type="radio" id="fruit" name="searchKeyword" value="F"
 					<%="Category".equals(searchType) && "F".equals(searchKeyword) ? "checked" : ""%> />
-				과일 <input type="submit" value="검색" />
+					<label for="fruit">과일</label>
+					<input type="submit" value="검색" />
 			</form>
 		</div>
 
