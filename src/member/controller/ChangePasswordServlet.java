@@ -39,7 +39,7 @@ public class ChangePasswordServlet extends HttpServlet {
 			int result = new MemberService().changeUpdate(m,pwd_new);
 			if(result > 0) {
 				msg = "비밀번호가 변경되었습니다.";
-				loc = "/";
+				loc = "/product/productView";
 			}
 			
 		}else {
