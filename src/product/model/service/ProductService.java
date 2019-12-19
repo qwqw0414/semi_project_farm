@@ -79,6 +79,13 @@ public class ProductService {
 		return total;
 	}
 
+	public Product selectOneByPId(int pId) {
+		Connection conn = getConnection();
+		Product p = new ProductDAO().selectOneByPId(conn, pId);
+		close(conn);
+		return p;
+	}
+
 
 	
 }

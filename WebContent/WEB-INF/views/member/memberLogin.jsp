@@ -41,21 +41,8 @@
 	        <button type="submit" class="btn btn-primary">로그인</button>
 	        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/memberFindId'">아이디 찾기</button>
 	        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/updatePassword'">비밀번호 찾기</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/memberEnroll'">회원가입</button>
         </form>
-</div>
-<%} else { %>
-<div class="container">
-	<table id="logged-in">
-		<tr>
-			<td><%=memberLoggedIn.getMemberName() %>님, 안녕하세요.</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="button" value="내 정보보기" onclick="location.href='#" />
-				<input type="button" value="로그아웃" onclick="location.href='<%=request.getContextPath()%>/member/memberLogout'"/>
-			</td>
-		</tr>
-	</table>
 </div>
 <%} %>
 <script>

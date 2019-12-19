@@ -79,8 +79,8 @@ public class MemberLoginServletEnd extends HttpServlet {
 					response.addCookie(c);
 				}
 
-				//리다이렉트 처리
-				response.sendRedirect(request.getContextPath());
+				//메인 화면으로 리다이렉트 처리
+				response.sendRedirect(request.getContextPath()+"/product/productView");
 			}
 		}
 	}

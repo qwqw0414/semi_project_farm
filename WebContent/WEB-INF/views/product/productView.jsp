@@ -30,7 +30,7 @@
     <%for(Product p : list){ %>
         <div class="card" style="width: 16rem;">
         	<!-- 상품 이미지 -->
-            <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top">
+            <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top" >
             <div class="card-body">
                 <input type="hidden" id="<%=p.getpId()%>">
                 <h5 class="card-title"><%=p.getpName()%></h5>
@@ -61,6 +61,11 @@
 
 
 <script>
+$(".card-img-top").on("click",function(e){
+	var pId = $(e.target).siblings().children("input").attr("id");
+	location.href ='<%=request.getContextPath()%>/product/productInfo?pId='+pId;
+	
+});
 function wishListReg(pId){
     var pName = $("[id="+pId+"]").siblings(".card-title").text();
     var pNum = $("[id="+pId+"]").parent().find("#productNum").val();
