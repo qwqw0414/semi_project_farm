@@ -21,9 +21,9 @@
                </div>
                <div class="col-xl-6 order-xl-3 col-12 order-3 float-left">
                		<label for="amount">수량 :</label>
-               		<input type="number" name="amount" id="amount" />
-	               	<button>구매하기</button>
-	               	<button>장바구니</button>
+               		<input type="number" name="amount" id="amount" min="1" max="10" step="1"/>
+	               	<button class="btn btn-danger">구매하기</button>
+	               	<button class="btn btn-success">장바구니</button>
                </div>
                <div class="col-12 order-4 float-left">
                	리뷰를 만든다면 여기에

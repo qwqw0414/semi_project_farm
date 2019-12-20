@@ -32,23 +32,42 @@
 			<input type="number" id="amount" name="amount" placeholder="수량" min="0" required>
 			<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
 			<div class="input-group-append">
+			<input type="hidden" name="byStatus" id="byStatus" />
 				<button class="btn btn-outline-secondary" type="submit">확인</button>
 			</div>
 		</div>
 	</form>
 	<h1>입·출고 내역</h1>
-	<button class="btn btn-primary" onclick="viewProductIO();">새로고침</button>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>입·출고번호</th>
+				<th>입·출고</th>
 				<th>상품명</th>
 				<th>담당자 아이디</th>
-				<th>입·출고</th>
 				<th>수량</th>
 				<th>입·출고일</th>
 			</tr>
 		</thead>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<input type="checkbox" value="All" name="category" checked
+						aria-label="Checkbox for following text input">전체 보기
+				</div>
+			</div>
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<input type="checkbox" value="I" name="category"
+						aria-label="Checkbox for following text input">입고 보기
+				</div>
+			</div>
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<input type="checkbox" value="O" name="category"
+						aria-label="Checkbox for following text input">출고 보기
+				</div>
+			</div>
+		</div>
 		<tbody>
 			<%if(productIOlist==null||productIOlist.isEmpty()){ %>
 			<tr>
@@ -57,10 +76,9 @@
 		<%} else { 
 			for(ProductIOProduct pIO: productIOlist){%>
 			<tr>
-				<td><%=pIO.getIoId() %></td>
+				<td><%=("I".equals(pIO.getStatus()))?"입고":"출고" %></td>
 				<td><%=pIO.getpName() %></td>
 				<td><%=pIO.getMemberId() %></td>
-				<td><%=("I".equals(pIO.getStatus()))?"입고":"출고" %></td>
 				<td><%=pIO.getAmount() %></td>
 				<td><%=pIO.getIoDate() %></td>
 			</tr>
@@ -91,8 +109,23 @@ function productIOValidate(){
 	}
 	return true;
 }
-function viewProductIO(){
-	location.href="<%=request.getContextPath()%>/admin/productIOList";
+function viewProductIO(byStatus){
+	location.href="<%=request.getContextPath()%>/admin/productIOList?byCategory="+byStatus;
 }
+$(()=>{
+	$("input:checkbox").on('click', function(){
+		var $box = $(this);
+		if($box.is(":checked")){
+			var group = "input:checkbox[name='" + $box.attr("name") + "']";
+			 $(group).prop("checked", false);
+			 $box.prop("checked", true);
+			 console.log($box.val());
+			 var $byStatus = $("#byStatus").attr("value",$box.val());
+			 viewProductIO($byStatus.val());
+		} else {
+			$box.prop("checked", false);
+		}
+	})
+});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

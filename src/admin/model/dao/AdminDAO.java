@@ -379,16 +379,29 @@ public class AdminDAO {
 	}
 			
 
-	public List<ProductIO> selectAllProductIO(Connection conn, int cPage, int numPerPage) {
+	public List<ProductIO> selectAllProductIO(Connection conn, int cPage, int numPerPage, String byStatus) {
 		List<ProductIO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectAllProductIO");
+		String query = "";
+		if(byStatus==null||"All".equals(byStatus)) {
+			query = prop.getProperty("selectAllProductIO");			
+		} else {
+			query = prop.getProperty("selectProductIOByCategory");
+		}
+
 		
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);//start rownum
-			pstmt.setInt(2, cPage*numPerPage);//end rownum
+			if(byStatus==null||"All".equals(byStatus)) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, (cPage-1)*numPerPage+1);//start rownum
+				pstmt.setInt(2, cPage*numPerPage);//end rownum
+			} else {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, byStatus);
+				pstmt.setInt(2, (cPage-1)*numPerPage+1);//start rownum
+				pstmt.setInt(3, cPage*numPerPage);//end rownum
+			}
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 			while(rset.next()) {

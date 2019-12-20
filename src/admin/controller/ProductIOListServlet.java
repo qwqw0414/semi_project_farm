@@ -33,10 +33,12 @@ public class ProductIOListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			
 		}
-		//2. 업무로직
+		String byStatus = request.getParameter("byCategory");
+		System.out.println("byCategory@= "+byStatus);
 		AdminService as = new AdminService();
-		List<ProductIO> productIOList = as.selectAllProductIO(cPage, numPerPage);
+		List<ProductIO> productIOList = as.selectAllProductIO(cPage, numPerPage, byStatus);
 		List<Product> productList = as.selectAllProductList();
+		//2. 업무로직
 		
 		int totalContent = as.selectProductIOCount();
 		int totalPage =  (int)Math.ceil((double)totalContent/numPerPage);

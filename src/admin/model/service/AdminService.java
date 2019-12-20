@@ -105,9 +105,9 @@ public class AdminService {
 		return list;
 	}
 
-	public List<ProductIO> selectAllProductIO(int cPage, int numPerPage) {
+	public List<ProductIO> selectAllProductIO(int cPage, int numPerPage, String byStatus) {
 		Connection conn = getConnection();
-		List<ProductIO> list = new AdminDAO().selectAllProductIO(conn, cPage, numPerPage);
+		List<ProductIO> list = new AdminDAO().selectAllProductIO(conn, cPage, numPerPage, byStatus);
 		close(conn);
 		return list;
 	}
