@@ -40,5 +40,5 @@
 	margin-top: 55px;
 }
 .card:hover{
-	box-shadow: 10px 10px 8px rgba(135, 139, 133, 0.4);
+	box-shadow: 0 0 10px gray;
 }

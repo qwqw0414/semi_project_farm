@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import product.model.service.ProductService;
 import product.model.vo.WishList;
 import product.model.vo.WishListProduct;
@@ -22,17 +25,25 @@ public class WishListViewServlet extends HttpServlet {
 		
 		List<WishListProduct> list = null;
 		String memberId = request.getParameter("memberId");
+
+		//json 처리
+		list = new ProductService().selectWishListByMemberId(memberId);
+		JSONArray jsonArray = new JSONArray();
 		
-		
-		//로그인 여부 처리
-		if(memberId == null) {
-			
-		}else {
-			list = new ProductService().selectWishListByMemberId(memberId);
+		for(WishListProduct wp : list) {
+			JSONObject jsonWishList = new JSONObject();
+			jsonWishList.put("pName", wp.getpName());
+			jsonWishList.put("amount", wp.getAmount());
+			jsonWishList.put("pId", wp.getpId());
+			jsonWishList.put("photo", wp.getPhoto());
+			jsonWishList.put("listId", wp.getListId());
+			jsonWishList.put("price", wp.getPrice());
+			jsonWishList.put("discount", wp.getDiscount());
+			jsonArray.add(jsonWishList);
 		}
-		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/product/wishListView.jsp").forward(request, response);
+
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().append(jsonArray.toString());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

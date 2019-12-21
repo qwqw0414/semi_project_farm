@@ -28,9 +28,6 @@
 		<ul class="navbar-nav">
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/product/productView">Farm</a>
 			<!-- 검색 분류 -->
-			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/mam/one">절대 클릭 금지!!</a>
-			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 					카테고리
@@ -41,9 +38,6 @@
 				</div>
 			</li>
 	
-			<li class="nav-item">
-				<a class="nav-link" href="#">신상품</a>
-			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">베스트</a>
 			</li>
@@ -100,7 +94,7 @@
 			}
 %>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/product/wishListView?memberId=<%=(memberLoggedIn!=null)?memberLoggedIn.getMemberId():null%>">장바구니</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/product/wishList">장바구니</a>
 			</li>
 		</ul>
 	</nav>

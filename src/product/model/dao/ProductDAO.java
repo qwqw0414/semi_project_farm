@@ -123,6 +123,7 @@ public class ProductDAO {
 				w.setAmount(rset.getInt("amount"));
 				w.setpName(rset.getString("pname"));
 				w.setPrice(rset.getInt("price"));
+				w.setDiscount(rset.getDouble("discount"));
 				w.setPhoto(rset.getString("photo"));
 
 				list.add(w);
