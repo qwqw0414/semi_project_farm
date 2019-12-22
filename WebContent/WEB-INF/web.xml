@@ -75,7 +75,6 @@
     <servlet-name>ChangePasswordServlet</servlet-name>
     <url-pattern>/member/ChangePassword</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>wishListServlet</servlet-name>
     <jsp-file>/WEB-INF/views/product/wishListView.jsp</jsp-file>

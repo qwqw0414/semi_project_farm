@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import product.model.vo.OrderList;
 import product.model.vo.Product;
 import product.model.vo.WishList;
 import product.model.vo.WishListProduct;
@@ -234,6 +235,33 @@ public class ProductDAO {
 			close(pstmt);
 		}
 		return p;
+	}
+
+	public int orderAll(Connection conn, List<OrderList> orderList) {
+		
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("orderAll");
+		int result = 0;
+		
+		try {
+			for(OrderList ol : orderList) {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, ol.getMemberId());
+				pstmt.setInt(2, ol.getpId());
+				pstmt.setInt(3, ol.getPrice());
+				pstmt.setInt(4, ol.getAmount());
+				pstmt.setString(5, ol.getMemberId());
+				pstmt.setString(6, ol.getMemberId());
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

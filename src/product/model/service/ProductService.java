@@ -5,8 +5,11 @@ import static common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import admin.model.dao.AdminDAO;
 import product.model.dao.ProductDAO;
+import product.model.vo.OrderList;
 import product.model.vo.Product;
 import product.model.vo.WishList;
 import product.model.vo.WishListProduct;
@@ -84,6 +87,33 @@ public class ProductService {
 		Product p = new ProductDAO().selectOneByPId(conn, pId);
 		close(conn);
 		return p;
+	}
+
+	public int orderAll(List<OrderList> orderList,List<Integer> listId) {
+		Connection conn = getConnection();
+		int result = 0;
+		ProductDAO pd = new ProductDAO();
+		
+		result = pd.orderAll(conn, orderList);
+		
+		if(result > 0) {
+			//장바구니 제거
+			if(listId != null && listId.size()>0) {
+				for(int id : listId) {
+					pd.deleteWishList(conn, id);
+					System.out.println(id);
+				}
+			}
+			
+			commit(conn);
+			
+		}
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 

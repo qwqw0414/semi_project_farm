@@ -28,10 +28,55 @@ img{width: 5rem;}
 <hr>
 <h3>합계금액 : <span id="sumPrice"></span></h3>
 <br>
-<input type="button" value="구입하기" class="btn btn-danger">
+<input type="button" value="구입하기" class="btn btn-danger" id="btnOrder">
 <script>
 $(()=>{
 	loadWishList();
+
+	$("#btnOrder").click(()=>{
+
+		if(!confirm("구입?"))
+			return;
+
+		var $check = $(".check-WishList");
+		var orderList = new Array();
+
+		// 주문 내역 전처리
+		for(var i = 0; i < $check.length; i++){
+			if($check.eq(i).prop("checked")){
+				var price = $check.eq(i).parent().siblings("[name=price]").val();
+				var pId = $check.eq(i).parents("tr").find("[name=pId]").val();
+				var listId = $check.eq(i).parent().siblings("[name=listId]").val();
+				var amount = $check.eq(i).parents("tr").find(".amount").text();
+				var memberId = "<%=memberLoggedIn.getMemberId()%>";
+
+				orderList.push({
+							pId: pId,
+							listId: listId,
+							amount: amount,
+							price: price
+						});
+			}
+		}
+		
+		var jsonArr = JSON.stringify(orderList);
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/product/orderReg",
+			data: {orderList: jsonArr,
+				   memberId: memberId},
+			type: "post",
+			success: data =>{
+				loadWishList();
+			},
+			error : (jqxhr, textStatus, errorThrown)=>{
+				console.log(jqxhr, textStatus, errorThrown);
+			}
+
+		});
+
+	});
+
 });
 
 // 전체 선택
@@ -63,7 +108,7 @@ function sumPrice(){
 
 // 장바구니 제거
 function deleteWishList(btn){
-	var listId = $(btn).siblings("[name=listId]").val();
+	var listId = $(btn).parents("tr").find("[name=listId]").val();
 	var memberId = "<%=memberLoggedIn.getMemberId()%>";
 	var $tbody = $("tbody");
 
@@ -98,11 +143,12 @@ function loadWishList(){
 				html += "<tr><th><input type='checkbox' class='check-WishList' checked='checked'></th>";
 				html += "<td><img src='/farm/upload/product/" + wishList.photo + "'></td>";
 				html += "<td>" + wishList.pName + "</td>";
-				html += "<td>" + wishList.amount + " 개</td>";
+				html += "<td><span class='amount'>" + wishList.amount + "</span> 개</td>";
 				html += "<td>" + numberFormat(price) + "</td>";
 				html += "<td><input type='button' class='btn btn-danger' value='x' onclick='deleteWishList(this);'>";
-				html += "<input type='hidden' value='"+wishList.listId+"' name='listId'></td>";
+				html += "<input type='hidden' value='"+wishList.pId+"' name='pId'></td>";
 				html += "<input type='hidden' value='"+price+"' name='price'>";
+				html += "<input type='hidden' value='"+wishList.listId+"' name='listId'>";
 				html += "</tr>";
 			});
 

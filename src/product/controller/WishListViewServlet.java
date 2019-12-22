@@ -35,6 +35,7 @@ public class WishListViewServlet extends HttpServlet {
 			jsonWishList.put("pName", wp.getpName());
 			jsonWishList.put("amount", wp.getAmount());
 			jsonWishList.put("pId", wp.getpId());
+			jsonWishList.put("listId", wp.getListId());
 			jsonWishList.put("photo", wp.getPhoto());
 			jsonWishList.put("listId", wp.getListId());
 			jsonWishList.put("price", wp.getPrice());
