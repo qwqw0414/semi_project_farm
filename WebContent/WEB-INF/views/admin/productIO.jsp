@@ -13,6 +13,8 @@
 		option += "<option value=\""+p.getpId()+"\">"+p.getpName()+"</option>";
 	}
 	String pageBar = (String)request.getAttribute("pageBar");
+	String byStatus = (String)request.getAttribute("byStatus");
+	System.out.println(byStatus);
 %>
 <h1>입·출고 수행</h1>
 <div class="container">
@@ -51,19 +53,22 @@
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<div class="input-group-text">
-					<input type="checkbox" value="All" name="category" checked
+					<input type="checkbox" value="All" name="category" 
+						<%=(byStatus==null||"All".equals(byStatus))?"checked":"" %>
 						aria-label="Checkbox for following text input">전체 보기
 				</div>
 			</div>
 			<div class="input-group-prepend">
 				<div class="input-group-text">
 					<input type="checkbox" value="I" name="category"
+					<%=("I".equals(byStatus))?"checked":"" %>
 						aria-label="Checkbox for following text input">입고 보기
 				</div>
 			</div>
 			<div class="input-group-prepend">
 				<div class="input-group-text">
 					<input type="checkbox" value="O" name="category"
+					<%=("O".equals(byStatus))?"checked":"" %>
 						aria-label="Checkbox for following text input">출고 보기
 				</div>
 			</div>
@@ -110,7 +115,7 @@ function productIOValidate(){
 	return true;
 }
 function viewProductIO(byStatus){
-	location.href="<%=request.getContextPath()%>/admin/productIOList?byCategory="+byStatus;
+	location.href="<%=request.getContextPath()%>/admin/productIOList?byStatus="+byStatus;
 }
 $(()=>{
 	$("input:checkbox").on('click', function(){

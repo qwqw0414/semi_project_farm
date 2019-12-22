@@ -33,14 +33,19 @@ public class ProductIOListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			
 		}
-		String byStatus = request.getParameter("byCategory");
+		String byStatus = request.getParameter("byStatus");
 		System.out.println("byCategory@= "+byStatus);
 		AdminService as = new AdminService();
 		List<ProductIO> productIOList = as.selectAllProductIO(cPage, numPerPage, byStatus);
 		List<Product> productList = as.selectAllProductList();
 		//2. 업무로직
-		
-		int totalContent = as.selectProductIOCount();
+		int totalContent = 0;
+		if(byStatus==null||"All".equals(byStatus)) {
+			totalContent = as.selectProductIOCount();
+			
+		} else {
+			totalContent = as.selectProductIOCountByStatus(byStatus);
+		}
 		int totalPage =  (int)Math.ceil((double)totalContent/numPerPage);
 		
 		String pageBar = "";
@@ -48,32 +53,62 @@ public class ProductIOListServlet extends HttpServlet {
 		int pageStart = ((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd = pageStart+pageBarSize-1;
 		int pageNo = pageStart;
-		
-		//[이전] section
-		if(pageNo == 1 ){
-			//pageBar += "<span>[이전]</span>"; 
-		}
-		else {
-			pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+(pageNo-1)+"'>[이전]</a> ";
-		}
-			
-		// pageNo section
-		while(pageNo<=pageEnd && pageNo<=totalPage){
-			
-			if(cPage == pageNo ){
-				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
-			} 
-			else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>"+pageNo+"</a> ";
+		if(byStatus==null||"All".equals(byStatus)) {
+			//입출고내역 전체조회일 경우 페이징바 처리
+			//[이전] section
+			if(pageNo == 1 ){
+				//pageBar += "<span>[이전]</span>"; 
 			}
-			pageNo++;
-		}
-		
-		//[다음] section
-		if(pageNo > totalPage){
-
+			else {
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+(pageNo-1)+"'>[이전]</a> ";
+			}
+			
+			// pageNo section
+			while(pageNo<=pageEnd && pageNo<=totalPage){
+				
+				if(cPage == pageNo ){
+					pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+				} 
+				else {
+					pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>"+pageNo+"</a> ";
+				}
+				pageNo++;
+			}
+			
+			//[다음] section
+			if(pageNo > totalPage){
+				
+			} else {
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>[다음]</a>";
+			}
 		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a>";
+			//입출고내역 입고, 출고로 조회할 경우 페이징바 처리
+			if(pageNo == 1 ){
+				//pageBar += "<span>[이전]</span>"; 
+			}
+			else {
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+(pageNo-1)+"'>[이전]</a> ";
+			}
+			
+			// pageNo section
+			while(pageNo<=pageEnd && pageNo<=totalPage){
+				
+				if(cPage == pageNo ){
+					pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+				} 
+				else {
+					pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
+				}
+				pageNo++;
+			}
+			
+			//[다음] section
+			if(pageNo > totalPage){
+				
+			} else {
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a>";
+			}
+			request.setAttribute("byStatus", byStatus);
 		}
 		
 		//3. view단 처리

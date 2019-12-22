@@ -138,6 +138,13 @@ public class AdminService {
 		close(conn);
 		return totalContent;
 	}
+	
+	public int selectProductIOCountByStatus(String byStatus) {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectProductIOCountByStatus(conn, byStatus);
+		close(conn);
+		return totalContent;
+	}
 
 	public int selectTotalContentByMemberName(String memberName) {
 		Connection conn = getConnection();

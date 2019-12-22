@@ -501,7 +501,30 @@ public class AdminDAO {
 		}
 		return totalContent;
 	}
+	
+	public int selectProductIOCountByStatus(Connection conn, String byStatus) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProductIOCountByStatus");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, byStatus);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
 
 	public int selectTotalContentByMemberName(Connection conn, String memberName) {
 		int totalContent = 0;
@@ -712,6 +735,5 @@ public class AdminDAO {
 		
 		return result;
 	}
-
 
 }
