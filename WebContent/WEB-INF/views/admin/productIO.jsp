@@ -53,23 +53,26 @@
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<div class="input-group-text">
-					<input type="checkbox" value="All" name="category" 
+					<input type="checkbox" value="All" name="category" id="All"
 						<%=(byStatus==null||"All".equals(byStatus))?"checked":"" %>
-						aria-label="Checkbox for following text input">전체 보기
+						aria-label="Checkbox for following text input">
+						<label for="All">전체보기</label>
 				</div>
 			</div>
 			<div class="input-group-prepend">
 				<div class="input-group-text">
-					<input type="checkbox" value="I" name="category"
+					<input type="checkbox" value="I" name="category" id="I"
 					<%=("I".equals(byStatus))?"checked":"" %>
-						aria-label="Checkbox for following text input">입고 보기
+						aria-label="Checkbox for following text input">
+						<label for="I">입고 보기</label>
 				</div>
 			</div>
 			<div class="input-group-prepend">
 				<div class="input-group-text">
-					<input type="checkbox" value="O" name="category"
+					<input type="checkbox" value="O" name="category" id="O"
 					<%=("O".equals(byStatus))?"checked":"" %>
-						aria-label="Checkbox for following text input">출고 보기
+						aria-label="Checkbox for following text input">
+						<label for="O">출고 보기</label>
 				</div>
 			</div>
 		</div>
