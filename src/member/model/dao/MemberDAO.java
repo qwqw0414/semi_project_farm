@@ -276,6 +276,31 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int memberUpdate(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberUpdate");
+		//memberUpdate=update member set membername=?, birth=?, phone=?, zipcode=?, address=? where memberid=?
+		int result = 0;
+		
+		try {
+			int cnt = 0;
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(++cnt, m.getMemberName());
+			pstmt.setString(++cnt, m.getBirth());
+			pstmt.setString(++cnt, m.getPhone());
+			pstmt.setString(++cnt, m.getZipcode());
+			pstmt.setString(++cnt, m.getAddress());
+			pstmt.setString(++cnt, m.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 
 }
 
