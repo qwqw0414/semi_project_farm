@@ -217,6 +217,13 @@ public class AdminService {
 		
 	}
 
+	public Product selectProductByPId(int pId) {
+		Connection conn = getConnection();
+		Product p = new AdminDAO().selectProductByPId(conn, pId);
+		close(conn);
+		return p;
+	}
+
 }
 
 
