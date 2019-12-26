@@ -33,7 +33,7 @@ public class OrderViewServlet extends HttpServlet {
 		List<OrderList> list = new MemberService().selectOrderList(memberId,cPage,numPerPage); 
 		//페이징바 영역처리
 		int totalContent = new MemberService().orderTotalContent(memberId);
-		int totalPage = (int) Math.ceil(totalContent/numPerPage);
+		int totalPage = (int) Math.ceil((double)totalContent/numPerPage);
 
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -55,12 +55,14 @@ public class OrderViewServlet extends HttpServlet {
 				} else {
 					pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
 				}
+				pageNo++;
 			}
 		//3. 다음
 			if(pageNo<totalPage) {
 				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>\n";
 			}
 		
+			System.out.println(totalPage+"1123123");
 	
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
