@@ -370,7 +370,49 @@ public class MemberDAO {
 		return totalContent;
 	}
 
+	
+	
+	
+	public int memberIdCheck(String memberId, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("memberIdCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			
+			result=rset.getInt("cnt");
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return result;
+	}
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
