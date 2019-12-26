@@ -4,9 +4,12 @@ import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
+import product.model.vo.OrderList;
+import product.model.vo.Product;
 
 public class MemberService {
 
@@ -135,10 +138,19 @@ public class MemberService {
 		return result;
 	}
 
+	public List<OrderList> selectOrderList(String memberId, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<OrderList> list = new MemberDAO().selectOrderList(conn, memberId, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
 
-
-	
-	
+	public int orderTotalContent() {
+		Connection conn = getConnection();
+		int totalContent = new MemberDAO().orderTotalContent(conn);
+		close(conn);
+		return totalContent;
+	}
 	
 	
 }

@@ -8,9 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import product.model.vo.OrderList;
+import product.model.vo.OrderListProduct;
+import product.model.vo.Product;
 
 public class MemberDAO {
 
@@ -299,6 +304,70 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+	public List<OrderList> selectOrderList(Connection conn, String memberId, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		List<OrderList> list = new ArrayList<>();
+		String query = prop.getProperty("selectOrderList");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, cPage*10-9);
+			pstmt.setInt(3, numPerPage*cPage);
+			rset = pstmt.executeQuery();
+
+			
+			while(rset.next()) {
+				OrderListProduct o = new OrderListProduct();
+				o.setOrderId(rset.getInt("ORDERID"));
+				o.setMemberId(rset.getString("MEMBERID"));
+				o.setpId(rset.getInt("PID"));
+				o.setPrice(rset.getInt("PRICE"));
+				o.setAmount(rset.getInt("AMOUNT"));
+				o.setZipcode(rset.getString("ZIPCODE"));
+				o.setAddress(rset.getString("ADDRESS"));
+				o.setOrderDate(rset.getDate("ORDERDATE"));
+				o.setCheckDate(rset.getDate("CHECKDATE"));
+				o.setStatus(rset.getString("STATUS"));
+				o.setpName(rset.getString("PNAME"));
+				o.setPhoto(rset.getString("PHOTO"));
+				
+				list.add(o);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	public int orderTotalContent(Connection conn) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("orderTotalContent");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
 	}
 
 
