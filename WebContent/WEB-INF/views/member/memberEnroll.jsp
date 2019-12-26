@@ -6,8 +6,13 @@
         <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST"
             onsubmit="return enrollValidate();">
             <div class="form-group">
-                <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" required>
-                <small class="form-text text-muted">아이디를 입력해주세요.</small>
+            	<div class="input-group">
+                	<input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" required>
+                	<div class="input-group-append">
+                		<button class="btn btn-outline-secondary" id="checkId-btn" type="button" >중복검사</button>
+                	</div>
+                </div>
+                		<small class="form-text text-muted">아이디를 입력해주세요.</small>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호" required>
@@ -232,8 +237,29 @@
     });
 
 
+//아이디 중복 검사 및 유효성 검사
 
-
+$('#checkId-btn').click(function(){
+	var memberId= $('#memberId').val();
+	$.ajax({
+		type:"post",
+		url:"<%=request.getContextPath()%>/member/MemberIdCheckServlet",
+		data:{memberId:memberId},
+		success:function(result){
+			if(result==1){
+				alert("사용할 수 없는 아이디 입니다.")
+			}
+			else{
+				alert("사용 가능한 아이디 입니다.")
+			}
+			
+			
+			
+		}
+		
+		
+	})
+});
 
 
 
