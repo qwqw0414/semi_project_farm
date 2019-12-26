@@ -44,10 +44,12 @@ public class OrderViewServlet extends HttpServlet {
 		int pageNo = pageStart;
 		//1.이전
 			if(pageNo!=1) {
-				pageBar = "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
+				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
 				
 			}
 		//2.pageNo
+			System.out.println("cPage="+cPage);
+			System.out.println("pageNo= "+pageNo);
 			while(pageNo<=pageEnd&&pageNo<=totalPage) {
 				//현재페이지인 경우
 				if(cPage==pageNo) {
@@ -66,7 +68,6 @@ public class OrderViewServlet extends HttpServlet {
 	
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		System.out.println(pageBar+"servlet11");
 		request.getRequestDispatcher("/WEB-INF/views/member/orderView.jsp").forward(request, response);
 	}
 
