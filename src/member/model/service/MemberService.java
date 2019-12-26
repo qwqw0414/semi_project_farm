@@ -9,6 +9,7 @@ import java.util.List;
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
 import product.model.vo.OrderList;
+import product.model.vo.OrderListProduct;
 import product.model.vo.Product;
 
 public class MemberService {
@@ -145,9 +146,9 @@ public class MemberService {
 		return list;
 	}
 
-	public int orderTotalContent() {
+	public int orderTotalContent(String memberId) {
 		Connection conn = getConnection();
-		int totalContent = new MemberDAO().orderTotalContent(conn);
+		int totalContent = new MemberDAO().orderTotalContent(conn,memberId);
 		close(conn);
 		return totalContent;
 	}

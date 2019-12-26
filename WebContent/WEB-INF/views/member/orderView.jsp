@@ -9,7 +9,6 @@
 <%
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
-
 %>
 
 <script>

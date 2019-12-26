@@ -348,7 +348,7 @@ public class MemberDAO {
 		return list;
 	}
 
-	public int orderTotalContent(Connection conn) {
+	public int orderTotalContent(Connection conn, String memberId) {
 		int totalContent = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -356,6 +356,7 @@ public class MemberDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
@@ -367,6 +368,8 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println(totalContent+"dao11");
+
 		return totalContent;
 	}
 

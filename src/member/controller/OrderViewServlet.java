@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 import product.model.vo.OrderList;
+import product.model.vo.OrderListProduct;
 
 @WebServlet("/member/orderView")
 public class OrderViewServlet extends HttpServlet {
@@ -19,6 +20,8 @@ public class OrderViewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String memberId = request.getParameter("memberId");
+		
 		int cPage =1; //초기값 설정
 		final int numPerPage = 10;
 		try {
@@ -26,9 +29,10 @@ public class OrderViewServlet extends HttpServlet {
 		} catch(NumberFormatException e) {
 			
 		}
-//		System.out.println("cPage@list="+cPage);
+		
+		List<OrderList> list = new MemberService().selectOrderList(memberId,cPage,numPerPage); 
 		//페이징바 영역처리
-		int totalContent = new MemberService().orderTotalContent();
+		int totalContent = new MemberService().orderTotalContent(memberId);
 		int totalPage = (int) Math.ceil(totalContent/numPerPage);
 
 		String pageBar = "";
@@ -40,7 +44,8 @@ public class OrderViewServlet extends HttpServlet {
 		int pageNo = pageStart;
 		//1.이전
 			if(pageNo!=1) {
-				pageBar = "<a href='"+request.getContextPath()+"/member/orderView?cPage="+(pageNo-1)+"'[이전]</a>\n";
+				pageBar = "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
+				
 			}
 		//2.pageNo
 			while(pageNo<=pageEnd&&pageNo<=totalPage) {
@@ -48,18 +53,18 @@ public class OrderViewServlet extends HttpServlet {
 				if(cPage==pageNo) {
 					pageBar += "<span class='cPage'>"+pageNo+"</span>";
 				} else {
-					pageBar += "<a href='"+request.getContextPath()+"/member/orderView?cPage="+pageNo+"'>"+pageNo+"</a>\n";
+					pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
 				}
 			}
 		//3. 다음
 			if(pageNo<totalPage) {
-				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?cPage="+pageNo+"'>[다음]</a>\n";
+				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>\n";
 			}
 		
-		String memberId = request.getParameter("memberId");
-		List<OrderList> list = new MemberService().selectOrderList(memberId,cPage,numPerPage);
+	
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
+		System.out.println(pageBar+"servlet11");
 		request.getRequestDispatcher("/WEB-INF/views/member/orderView.jsp").forward(request, response);
 	}
 
