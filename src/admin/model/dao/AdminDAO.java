@@ -834,4 +834,23 @@ public class AdminDAO {
 		return totalContent;
 	}
 
+	public int changeOrderStatus(Connection conn, int orderId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("changeOrderStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, orderId);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(result+"DAO");
+		return result;
+	}
+
 }

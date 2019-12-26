@@ -7,6 +7,7 @@
 <%
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
+	System.out.println(request.getParameter("cPage"));
 %>
 <h2>orderlist page</h2>
 	<table class="table table-hover">
@@ -32,7 +33,7 @@
 		<%} else { 
 			for(OrderListProduct o:list){%>
 			<tr>
-				<td><%=o.getOrderId() %></td>
+				<td id="orderId"><%=o.getOrderId() %></td>
 				<td><%=o.getMemberId() %></td>
 				<td><%=o.getpId() %></td>
 				<td><%=o.getpName() %></td>
@@ -41,7 +42,7 @@
 				<td><%=o.getAddress() %></td>
 				<td><%=o.getOrderDate() %></td>
 				<td><%=o.getCheckDate()==null?"미처리":o.getCheckDate() %></td>
-				<td><%="N".equals(o.getStatus())?"미출고":"출고됨" %></td>
+				<td><button onclick="changeStatus(this);"><%="N".equals(o.getStatus())?"미출고":"출고됨" %></button></td>
 			</tr>
 		<%  }
 		}%>
@@ -50,4 +51,21 @@
 	<div id="pageBar">
 		<%=pageBar %>
 	</div>
+<script>
+function changeStatus(this_){
+	var orderId = $(this_).parents("td").siblings("#orderId").text();
+	$.ajax ({
+		url: "<%=request.getContextPath()%>/admin/changeOrderStatus",
+		data:{"orderId": orderId,
+			  cPage:'<%=request.getParameter("cPage")%>'},
+		success: data =>{
+		 console.log(data);	
+		},
+		error : (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
+		}
+		
+	})
+} 
+</script>
 <%@ include file ="/WEB-INF/views/common/footer.jsp"%>

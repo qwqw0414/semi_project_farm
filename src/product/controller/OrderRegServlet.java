@@ -42,7 +42,6 @@ public class OrderRegServlet extends HttpServlet {
 		}
 		
 		//배열 -> 오브젝트 분리 -> order 객체 생성
-		
 		OrderList order = null;
 		for(int i = 0; i < orderArr.size(); i++) {
 			

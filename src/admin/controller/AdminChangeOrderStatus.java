@@ -9,30 +9,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import admin.model.service.AdminService;
 import common.BaseData;
+import member.model.vo.Member;
 import product.model.vo.OrderList;
+import product.model.vo.OrderListProduct;
 
 /**
- * Servlet implementation class AdminProductOrderListServlet
+ * Servlet implementation class AdminChangeOrderStatus
  */
-@WebServlet("/admin/productOrderList")
-public class AdminProductOrderListServlet extends HttpServlet {
+@WebServlet("/admin/changeOrderStatus")
+public class AdminChangeOrderStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 파라미터 핸들링
-		final int numPerPage = new BaseData().getPagenum();
-		int cPage = 1;
-		try {
-			cPage = Integer.parseInt(request.getParameter("cPage"));			
-		}catch(NumberFormatException e) {
-			
-		}
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		int numPerPage = new BaseData().getPagenum();
+		System.out.println("Change@="+orderId);
 		AdminService as = new AdminService();
+		int result = as.chageOrderStatus(orderId);
+		System.out.println(result+"=Change");
 		List<OrderList> list = as.selectAllOrderList(cPage, numPerPage);
 		int totalContent = as.selectOrderListCount();
 		int totalPage =  (int)Math.ceil((double)totalContent/numPerPage);
@@ -68,9 +71,20 @@ public class AdminProductOrderListServlet extends HttpServlet {
 		} else {
 			pageBar += "<a href='"+request.getContextPath()+"/admin/productOrderList?cPage="+pageNo+"'>[다음]</a>";
 		}
+		//JSON처리
+		JSONArray jsonArray = new JSONArray();
+		
+		for(OrderList o:list) {
+			JSONObject jsonMember = new JSONObject();
+			
+//			jsonMember.put("name", m.getName());
+//			jsonMember.put("phone", m.getPhone());
+//			jsonMember.put("profile", m.getProfile());
+//			jsonArray.add(jsonMember);
+		}
+		
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/WEB-INF/views/admin/orderList.jsp").forward(request, response);
 	}
 
 	/**

@@ -116,13 +116,14 @@ public class ProductService {
 	public int insertOrderList(OrderList list) {
 		Connection conn = getConnection();
 		int result = 0;
-		
 		result = new ProductDAO().insertOrderList(conn, list);
 		
 		if(result > 0)
 			commit(conn);
 		else
 			rollback(conn);
+		
+		close(conn);
 		
 		return result;
 	}

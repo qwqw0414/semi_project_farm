@@ -1,6 +1,7 @@
 package admin.model.service;
 
 import product.model.vo.OrderList;
+import product.model.vo.OrderListProduct;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
 import static common.JDBCTemplate.*;
@@ -237,6 +238,19 @@ public class AdminService {
 		int totalContent = new AdminDAO().selectOrderListCount(conn);
 		close(conn);
 		return totalContent;
+	}
+
+	public int chageOrderStatus(int orderId) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().changeOrderStatus(conn, orderId);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		System.out.println(result+"Service");
+		close(conn);
+		return result;
 	}
 
 }
