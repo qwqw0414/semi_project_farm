@@ -117,6 +117,24 @@ public class MemberService {
 
 	}
 
+	public int memberUpdate(Member m) {
+		// TODO Auto-generated method stub
+		Connection conn = getConnection();
+		
+		int result =  new MemberDAO().memberUpdate(conn,m);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 
 	

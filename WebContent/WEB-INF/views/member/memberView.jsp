@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<% Member m = (Member)request.getAttribute("member"); %>
 <div class="container">
-    <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" method="POST" onsubmit="return enrollValidate();">
+    <form action="<%=request.getContextPath()%>/member/memberUpdate" method="POST">
         <div class="form-group">
             <small class="form-text text-muted" >아이디</small>
             <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" readonly value=<%=m.getMemberId() %>>

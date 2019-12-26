@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import product.model.vo.Product;
 import product.model.vo.ProductIO;
 
 /**
@@ -26,7 +27,7 @@ public class ProductIOServelt extends HttpServlet {
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		String status = request.getParameter("selectIO");
 		String memberId = request.getParameter("memberId");
-		
+		System.out.println("입출고@pId="+pId);
 		ProductIO pIO = new ProductIO(0,pId,memberId,status,amount,null);
 		
 		//2. 업무로직
@@ -47,14 +48,22 @@ public class ProductIOServelt extends HttpServlet {
 			}
 		} else {
 		//2-2. 출고일 경우	
-			result = new AdminService().productOutput(pIO);
-			if(result>0) {
-				msg ="출고 성공";
+			//출고할 상품 재고 확인
+			Product p = new AdminService().selectProductByPId(pId);
+			if(amount>p.getStock()) {
+				//재고보다 출고량이 많을 경우
+				msg = "재고보다 출고량이 많습니다";
 				loc = "/admin/productIOList";
-				
 			} else {
-				msg ="출고 실패";
-				loc = "/admin/productIOList";
+				//재고가 충분할 경우(정상진행)
+				result = new AdminService().productOutput(pIO);
+				if(result>0) {
+					msg ="출고 성공";
+					loc = "/admin/productIOList";
+				} else {
+					msg ="출고 실패";
+					loc = "/admin/productIOList";
+				}
 			}
 		}
 		//3. view단처리
