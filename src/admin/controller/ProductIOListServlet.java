@@ -34,7 +34,7 @@ public class ProductIOListServlet extends HttpServlet {
 			
 		}
 		String byStatus = request.getParameter("byStatus");
-		System.out.println("byCategory@= "+byStatus);
+		
 		AdminService as = new AdminService();
 		List<ProductIO> productIOList = as.selectAllProductIO(cPage, numPerPage, byStatus);
 		List<Product> productList = as.selectAllProductList();
