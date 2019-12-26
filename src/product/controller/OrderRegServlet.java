@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import product.model.dao.ProductDAO;
 import product.model.service.ProductService;
 import product.model.vo.OrderList;
 
@@ -30,8 +31,9 @@ public class OrderRegServlet extends HttpServlet {
 //		배열 파싱처리
 		JSONParser parser = new JSONParser();
 		JSONArray orderArr = null;
-		List<Integer> listId = new ArrayList<>();
 		List<OrderList> orderList = new ArrayList<>();
+		int result = 0;
+		int listId = 0;
 		
 		try {
 			orderArr = (JSONArray)parser.parse(request.getParameter("orderList"));
@@ -41,26 +43,29 @@ public class OrderRegServlet extends HttpServlet {
 		
 		//배열 -> 오브젝트 분리 -> order 객체 생성
 		
-		OrderList o = null;
+		OrderList order = null;
 		for(int i = 0; i < orderArr.size(); i++) {
 			
 			JSONObject obj = (JSONObject)orderArr.get(i);
-			o = new OrderList();
-			o.setpId(Integer.parseInt((String)obj.get("pId")));
-			o.setPrice(Integer.parseInt((String)obj.get("price")));
-			o.setAmount(Integer.parseInt((String)obj.get("amount")));
-			o.setMemberId(memberId);
+			order = new OrderList();
+			order.setpId(Integer.parseInt((String)obj.get("pId")));
+			order.setPrice(Integer.parseInt((String)obj.get("price")));
+			order.setAmount(Integer.parseInt((String)obj.get("amount")));
+			order.setMemberId(memberId);
 			
-			orderList.add(o);
+//			비즈니스로직
+			result = new ProductService().insertOrderList(order);
 			
-			if(obj.get("listId")!=null)
-				listId.add(Integer.parseInt((String)obj.get("listId")));
+			//장바구니 제거
+			if(result > 0 && obj.get("listId")!=null) {
+				listId = Integer.parseInt((String)obj.get("listId"));
+				new ProductService().deleteWishList(listId);
+			}else {
+				//재고 부족 리턴
+				
+			}
 			
 		}
-		
-//		비즈니스로직
-		int result = new ProductService().orderAll(orderList,listId);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
