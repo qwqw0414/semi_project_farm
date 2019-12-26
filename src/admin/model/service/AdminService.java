@@ -1,5 +1,6 @@
 package admin.model.service;
 
+import product.model.vo.OrderList;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
 import static common.JDBCTemplate.*;
@@ -222,6 +223,20 @@ public class AdminService {
 		Product p = new AdminDAO().selectProductByPId(conn, pId);
 		close(conn);
 		return p;
+	}
+
+	public List<OrderList> selectAllOrderList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<OrderList> list = new AdminDAO().selectAllOrderList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectOrderListCount() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectOrderListCount(conn);
+		close(conn);
+		return totalContent;
 	}
 
 }
