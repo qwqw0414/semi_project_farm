@@ -101,12 +101,9 @@ public class ProductService {
 			if(listId != null && listId.size()>0) {
 				for(int id : listId) {
 					pd.deleteWishList(conn, id);
-					System.out.println(id);
 				}
 			}
-			
 			commit(conn);
-			
 		}
 		else
 			rollback(conn);
@@ -116,6 +113,18 @@ public class ProductService {
 		return result;
 	}
 
+	public int insertOrderList(OrderList list) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result = new ProductDAO().insertOrderList(conn, list);
+		
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		return result;
+	}
 
-	
 }

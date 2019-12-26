@@ -124,6 +124,7 @@ public class ProductDAO {
 				w.setAmount(rset.getInt("amount"));
 				w.setpName(rset.getString("pname"));
 				w.setPrice(rset.getInt("price"));
+				w.setStock(rset.getInt("stock"));
 				w.setDiscount(rset.getDouble("discount"));
 				w.setPhoto(rset.getString("photo"));
 
@@ -254,6 +255,30 @@ public class ProductDAO {
 				pstmt.setString(6, ol.getMemberId());
 				result += pstmt.executeUpdate();
 			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertOrderList(Connection conn, OrderList list) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertOrderList");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, list.getMemberId());
+			pstmt.setInt(2, list.getpId());
+			pstmt.setInt(3, list.getPrice());
+			pstmt.setInt(4, list.getAmount());
+			pstmt.setString(5, list.getMemberId());
+			pstmt.setString(6, list.getMemberId());
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
