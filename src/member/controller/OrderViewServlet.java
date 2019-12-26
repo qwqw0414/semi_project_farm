@@ -33,7 +33,7 @@ public class OrderViewServlet extends HttpServlet {
 		List<OrderList> list = new MemberService().selectOrderList(memberId,cPage,numPerPage); 
 		//페이징바 영역처리
 		int totalContent = new MemberService().orderTotalContent(memberId);
-		int totalPage = (int) Math.ceil(totalContent/numPerPage);
+		int totalPage = (int) Math.ceil((double)totalContent/numPerPage);
 
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -44,10 +44,12 @@ public class OrderViewServlet extends HttpServlet {
 		int pageNo = pageStart;
 		//1.이전
 			if(pageNo!=1) {
-				pageBar = "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
+				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
 				
 			}
 		//2.pageNo
+			System.out.println("cPage="+cPage);
+			System.out.println("pageNo= "+pageNo);
 			while(pageNo<=pageEnd&&pageNo<=totalPage) {
 				//현재페이지인 경우
 				if(cPage==pageNo) {
@@ -55,6 +57,7 @@ public class OrderViewServlet extends HttpServlet {
 				} else {
 					pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
 				}
+				pageNo++;
 			}
 		//3. 다음
 			if(pageNo<totalPage) {
@@ -64,7 +67,6 @@ public class OrderViewServlet extends HttpServlet {
 	
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		System.out.println(pageBar+"servlet11");
 		request.getRequestDispatcher("/WEB-INF/views/member/orderView.jsp").forward(request, response);
 	}
 
