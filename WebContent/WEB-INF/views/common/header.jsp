@@ -86,7 +86,7 @@
 				</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">내 정보</a>
-					<a class="dropdown-item" href="#">구매한 상품</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/orderView?memberId=<%=memberLoggedIn.getMemberId()%>">구매한 상품</a>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberLogout">로그아웃</a>
 				</div>
 			</li>
