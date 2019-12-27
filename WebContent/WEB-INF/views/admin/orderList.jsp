@@ -41,7 +41,7 @@
 				<td><%=o.getAddress() %></td>
 				<td><%=o.getOrderDate() %></td>
 				<td><%=o.getCheckDate()==null?"미처리":o.getCheckDate() %></td>
-				<td><%="N".equals(o.getStatus())?"<button onclick='changeStatus(this);'>미출고</button>":"출고완료" %></td>
+				<td><%="N".equals(o.getStatus())?"<button class='btn btn-success' onclick='changeStatus(this);'>출고하기</button>":"<button class='btn btn-danger' onclick='changeStatus(this);'>출고취소</button>" %></td>
 			</tr>
 		<%  }
 		}%>
@@ -54,16 +54,16 @@
 	</div>
 <script>
 function changeStatus(this_){
-	var orderId = $(this_).parents("td").siblings("#orderId").text();
+	var orderId = $(this_).parent("td").siblings("#orderId").text();
+	console.log(orderId);
 	$.ajax ({
 		url: "<%=request.getContextPath()%>/admin/changeOrderStatus",
 		data:{"orderId": orderId,
 			  cPage:'<%=request.getParameter("cPage")%>'},
 		success: data =>{
-			console.log(data);
 			let html ="";
 			$(data).each((idx,data)=>{
-			html += "<td>"+data.orderId+"</td>";
+			html += "<td id='orderId'>"+data.orderId+"</td>";
 			html += "<td>"+data.memberId+"</td>";
 			html += "<td>"+data.pId+"</td>";
 			html += "<td>"+data.pName+"</td>";
@@ -71,8 +71,13 @@ function changeStatus(this_){
 			html += "<td>"+data.zipcode+"</td>";
 			html += "<td>"+data.address+"</td>";
 			html += "<td>"+data.orderDate+"</td>";
-			html += "<td>"+data.checkDate+"</td>";
-			html += "<td>출고완료</td>";
+			html += "<td>"+((data.checkDate==null)?'미처리':data.checkDate)+"</td>";
+			if('N'==data.status){
+			html += "<td><button class='btn btn-success' onclick='changeStatus(this);'>출고하기</button></td>";				
+			} else {
+				html += "<td><button class='btn btn-danger' onclick='changeStatus(this);'>출고취소</button></td>";
+			}
+			
 			});//end of each
 			
 			let tr = $(this_).parent().parent("tr");

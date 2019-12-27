@@ -30,7 +30,6 @@ public class AdminChangeOrderStatus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int orderId = Integer.parseInt(request.getParameter("orderId"));
-
 		AdminService as = new AdminService();
 		int result = as.chageOrderStatus(orderId);
 		OrderList o = as.selectOrderListByOrderId(orderId);
