@@ -86,7 +86,7 @@
 	</tbody>
 </table>
 
-<div id="pageBar">
+<div id="pageBar" class="text-center">
 	<%=pageBar %>
 </div>
 
