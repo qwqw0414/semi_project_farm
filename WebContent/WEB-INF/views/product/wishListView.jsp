@@ -11,7 +11,7 @@
 <style>
 img{width: 5rem;}
 </style>
-<div style="overflow:auto; height:600px;">
+<div style="overflow:auto; min-height:200px; max-height: 600px;" class="wishListView">
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
@@ -95,6 +95,8 @@ function sumPrice(){
 
 	for(var i = 0; i < $check.length; i++){
 
+		console.log($check.eq(i));
+
 		if($check.eq(i).prop("checked"))
 			price += Number($check.eq(i).parent().siblings("[name=price]").val());
 
@@ -112,7 +114,7 @@ function sumPrice(){
 function deleteWishList(btn){
 	var listId = $(btn).parents("tr").find("[name=listId]").val();
 	var memberId = "<%=memberLoggedIn.getMemberId()%>";
-	var $tbody = $("tbody");
+	var $tbody = $(".wishListView tbody");
 
 	$.ajax({
 		url:"<%=request.getContextPath()%>/product/deleteWishList",
@@ -132,7 +134,7 @@ function deleteWishList(btn){
 
 // 장바구니리스트 로드
 function loadWishList(){
-	var $tbody = $("tbody");
+	var $tbody = $(".wishListView tbody");
 	$.ajax({
 		url:"<%=request.getContextPath()%>/product/wishListView",
 		data:{memberId: "<%=memberLoggedIn.getMemberId()%>"},
