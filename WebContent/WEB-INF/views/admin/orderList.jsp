@@ -14,7 +14,6 @@
 			<tr>
 				<th>주문번호</th>
 				<th>구매자 아이디</th>
-				<th>상품 아이디</th>
 				<th>상품명</th>
 				<th>가격</th>
 				<th>우편번호</th>
@@ -34,7 +33,6 @@
 			<tr>
 				<td id="orderId"><%=o.getOrderId() %></td>
 				<td><%=o.getMemberId() %></td>
-				<td><%=o.getpId() %></td>
 				<td><%=o.getpName() %></td>
 				<td><%=o.getPrice() %></td>
 				<td><%=o.getZipcode() %></td>
@@ -65,7 +63,6 @@ function changeStatus(this_){
 			$(data).each((idx,data)=>{
 			html += "<td id='orderId'>"+data.orderId+"</td>";
 			html += "<td>"+data.memberId+"</td>";
-			html += "<td>"+data.pId+"</td>";
 			html += "<td>"+data.pName+"</td>";
 			html += "<td>"+data.price+"</td>";
 			html += "<td>"+data.zipcode+"</td>";
