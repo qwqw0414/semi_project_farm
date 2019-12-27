@@ -64,7 +64,7 @@
 <script>
   //아이디 중복 검사 및 유효성 검사
   $('#memberId').blur(function idchk() {
-    
+	  fn_idchk();
 });
 
 function fn_idchk(){
@@ -317,19 +317,26 @@ function fn_idchk(){
     }
 
     function enrollValidate() {
-        if (!fn_idchk())
-            return false;
-        if (!fn_pwd1chk())
-            return false;
-        if (!fn_pwd2chk())
-            return false;
-        if (!fn_namechk())
-            return false;
-        if (!fn_birthchk())
-            return false;
-        if (!fn_phonechk())
-            return false;
-
+    	// console.log(1);
+        // if (!fn_idchk())
+        //     return false;
+        // console.log(2);
+        // if (!fn_pwd1chk())
+        //     return false;
+        // console.log(3);
+        // if (!fn_pwd2chk())
+        //     return false;
+        // console.log(4);
+        // if (!fn_namechk())
+        //     return false;
+        // console.log(5);
+        // if (!fn_birthchk())
+        //     return false;
+        // console.log(6);
+        // if (!fn_phonechk())
+        //     return false;
+        // console.log(7);
+        
         fn_idchk();
         fn_pwd2chk();
         fn_namechk();
