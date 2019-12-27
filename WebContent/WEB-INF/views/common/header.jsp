@@ -121,4 +121,4 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<div class="container text-center" id="contents">
+<div class="container" id="contents">

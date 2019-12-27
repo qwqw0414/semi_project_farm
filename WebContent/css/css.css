@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@font-face{
+	font-family:'BMHANNAPro';
+	src: url('/farm/css/font/BMHANNAPro.ttf');
+}
+
 #productList .card {
 	margin: 10px;
 }
@@ -17,17 +22,17 @@
 	/* font-family: 'Gamja Flower', cursive; */
 	/* font-family: 'Kirang Haerang', cursive; */
 	/* font-family: 'Noto Sans KR', sans-serif; */
-	font-family: 'Nanum Gothic Coding', monospace;
+	/* font-family: 'BMHANNAPro'; */
 }
 #productList{
-	font-family: 'Do Hyeon', sans-serif;
+	/* font-family: 'Do Hyeon', sans-serif; */
+	font-family: 'BMHANNAPro';
 }
 
 #slideProduct img{
 	height: 300px;
 
 }
-
 .wishList{
 	width: 100px;
 	color: antiquewhite;
@@ -52,7 +57,9 @@
 	font-size:12px;
 }
 
-
-
+/* 상품 스타일 */
+#productList .info-price{
+	color: rgb(27, 118, 221);
+}
 
 

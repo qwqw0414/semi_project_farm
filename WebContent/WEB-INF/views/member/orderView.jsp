@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="product.model.vo.OrderListProduct"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,14 +13,55 @@
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
 	System.out.println("pageBar= "+pageBar);
+	
+	Date date = new Date();	
+	SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM");
+	String today = simple.format(date);
+	Calendar cal = Calendar.getInstance();
+	
+	int tYear = cal.get(Calendar.YEAR);
+	int tMonth = cal.get(Calendar.MONTH)+1;
+	int year;
+	int month;
+	try{
+		year = Integer.parseInt(request.getParameter("year"));
+		month = Integer.parseInt(request.getParameter("month"));
+	}catch(NumberFormatException e){
+		year = tYear;
+		month = tMonth;
+	}
+	
+	System.out.println(tMonth);
+	System.out.println(year);
+	System.out.println(month);
 %>
 
-<script>
+<form  class="form-inline" action="<%=request.getContextPath()%>/member/orderViewEnd?memberId=<%=memberLoggedIn.getMemberId()%>"
+	  method="post">
+<select name="year" id="year" class="custom-select my-1 mr-sm-2">
+	<%  
+		for(int i=tYear;i>=tYear-5;i-- ){
+			if(year!=tYear&&year==i){%>
+				<option value="<%=i%>" selected="selected"><%=i %>년</option>
+			<% continue; }%>
+			<option value="<%=i%>"><%=i %>년</option>
+	<% } %>
+
+</select>
+<select name="month" id="month" class="custom-select my-1 mr-sm-2">
+	<% for(int i=1;i<=12;i++) { 
+		if(month != tMonth && month==i){%>
+			<option value="<%=i%>" selected="selected"><%=i %>월</option>
+		<% continue; } else if(month == tMonth){ %>
+			<option value="<%=i%>" selected="selected"><%=i %>월</option>
+		<% continue; }%>
+		<option value="<%=i%>"><%=i %>월</option>
 	
+	<%} %>
+</select>
+	<input type="submit" value="검색" class="btn btn-success"/>
+</form>
 
-</script>
-
-<select name="year" id="year"></select>
 
 <table class="table">
 	<thead class="thead-dark">
@@ -45,8 +89,6 @@
 <div id="pageBar">
 	<%=pageBar %>
 </div>
-
-
 
 
 

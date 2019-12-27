@@ -403,6 +403,48 @@ public class MemberDAO {
 		return result;
 	}
 
+	public List<OrderList> selectOrderByDate(Connection conn, String memberId, int year, int month, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		List<OrderList> list = new ArrayList<>();
+		String query = prop.getProperty("selectOrderByDate");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, year);
+			pstmt.setInt(3, month);
+			pstmt.setInt(4, cPage*10-9);
+			pstmt.setInt(5, numPerPage*cPage);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				OrderListProduct o = new OrderListProduct();
+				o.setOrderId(rset.getInt("ORDERID"));
+				o.setMemberId(rset.getString("MEMBERID"));
+				o.setpId(rset.getInt("PID"));
+				o.setPrice(rset.getInt("PRICE"));
+				o.setAmount(rset.getInt("AMOUNT"));
+				o.setZipcode(rset.getString("ZIPCODE"));
+				o.setAddress(rset.getString("ADDRESS"));
+				o.setOrderDate(rset.getDate("ORDERDATE"));
+				o.setCheckDate(rset.getDate("CHECKDATE"));
+				o.setStatus(rset.getString("STATUS"));
+				o.setpName(rset.getString("PNAME"));
+				o.setPhoto(rset.getString("PHOTO"));
+				
+				list.add(o);
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 
 	
 	

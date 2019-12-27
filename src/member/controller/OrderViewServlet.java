@@ -22,6 +22,7 @@ public class OrderViewServlet extends HttpServlet {
 	
 		String memberId = request.getParameter("memberId");
 		
+		
 		int cPage =1; //초기값 설정
 		final int numPerPage = 10;
 		try {
@@ -31,6 +32,7 @@ public class OrderViewServlet extends HttpServlet {
 		}
 		
 		List<OrderList> list = new MemberService().selectOrderList(memberId,cPage,numPerPage); 
+		
 		//페이징바 영역처리
 		int totalContent = new MemberService().orderTotalContent(memberId);
 		int totalPage = (int) Math.ceil((double)totalContent/numPerPage);
