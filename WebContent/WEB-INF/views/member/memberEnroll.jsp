@@ -99,6 +99,10 @@
     
     
     $('#pwd').blur(function pwd1chk() {
+        fn_pwd1chk();
+    });
+
+    function fn_pwd1chk(){
         var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
         var val = $('#pwd').val();
 
@@ -110,7 +114,7 @@
             if ($('#pwd').hasClass('is-invalid')) {
                 $('#pwd').removeClass('is-invalid').addClass('is-valid');
             }
-
+            return true
         }
         else if (!regExp.test(val)) {
             $('#pwd').addClass('is-invalid');
@@ -121,8 +125,7 @@
             }
             return false;
         }
-    });
-
+    }
 
 
 
@@ -251,20 +254,28 @@
 $('#memberId').blur(function idchk(){
 	var memberId= $('#memberId').val();
 	console.log(memberId);
+
+// 유효성 검사
+
+
 	$.ajax({
 		url:"<%=request.getContextPath()%>/member/MemberIdCheckServlet",
 		data: {memberId: memberId},
 		type: "post",
 		success:function(result){
+            var $memberId = $('#memberId');
+
 			 if($('#memberId').val()==""){
 				  alert("아이디를 입력해주세요.");
 				  /* $('#memberId').focus(); */
-				  
+				  return;
 			  }
-			
-			else if(result<=0){
+		
+
+
+			if(result<=0){
 				alert("사용 가능한 아이디 입니다.");
-				$('#memberId').addClass('is-valid');
+				$memberId.addClass('is-valid');
 				$('#id_Msg').text("  *인증되었습니다.");
 			    $('#id_Msg').css("color", "green");
 				  if ($('#memberId').hasClass('is-invalid')) {
@@ -308,14 +319,21 @@ $('#memberId').blur(function idchk(){
     }
 
     function enrollValidate() {
-    	pwd1chk();
+    	if(!fn_pwd1chk())
+            return false;
+
+
     	pwd2chk();
     	namechk();
     	birthchk();
     	phonechk();
     	idchk();
     	
-    	
+    	return true;
+
+
+
+
         var $memberId = $("#memberId");
         if ($memberId.val().trim().length < 4) {
             alert("아이디는 4글자 이상 가능합니다.");
