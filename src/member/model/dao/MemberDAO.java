@@ -376,7 +376,7 @@ public class MemberDAO {
 	
 	
 	
-	public int memberIdCheck(String memberId, Connection conn) {
+	public int memberIdCheck(Connection conn, String memberId) {
 		int result=0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -387,7 +387,9 @@ public class MemberDAO {
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 			
-			result=rset.getInt("cnt");
+			if(rset.next()) {
+					result=rset.getInt("cnt");
+			}
 			
 			
 			
@@ -397,9 +399,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
-		
 		
 		return result;
 	}

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.dao.MemberDAO;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberIdCheckServlet
@@ -28,12 +30,13 @@ public class MemberIdCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String memberId = request.getParameter("memberId");
+		int result=0; 
+		String memberId = request.getParameter("memberId");
+		 result = new MemberService().memberIdCheck(memberId);
+		 String data = result+"";
+		 response.setContentType("text/csv; charset=utf-8");
+		 response.getWriter().append(data);
 		 
-		 
-		 //존나 하나도 몰겠 ㅅㅂ
-//		 response.getWriter().write(new MemberDAO().memberIdCheck(memberId));
-	
 	}
 
 	/**

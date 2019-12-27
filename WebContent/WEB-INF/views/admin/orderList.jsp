@@ -7,7 +7,6 @@
 <%
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
-	System.out.println(request.getParameter("cPage"));
 %>
 <h2>orderlist page</h2>
 	<table class="table table-hover">
@@ -42,24 +41,48 @@
 				<td><%=o.getAddress() %></td>
 				<td><%=o.getOrderDate() %></td>
 				<td><%=o.getCheckDate()==null?"미처리":o.getCheckDate() %></td>
-				<td><button onclick="changeStatus(this);"><%="N".equals(o.getStatus())?"미출고":"출고됨" %></button></td>
+				<td><%="N".equals(o.getStatus())?"<button class='btn btn-success' onclick='changeStatus(this);'>출고하기</button>":"<button class='btn btn-danger' onclick='changeStatus(this);'>출고취소</button>" %></td>
 			</tr>
 		<%  }
 		}%>
 		</tbody>
+	</table>
+	<table  id="ajax">
 	</table>
 	<div id="pageBar">
 		<%=pageBar %>
 	</div>
 <script>
 function changeStatus(this_){
-	var orderId = $(this_).parents("td").siblings("#orderId").text();
+	var orderId = $(this_).parent("td").siblings("#orderId").text();
+	console.log(orderId);
 	$.ajax ({
 		url: "<%=request.getContextPath()%>/admin/changeOrderStatus",
 		data:{"orderId": orderId,
 			  cPage:'<%=request.getParameter("cPage")%>'},
 		success: data =>{
-		 console.log(data);	
+			let html ="";
+			$(data).each((idx,data)=>{
+			html += "<td id='orderId'>"+data.orderId+"</td>";
+			html += "<td>"+data.memberId+"</td>";
+			html += "<td>"+data.pId+"</td>";
+			html += "<td>"+data.pName+"</td>";
+			html += "<td>"+data.price+"</td>";
+			html += "<td>"+data.zipcode+"</td>";
+			html += "<td>"+data.address+"</td>";
+			html += "<td>"+data.orderDate+"</td>";
+			html += "<td>"+((data.checkDate==null)?'미처리':data.checkDate)+"</td>";
+			if('N'==data.status){
+			html += "<td><button class='btn btn-success' onclick='changeStatus(this);'>출고하기</button></td>";				
+			} else {
+				html += "<td><button class='btn btn-danger' onclick='changeStatus(this);'>출고취소</button></td>";
+			}
+			
+			});//end of each
+			
+			let tr = $(this_).parent().parent("tr");
+
+			tr.html(html);
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
 			console.log(jqxhr, textStatus, errorThrown);

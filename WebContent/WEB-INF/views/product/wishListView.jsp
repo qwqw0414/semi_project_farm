@@ -11,20 +11,22 @@
 <style>
 img{width: 5rem;}
 </style>
-<table class="table">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col"><input type="checkbox" id="checkAll" checked></th>
-			<th scope="col">이미지</th>
-			<th scope="col">상품명</th>
-			<th scope="col">수량</th>
-			<th scope="col">가격</th>
-			<th scope="col">취소</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
+<div style="overflow:auto; height:600px;">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col"><input type="checkbox" id="checkAll" checked></th>
+				<th scope="col">이미지</th>
+				<th scope="col">상품명</th>
+				<th scope="col">수량</th>
+				<th scope="col">가격</th>
+				<th scope="col">취소</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
 <hr>
 <h3>합계금액 : <span id="sumPrice"></span></h3>
 <br>
@@ -55,7 +57,7 @@ $(()=>{
 							listId: listId,
 							amount: amount,
 							price: price
-						});
+						  });
 			}
 		}
 		
@@ -140,7 +142,11 @@ function loadWishList(){
 			$(data).each((idx,wishList)=>{
 				var price = wishList.price*wishList.amount*(1-wishList.discount);
 
-				html += "<tr><th><input type='checkbox' class='check-WishList' checked='checked'></th>";
+				if((wishList.stock - wishList.amount)<0)
+					html += "<tr><th><input type='checkbox' disabled></th>";
+				else
+					html += "<tr><th><input type='checkbox' class='check-WishList' checked='checked'></th>";
+
 				html += "<td><img src='/farm/upload/product/" + wishList.photo + "'></td>";
 				html += "<td>" + wishList.pName + "</td>";
 				

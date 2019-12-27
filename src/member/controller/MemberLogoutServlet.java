@@ -25,7 +25,7 @@ public class MemberLogoutServlet extends HttpServlet {
 					session.invalidate();
 				}
 				//Redirect
-				response.sendRedirect(request.getContextPath());
+				response.sendRedirect(request.getContextPath()+"/product/productView");
 	}
 	
 

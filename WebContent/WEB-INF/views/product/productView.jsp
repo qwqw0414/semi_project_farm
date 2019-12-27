@@ -34,19 +34,15 @@
             <div class="card-body">
                 <input type="hidden" id="<%=p.getpId()%>">
                 <h5 class="card-title"><%=p.getpName()%></h5>
+<%if(p.getDiscount() == 0){%>
                 <p class="card-text">
-                    <div class="input-group">
-                        <span class="form-control">￦ <%=new Utils().numberFormat(p.getPrice()) %></span>
-                        <div class="input-group-append">
-                            <input type="number" min="1" max="10" class="input-group-text" value="1" id="productNum">
-                        </div>
-                    </div>
+                    <%=new Utils().numberFormat(p.getPrice())%>원
                 </p>
-				<!-- 장바구니 & 구매 버튼 -->                
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-danger">구매하기</button>
-                    <button type="button" class="btn btn-outline-info" onclick="wishListReg('<%=p.getpId()%>');">장바구니</button>
-                </div>
+<%}else{%>
+                <p class="card-text">
+	                <p><%=p.getDiscount()%></p>
+                </p>
+<%} %>
             </div>
         </div>
 	<%} %>
@@ -66,14 +62,14 @@ $(".card-img-top").on("click",function(e){
 	location.href ='<%=request.getContextPath()%>/product/productInfo?pId='+pId;
 	
 });
+<%
+	if(false){
+%>	
 function wishListReg(pId){
     var pName = $("[id="+pId+"]").siblings(".card-title").text();
     var pNum = $("[id="+pId+"]").parent().find("#productNum").val();
     var $bar = $("#wishListBar");
 
-<%
-	if(memberLoggedIn != null){
-%>	
     var memberId = '<%=memberLoggedIn.getMemberId()%>';
 
     $.ajax({
@@ -90,9 +86,9 @@ function wishListReg(pId){
             console.log(jqxhr, textStatus, errorThrown);
         }
     });
+}
 <%
 	}
 %>
-}
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
