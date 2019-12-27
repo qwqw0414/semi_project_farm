@@ -7,7 +7,6 @@
 <%
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
-	System.out.println(request.getParameter("cPage"));
 %>
 <h2>orderlist page</h2>
 	<table class="table table-hover">
@@ -42,7 +41,7 @@
 				<td><%=o.getAddress() %></td>
 				<td><%=o.getOrderDate() %></td>
 				<td><%=o.getCheckDate()==null?"미처리":o.getCheckDate() %></td>
-				<td><button onclick="changeStatus(this);"><%="N".equals(o.getStatus())?"미출고":"출고됨" %></button></td>
+				<td><%="N".equals(o.getStatus())?"<button onclick='changeStatus(this);'>미출고</button>":"출고완료" %></td>
 			</tr>
 		<%  }
 		}%>
@@ -73,6 +72,7 @@ function changeStatus(this_){
 			html += "<td>"+data.address+"</td>";
 			html += "<td>"+data.orderDate+"</td>";
 			html += "<td>"+data.checkDate+"</td>";
+			html += "<td>출고완료</td>";
 			});//end of each
 			
 			let tr = $(this_).parent().parent("tr");
