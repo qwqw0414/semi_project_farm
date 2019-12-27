@@ -257,7 +257,6 @@ $('#memberId').blur(function idchk(){
 
 // 유효성 검사
 
-
 	$.ajax({
 		url:"<%=request.getContextPath()%>/member/MemberIdCheckServlet",
 		data: {memberId: memberId},
