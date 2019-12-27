@@ -1,61 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-<div class="container">
-        <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST"
-            onsubmit="return enrollValidate();">
-            <div class="form-group">
-            	<div class="input-group">
-                	<input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" required>
-                	<div class="input-group-append">
-                		<button class="btn btn-outline-secondary" id="checkId-btn" type="button" >중복검사</button>
-                	</div>
-                </div>
-                		<small class="form-text text-muted">아이디를 입력해주세요.</small>
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호" required>
-                <small class="form-text text-muted">비밀번호를 입력해주세요.</small>
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="pwdck" placeholder="비밀번호 확인" required>
-                <small class="form-text text-muted">비밀번호를 한번 더 입력해주세요.</small>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="memberName" name="memberName" placeholder="성명" required>
-                <small class="form-text text-muted">성명을 입력해주세요.</small>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일" required maxlength="6">
-                <small class="form-text text-muted">생년월일을 입력해주세요.</small>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처" required maxlength="11">
-                <small class="form-text text-muted">연락처를 입력해주세요.</small>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호"
-                            required>
-                    </div>
-                    <input type="text" class="form-control" readonly name="addr" required>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
-                            id="button-addon2">우편번호 검색</button>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요."
-                    required>
-            </div>
-            <button type="submit" class="btn btn-primary">회원 가입</button>
-        </form>
-    </div>
 
 
+<div class="memberEnroll">
+	<div class="container">
+		<form action="<%=request.getContextPath()%>/member/memberEnrollEnd"
+			name="frmMemberEnroll" method="POST"
+			onsubmit="return enrollValidate();">
+			<div class="form-group">
+				<input type="text" class="form-control" id="memberId"
+					name="memberId" placeholder="아이디" required> <small
+					class="form-text text-muted">아이디를 입력해주세요.</small>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="pwd" name="password"
+					placeholder="비밀번호" required> <small
+					class="form-text text-muted">비밀번호를 입력해주세요.</small>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="pwdck"
+					placeholder="비밀번호 확인" required> <small
+					class="form-text text-muted">비밀번호를 한번 더 입력해주세요.</small>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="memberName"
+					name="memberName" placeholder="성명" required> <small
+					class="form-text text-muted">성명을 입력해주세요.</small>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="birth" name="birth"
+					placeholder="생년월일" required maxlength="6"> <small
+					class="form-text text-muted">생년월일을 입력해주세요.</small>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="phone" name="phone"
+					placeholder="연락처" required maxlength="11"> <small
+					class="form-text text-muted">연락처를 입력해주세요.</small>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<input type="text" class="form-control" id="zipCode" readonly
+							name="zipcode" placeholder="우편번호" required>
+					</div>
+					<input type="text" class="form-control" readonly name="addr"
+						required>
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button"
+							id="zipcodeSearchBtn" id="button-addon2">우편번호 검색</button>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="address" name="address"
+					placeholder="나머지 주소를 입력해주세요." required>
+			</div>
+			<button type="submit" class="btn btn-primary">회원 가입</button>
+		</form>
+	</div>
+
+</div>
 
 
 
@@ -238,46 +244,44 @@
 
 
 //아이디 중복 검사 및 유효성 검사
-
-$('#checkId-btn').click(function(){
+//블러로 이용
+$('#memberId').blur(function(){
 	var memberId= $('#memberId').val();
+	console.log(memberId);
 	$.ajax({
-		type:"post",
 		url:"<%=request.getContextPath()%>/member/MemberIdCheckServlet",
-		data:{memberId:memberId},
+		data: {memberId: memberId},
+		type: "post",
 		success:function(result){
-			if(result==1){
-				alert("사용할 수 없는 아이디 입니다.")
+			if(result<=0){
+				alert("사용 가능한 아이디 입니다.");
+				$('#memberId').addClass('is-valid');
+				  if ($('#memberId').hasClass('is-invalid')) {
+		                $('#memberId').removeClass('is-invalid').addClass('is-valid');
+		            }
+				
 			}
 			else{
-				alert("사용 가능한 아이디 입니다.")
+				alert("중복된 아이디 입니다.");
+				$('#memberId').addClass('is-invalid');
+				if ($('#memberId').hasClass('is-valid')) {
+	                $('#memberId').removeClass('is-valid').addClass('is-invalid');
+	            }
+				
+				
+				
+				
+				
 			}
-			
-			
-			
+		},
+		error : (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
 		}
-		
-		
-	})
-});
+		});
+	});
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 

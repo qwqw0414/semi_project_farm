@@ -152,6 +152,14 @@ public class MemberService {
 		close(conn);
 		return totalContent;
 	}
+
+	public int memberIdCheck(String memberId) {
+		int result=0;
+		Connection conn = getConnection();
+		result = new MemberDAO().memberIdCheck(conn, memberId);
+		close(conn);
+		return result;
+	}
 	
 	
 }
