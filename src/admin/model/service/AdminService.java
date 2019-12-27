@@ -248,9 +248,15 @@ public class AdminService {
 		} else {
 			rollback(conn);
 		}
-		System.out.println(result+"Service");
 		close(conn);
 		return result;
+	}
+
+	public OrderList selectOrderListByOrderId(int orderId) {
+		Connection conn = getConnection();
+		OrderList o = new AdminDAO().selectOrderListByOrderId(conn,orderId);
+		close(conn);
+		return o;
 	}
 
 }

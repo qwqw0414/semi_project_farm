@@ -48,6 +48,8 @@
 		}%>
 		</tbody>
 	</table>
+	<table  id="ajax">
+	</table>
 	<div id="pageBar">
 		<%=pageBar %>
 	</div>
@@ -59,7 +61,23 @@ function changeStatus(this_){
 		data:{"orderId": orderId,
 			  cPage:'<%=request.getParameter("cPage")%>'},
 		success: data =>{
-		 console.log(data);	
+			console.log(data);
+			let html ="";
+			$(data).each((idx,data)=>{
+			html += "<td>"+data.orderId+"</td>";
+			html += "<td>"+data.memberId+"</td>";
+			html += "<td>"+data.pId+"</td>";
+			html += "<td>"+data.pName+"</td>";
+			html += "<td>"+data.price+"</td>";
+			html += "<td>"+data.zipcode+"</td>";
+			html += "<td>"+data.address+"</td>";
+			html += "<td>"+data.orderDate+"</td>";
+			html += "<td>"+data.checkDate+"</td>";
+			});//end of each
+			
+			let tr = $(this_).parent().parent("tr");
+
+			tr.html(html);
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
 			console.log(jqxhr, textStatus, errorThrown);
