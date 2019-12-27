@@ -62,33 +62,72 @@
 </body>
 
 <script>
+  //아이디 중복 검사 및 유효성 검사
+  $('#memberId').blur(function idchk() {
+    
+});
+
+function fn_idchk(){
+    var memberId = $('#memberId').val();
+    console.log(memberId);
+
+    // 유효성 검사
+    var regExp = /^[a-z][a-z\d]{3,14}$/;
+    if(!regExp.test(memberId)){
+        $('#memberId').addClass('is-invalid');
+        $('#id_Msg').text("  *사용 할 수 없는 아이디 입니다.");
+        $('#id_Msg').css("color", "red");
+        if ($('#memberId').hasClass('is-valid')) {
+            $('#memberId').removeClass('is-valid').addClass('is-invalid');
+        }
+        return;
+    }
+
+
+    $.ajax({
+        url: "<%=request.getContextPath()%>/member/MemberIdCheckServlet",
+        data: { memberId: memberId },
+        type: "post",
+        success: function (result) {
+            var $memberId = $('#memberId');
+
+            if ($('#memberId').val() == "") {
+                alert("아이디를 입력해주세요.");
+                /* $('#memberId').focus(); */
+                return;
+            }
 
 
 
+            if (result <= 0) {
+                $memberId.addClass('is-valid');
+                $('#id_Msg').text("  *인증되었습니다.");
+                $('#id_Msg').css("color", "green");
+                if ($('#memberId').hasClass('is-invalid')) {
+                    $('#memberId').removeClass('is-invalid').addClass('is-valid');
+                }
+            }
+            else {
+                $('#memberId').addClass('is-invalid');
+                $('#id_Msg').text("  *중복된 아이디 입니다.");
+                $('#id_Msg').css("color", "red");
+                if ($('#memberId').hasClass('is-valid')) {
+                    $('#memberId').removeClass('is-valid').addClass('is-invalid');
+                }
+                return false;
+            }
+        },
+        error: (jqxhr, textStatus, errorThrown) => {
+            console.log(jqxhr, textStatus, errorThrown);
+        }
+    });
+};
 
 
-    //아이디 유효성 검사 일다 재껴
-    // $('#memberId').blur(function(){
-    //     var regExp = /^[a-z][a-z\d]{3,14}$/;
-    //     var val = $('#memberId').val();
-    //     console.log(val);
-
-    //      //기본 class -> 한번에 성공시    
-    //      if(regExp.test(val)){
-    //          $('#memberId').removeClass('form-control').addClass('form-control is-valid');
-    //      }
-
-
-
-
-
-
-    // });
 
 
 
     //비밀번호 유효성 검사
-
     $('#pwd').blur(function pwd1chk() {
         fn_pwd1chk();
     });
@@ -156,10 +195,6 @@
 
 
     //이름 유효성 검사
-
-
-
-
     $('#memberName').blur(function namechk() {
         fn_namechk();
     });
@@ -196,7 +231,7 @@
 
     //생년월일 유효성검사
     $('#birth').blur(function birthchk() {
-
+        fn_birthchk();
     });
 
 
@@ -260,70 +295,7 @@
 
 
 
-
-
-
-
-
-    //아이디 중복 검사 및 유효성 검사
-    //블러로 이용
-    $('#memberId').blur(function idchk() {
-        var memberId = $('#memberId').val();
-        console.log(memberId);
-
-        // 유효성 검사
-        var regExp = /^[a-z][a-z\d]{3,14}$/;
-
-    
-
-        if(!regExp.test(memberId)){
-            $('#memberId').addClass('is-invalid');
-            $('#id_Msg').text("  *사용 할 수 없는 아이디 입니다.");
-            $('#id_Msg').css("color", "red");
-            if ($('#memberId').hasClass('is-valid')) {
-                $('#memberId').removeClass('is-valid').addClass('is-invalid');
-            }
-            return;
-        }
-
-        $.ajax({
-            url: "<%=request.getContextPath()%>/member/MemberIdCheckServlet",
-            data: { memberId: memberId },
-            type: "post",
-            success: function (result) {
-                var $memberId = $('#memberId');
-
-                if ($('#memberId').val() == "") {
-                    alert("아이디를 입력해주세요.");
-                    /* $('#memberId').focus(); */
-                    return;
-                }
-
-
-
-                if (result <= 0) {
-                    $memberId.addClass('is-valid');
-                    $('#id_Msg').text("  *인증되었습니다.");
-                    $('#id_Msg').css("color", "green");
-                    if ($('#memberId').hasClass('is-invalid')) {
-                        $('#memberId').removeClass('is-invalid').addClass('is-valid');
-                    }
-                }
-                else {
-                    $('#memberId').addClass('is-invalid');
-                    $('#id_Msg').text("  *중복된 아이디 입니다.");
-                    $('#id_Msg').css("color", "red");
-                    if ($('#memberId').hasClass('is-valid')) {
-                        $('#memberId').removeClass('is-valid').addClass('is-invalid');
-                    }
-                    return false;
-                }
-            },
-            error: (jqxhr, textStatus, errorThrown) => {
-                console.log(jqxhr, textStatus, errorThrown);
-            }
-        });
-    });
+  
 
 
 
@@ -345,15 +317,24 @@
     }
 
     function enrollValidate() {
+        if (!fn_idchk())
+            return false;
         if (!fn_pwd1chk())
             return false;
+        if (!fn_pwd2chk())
+            return false;
+        if (!fn_namechk())
+            return false;
+        if (!fn_birthchk())
+            return false;
+        if (!fn_phonechk())
+            return false;
 
-
-        pwd2chk();
-        namechk();
-        birthchk();
-        phonechk();
-        idchk();
+        fn_idchk();
+        fn_pwd2chk();
+        fn_namechk();
+        fn_birthchk();
+        fn_phonechk();
 
         return true;
 
