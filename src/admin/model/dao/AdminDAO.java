@@ -781,8 +781,6 @@ public class AdminDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);//start rownum
 			pstmt.setInt(2, cPage*numPerPage);//end rownum
-			System.out.println("DAO@1번"+((cPage-1)*numPerPage+1));
-			System.out.println("DAO@2번"+cPage*numPerPage);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<>();
 			while(rset.next()) {
@@ -808,7 +806,6 @@ public class AdminDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("DAO"+list);
 		return list;
 	}
 
@@ -849,8 +846,44 @@ public class AdminDAO {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println(result+"DAO");
 		return result;
+	}
+
+	public OrderList selectOrderListByOrderId(Connection conn, int orderId) {
+		OrderList o = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectOrderListByOrderId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, orderId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				o = new OrderListProduct();
+				o.setOrderId(rset.getInt("orderid"));
+				o.setMemberId(rset.getString("memberid"));
+				o.setpId(rset.getInt("pid"));
+				o.setPrice(rset.getInt("price"));
+				o.setAmount(rset.getInt("amount"));
+				o.setZipcode(rset.getString("zipcode"));
+				o.setAddress(rset.getString("address"));
+				o.setOrderDate(rset.getDate("orderDate"));
+				o.setCheckDate(rset.getDate("checkdate"));
+				o.setStatus(rset.getString("status"));
+				((OrderListProduct) o).setpName(rset.getString("pname"));
+				((OrderListProduct) o).setPhoto(rset.getString("photo"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+				
+		return o;
 	}
 
 }
