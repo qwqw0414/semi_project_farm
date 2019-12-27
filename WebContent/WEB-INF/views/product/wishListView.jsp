@@ -140,7 +140,11 @@ function loadWishList(){
 			$(data).each((idx,wishList)=>{
 				var price = wishList.price*wishList.amount*(1-wishList.discount);
 
-				html += "<tr><th><input type='checkbox' class='check-WishList' checked='checked'></th>";
+				if((wishList.stock - wishList.amount)<0)
+					html += "<tr><th><input type='checkbox' disabled></th>";
+				else
+					html += "<tr><th><input type='checkbox' class='check-WishList' checked='checked'></th>";
+
 				html += "<td><img src='/farm/upload/product/" + wishList.photo + "'></td>";
 				html += "<td>" + wishList.pName + "</td>";
 				
