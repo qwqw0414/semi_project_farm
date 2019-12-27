@@ -834,8 +834,13 @@ public class AdminDAO {
 	public int changeOrderStatus(Connection conn, int orderId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("changeOrderStatus");
-		
+		String query = "";
+		OrderList o = selectOrderListByOrderId(conn, orderId);
+		if("N".equals(o.getStatus())){
+			query = prop.getProperty("changeOrderStatusToY");
+		} else {
+			query = prop.getProperty("changeOrderStatusToN");
+		}
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, orderId);
