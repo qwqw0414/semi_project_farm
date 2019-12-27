@@ -4,40 +4,41 @@
 
 
 
-<div class="memberEnroll">
+<div class="memberEnroll container">
 	<div class="container">
 		<form action="<%=request.getContextPath()%>/member/memberEnrollEnd"
 			name="frmMemberEnroll" method="POST"
 			onsubmit="return enrollValidate();">
 			<div class="form-group">
 				<input type="text" class="form-control" id="memberId"
-					name="memberId" placeholder="아이디" required> <small
-					class="form-text text-muted">아이디를 입력해주세요.</small>
+					name="memberId" placeholder="아이디" required> 
+					<small id="id_Msg">아이디를 입력해주세요.</small>
+				
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" id="pwd" name="password"
 					placeholder="비밀번호" required> <small
-					class="form-text text-muted">비밀번호를 입력해주세요.</small>
+					id="pwd1_Msg">비밀번호를 입력해주세요.</small>
 			</div>
 			<div class="form-group">
 				<input type="password" class="form-control" id="pwdck"
 					placeholder="비밀번호 확인" required> <small
-					class="form-text text-muted">비밀번호를 한번 더 입력해주세요.</small>
+					id="pwd2_Msg">비밀번호를 한번 더 입력해주세요.</small>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="memberName"
 					name="memberName" placeholder="성명" required> <small
-					class="form-text text-muted">성명을 입력해주세요.</small>
+					id="name_Msg">성명을 입력해주세요.</small>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="birth" name="birth"
 					placeholder="생년월일" required maxlength="6"> <small
-					class="form-text text-muted">생년월일을 입력해주세요.</small>
+					id="birth_Msg">생년월일을 입력해주세요.</small>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="phone" name="phone"
 					placeholder="연락처" required maxlength="11"> <small
-					class="form-text text-muted">연락처를 입력해주세요.</small>
+					id="phone_Msg">연락처를 입력해주세요.</small>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
@@ -69,30 +70,7 @@
 </body>
 
 <script>
-    //유효성 검사
-    // function enrollValidate(){
-    //     var memberId = document.getElementById("memberId");
-    //     var memberPwd1 = document.getElementById("pwd");
-    //     var memberPwd2 = document.getElementById("pwdck")
-    //     var memberName = document.getElementById("memberName");
-    //     var birth = document.getElementById("birth");
-    //     var phone = document.getElementById("phone");
-    //     var zipCode = document.getElementById("zipCode");
-    //     var address = document.getElementById("address");
 
-
-    //     //아이디 유효성 검사
-    //     //알파벳 소문자로 시작하고 숫자가 하나이상 조합된 4~12자
-    //     var regExp1 = /^[a-z][a-z\d]{3,11}$/;
-    //     var regExp2 = /[0-9]/;
-    //     var idVal = memberId.val;
-
-    //     if(regExp1.test(idVal)){
-
-
-    //     }
-
-    // }
 
 
 
@@ -118,13 +96,17 @@
 
 
     //비밀번호 유효성 검사
-    $('#pwd').blur(function () {
+    
+    
+    $('#pwd').blur(function pwd1chk() {
         var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
         var val = $('#pwd').val();
 
 
         if (regExp.test(val)) {
             $('#pwd').addClass('is-valid');
+            $('#pwd1_Msg').text("  *사용가능합니다.");
+			$('#pwd1_Msg').css("color", "green");
             if ($('#pwd').hasClass('is-invalid')) {
                 $('#pwd').removeClass('is-invalid').addClass('is-valid');
             }
@@ -132,9 +114,12 @@
         }
         else if (!regExp.test(val)) {
             $('#pwd').addClass('is-invalid');
+            $('#pwd1_Msg').text("  *사용할 수 없습니다.");
+			$('#pwd1_Msg').css("color", "red");
             if ($('#pwd').hasClass('is-valid')) {
                 $('#pwd').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
     });
 
@@ -143,17 +128,15 @@
 
 
     //비밀번호 확인 유효성 검사
-    $('#pwdck').blur(function () {
+    $('#pwdck').blur(function pwd2chk() {
         var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
         var pwd1 = $('#pwd').val();
         var pwd2 = $('#pwdck').val();
 
-
-
-
-
         if (pwd1 == pwd2) {
             $('#pwdck').addClass('is-valid');
+            $('#pwd2_Msg').text("  *일치합니다.");
+			$('#pwd2_Msg').css("color", "green");
             if ($('#pwdck').hasClass('is-invalid')) {
                 $('#pwdck').removeClass('is-invalid').addClass('is-valid');
             }
@@ -161,9 +144,12 @@
 
         else if (!regExp.test(pwd1) || pwd1 != pwd2) {
             $('#pwdck').addClass('is-invalid');
+            $('#pwd2_Msg').text("  *비밀번호가 일치 하지 않습니다.");
+			$('#pwd2_Msg').css("color", "red");
             if ($('#pwdck').hasClass('is-valid')) {
                 $('#pwdck').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
     });
 
@@ -171,7 +157,7 @@
 
 
     //이름 유효성 검사
-    $('#memberName').blur(function () {
+    $('#memberName').blur(function namechk() {
         var regExp = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
         var val = $('#memberName').val();
 
@@ -179,6 +165,8 @@
 
         if (regExp.test(val)) {
             $('#memberName').addClass('is-valid');
+            $('#name_Msg').text("  *확인 되었습니다.");
+			$('#name_Msg').css("color", "green");
             if ($('#memberName').hasClass('is-invalid')) {
                 $('#memberName').removeClass('is-invalid').addClass('is-valid');
             }
@@ -186,21 +174,28 @@
         }
         else if (!regExp.test(val)) {
             $('#memberName').addClass('is-invalid');
+            $('#name_Msg').text("  *다시 입력해주세요.");
+			$('#name_Msg').css("color", "red");
             if ($('#memberName').hasClass('is-valid')) {
                 $('#memberName').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
     });
 
 
 
     //생년월일 유효성검사
-    $('#birth').blur(function () {
+    $('#birth').blur(function birthchk() {
     var regExp=/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/;
     var val =$('#birth').val(); 
 
     if (regExp.test(val)) {
             $('#birth').addClass('is-valid');
+            $('#birth_Msg').text("  *확인 되었습니다.");
+			$('#birth_Msg').css("color", "green");
+            
+            
             if ($('#birth').hasClass('is-invalid')) {
                 $('#birth').removeClass('is-invalid').addClass('is-valid');
             }
@@ -208,9 +203,12 @@
         }
         else if (!regExp.test(val)) {
             $('#birth').addClass('is-invalid');
+            $('#birth_Msg').text("  *다시 입력해주세요.");
+			$('#birth_Msg').css("color", "red");
             if ($('#birth').hasClass('is-valid')) {
                 $('#birth').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
 
     });
@@ -218,12 +216,14 @@
 
 
     //핸드폰번호 유효성검사
-    $('#phone').blur(function () {
+    $('#phone').blur(function phonechk() {
         var regExp=/01{1}[016789]{1}[0-9]{7,8}/;
         var val =$('#phone').val(); 
 
         if (regExp.test(val)) {
             $('#phone').addClass('is-valid');
+            $('#phone_Msg').text("  *확인 되었습니다.");
+			$('#phone_Msg').css("color", "green");
             if ($('#phone').hasClass('is-invalid')) {
                 $('#phone').removeClass('is-invalid').addClass('is-valid');
             }
@@ -231,9 +231,12 @@
         }
         else if (!regExp.test(val)) {
             $('#phone').addClass('is-invalid');
+            $('#phone_Msg').text("  *다시 입력해주세요.");
+			$('#phone_Msg').css("color", "red");
             if ($('#phone').hasClass('is-valid')) {
                 $('#phone').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }    
 
 
@@ -245,7 +248,7 @@
 
 //아이디 중복 검사 및 유효성 검사
 //블러로 이용
-$('#memberId').blur(function(){
+$('#memberId').blur(function idchk(){
 	var memberId= $('#memberId').val();
 	console.log(memberId);
 	$.ajax({
@@ -253,25 +256,30 @@ $('#memberId').blur(function(){
 		data: {memberId: memberId},
 		type: "post",
 		success:function(result){
-			if(result<=0){
+			 if($('#memberId').val()==""){
+				  alert("아이디를 입력해주세요.");
+				  /* $('#memberId').focus(); */
+				  
+			  }
+			
+			else if(result<=0){
 				alert("사용 가능한 아이디 입니다.");
 				$('#memberId').addClass('is-valid');
+				$('#id_Msg').text("  *인증되었습니다.");
+			    $('#id_Msg').css("color", "green");
 				  if ($('#memberId').hasClass('is-invalid')) {
 		                $('#memberId').removeClass('is-invalid').addClass('is-valid');
 		            }
-				
 			}
 			else{
 				alert("중복된 아이디 입니다.");
 				$('#memberId').addClass('is-invalid');
+				$('#id_Msg').text("  *중복된 아이디 입니다.");
+				$('#id_Msg').css("color", "red");
 				if ($('#memberId').hasClass('is-valid')) {
 	                $('#memberId').removeClass('is-valid').addClass('is-invalid');
 	            }
-				
-				
-				
-				
-				
+				return false;
 			}
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
@@ -300,7 +308,14 @@ $('#memberId').blur(function(){
     }
 
     function enrollValidate() {
-
+    	pwd1chk();
+    	pwd2chk();
+    	namechk();
+    	birthchk();
+    	phonechk();
+    	idchk();
+    	
+    	
         var $memberId = $("#memberId");
         if ($memberId.val().trim().length < 4) {
             alert("아이디는 4글자 이상 가능합니다.");
