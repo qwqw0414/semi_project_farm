@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
-import member.model.vo.Member;
 import product.model.vo.OrderList;
-import product.model.vo.OrderListProduct;
 
-@WebServlet("/member/orderView")
-public class OrderViewServlet extends HttpServlet {
+/**
+ * Servlet implementation class OrderViewEndServlet
+ */
+@WebServlet("/member/orderViewEnd")
+public class OrderViewEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		int year = Integer.parseInt(request.getParameter("year"));
+		int month = Integer.parseInt(request.getParameter("month"));
 		String memberId = request.getParameter("memberId");
-		
 		
 		int cPage =1; //초기값 설정
 		final int numPerPage = 10;
@@ -31,7 +32,7 @@ public class OrderViewServlet extends HttpServlet {
 			
 		}
 		
-		List<OrderList> list = new MemberService().selectOrderList(memberId,cPage,numPerPage); 
+		List<OrderList> list = new MemberService().selectOrderByDate(memberId, year, month, cPage, numPerPage);
 		
 		//페이징바 영역처리
 		int totalContent = new MemberService().orderTotalContent(memberId);
@@ -46,7 +47,7 @@ public class OrderViewServlet extends HttpServlet {
 		int pageNo = pageStart;
 		//1.이전
 			if(pageNo!=1) {
-				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
+				pageBar += "<a href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&cPage="+(pageNo-1)+"'[이전]</a>\n";
 				
 			}
 		//2.pageNo
@@ -57,20 +58,22 @@ public class OrderViewServlet extends HttpServlet {
 				if(cPage==pageNo) {
 					pageBar += "<span class='cPage'>"+pageNo+"</span>";
 				} else {
-					pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
+					pageBar += "<a href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
 				}
 				pageNo++;
 			}
 		//3. 다음
 			if(pageNo<totalPage) {
-				pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>\n";
+				pageBar += "<a href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>\n";
 			}
-		
-			System.out.println(totalPage+"1123123");
-	
+			if(year == 0 && month == 0) {
+				
+			}
+			
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/WEB-INF/views/member/orderView.jsp").forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

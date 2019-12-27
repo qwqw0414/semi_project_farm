@@ -152,6 +152,13 @@ public class MemberService {
 		close(conn);
 		return totalContent;
 	}
+
+	public List<OrderList> selectOrderByDate(String memberId, int year, int month, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<OrderList> list = new MemberDAO().selectOrderByDate(conn, memberId, year, month, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
 	
 	
 }
