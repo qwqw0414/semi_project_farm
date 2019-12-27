@@ -42,11 +42,15 @@
                         </div>
                     </div>
                 </p>
-				<!-- 장바구니 & 구매 버튼 -->                
+				<!-- 장바구니 & 구매 버튼 -->
+                <%if(p.getStock() == 0){%>
+                    <h4><span class="badge badge-danger">품절</span></h4>
+                <%}else{%>
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                     <button type="button" class="btn btn-outline-danger">구매하기</button>
                     <button type="button" class="btn btn-outline-info" onclick="wishListReg('<%=p.getpId()%>');">장바구니</button>
                 </div>
+                <%}%>             
             </div>
         </div>
 	<%} %>

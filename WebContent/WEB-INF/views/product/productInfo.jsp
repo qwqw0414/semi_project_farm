@@ -37,6 +37,7 @@
 </div>
 
 <script>
+<% if(memberLoggedIn != null){%>
 $("#btn-WishList").click(()=>{
     var amount = $("#amount").val();
     var pId = "<%=p.getpId()%>";
@@ -63,5 +64,7 @@ $("#btn-WishList").click(()=>{
         }
     });
 });
+<%}%>
 </script>
+
 <%@ include file ="/WEB-INF/views/common/footer.jsp"%>

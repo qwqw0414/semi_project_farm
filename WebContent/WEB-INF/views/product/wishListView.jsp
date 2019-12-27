@@ -11,20 +11,22 @@
 <style>
 img{width: 5rem;}
 </style>
-<table class="table">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col"><input type="checkbox" id="checkAll" checked></th>
-			<th scope="col">이미지</th>
-			<th scope="col">상품명</th>
-			<th scope="col">수량</th>
-			<th scope="col">가격</th>
-			<th scope="col">취소</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
+<div style="overflow:auto; height:600px;">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col"><input type="checkbox" id="checkAll" checked></th>
+				<th scope="col">이미지</th>
+				<th scope="col">상품명</th>
+				<th scope="col">수량</th>
+				<th scope="col">가격</th>
+				<th scope="col">취소</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
 <hr>
 <h3>합계금액 : <span id="sumPrice"></span></h3>
 <br>
@@ -55,7 +57,7 @@ $(()=>{
 							listId: listId,
 							amount: amount,
 							price: price
-						});
+						  });
 			}
 		}
 		
