@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
+
+
+<div class="memberEnroll">
 <div class="container">
         <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST"
             onsubmit="return enrollValidate();">
@@ -55,7 +58,7 @@
         </form>
     </div>
 
-
+</div>
 
 
 
