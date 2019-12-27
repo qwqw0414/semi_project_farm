@@ -70,30 +70,7 @@
 </body>
 
 <script>
-    //유효성 검사
-    // function enrollValidate(){
-    //     var memberId = document.getElementById("memberId");
-    //     var memberPwd1 = document.getElementById("pwd");
-    //     var memberPwd2 = document.getElementById("pwdck")
-    //     var memberName = document.getElementById("memberName");
-    //     var birth = document.getElementById("birth");
-    //     var phone = document.getElementById("phone");
-    //     var zipCode = document.getElementById("zipCode");
-    //     var address = document.getElementById("address");
 
-
-    //     //아이디 유효성 검사
-    //     //알파벳 소문자로 시작하고 숫자가 하나이상 조합된 4~12자
-    //     var regExp1 = /^[a-z][a-z\d]{3,11}$/;
-    //     var regExp2 = /[0-9]/;
-    //     var idVal = memberId.val;
-
-    //     if(regExp1.test(idVal)){
-
-
-    //     }
-
-    // }
 
 
 
@@ -119,7 +96,9 @@
 
 
     //비밀번호 유효성 검사
-    $('#pwd').blur(function () {
+    
+    
+    $('#pwd').blur(function pwd1chk() {
         var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
         var val = $('#pwd').val();
 
@@ -140,6 +119,7 @@
             if ($('#pwd').hasClass('is-valid')) {
                 $('#pwd').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
     });
 
@@ -148,7 +128,7 @@
 
 
     //비밀번호 확인 유효성 검사
-    $('#pwdck').blur(function () {
+    $('#pwdck').blur(function pwd2chk() {
         var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
         var pwd1 = $('#pwd').val();
         var pwd2 = $('#pwdck').val();
@@ -169,6 +149,7 @@
             if ($('#pwdck').hasClass('is-valid')) {
                 $('#pwdck').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
     });
 
@@ -176,7 +157,7 @@
 
 
     //이름 유효성 검사
-    $('#memberName').blur(function () {
+    $('#memberName').blur(function namechk() {
         var regExp = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
         var val = $('#memberName').val();
 
@@ -198,13 +179,14 @@
             if ($('#memberName').hasClass('is-valid')) {
                 $('#memberName').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
     });
 
 
 
     //생년월일 유효성검사
-    $('#birth').blur(function () {
+    $('#birth').blur(function birthchk() {
     var regExp=/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/;
     var val =$('#birth').val(); 
 
@@ -226,6 +208,7 @@
             if ($('#birth').hasClass('is-valid')) {
                 $('#birth').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }
 
     });
@@ -233,7 +216,7 @@
 
 
     //핸드폰번호 유효성검사
-    $('#phone').blur(function () {
+    $('#phone').blur(function phonechk() {
         var regExp=/01{1}[016789]{1}[0-9]{7,8}/;
         var val =$('#phone').val(); 
 
@@ -253,6 +236,7 @@
             if ($('#phone').hasClass('is-valid')) {
                 $('#phone').removeClass('is-valid').addClass('is-invalid');
             }
+            return false;
         }    
 
 
@@ -264,7 +248,7 @@
 
 //아이디 중복 검사 및 유효성 검사
 //블러로 이용
-$('#memberId').blur(function(){
+$('#memberId').blur(function idchk(){
 	var memberId= $('#memberId').val();
 	console.log(memberId);
 	$.ajax({
@@ -295,6 +279,7 @@ $('#memberId').blur(function(){
 				if ($('#memberId').hasClass('is-valid')) {
 	                $('#memberId').removeClass('is-valid').addClass('is-invalid');
 	            }
+				return false;
 			}
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
@@ -323,7 +308,14 @@ $('#memberId').blur(function(){
     }
 
     function enrollValidate() {
-
+    	pwd1chk();
+    	pwd2chk();
+    	namechk();
+    	birthchk();
+    	phonechk();
+    	idchk();
+    	
+    	
         var $memberId = $("#memberId");
         if ($memberId.val().trim().length < 4) {
             alert("아이디는 4글자 이상 가능합니다.");
