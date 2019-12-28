@@ -70,11 +70,22 @@ $(".image").on("click",function(){
 	location.href ='<%=request.getContextPath()%>/product/productInfo?pId='+pId;
 });
 
+
+// 장바구니 모달 활성화
 $(".wishList").on("click",function(){
+<% if(memberLoggedIn != null){%>  
 	var pId = $(this).parent().find("[type=hidden]").attr("id");
     var $modal = $(".modal-wish");
-    var $con = $(".wishList .modal-body")
+    var $con = $(".wishList .modal-body");
+	var $amount = $("#product-amount");
+	var $priceSum = $("#product-price-sum");
 
+    //공통 자원 값 초기화
+    $amount.text("0");
+    $priceSum.text("");
+    $(".modal-wish #product-id").val(pId);
+
+    //모달 화면에 표시
     $modal.css("display","block");
 
     $.ajax({
@@ -83,13 +94,22 @@ $(".wishList").on("click",function(){
         data: {pId:pId},
         dataType: "json",
         success: data =>{
-            
+            var price = data.price - data.price*data.discount;
+
+            $("modal #product-name").text(data.pName);
+            $("modal #product-price").val(price);
+            $("modal #product-price-format").html(numberFormat(price)+"<small>원</small>");
         },
         error: (jqxhr, textStatus, errorThrown)=>{
             console.log(jqxhr, textStatus, errorThrown);
         }
     });
+<%}else{%>
+	location.href = "<%=request.getContextPath()%>/member/memberLogin";
+<%}%>
 });
+
+
 
 $(".card").mouseenter(function(){
     $(this).find(".card-img-top").addClass("ani-photo-in");
@@ -99,33 +119,6 @@ $(".card").mouseenter(function(){
     $(this).find(".wishList").removeClass("ani-vibrate");
 });
 
-<%
-	if(false){
-%>	
-function wishListReg(pId){
-    var pName = $("[id="+pId+"]").siblings(".card-title").text();
-    var pNum = $("[id="+pId+"]").parent().find("#productNum").val();
-    var $bar = $("#wishListBar");
 
-    var memberId = '<%=memberLoggedIn.getMemberId()%>';
-
-    $.ajax({
-        url:"<%=request.getContextPath()%>/product/wishListInsert",
-        type: "post",
-        data: { pNum: pNum,
-                pId: pId,
-                memberId: memberId},
-        dataType: "json",
-        success: data =>{
-            alert(pName + " " + pNum + "개를 장바구니에 담았습니다.");
-        },
-        error: (jqxhr, textStatus, errorThrown)=>{
-            console.log(jqxhr, textStatus, errorThrown);
-        }
-    });
-}
-<%
-	}
-%>
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

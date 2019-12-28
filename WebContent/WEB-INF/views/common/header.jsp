@@ -25,65 +25,119 @@
 <body>
 
 <modal>
-
+<% if(memberLoggedIn != null){%>
 <!-- 모달창 -->
 <div class="modal-wish" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content" style="height: 600px;">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content" style="height: 300px;">
             <div class="modal-header">
-                장바구니
+                장바구니 담기
                 <span class="close">x</span>
-            </div>
+			</div>
+<!-- 모달바디 -->
             <div class="modal-body">
-				<table>
-					<tr>
-						<td rowspan="4">
-							<img src="/farm/upload/product/꽃게.jpg" width="200px">
-						</td>
-						<td>
-							<h1><span class="product-name">name</span></h1>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h2><span class="product-price">price</span></h2>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<button class="btn btn-outline-secondary" type="button" id="button-addon1">-</button>
-								</div>
-								<input type="text" class="form-control">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
-								</div>
+
+				<div class="row">
+					<div class="col">
+						<h1><span id="product-name">name</span></h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-8">
+						<input type="hidden" id="product-price">
+						<h2><span id="product-price-format">price</span></h2>
+					</div>
+					<div class="col-4 text-right" style="right:-17px;">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<button class="btn btn-outline-secondary" type="button" id="amount-minus">-</button>
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h3>총금액 : <span class="priceSum"></span></h3>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="button" class="btn btn-info" value="장바구니">
-						</td>
-					</tr>
-				</table>
-            </div>
+							<span id="product-amount" class="input-group-text" style="width: 50px; display: inline;">0</span>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="amount-plus">+</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-3">
+						<h4>합계 :</h4>
+					</div>
+					<div class="col text-right">
+						<span id="product-price-sum"></span>
+					</div>
+					<div class="col-4">
+						<input type="hidden" id="product-id">
+						<input type="button" class="btn btn-info btn-block" value="장바구니" id="btn-wishlist">
+					</div>
+				</div>
+			</div>
         </div>
     </div>
 </div>
 
 <script>
+//모달 비활성화
 $(".modal-wish .close").click(() => {
 	$(".modal-wish").css("display", "none");
 });
 
+//수량 가감 버튼
+$(()=>{
+	var $amount = $(".modal-wish #product-amount");
+	var $priceSum = $(".modal-wish #product-price-sum");
+	var $price = $(".modal-wish #product-price");
+
+	$priceSum.text("0");
+
+	$(".modal-wish #amount-minus").click(()=>{
+		if(Number($amount.text()) > 0)
+			$amount.text(Number($amount.text())-1);
+		
+		sumPirce();
+	});
+
+	$(".modal-wish #amount-plus").click(()=>{
+		$amount.text(Number($amount.text())+1);
+		sumPirce();
+	});
+
+	function sumPirce(){
+		$priceSum.html(numberFormat($price.val() * Number($amount.text()))+"<small>원</small>");
+	
+	}
+
+	$(".modal-wish #btn-wishlist").click(()=>{
+		var memberId = "<%=memberLoggedIn.getMemberId()%>";
+		var pId = $(".modal-wish #product-id").val();
+
+		console.log(memberId);
+		console.log(pId);
+		console.log($amount.text());
+
+		$.ajax({
+			url:"<%=request.getContextPath()%>/product/wishListInsert",
+			type: "post",
+			data: { pNum: Number($amount.text()),
+					pId: pId,
+					memberId: memberId},
+			dataType: "json",
+			success: data =>{
+				$(".modal-wish").css("display", "none");
+			},
+			error: (jqxhr, textStatus, errorThrown)=>{
+				console.log(jqxhr, textStatus, errorThrown);
+			}
+		});
+	});
+
+});
 </script>
+<%}%>
 </modal>
 
 
@@ -99,6 +153,7 @@ $(".modal-wish .close").click(() => {
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="#">채소</a>
 					<a class="dropdown-item" href="#">과일</a>
+					<a class="dropdown-item" href="#">해산물</a>
 				</div>
 			</li>
 	

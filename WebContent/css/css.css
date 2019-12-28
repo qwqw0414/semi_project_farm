@@ -54,6 +54,22 @@
 #zipcodeSearchBtn{
 	font-size:12px;
 }
+/* 장바구니 모달 */
+.modal-wish #product-price-format{
+	color: rgb(65, 127, 209);
+}
+.modal-wish #product-name{
+	font-family: 'BMHANNAPro';
+}
+
+.modal-wish #product-price-sum{
+	color: rgb(65, 127, 209);
+	font-family: 'Jua', sans-serif;
+	font-size: 1.5em;
+	text-align: right;
+	width: 100%;
+}
+
 
 /* 상품 스타일 */
 #productList .card-text{
