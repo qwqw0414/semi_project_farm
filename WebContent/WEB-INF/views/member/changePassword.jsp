@@ -25,6 +25,14 @@
 
 </div>
 <script>
+
+
+
+
+
+
+
+
 function password2_validate(){
 	
 	var pwd_new = $("#pwd_new").val().trim();
