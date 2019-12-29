@@ -9,6 +9,7 @@ import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import admin.model.dao.AdminDAO;
 import product.model.dao.ProductDAO;
+import product.model.vo.Comments;
 import product.model.vo.OrderList;
 import product.model.vo.Product;
 import product.model.vo.WishList;
@@ -126,6 +127,25 @@ public class ProductService {
 		close(conn);
 		
 		return result;
+	}
+
+	public int productInsertComment(int pId, String memberId, String commentContent) {
+		Connection conn = getConnection();
+		int result = new ProductDAO().productInsertComment(conn, pId, memberId, commentContent);
+		
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<Comments> selectCommentsByPId(int pId) {
+		Connection conn = getConnection();
+		List<Comments> list = new ProductDAO().selectCommentsByPId(conn, pId);
+		close(conn);
+		return list;
 	}
 
 }

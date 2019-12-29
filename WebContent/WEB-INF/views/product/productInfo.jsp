@@ -6,7 +6,7 @@
 <%
 	Product p = (Product)request.getAttribute("product");
 %>
-<h1>상품 상세보기</h1>
+<h1 class="text-center">상품 상세보기</h1>
     <div class="container-fluid">
     <div class="row">
         <div class="col-xl-1 d-none d-md-block"></div>
@@ -29,15 +29,77 @@
 	               	<button class="btn btn-danger" id="btn-order">구매하기</button>
 	               	<button class="btn btn-success" id="btn-WishList">장바구니</button>
                </div>
-               <div class="col-12 order-4 float-left">
-               	리뷰를 만든다면 여기에
-               </div>
-           </div>
+				<div class="col-12 order-4 float-left">
+               <hr>	
+					<h5 class="mt-0">리뷰를 작성해 보세요</h5>
+					<form action="<%=request.getContextPath()%>/product/productCommentInsert" method="POST" name="productCommentFrm">
+						<input type="hidden" name="pid" value="<%=p.getpId()%>" /> 
+						<input type="hidden" name="memberid" value="<%=memberLoggedIn != null ? memberLoggedIn.getMemberId() : ""%>" />
+						<textarea class="form-control" name="comments" cols="30" rows="3"></textarea>
+						<input type="submit" id="btn-insert" class="btn btn-primary" value="작성" />
+					</form>
+					<!-- 리뷰 댓글 시작 -->
+					<button class="btn btn-secondary" id="showComments">리뷰 보기</button>
+					<ul class="list-group list-group-flush" id="comment-wrapper">
+						<li class="list-group-item" ></li>
+					</ul>
+					<!-- 리뷰 댓글 종료 -->
+				</div>
+			</div>
        </div>
     </div>
 </div>
 
 <script>
+$("#showComments").click(function(){
+	var $pId = $("[name=pid]").val();
+	$.ajax({
+		url: "<%=request.getContextPath()%>/product/productCommentView",
+		data:{"pId":$pId},
+		success: data=>{
+			console.log(data);
+			let $ul = $("#comment-wrapper");
+			let html = "";
+			$(data).each((idx,data)=>{
+				html += "<li class='list-group-item' ><table><tr><td id='commentWriter'>"+data.memberId+"</td><td>"+data.commentContent+"</td><td>"+data.commentDate+"</td></tr></table></li>";
+			});//end of each
+			$ul.html(html);
+		},
+		error: (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
+		}
+		
+	});//end of ajax
+	
+});
+
+
+
+$("[name=comments]").click(function(){
+	if(<%=memberLoggedIn==null%>){
+		loginAlert();
+	}
+});
+
+$("[name=productCommentFrm]").submit(function(e){
+	if(<%=memberLoggedIn==null%>){
+		loginAlert();
+		e.preventDefault();
+		return;
+	}
+	var $content = $("[name=comments]");
+	if($content.val().trim().length==0){
+		alert("내용을 입력해 주세요");
+		$content.focus();
+		e.preventDefault();
+		return;
+	}
+});
+
+function loginAlert(){
+	alert("로그인 후 이용할 수 있습니다.");
+}
+
 <% if(memberLoggedIn != null){%>
 $("#btn-WishList").click(()=>{
     var amount = $("#amount").val();

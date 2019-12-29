@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import product.model.vo.Comments;
 import product.model.vo.OrderList;
 import product.model.vo.Product;
 import product.model.vo.WishList;
@@ -285,6 +286,62 @@ public class ProductDAO {
 		}
 		
 		return result;
+	}
+
+	public int productInsertComment(Connection conn, int pId, String memberId, String commentContent) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("productInsertComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, pId);
+			pstmt.setString(3, commentContent);
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public List<Comments> selectCommentsByPId(Connection conn, int pId) {
+		Comments c = null;
+		List<Comments> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectCommentsByPId");
+		
+		try {
+			list = new ArrayList<>();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				c = new Comments();
+				c.setCommentId(rset.getInt("commentid"));
+				c.setMemberId(rset.getString("memberid"));
+				c.setpId(rset.getInt("pid"));
+				c.setCommentContent(rset.getString("comments"));
+				c.setCommentDate(rset.getDate("comment_date"));
+				
+				list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
