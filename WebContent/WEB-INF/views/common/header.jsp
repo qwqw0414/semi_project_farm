@@ -115,9 +115,10 @@ $(()=>{
 		var memberId = "<%=memberLoggedIn.getMemberId()%>";
 		var pId = $(".modal-wish #product-id").val();
 
-		console.log(memberId);
-		console.log(pId);
-		console.log($amount.text());
+		if(Number($amount.text()) < 1){
+			alert("수량을 입력해주세요."); 
+			return;
+		}
 
 		$.ajax({
 			url:"<%=request.getContextPath()%>/product/wishListInsert",
