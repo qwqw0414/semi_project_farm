@@ -82,7 +82,7 @@ $(".wishList").on("click",function(){
 
     //공통 자원 값 초기화
     $amount.text("0");
-    $priceSum.text("");
+    $priceSum.html("0<small>원</small>");
     $(".modal-wish #product-id").val(pId);
 
     //모달 화면에 표시
@@ -95,8 +95,23 @@ $(".wishList").on("click",function(){
         dataType: "json",
         success: data =>{
             var price = data.price - data.price*data.discount;
+            var $stock = $("modal #product-stock");
 
             $("modal #product-name").text(data.pName);
+
+            if(data.stock == 0)
+                $stock.text('sold out');
+            else
+                $stock.text(data.stock);
+
+            //재고별 색상 변경
+            if(data.stock >= 100)
+                $stock.attr('class','badge badge-success');
+            else if(data.stock > 0)
+                $stock.attr('class','badge badge-warning');
+            else
+                $stock.attr('class','badge badge-danger');
+
             $("modal #product-price").val(price);
             $("modal #product-price-format").html(numberFormat(price)+"<small>원</small>");
         },

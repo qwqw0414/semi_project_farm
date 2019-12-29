@@ -1,3 +1,4 @@
+<%@page import="common.util.Utils"%>
 <%@page import="product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -25,7 +26,7 @@
                     <br>
                     <span>재고:<%=p.getStock()%></span>
                     <br>
-	               	<button class="btn btn-danger">구매하기</button>
+	               	<button class="btn btn-danger" id="btn-order">구매하기</button>
 	               	<button class="btn btn-success" id="btn-WishList">장바구니</button>
                </div>
                <div class="col-12 order-4 float-left">
@@ -66,5 +67,220 @@ $("#btn-WishList").click(()=>{
 });
 <%}%>
 </script>
+
+<% if(memberLoggedIn != null){%>
+<!-- 구입 모달 -->
+<div class="modal-order" style="display: none;">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content" style="height: 400px;">
+            <div class="modal-header">
+                구매하기
+                <span class="close">x</span>
+			</div>
+<!-- 모달바디 -->
+            <div class="modal-body">
+
+				<div class="row">
+					<div class="col">
+						<h1><span id="product-name"><%=p.getpName()%></span></h1>
+					</div>
+					<div class="col-4 text-right">
+						<h5>
+							<span id="product-stock" class="badge badge-success"><%=p.getStock()%></span>
+						</h5>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-8">
+						<input type="hidden" id="product-price" value="<%=(int)(p.getPrice() - p.getPrice()*p.getDiscount())%>">
+						<h2><span id="product-price-format"><%=new Utils().numberFormat((int)(p.getPrice() - p.getPrice()*p.getDiscount()))%><small>원</small></span></h2>
+					</div>
+					<div class="col-4 text-right" style="right:-17px;">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<button class="btn btn-outline-secondary" type="button" id="amount-minus">-</button>
+							</div>
+							<span id="product-amount" class="input-group-text" style="width: 50px; display: inline;">0</span>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="amount-plus">+</button>
+							</div>
+						</div>
+					</div>
+				</div>
+                <hr>
+
+            <!-- 주소 -->
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">우편번호 & 주소</span>
+                            </div>
+                            <input type="text" class="form-control" readonly id="member-zipcode">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="member-address">
+                    </div>
+                </div>
+                <hr>
+                <!-- 금액 & 구입 -->
+				<div class="row">
+					<div class="col-3">
+						<h4>합계 :</h4>
+					</div>
+					<div class="col text-right">
+						<span id="product-price-sum">0<small>원</small></span>
+					</div>
+					<div class="col-4">
+						<input type="hidden" id="product-id">
+						<input type="button" class="btn btn-danger btn-block" value="구매" id="btn-order">
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+<script>
+//모달 비활성화
+$(".modal-order .close").click(() => {
+    $(".modal-order").css("display", "none");
+});
+
+$(()=>{
+    var $amount = $(".modal-order #product-amount");
+    var $priceSum = $(".modal-order #product-price-sum");
+    var $price = $(".modal-order #product-price");
+    var $stock = $(".modal-order #product-stock");
+    var $address = $(".modal-order #member-address");
+    var $zipcode = $(".modal-order #member-zipcode");
+    var memberId = "<%=memberLoggedIn.getMemberId()%>";
+
+//모달 활성화
+    $("#btn-order").click(()=>{
+        
+        $.ajax({
+            url:"<%=request.getContextPath()%>//member/memberinfo",
+            type: "post",
+            data: {memberId: memberId},
+            dataType: "json",
+            success: data =>{
+
+                $address.val(data.address);
+                $zipcode.val(data.zipcode);
+                $(".modal-order").css("display","block");
+            },
+            error: (jqxhr, textStatus, errorThrown)=>{
+                console.log(jqxhr, textStatus, errorThrown);
+            }
+        });
+
+    });
+
+//수량 감소 버튼
+    $(".modal-order #amount-minus").click(()=>{
+        if(Number($amount.text()) > 0)
+            $amount.text(Number($amount.text())-1);
+        
+        sumPirce();
+    });
+//수량 증가 버튼
+    $(".modal-order #amount-plus").click(()=>{
+
+        //재고 유효성
+        if(Number($stock.text()) <= Number($amount.text()))
+            return;
+
+        $amount.text(Number($amount.text())+1);
+        sumPirce();
+    });
+
+    function sumPirce(){
+        $priceSum.html(numberFormat($price.val() * Number($amount.text()))+"<small>원</small>");
+    
+    }
+
+    $(".modal-wish #btn-wishlist").click(()=>{
+        
+        var pId = $(".modal-wish #product-id").val();
+
+        if(Number($amount.text()) < 1){
+            alert("수량을 입력해주세요."); 
+            return;
+        }
+
+        $.ajax({
+            url:"<%=request.getContextPath()%>//product/directOrder",
+            type: "post",
+            data: { pNum: Number($amount.text()),
+                    pId: pId,
+                    memberId: memberId},
+            dataType: "json",
+            success: data =>{
+                $(".modal-wish").css("display", "none");
+            },
+            error: (jqxhr, textStatus, errorThrown)=>{
+                console.log(jqxhr, textStatus, errorThrown);
+            }
+        });
+    });
+
+
+    // 구입
+    $(".modal-order #btn-order").click(()=>{
+        var memberId = "<%=memberLoggedIn.getMemberId()%>";
+        var pId = <%=p.getpId()%>;
+        var amount = Number($amount.text());
+        var price = $price.val() * amount;
+
+        console.log($address.val());
+        console.log($zipcode.val());
+
+        if(Number($amount.text()) < 1){
+            alert("수량을 입력해주세요."); 
+            return;
+        }
+
+        $.ajax({
+            url:"<%=request.getContextPath()%>//product/directOrder",
+            type: "post",
+            data: { amount: Number($amount.text()),
+                    pId: pId,
+                    memberId: memberId,
+                    price: price,
+                    address: $address.val(),
+                    zipcode: $zipcode.val()
+                  },
+            dataType: "json",
+            success: data =>{
+            },
+            error: (jqxhr, textStatus, errorThrown)=>{
+                console.log(jqxhr, textStatus, errorThrown);
+            },
+            complete: ()=>{
+                alert("구입 완료");
+                $(".modal-order").css("display", "none");
+            }
+        });
+    });
+
+});
+</script>
+<%}else{%>
+<script>
+$("#btn-order").click(() => {
+    loginGo();
+});
+$("#btn-WishList").click(() => {
+    loginGo();
+});
+</script>
+<%}%>
 
 <%@ include file ="/WEB-INF/views/common/footer.jsp"%>

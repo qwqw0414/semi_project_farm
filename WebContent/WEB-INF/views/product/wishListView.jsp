@@ -142,7 +142,7 @@ function loadWishList(){
 			let html = "";
 
 			$(data).each((idx,wishList)=>{
-				var price = wishList.price*wishList.amount*(1-wishList.discount);
+				var price = Math.ceil(wishList.price*wishList.amount*(1-wishList.discount));
 
 				if((wishList.stock - wishList.amount)<0)
 					html += "<tr><th><input type='checkbox' disabled></th>";
