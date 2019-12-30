@@ -493,6 +493,38 @@ public class ProductDAO {
 		return list;
 	}
 
+	public OrderList selectProductOrderByMemberId(Connection conn, int pId, String memberId) {
+		OrderList checkPurchase = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProductOrderByMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, pId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				checkPurchase = new OrderList();
+				checkPurchase.setOrderId(rset.getInt("orderid"));
+				checkPurchase.setMemberId(rset.getString("memberid"));
+				checkPurchase.setpId(rset.getInt("pid"));
+				checkPurchase.setPrice(rset.getInt("price"));
+				checkPurchase.setAmount(rset.getInt("amount"));
+				checkPurchase.setZipcode(rset.getString("zipcode"));
+				checkPurchase.setAddress(rset.getString("address"));
+				checkPurchase.setOrderDate(rset.getDate("orderDate"));
+				checkPurchase.setCheckDate(rset.getDate("checkdate"));
+				checkPurchase.setStatus(rset.getString("status"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return checkPurchase;
+	}
+
 }
 
 

@@ -188,6 +188,13 @@ public class ProductService {
 		return list;
 	}
 
+	public OrderList selectProductOrderByMemberId(int pId, String memberId) {
+		Connection conn = getConnection();
+		OrderList checkPurchase = new ProductDAO().selectProductOrderByMemberId(conn, pId, memberId);
+		close(conn);
+		return checkPurchase;
+	}
+
 }
 
 

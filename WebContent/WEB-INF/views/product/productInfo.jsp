@@ -93,7 +93,7 @@ function showComments() {
 					html += "<sub class='badge badge-warning'>NEW</sub>";
 				}
 				if(data.memberId==$memberId||$isAdmin=="true"){
-					html += "<sub><a href='<%=request.getContextPath()%>/product/deleteComment?commentId="+data.commentId+"&pId="+data.pId+"' class='badge badge-danger'>삭제</a></sub>";
+					html += "<span class='float-right'><a class='close' href='<%=request.getContextPath()%>/product/deleteComment?commentId="+data.commentId+"&pId="+data.pId+"'>x</a></span>";
 				}
 				html += "</h5>"+data.commentContent+"</div></li><br>";
 			});//end of each
