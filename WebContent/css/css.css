@@ -116,6 +116,16 @@
 	font-size: 1.2em;
 	
 }
+#productList .sale-view{
+	position: absolute;
+	width: 65px;
+	height: 65px;
+	background: rgba(221, 160, 221, 0.85);
+	z-index: 1;
+	color: white;
+	padding: 5px 10px 5px 10px;
+	font-family: 'BMHANNAPro';
+}
 #productList .discount{
 	color: rgb(146, 146, 146);
 	text-decoration: line-through;
