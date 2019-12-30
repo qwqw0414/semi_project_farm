@@ -10,7 +10,7 @@
 %>
 <%=(str!=null)?str:"" %>
 
-<div class="container">
+<div class="container pwd-update-container">
 	<%if(m==null ){ %>
 	<form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd"
 		method="POST" onsubmit="return password_validate();">
@@ -30,7 +30,7 @@
 				value="" placeholder="전화번호"> <small
 				class="form-text text-muted">전화번호를 입력하세요.</small>
 		</div>
-		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
+		<button type="submit" class="btn btn-primary pwd-find-btn">비밀번호 변경</button>
 	</form>
 	<% }else {%>
 	<form action="<%=request.getContextPath()%>/member/PasswordUpdateEnd"
@@ -47,7 +47,7 @@
 				class="form-text text-muted">비밀번호 확인</small><br />
 		</div>
 
-		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
+		<button type="submit" class="btn btn-primary pwd-find-btn">비밀번호 변경</button>
 	</form>
 	<%} %>
 

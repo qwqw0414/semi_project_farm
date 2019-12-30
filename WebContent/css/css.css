@@ -167,5 +167,87 @@
 
 
 
+/*로그인 화면*/
+.logincontainer{
+	width:380px;
+	height:296px;
+}
+#span1{
+	font-size: 10px;
+	color:blue;
+}
+.find-id-link{
+	font-size: 10px;
+}
+.find-id-link#span1{
+	font-size: 10px;
+		color:blue;
+}
+.find-pw-link{
+	font-size: 10px;
+}
+.login-btn{
+	width:348px;
+	padding: 0;
+	height: 40px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.enroll-btn{
+	width:348px;
+	padding: 0;
+	height: 40px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.col-b{
+	font-size: 12px;
+}
+.col-a{
+	padding-left: 112px;
+}
+
+
+
+/*아이디 찾기 화면*/
+.find-id-container{
+	width:380px;
+	height:296px;
+}
+.find-id-btn{
+	width:348px;
+	padding: 0;
+	height: 40px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+
+
+
+/*비밀번호 찾기 화면*/
+.pwd-update-container{
+	width:380px;
+	height:296px;
+}
+
+.pwd-find-btn{
+	width:348px;
+	padding: 0;
+	height: 40px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+
+/*비밀번호 변경화면*/
+.user-img{
+	width: 50px;
+}
+.comment-pwd{
+	margin-top: 10px;
+}
+
+
 
 
