@@ -94,9 +94,9 @@
 		}%>
 		</tbody>
 	</table>
-	<div id="pageBar">
-		<%=pageBar %>
-	</div>
+<ul class="pagination justify-content-center" style="margin:50px 0 150px 0">
+	<%=pageBar%>
+</ul>
 </div>
 
 <script>
