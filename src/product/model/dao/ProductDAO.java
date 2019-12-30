@@ -344,7 +344,43 @@ public class ProductDAO {
 		return list;
 	}
 
-
+	public List<Product> selectByCategory(Connection conn, String category, int cPage, int numPerPage) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectByCategory");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+			
+				list.add(p);
+				}
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return list;
+		
+	}
+			
 	public int deleteComment(Connection conn, int commentId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -385,9 +421,29 @@ public class ProductDAO {
 				p.setDiscount(rset.getDouble("DISCOUNT"));
 				p.setStock(rset.getInt("STOCK"));
 				p.setPhoto(rset.getString("PHOTO"));
-
 				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
 
+	public int selectProductTotalContent(Connection conn, String category) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProductTotalContent");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
 			}
 
 		} catch (SQLException e) {
@@ -397,7 +453,7 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return list;
+		return totalContent;
 
 	}
 
@@ -438,3 +494,5 @@ public class ProductDAO {
 	}
 
 }
+
+

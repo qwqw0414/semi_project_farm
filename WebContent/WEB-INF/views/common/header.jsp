@@ -166,9 +166,11 @@ $(()=>{
 					카테고리
 				</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">채소</a>
-					<a class="dropdown-item" href="#">과일</a>
-					<a class="dropdown-item" href="#">해산물</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=채소">채소</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=과일">과일</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=해산물">해산물</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=육류">육류</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=버섯">버섯</a>
 				</div>
 			</li>
 	

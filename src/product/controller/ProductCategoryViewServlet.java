@@ -9,49 +9,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.model.service.AdminService;
 import common.BaseData;
 import product.model.service.ProductService;
 import product.model.vo.Product;
 
-@WebServlet("/product/productView")
-public class ProductViewServlet extends HttpServlet {
+/**
+ * Servlet implementation class ProductCategoryViewServlet
+ */
+@WebServlet("/product/productCategory")
+public class ProductCategoryViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		// 1.파라미터 핸들링
-		int numPerPage = new BaseData().getIndexpagenum();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.파라미터
+		String category = request.getParameter("category");
 		int cPage = 1;
 		int totalContent = 0;
-
-		String keyWord = request.getParameter("keyWord");
-		if(keyWord == null) keyWord = "";
+		int numPerPage = new BaseData().getIndexpagenum();
 		
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
 		}
-		// 2.업무로직
-		List<Product> list = null;
-		ProductService ps = new ProductService();
-		list = ps.selectProduct(keyWord ,cPage, numPerPage);
-
-		//총 수
-		totalContent = ps.countProductByName(keyWord);
+		
+		totalContent = new ProductService().selectProductTotalContent(category);
+		List<Product> list = new ProductService().selectByCategory(category, cPage, numPerPage);
+	
+		
 		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
 		
-		// 페이지바 html 코드 생성
 		String pageBar = "";
 		int pageBarSize = new BaseData().getPAGEBARSIZE();
 		int pageStart = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageStart + pageBarSize - 1;
 		int pageNo = pageStart;
-
+		
+		//1.이전
 		if (pageNo == 1) {
 
 		} else {
-			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord + "&cPage="
+			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productCategory?category=" + category + "&cPage="
 					+ (pageNo - pageBarSize) + "'>이전</a></li>";
 		}
 
@@ -59,7 +57,7 @@ public class ProductViewServlet extends HttpServlet {
 			if (cPage == pageNo) {
 				pageBar += "<li class='page-item active'><a class='page-link'>" + pageNo + "</a></li>";
 			} else {
-				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord
+				pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productCategory?category=" + category
 						+ "&cPage=" + pageNo + "'>" + pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -68,21 +66,42 @@ public class ProductViewServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 
 		} else {
-			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord + "&cPage="
+			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productCategory?category=" + category + "&cPage="
 					+ pageNo + "'>다음</a></li>";
 		}
-		//3.view단 처리
+		
+
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		System.out.println(pageBar+"111"+cPage);
-		request.getRequestDispatcher("/WEB-INF/views/product/productView.jsp").forward(request, response);
-
+		request.getRequestDispatcher("/WEB-INF/views/product/productCategoryView.jsp").forward(request, response);
+		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
