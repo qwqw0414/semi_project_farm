@@ -46,7 +46,7 @@
 }
 
 .memberEnroll{
-	width:600px;
+	width:400px;
 }
 #zipCode{
 	width:90px;
@@ -175,6 +175,9 @@
 	
 }
 
+footer{
+	margin-top: 50px;
+}
 
 /* 우리색상 */
 .main-color{
