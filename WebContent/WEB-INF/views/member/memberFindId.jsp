@@ -5,8 +5,7 @@
 <%
 	Member m = (Member)request.getAttribute("member");
 %>
-
-<div class="container">
+<div class="container find-id-container">
 	<form action="<%=request.getContextPath()%>/member/memberFindIdEnd"
 		method="POST" onsubmit="return FindIdValidate();" <%=(m!=null)?"hidden":""%>>
 		<div class="form-group">
@@ -24,18 +23,32 @@
             <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처">
             <small class="form-text text-muted">연락처를 입력해주세요.</small>
         </div>
-         <button type="submit" class="btn btn-primary">아이디 찾기</button>
+         <button type="submit" class="btn btn-primary find-id-btn">확인</button>
 
 	</form>
 	
 	<%if(m != null){ %>
-	<div>
-		찾은 아이디는 <%=m.getMemberId() %>입니다.
+	<div class="container">
+		<h3 class="text-center">아이디 찾기</h3>
+		<img src="/farm/images/user.png" alt="" class="rounded mx-auto d-block user-img">
+		<h5 class="text-center comment-pwd">고객님의 <br>
+		아이디 찾기가 완료 되었습니다.</h5>
+		<h6 class="text-center">
+			아이디 : <%=m.getMemberId() %>
+		</h6>	
+
+		<button type="button" class="btn btn-primary enroll-btn" onclick="location.href='<%=request.getContextPath()%>/member/memberLogin'">로그인 하러가기</button>
 	</div>
 	
 	<%} %>
 
 </div>
+
+
+
+
+
+
 <script>
 function FindIdValidate(){
 	var $memberName = $("#memberName");
