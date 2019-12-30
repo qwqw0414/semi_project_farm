@@ -257,14 +257,18 @@ $(()=>{
 
     if($stock.text() >= 100)
         $stock.attr('class','badge badge-success');
-    else if($stock.text() >= 10)
-        $stock.attr('class','badge badge-warning');
     else
-        $stock.attr('class','badge badge-danger').text("sold out");
+        $stock.attr('class','badge badge-warning');
+
 
 //모달 활성화
     $("#btn-order").click(()=>{
         
+        if($stock.text() == 0){
+            alert("재고가 없습니다.")
+            return;
+        }
+
         $.ajax({
             url:"<%=request.getContextPath()%>//member/memberinfo",
             type: "post",
@@ -365,6 +369,7 @@ $(()=>{
             complete: ()=>{
                 alert("구입 완료");
                 $(".modal-order").css("display", "none");
+                location.reload(true);
             }
         });
     });
