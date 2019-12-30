@@ -83,8 +83,8 @@
 			</tr>
 		<%} else { 
 			for(ProductIOProduct pIO: productIOlist){%>
-			<tr>
-				<td><%=("I".equals(pIO.getStatus()))?"입고":"출고" %></td>
+			<tr >
+				<td><%=("I".equals(pIO.getStatus()))?"<h5><span class='badge badge-pill badge-success'>입고</span></h5>":"<h5><span class='badge badge-pill badge-danger'>출고</span></h5>" %></td>
 				<td><%=pIO.getpName() %></td>
 				<td><%=pIO.getMemberId() %></td>
 				<td><%=pIO.getAmount() %></td>
