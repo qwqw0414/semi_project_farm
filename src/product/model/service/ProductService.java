@@ -148,4 +148,32 @@ public class ProductService {
 		return list;
 	}
 
+	public List<Product> selectByCategory(String category, int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Product> list = new ProductDAO().selectByCategory(conn, category, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectProductTotalContent(String category) {
+		Connection conn = getConnection();
+		int totalContent = new ProductDAO().selectProductTotalContent(conn,category);
+		close(conn);
+		return totalContent;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
