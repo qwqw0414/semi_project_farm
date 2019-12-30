@@ -7,61 +7,90 @@
 	Product p = (Product)request.getAttribute("product");
 %>
 <h1 class="text-center">상품 상세보기</h1>
-    <div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-1 d-none d-md-block"></div>
-        <div class="col-xl-10 col-12">
-           <div class="row d-xl-block d-flex h-100">
-               <div class="col-xl-6 order-xl-1 col-12 order-2 order-xl-1 d-flex tall float-left">
-                   <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top" >
-               </div>
-               <div class="col-xl-6 order-xl-2 col-12 order-1 float-left">
-                   <%=p.getpName()%>
-	              할인율: <%=p.getDiscount()%><br>
-	              상품 상세정보: <%=p.getpInfo()!=null?p.getpInfo():"" %>
-               </div>
-               <div class="col-xl-6 order-xl-3 col-12 order-3 float-left">
-               		<label for="amount">수량 :</label>
-                    <input type="number" name="amount" id="amount" min="1" max="<%=p.getStock()%>" step="1"/>
-                    <br>
-                    <span>재고:<%=p.getStock()%></span>
-                    <br>
-	               	<button class="btn btn-danger" id="btn-order">구매하기</button>
-	               	<button class="btn btn-success" id="btn-WishList">장바구니</button>
-               </div>
-				<div class="col-12 order-4 float-left">
-               <hr>	
-					<h5 class="mt-0">리뷰를 작성해 보세요</h5>
-					<form action="<%=request.getContextPath()%>/product/productCommentInsert" method="POST" name="productCommentFrm">
-						<input type="hidden" name="pid" value="<%=p.getpId()%>" /> 
-						<input type="hidden" name="memberid" value="<%=memberLoggedIn != null ? memberLoggedIn.getMemberId() : ""%>" />
-						<textarea class="form-control" name="comments" cols="30" rows="3"></textarea>
-						<input type="submit" id="btn-insert" class="btn btn-primary" value="작성" />
-					</form>
-					<!-- 리뷰 댓글 시작 -->
-					<button class="btn btn-secondary" id="showComments">리뷰 보기</button>
-					<ul class="list-group list-group-flush" id="comment-wrapper">
-						<li class="list-group-item" ></li>
-					</ul>
-					<!-- 리뷰 댓글 종료 -->
-				</div>
+<input type="hidden" name="isAdmin" value="<%=memberLoggedIn!=null?memberLoggedIn.isAdmin():false %>"/>
+<div class="card mb-3 text-right" style="max-width: 100%;">
+	<div class="row no-gutters">
+		<div class="col-md-4">
+			<img src='/farm/<%=(p.getPhoto() == null) ? "images/no.png" : "upload/product/" + p.getPhoto()%>' width="450px">
+		</div>
+		<div class="col-md-8">
+			<div class="card-body">
+				<h5 class="card-title text-center"><%=p.getpName()%></h5>
+				<p class="card-text text-center">
+					할인율:
+					<%=p.getDiscount()%><br> 상품 상세정보:
+					<%=p.getpInfo() != null ? p.getpInfo() : ""%></p>
+				<p class="card-text text-right">
+					<label for="amount">수량 :</label> <input type="number" name="amount"
+						id="amount" min="1" max="<%=p.getStock()%>" step="1" /> <br>
+					<span>재고:<%=p.getStock()%></span> <br>
+					<button class="btn btn-danger" id="btn-order">구매하기</button>
+					<button class="btn btn-success" id="btn-WishList">장바구니</button>
+				</p>
 			</div>
-       </div>
-    </div>
+		</div>
+	</div>
+	<div class="card-footer bg-transparent border-dark">
+		<div class="review-container">
+			<h5 class="mt-0">리뷰를 작성해 보세요</h5>
+			<form
+				action="<%=request.getContextPath()%>/product/productCommentInsert"
+				method="POST" name="productCommentFrm">
+				<input type="hidden" name="pid" value="<%=p.getpId()%>" /> <input
+					type="hidden" name="memberid"
+					value="<%=memberLoggedIn != null ? memberLoggedIn.getMemberId() : ""%>" />
+				<textarea class="form-control" name="comments" cols="30" rows="3"></textarea>
+				<input type="submit" id="btn-insert" class="btn btn-primary"
+					value="작성" />
+			</form>
+			<!-- 리뷰 댓글 시작 -->
+			<button class="btn btn-secondary" id="showComments">리뷰 보기</button>
+			<ul class="list-unstyled" id="comment-wrapper">
+
+			</ul>
+			<!-- 리뷰 댓글 종료 -->
+		</div>
+	</div>
 </div>
 
+
 <script>
-$("#showComments").click(function(){
+function getRecentDate(){
+    var dt = new Date();
+ 
+    var recentYear = dt.getFullYear();
+    var recentMonth = dt.getMonth() + 1;
+    var recentDay = dt.getDate();
+ 
+    if(recentMonth < 10) recentMonth = "0" + recentMonth;
+    if(recentDay < 10) recentDay = "0" + recentDay;
+ 
+    return recentYear + "-" + recentMonth + "-" + recentDay;
+}
+
+$("#showComments").click(function(e){
 	var $pId = $("[name=pid]").val();
+	var $memberId = $("[name=memberid]").val();
+	console.log($memberId);
+	var $isAdmin = $("[name=isAdmin]").val();
+	console.log($isAdmin);
+	var recentDate = getRecentDate();
+	console.log(recentDate);
 	$.ajax({
 		url: "<%=request.getContextPath()%>/product/productCommentView",
 		data:{"pId":$pId},
 		success: data=>{
-			console.log(data);
 			let $ul = $("#comment-wrapper");
-			let html = "";
+			let html = "<br>";
 			$(data).each((idx,data)=>{
-				html += "<li class='list-group-item' ><table><tr><td id='commentWriter'>"+data.memberId+"</td><td>"+data.commentContent+"</td><td>"+data.commentDate+"</td></tr></table></li>";
+				html += "<li class='media'><img src='<%=request.getContextPath()%>/upload/icon/coin.png' class='mr-3' ><div class='media-body'><h5 class='mt-0 mb-1'>"+data.memberId+" <sub>"+data.commentDate+" </sub>";
+				if(data.commentDate==recentDate){
+					html += "<sub class='badge badge-warning'>NEW</sub>";
+				}
+				if(data.memberId==$memberId||$isAdmin=="true"){
+					html += "<sub><a href='<%=request.getContextPath()%>/product/deleteComment?commentId="+data.commentId+"&pId="+data.pId+"' class='badge badge-danger'>삭제</a></sub>";
+				}
+				html += "</h5>"+data.commentContent+"</div></li><br>";
 			});//end of each
 			$ul.html(html);
 		},
@@ -73,6 +102,9 @@ $("#showComments").click(function(){
 	
 });
 
+$("#deleteComment").click(function(){
+	
+});
 
 
 $("[name=comments]").click(function(){
