@@ -31,6 +31,10 @@
         <div class="card" style="width: 16rem; height: 440px;">
             <!-- 장바구니 아이콘 -->
             <img src="/farm/images/wishlist.png" class="wishList">
+            <!-- 세일 표시 -->
+<%if(p.getDiscount() > 0){%>
+            <span class="sale-view">SALE<br><h4><%=(int)(p.getDiscount()*100)%><small>%</small></h4></span>
+<%}%>
             <!-- 상품 이미지 -->
             <div class="image">
                 <img src='/farm/<%=(p.getPhoto()==null)?"images/no.png":"upload/product/"+p.getPhoto()%>' class="card-img-top" >

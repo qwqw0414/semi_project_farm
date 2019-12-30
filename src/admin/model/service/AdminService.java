@@ -259,6 +259,20 @@ public class AdminService {
 		return o;
 	}
 
+	public List<OrderList> selectOrderListByStatusN(int cPage, int numPerPage, String status) {
+		Connection conn = getConnection();
+		List<OrderList> list = new AdminDAO().selectOrderListByStatusN(conn, cPage, numPerPage, status);
+		close(conn);
+		return list;
+	}
+
+	public int selectOrderListStatusNCount() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectOrderListStatusNCount(conn);
+		close(conn);
+		return totalContent;
+	}
+
 }
 
 

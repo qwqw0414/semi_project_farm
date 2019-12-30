@@ -7,10 +7,17 @@
 <%
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
+	String status = (String)request.getAttribute("status");
+	
 %>
 <h2>orderlist page</h2>
+	<div class="custom-control custom-switch">
+		<input type="checkbox" class="custom-control-input" id="orderByStatusN"
+		<%=status!=null?"checked":"" %>>
+		<label class="custom-control-label" for="orderByStatusN">미출고 주문보기</label>
+	</div>
 	<table class="table table-hover">
-		<thead>
+	<thead>
 			<tr>
 				<th>주문번호</th>
 				<th>구매자 아이디</th>
@@ -47,10 +54,29 @@
 	</table>
 	<table  id="ajax">
 	</table>
-	<div id="pageBar">
-		<%=pageBar %>
-	</div>
+<ul class="pagination justify-content-center" style="margin:50px 0 150px 0">
+	<%=pageBar%>
+</ul>
 <script>
+$(()=>{
+	$("#orderByStatusN").on('change', function(){
+		var $orderByStatusN = $("#orderByStatusN");
+		console.log($orderByStatusN);
+		console.log($orderByStatusN.is(":checked"));
+		if($orderByStatusN.is(":checked")){
+			orderByStatusN();
+		} else {
+			location.href="<%=request.getContextPath()%>/admin/productOrderList";
+		}
+	});
+	
+});
+
+function orderByStatusN(){
+	console.log("function");
+	location.href="<%=request.getContextPath()%>/admin/productOrderList?status=N";
+}
+
 function changeStatus(this_){
 	var orderId = $(this_).parent("td").siblings("#orderId").text();
 	console.log(orderId);
@@ -87,5 +113,6 @@ function changeStatus(this_){
 		
 	})
 } 
+
 </script>
 <%@ include file ="/WEB-INF/views/common/footer.jsp"%>

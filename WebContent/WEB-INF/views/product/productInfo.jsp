@@ -93,7 +93,7 @@ function showComments() {
 					html += "<sub class='badge badge-warning'>NEW</sub>";
 				}
 				if(data.memberId==$memberId||$isAdmin=="true"){
-					html += "<sub><a href='<%=request.getContextPath()%>/product/deleteComment?commentId="+data.commentId+"&pId="+data.pId+"' class='badge badge-danger'>삭제</a></sub>";
+					html += "<span class='float-right'><a class='close' href='<%=request.getContextPath()%>/product/deleteComment?commentId="+data.commentId+"&pId="+data.pId+"'>x</a></span>";
 				}
 				html += "</h5>"+data.commentContent+"</div></li><br>";
 			});//end of each
@@ -257,14 +257,18 @@ $(()=>{
 
     if($stock.text() >= 100)
         $stock.attr('class','badge badge-success');
-    else if($stock.text() >= 10)
-        $stock.attr('class','badge badge-warning');
     else
-        $stock.attr('class','badge badge-danger').text("sold out");
+        $stock.attr('class','badge badge-warning');
+
 
 //모달 활성화
     $("#btn-order").click(()=>{
         
+        if($stock.text() == 0){
+            alert("재고가 없습니다.")
+            return;
+        }
+
         $.ajax({
             url:"<%=request.getContextPath()%>//member/memberinfo",
             type: "post",
@@ -365,6 +369,7 @@ $(()=>{
             complete: ()=>{
                 alert("구입 완료");
                 $(".modal-order").css("display", "none");
+                location.reload(true);
             }
         });
     });

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import product.model.service.ProductService;
+import product.model.vo.OrderList;
+import product.model.vo.Product;
 
 /**
  * Servlet implementation class ProductCommentInsertServlet
@@ -30,18 +32,30 @@ public class ProductCommentInsertServlet extends HttpServlet {
 											.replaceAll("\\n", "<br/>");//개행문자 처리
 		//2. 업무로직
 		ProductService ps = new ProductService();
-		int result = ps.productInsertComment(pId, memberId, commentContent);
-		//3. view단 처리
-		String msg = "";
-		if(result>0) {
-			msg = "리뷰 등록 성공";
+		//리뷰 작성자 해당 물품 구매여부 확인
+		OrderList checkPurchase = ps.selectProductOrderByMemberId(pId, memberId);
+		if(checkPurchase==null) {
+			//구매하지 않았을 경우 경고메시지 후 리턴
+			String msg = "해당 물품 구매자만 리뷰를 등록할 수 있습니다.";
+			String loc = "/product/productInfo?pId="+pId;
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			
 		} else {
-			msg = "리뷰 등록 실패";
+			int result = ps.productInsertComment(pId, memberId, commentContent);
+			//3. view단 처리
+			String msg = "";
+			if(result>0) {
+				msg = "리뷰 등록 성공";
+			} else {
+				msg = "리뷰 등록 실패";
+			}
+			String loc = "/product/productInfo?pId="+pId;
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
-		String loc = "/product/productInfo?pId="+pId;
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
