@@ -11,22 +11,20 @@
 <style>
 img{width: 5rem;}
 </style>
-<div style="overflow:auto; min-height:200px; max-height: 600px;" class="wishListView">
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<th scope="col"><input type="checkbox" id="checkAll" checked></th>
-				<th scope="col">이미지</th>
-				<th scope="col">상품명</th>
-				<th scope="col">수량</th>
-				<th scope="col">가격</th>
-				<th scope="col">취소</th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-</div>
+<table class="table wishListView">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col"><input type="checkbox" id="checkAll" checked></th>
+			<th scope="col">이미지</th>
+			<th scope="col">상품명</th>
+			<th scope="col">수량</th>
+			<th scope="col">가격</th>
+			<th scope="col">취소</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
 <hr>
 <h3>합계금액 : <span id="sumPrice"></span></h3>
 <br>
@@ -85,6 +83,7 @@ $(()=>{
 $("#checkAll").click(function(){
 	var $check = $(".check-WishList");
 	$check.prop("checked",$(this).prop("checked"));
+	sumPrice();
 });
 
 // 합계 금액
