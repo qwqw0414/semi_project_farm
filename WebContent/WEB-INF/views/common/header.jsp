@@ -205,7 +205,7 @@ $(()=>{
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productReg">상품 등록</a>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productIOList">상품 입출고</a>
-					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productList">상품 리스트</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productList">상품 관리</a>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productOrderList">주문 관리</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/memberList">회원 정보</a>
