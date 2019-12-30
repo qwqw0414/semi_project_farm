@@ -22,7 +22,8 @@ public class ProductBestView extends HttpServlet {
 		
 		list = new ProductService().selectByBest();
 		
-		System.out.println(list);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/WEB-INF/views/product/productBestView.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

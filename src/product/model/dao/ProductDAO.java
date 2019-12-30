@@ -349,7 +349,7 @@ public class ProductDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = prop.getProperty("selectAll");
+		String query = prop.getProperty("selectByBest");
 
 		try {
 			pstmt = conn.prepareStatement(query);

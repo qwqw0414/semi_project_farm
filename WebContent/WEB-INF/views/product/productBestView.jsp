@@ -7,11 +7,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-
-<%
-	String keyWord = null;
-%>
-
 <!-- 상품 출력 -->
 <%
 
@@ -22,8 +17,6 @@
 <%
             /* <img src="/farm/images/no.png" class="card-img-top"> */
 	}else{
-		keyWord = (String)request.getAttribute("keyWord");
-		String pageBar = (String)request.getAttribute("pageBar");		
 %>
 <div id="productList">
     <div class="row w-100" style="margin: auto;">
@@ -58,9 +51,6 @@
     </div>
 </div>
 <!-- 페이지바 -->
-<ul class="pagination justify-content-center" style="margin:50px 0 150px 0">
-	<%=pageBar%>
-</ul>
 <%}%>
 
 
