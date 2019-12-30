@@ -256,6 +256,13 @@ $(()=>{
     var $zipcode = $(".modal-order #member-zipcode");
     var memberId = "<%=memberLoggedIn.getMemberId()%>";
 
+    if($stock.text() >= 100)
+        $stock.attr('class','badge badge-success');
+    else if($stock.text() >= 10)
+        $stock.attr('class','badge badge-warning');
+    else
+        $stock.attr('class','badge badge-danger').text("sold out");
+
 //모달 활성화
     $("#btn-order").click(()=>{
         
@@ -274,7 +281,6 @@ $(()=>{
                 console.log(jqxhr, textStatus, errorThrown);
             }
         });
-
     });
 
 //수량 감소 버튼

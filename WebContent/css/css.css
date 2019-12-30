@@ -131,13 +131,14 @@
 }
 #productList .card{
 	cursor: pointer;
+	overflow: hidden;
 }
 .ani-photo-in{
 	animation: kenburns-top 0.5s ease-out both;
 }
 #productList .wishList{
 	position: absolute;
-	left: 12.5em;
+	left: 16.4em;
 	top: 17.2em;
 	width: 45px;
 	padding: 10px;
@@ -146,12 +147,14 @@
 	background-color: darkcyan;
 	z-index: 1;
 }
+
 .ani-vibrate{
 	animation: vibrate-1 0.3s linear infinite both;
 }
 
-
-
+.ani-wishlist{
+	animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 
 /* footer 스타일*/
 .footer-container{

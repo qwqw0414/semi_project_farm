@@ -173,7 +173,7 @@ $(()=>{
 			</li>
 	
 			<li class="nav-item">
-				<a class="nav-link" href="#">베스트</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/product/productBest">베스트 12</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">알뜰쇼핑</a>
