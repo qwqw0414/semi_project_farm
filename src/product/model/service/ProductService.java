@@ -148,11 +148,24 @@ public class ProductService {
 		return list;
 	}
 
+
+	public int deleteComment(int commentId) {
+		Connection conn = getConnection();
+		int result = new ProductDAO().deleteComment(conn, commentId);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	public List<Product> selectByBest() {
 		Connection conn = getConnection();
 		List<Product> list = new ProductDAO().selectByBest(conn);
 		close(conn);
 		return list;
+
 	}
 
 	public List<Product> selectOfDiscount() {
