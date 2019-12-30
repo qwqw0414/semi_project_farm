@@ -148,4 +148,11 @@ public class ProductService {
 		return list;
 	}
 
+	public List<Product> selectByBest() {
+		Connection conn = getConnection();
+		List<Product> list = new ProductDAO().selectByBest(conn);
+		close(conn);
+		return list;
+	}
+
 }
