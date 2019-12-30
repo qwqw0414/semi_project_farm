@@ -124,16 +124,13 @@ $(".wishList").on("click",function(){
 <%}%>
 });
 
-
-
 $(".card").mouseenter(function(){
     $(this).find(".card-img-top").addClass("ani-photo-in");
-    $(this).find(".wishList").addClass("ani-vibrate");
+    $(this).find(".wishList").addClass("ani-wishlist");
 }).mouseleave(function(){
     $(this).find(".card-img-top").removeClass("ani-photo-in");
-    $(this).find(".wishList").removeClass("ani-vibrate");
+    $(this).find(".wishList").removeClass("ani-wishlist");
 });
-
 
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
