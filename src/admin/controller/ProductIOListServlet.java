@@ -60,17 +60,17 @@ public class ProductIOListServlet extends HttpServlet {
 				//pageBar += "<span>[이전]</span>"; 
 			}
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+(pageNo-1)+"'>[이전]</a> ";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+(pageNo-1)+"'>[이전]</a></li> ";
 			}
 			
 			// pageNo section
 			while(pageNo<=pageEnd && pageNo<=totalPage){
 				
 				if(cPage == pageNo ){
-					pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+					pageBar += "<li class='page-item active'><a class='page-link'>"+pageNo+"</a></li> ";
 				} 
 				else {
-					pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>"+pageNo+"</a> ";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>"+pageNo+"</a></li> ";
 				}
 				pageNo++;
 			}
@@ -79,7 +79,7 @@ public class ProductIOListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>[다음]</a>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a></li>";
 			}
 		} else {
 			//입출고내역 입고, 출고로 조회할 경우 페이징바 처리
@@ -87,17 +87,17 @@ public class ProductIOListServlet extends HttpServlet {
 				//pageBar += "<span>[이전]</span>"; 
 			}
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+(pageNo-1)+"'>[이전]</a> ";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+(pageNo-1)+"'>[이전]</a></li> ";
 			}
 			
 			// pageNo section
 			while(pageNo<=pageEnd && pageNo<=totalPage){
 				
 				if(cPage == pageNo ){
-					pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+					pageBar += "<li class='page-item active'><a class='page-link'>"+pageNo+"</a></li> ";
 				} 
 				else {
-					pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>"+pageNo+"</a></li> ";
 				}
 				pageNo++;
 			}
@@ -106,7 +106,7 @@ public class ProductIOListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>[다음]</a></li>";
 			}
 			request.setAttribute("byStatus", byStatus);
 		}
