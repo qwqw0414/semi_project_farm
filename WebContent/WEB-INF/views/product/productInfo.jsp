@@ -8,7 +8,7 @@
 %>
 <h1 class="text-center">상품 상세보기</h1>
 <input type="hidden" name="isAdmin" value="<%=memberLoggedIn!=null?memberLoggedIn.isAdmin():false %>"/>
-<div class="card mb-3 text-right" style="max-width: 100%;">
+<div class="card mb-3 text-right border-light" style="max-width: 100%;">
 	<div class="row no-gutters">
 		<div class="col-md-4">
 			<img src='/farm/<%=(p.getPhoto() == null) ? "images/no.png" : "upload/product/" + p.getPhoto()%>' width="450px">
@@ -30,23 +30,26 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-footer bg-transparent border-dark">
+	<div class="card-footer bg-transparent border-light">
 		<div class="review-container">
-			<h5 class="mt-0">리뷰를 작성해 보세요</h5>
+			<h5 class="mt-0 text-left">리뷰를 작성해 보세요</h5>
 			<form
 				action="<%=request.getContextPath()%>/product/productCommentInsert"
 				method="POST" name="productCommentFrm">
 				<input type="hidden" name="pid" value="<%=p.getpId()%>" /> <input
 					type="hidden" name="memberid"
 					value="<%=memberLoggedIn != null ? memberLoggedIn.getMemberId() : ""%>" />
-				<textarea class="form-control" name="comments" cols="30" rows="3"></textarea>
-				<input type="submit" id="btn-insert" class="btn btn-primary"
-					value="작성" />
+				<div class="input-group mb-3">
+				<input type="text" class="form-control" name="comments"
+					placeholder="리뷰를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+					<div class="input-group-append">
+						<button class="btn btn-success" type="submit"
+							id="btn-insert">작성</button>
+					</div>
+				</div>
 			</form>
 			<!-- 리뷰 댓글 시작 -->
-			<button class="btn btn-secondary" id="showComments">리뷰 보기</button>
-			<ul class="list-unstyled" id="comment-wrapper">
-
+			<ul class="list-unstyled text-left" id="comment-wrapper">
 			</ul>
 			<!-- 리뷰 댓글 종료 -->
 		</div>
@@ -68,12 +71,14 @@ function getRecentDate(){
     return recentYear + "-" + recentMonth + "-" + recentDay;
 }
 
-$("#showComments").click(function(e){
+$(()=>{
+	showComments();
+});
+
+function showComments() {
 	var $pId = $("[name=pid]").val();
 	var $memberId = $("[name=memberid]").val();
-	console.log($memberId);
 	var $isAdmin = $("[name=isAdmin]").val();
-	console.log($isAdmin);
 	var recentDate = getRecentDate();
 	console.log(recentDate);
 	$.ajax({
@@ -83,7 +88,7 @@ $("#showComments").click(function(e){
 			let $ul = $("#comment-wrapper");
 			let html = "<br>";
 			$(data).each((idx,data)=>{
-				html += "<li class='media'><img src='<%=request.getContextPath()%>/upload/icon/coin.png' class='mr-3' ><div class='media-body'><h5 class='mt-0 mb-1'>"+data.memberId+" <sub>"+data.commentDate+" </sub>";
+				html += "<li class='media'><img src='<%=request.getContextPath()%>/images/icon.png' class='mr-3' width='55px'><div class='media-body'><h5 class='mt-0 mb-1'>"+data.memberId+" <sub>"+data.commentDate+" </sub>";
 				if(data.commentDate==recentDate){
 					html += "<sub class='badge badge-warning'>NEW</sub>";
 				}
@@ -99,13 +104,7 @@ $("#showComments").click(function(e){
 		}
 		
 	});//end of ajax
-	
-});
-
-$("#deleteComment").click(function(){
-	
-});
-
+}
 
 $("[name=comments]").click(function(){
 	if(<%=memberLoggedIn==null%>){

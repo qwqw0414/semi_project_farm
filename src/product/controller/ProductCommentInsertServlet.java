@@ -24,9 +24,10 @@ public class ProductCommentInsertServlet extends HttpServlet {
 		int pId = Integer.parseInt(request.getParameter("pid"));
 		String memberId = request.getParameter("memberid");
 		String commentContent = request.getParameter("comments");
-		System.out.println(pId);
-		System.out.println(memberId);
-		System.out.println(commentContent);
+		//XSS공격대비 &문자변환
+		commentContent = commentContent.replaceAll("<", "&lt;")
+											.replaceAll(">", "&gt;")
+											.replaceAll("\\n", "<br/>");//개행문자 처리
 		//2. 업무로직
 		ProductService ps = new ProductService();
 		int result = ps.productInsertComment(pId, memberId, commentContent);
