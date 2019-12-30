@@ -380,4 +380,40 @@ public class ProductDAO {
 		return list;
 	}
 
+	public List<Product> selectOfDiscount(Connection conn) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectOfDiscount");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
 }

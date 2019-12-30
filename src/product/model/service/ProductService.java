@@ -155,4 +155,11 @@ public class ProductService {
 		return list;
 	}
 
+	public List<Product> selectOfDiscount() {
+		Connection conn = getConnection();
+		List<Product> list = new ProductDAO().selectOfDiscount(conn);
+		close(conn);
+		return list;
+	}
+
 }
