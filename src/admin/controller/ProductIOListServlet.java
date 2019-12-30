@@ -79,7 +79,7 @@ public class ProductIOListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>[다음]</a>";
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a>";
 			}
 		} else {
 			//입출고내역 입고, 출고로 조회할 경우 페이징바 처리
@@ -106,7 +106,7 @@ public class ProductIOListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a>";
+				pageBar += "<a href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>[다음]</a>";
 			}
 			request.setAttribute("byStatus", byStatus);
 		}
