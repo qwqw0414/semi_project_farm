@@ -344,4 +344,155 @@ public class ProductDAO {
 		return list;
 	}
 
+	public List<Product> selectByCategory(Connection conn, String category, int cPage, int numPerPage) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectByCategory");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+			
+				list.add(p);
+				}
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return list;
+		
+	}
+			
+	public int deleteComment(Connection conn, int commentId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentId);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public List<Product> selectByBest(Connection conn) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectByBest");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+
+	public int selectProductTotalContent(Connection conn, String category) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectProductTotalContent");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, category);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContent;
+
+	}
+
+	public List<Product> selectOfDiscount(Connection conn) {
+		List<Product> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectOfDiscount");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Product p = new Product();
+				p.setpId(rset.getInt("PID"));
+				p.setCategory(rset.getString("CATEGORY"));
+				p.setpName(rset.getString("PNAME"));
+				p.setpInfo(rset.getString("PINFO"));
+				p.setPrice(rset.getInt("PRICE"));
+				p.setDiscount(rset.getDouble("DISCOUNT"));
+				p.setStock(rset.getInt("STOCK"));
+				p.setPhoto(rset.getString("PHOTO"));
+
+				list.add(p);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
 }
+
+

@@ -23,7 +23,8 @@
             /* <img src="/farm/images/no.png" class="card-img-top"> */
 	}else{
 		keyWord = (String)request.getAttribute("keyWord");
-		String pageBar = (String)request.getAttribute("pageBar");		
+		String pageBar = (String)request.getAttribute("pageBar");	
+		System.out.println(pageBar+"1111111");
 %>
 <div id="productList">
     <div class="row w-100" style="margin: auto;">

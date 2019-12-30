@@ -76,7 +76,8 @@
 	<tbody>
 		<%for(OrderListProduct o: list) { %>
 		<tr>
-			<td><%=o.getPhoto() %></td>
+			<td><img src="<%=request.getContextPath() %>/upload/product/<%=o.getPhoto() %>" 
+				width="130px" /></td>
 			<td><%=o.getpName() %></td>
 			<td><%=o.getAmount() %></td>
 			<td><%=o.getPrice() %></td>

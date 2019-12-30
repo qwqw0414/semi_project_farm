@@ -166,17 +166,19 @@ $(()=>{
 					카테고리
 				</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">채소</a>
-					<a class="dropdown-item" href="#">과일</a>
-					<a class="dropdown-item" href="#">해산물</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=채소">채소</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=과일">과일</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=해산물">해산물</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=육류">육류</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/product/productCategory?category=버섯">버섯</a>
 				</div>
 			</li>
 	
 			<li class="nav-item">
-				<a class="nav-link" href="#">베스트</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/product/productBest">베스트 12</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">알뜰쇼핑</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/product/productSmart">알뜰쇼핑</a>
 			</li>
 			<!-- 검색창 -->
 			<form class="form-inline" action="<%=request.getContextPath()%>/product/productView">
