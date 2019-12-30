@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<% Member m = (Member)request.getAttribute("member"); %>
 <div class="container">
-    <form action="<%=request.getContextPath()%>/member/memberUpdate" method="POST">
+    <form action="<%=request.getContextPath()%>/member/memberUpdate" method="POST" onsubmit="return enrollValidate();">
         <div class="form-group">
             <small class="form-text text-muted" >아이디</small>
             <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" readonly value=<%=m.getMemberId() %>>
@@ -21,14 +21,23 @@
                 <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처" required  value=<%=m.getPhone() %>
                     maxlength="11"> 
             </div>
-        <div class="form-group">
-            <small class="form-text text-muted">우편번호</small>
-            <input type="text"" class="form-control" id="zipcode" name="zipcode" placeholder="우편번호" value=<%=m.getZipcode() %>>
-        </div>
-        <div class="form-group">
-            <small class="form-text text-muted">상세주소</small>
-            <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소" value=<%=m.getAddress() %>>
-        </div>
+            <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호"
+                                required>
+                        </div>
+                        <input type="text" class="form-control" readonly name="addr" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
+                                id="button-addon2">우편번호 검색</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요."
+                        required>
+                </div>
         <button type="submit" class="btn btn-primary">수정 하기</button>
         <%if(memberLoggedIn.getMemberId().equals(m.getMemberId())){ %>
         <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword?memberId='">비밀번호 수정</button>
@@ -108,7 +117,9 @@ $('#phone').blur(function phonechk() {
         }
     };
 
-
+    function enrollValidate() {
+    
+    }
 
 
 
