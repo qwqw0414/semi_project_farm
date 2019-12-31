@@ -36,6 +36,7 @@
 .wishList{
 	width: 100px;
 	color: antiquewhite;
+	background-color: #fE6F5F !important; 
 }
 
 #wishListNav{
@@ -190,6 +191,14 @@ footer{
 .sub-bg{
 	background-color: #fE6F5F !important;
 }
+.btn-sub-bg{
+	background-color: #fE6F5F !important;
+	border-color: #fE6F5F !important;
+}
+.btn-main-bg{
+	background-color: #592F59 !important;
+	border-color: #592F59 !important;
+}
 /* 페이지 바 색상 */
 .page-item.active .page-link{
 	background-color: #592F59 !important;
@@ -295,4 +304,42 @@ footer{
 /* 회원리스트 폰트*/
 #search-container{
 	font-family: 'BMHANNAPro';
+}
+/* 상품 상세보기 페이지 */
+.btn-buy2{
+    width: 150px;
+    height: 54px;
+    }
+.btn-buy1{
+    width: 304px;
+    height: 54px;
+}
+
+.something-btn{
+    float: right;
+}
+
+.goods-price-comment{
+        margin: 0;
+    }
+.price-info{
+    font-size: 25px;
+}
+.before-price{
+    color: rgb(170, 170, 170);
+    text-decoration:line-through
+}
+.btn-outline-info{
+	color: #592F59 !important;
+	border-color: #592F59 !important;
+}
+.btn-outline-info:hover{
+	border-color: #fff !important;
+	background-color: #592F59 !important;
+	color: #fff !important;
+}
+.hover-main:hover{
+	border-color: #fff !important;
+	background-color: #592F59 !important;
+	color: #fff !important;
 }
