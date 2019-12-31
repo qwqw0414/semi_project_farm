@@ -952,4 +952,59 @@ public class AdminDAO {
 		return totalContent;
 	}
 
+	public List<OrderListProduct> selectAllOrderAndProduct(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<OrderListProduct> list = new ArrayList<>();
+		String query = prop.getProperty("selectAllOrderAndProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				OrderListProduct o = new OrderListProduct();
+				o.setpId(rset.getInt("pid"));
+				o.setpName(rset.getString("pname"));
+				o.setAmount(rset.getInt("amount"));
+				o.setPrice(rset.getInt("price"));
+				o.setOrderDate(rset.getDate("orderdate"));
+				list.add(o);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<OrderListProduct> researchDateIncom(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<OrderListProduct> list = new ArrayList<>();
+		String query = prop.getProperty("researchDateIncom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				OrderListProduct o = new OrderListProduct();
+				o.setPrice(rset.getInt("sum"));
+				o.setpName(rset.getString("orderdate"));
+				list.add(o);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }
