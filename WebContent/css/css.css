@@ -1,9 +1,10 @@
 @charset "UTF-8";
-
-@font-face{
-	font-family:'BMHANNAPro';
-	src: url('/farm/css/font/BMHANNAPro.ttf');
-}
+/* 사용자 정의 폰트 */
+@font-face{font-family:'BMHANNAPro';src: url('/farm/css/font/BMHANNAPro.ttf');}
+@font-face{font-family:'DXMgoRB';src: url('/farm/css/font/DXMgoRB-KSCpc-EUC-H.ttf');}
+@font-face{font-family:'LAB디지털';src: url('/farm/css/font/LAB디지털.ttf');}
+@font-face{font-family:'Typo_DecoSolidSlash';src: url('/farm/css/font/Typo_DecoSolidSlash.ttf');}
+@font-face{font-family:'NanumSquare_acB';src: url('/farm/css/font/NanumSquare_acB.ttf');}
 
 #productList .card {
 	margin: 10px;
