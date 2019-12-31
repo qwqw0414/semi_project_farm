@@ -7,7 +7,11 @@
 
 <%if(memberLoggedIn != null){ %>
 <h1><%=memberLoggedIn.getMemberName()%>님의 wishList</h1>
-
+<style>
+img{
+	width: 5rem;
+}
+</style>
 <table class="table wishListView">
 	<thead class="thead-dark">
 		<tr>
