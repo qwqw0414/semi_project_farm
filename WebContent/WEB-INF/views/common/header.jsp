@@ -157,7 +157,7 @@ $(()=>{
 
 
 <header>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
+	<nav class="navbar navbar-expand-sm main-bg navbar-dark fixed-top justify-content-center">
 		<ul class="navbar-nav">
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/product/productView">Farm</a>
 			<!-- 검색 분류 -->
@@ -183,7 +183,7 @@ $(()=>{
 			<!-- 검색창 -->
 			<form class="form-inline" action="<%=request.getContextPath()%>/product/productView">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
-				<button class="btn btn-success" type="submit" style="margin-right: 100px;">Search</button>
+				<button class="btn btn-success btn-sub-bg" type="submit" style="margin-right: 100px;">Search</button>
 			</form>
 			<!-- 회원 관련 -->
 <%

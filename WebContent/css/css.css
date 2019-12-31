@@ -36,6 +36,7 @@
 .wishList{
 	width: 100px;
 	color: antiquewhite;
+	background-color: #fE6F5F !important; 
 }
 
 #wishListNav{
@@ -192,6 +193,10 @@ footer{
 }
 .sub-bg{
 	background-color: #fE6F5F !important;
+}
+.btn-sub-bg{
+	background-color: #fE6F5F !important;
+	border-color: #fE6F5F !important;
 }
 /* 페이지 바 색상 */
 .page-item.active .page-link{
