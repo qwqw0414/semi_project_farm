@@ -1,12 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<div class="container">
-	<div class="card mb-3" style="margin: auto; position: relative;">
-	  <img class="card-img-top" src="<%=request.getContextPath()%>/images/error-clear.png" alt="Card image cap" width="100%">
-	  <div class="card-body">
-	    <h5 class="card-title">에러페이지입니다</h5>
-	    <p class="card-text"><a href="<%=request.getContextPath()%>/product/productView"><img src="<%=request.getContextPath()%>/images/home.png"></img></a></p>
-	    <p class="card-text"><small class="text-muted">ㅎㅇㅎㅇ</small></p>
-	  </div>
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/css.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/animation.css">
+
+<style>
+img{
+	display: block;
+	margin: 0px auto;
+	margin-top: 8vh;
+	/* width: 800px; */
+}
+.error-title{
+	position: absolute;
+	top: 300px;
+	z-index: 1;
+	text-align: center;
+	width: 100%;
+}
+.error-title h3{
+	color: rgb(49, 169, 190);
+	font-family: 'BMHANNAPro';
+}
+.error-title h6{
+	color:rgb(80, 80, 80);
+	/* font-family: 'NanumSquare_acB'; */
+}
+.error-title h4{
+	color:darkslategray;
+	font-family: 'NanumSquare_acB';
+}
+
+.error-title button{
+	width: 150px;
+}
+</style>
+<div class="row">
+	<div class="col">
+		<img src="<%=request.getContextPath()%>/images/error-clear.png">
 	</div>
 </div>
+<div class="error-title">
+	<h3>죄송합니다. 현재 찾을 수 없는 페이지를 요청 하셨습니다.</h3>
+	<br>
+	<h6>
+		존재하지 않는 주소를 입력하셨거나.<br>
+		요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.<br>
+		궁금한 점이 있으시면 언제든 고객센터를 통해 문의해 주시기 바랍니다.<br>
+		<br>
+	</h6>
+	<h4>감사합니다.</h4>
+	<br>
+	<div class="row">
+		<div class="col text-right">
+			<button class="btn btn-outline-secondary" id="btn-main">메인으로</button>
+		</div>
+		<div class="col text-left">
+			<button class="btn btn-outline-secondary" id="btn-back">이전 페이지</button>
+		</div>
+	</div>
+</div>
+<script>
+$("#btn-main").click(()=>{
+	location.href = "<%=request.getContextPath()%>/product/productView";
+})
+$("#btn-back").click(()=>{
+	// 임시
+	location.href = "<%=request.getContextPath()%>/product/productView";
+})
+</script>

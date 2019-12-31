@@ -1,9 +1,10 @@
 @charset "UTF-8";
-
-@font-face{
-	font-family:'BMHANNAPro';
-	src: url('/farm/css/font/BMHANNAPro.ttf');
-}
+/* 사용자 정의 폰트 */
+@font-face{font-family:'BMHANNAPro';src: url('/farm/css/font/BMHANNAPro.ttf');}
+@font-face{font-family:'DXMgoRB';src: url('/farm/css/font/DXMgoRB-KSCpc-EUC-H.ttf');}
+@font-face{font-family:'LAB디지털';src: url('/farm/css/font/LAB디지털.ttf');}
+@font-face{font-family:'Typo_DecoSolidSlash';src: url('/farm/css/font/Typo_DecoSolidSlash.ttf');}
+@font-face{font-family:'NanumSquare_acB';src: url('/farm/css/font/NanumSquare_acB.ttf');}
 
 #productList .card {
 	margin: 10px;
@@ -168,17 +169,14 @@
 }
 
 /* footer 스타일*/
-.footer-container{
-	width:100%;
-	height:230px;
-	background-color:rgb(52, 58, 64);
-	margin: 0 auto;
-	
-}
-
 footer{
 	margin-top: 50px;
 }
+
+.col-sm{
+	height:230px;
+}
+
 
 /* 우리색상 */
 .main-color{
@@ -197,6 +195,10 @@ footer{
 .btn-sub-bg{
 	background-color: #fE6F5F !important;
 	border-color: #fE6F5F !important;
+}
+.btn-main-bg{
+	background-color: #592F59 !important;
+	border-color: #592F59 !important;
 }
 /* 페이지 바 색상 */
 .page-item.active .page-link{
@@ -300,7 +302,85 @@ footer{
 	height: 1px;
 	background: #fE6F5F;
 }
-/* 회원리스트 폰트*/
+
+/* 상품 상세보기 페이지 */
+.btn-buy2{
+    width: 150px;
+    height: 54px;
+    }
+.btn-buy1{
+    width: 304px;
+    height: 54px;
+}
+
+.something-btn{
+    float: right;
+}
+
+.goods-price-comment{
+        margin: 0;
+    }
+.price-info{
+    font-size: 25px;
+}
+.before-price{
+    color: rgb(170, 170, 170);
+    text-decoration:line-through
+}
+.btn-outline-info{
+	color: #592F59 !important;
+	border-color: #592F59 !important;
+}
+.btn-outline-info:hover{
+	border-color: #fff !important;
+	background-color: #592F59 !important;
+	color: #fff !important;
+}
+.hover-main:hover{
+	border-color: #fff !important;
+	background-color: #592F59 !important;
+	color: #fff !important;
+}
+
+/* 회원 정보 페이지 */
+#search-memberId {
+	display: none;
+}
+#search-memberName {
+	display: inline-block;
+}
+#search-phone{
+	display: none;
+}
+div#pageBar span.cPage{
+	margin-right: 10px;
+}
+
 #search-container{
 	font-family: 'BMHANNAPro';
+}
+
+/* 상품 정보 페이지  */
+#search-container {
+	margin: 0 0 10px 0;
+	padding: 3px;
+}
+
+#search-pName {
+	display: inline-block;
+}
+#search-Category {
+	display: none;
+}
+/* 상품 등록 페이지*/
+ form #tag{
+ 	width: 120px;
+ }
+ /* 상품 상세보기&수정 페이지(관리자) */
+ #oldFileName{
+    position: absolute; 
+    z-index: 1; 
+    background: white; 
+    left: 10px; 
+    width: 200px;
 }

@@ -12,15 +12,6 @@
 %>
 
 
-<style>
-#search-container{
-	margin: 0 0 10px 0; 
-	padding: 3px;
-}
-#search-pName {display: inline-block;}
-#search-Category {display: none;}
-</style>
-
 <script>
 $(()=>{
 	var $searchpName = $("#search-pName");

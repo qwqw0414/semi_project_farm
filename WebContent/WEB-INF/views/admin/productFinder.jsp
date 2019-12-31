@@ -11,12 +11,6 @@
 %>
 
 <style>
-#search-container {
-	margin: 0 0 10px 0;
-	padding: 3px;
-	background-color: rgba(0, 188, 212, .3);
-}
-
 div#search-pName {
 	display: <%="pName".equals(searchType) || searchType == null ? "inline-block" : "none"%>;
 }
