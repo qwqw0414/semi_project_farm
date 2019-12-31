@@ -16,18 +16,19 @@
 	String byStatus = (String)request.getAttribute("byStatus");
 	System.out.println(byStatus);
 %>
-<h1>입·출고 수행</h1>
+<h1 class="text-center main-color">입·출고 수행</h1>
+<hr class="divide" />
 <div class="container">
 	<form action="productIO" method="POST"
 		onsubmit="return productIOValidate();" id="selectIOFrm">
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<select class="custom-select" id="selectIO" name="selectIO">
-					<option value="I" selected>입고</option>
-					<option value="O">출고</option>
+					<option value="I" selected class="text-success">입고</option>
+					<option value="O" class="text-danger">출고</option>
 				</select>
 			</div>
-			<select class="custom-select" id="pName"" name="pName" required>
+			<select class="custom-select" id="pName" name="pName" required>
 				<option value="" disabled selected hidden>상품 선택</option>
 				<%=option %>
 			</select>
@@ -35,12 +36,13 @@
 			<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
 			<div class="input-group-append">
 			<input type="hidden" name="byStatus" id="byStatus" />
-				<button class="btn btn-outline-secondary" type="submit">확인</button>
+				<button class="btn btn-outline-success" type="submit">확인</button>
 			</div>
 		</div>
 	</form>
-	<h1>입·출고 내역</h1>
-	<table class="table table-hover">
+	<h1 class="text-center main-color">입·출고 내역</h1>
+	<hr class="divide"/>
+	<table class="table table-hover text-center">
 		<thead>
 			<tr>
 				<th>입·출고</th>
@@ -50,26 +52,28 @@
 				<th>입·출고일</th>
 			</tr>
 		</thead>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<div class="custom-control custom-switch">
-					<input type="checkbox" value="All" class="custom-control-input" name="category" id="All"
+		<div class="input-group mb-3 text-center">
+			<div class="input-group-prepend text-center mx-auto">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" value="All" name="category" id="All"
 						<%=(byStatus==null||"All".equals(byStatus))?"checked":"" %>
 						aria-label="Checkbox for following text input">
 						<label class="custom-control-label" for="All">전체보기</label>
 				</div>
 			</div>
-			<div class="input-group-prepend">
-				<div class="custom-control custom-switch">
-					<input type="checkbox" value="I" class="custom-control-input" name="category" id="I"
+			&nbsp;
+			<div class="input-group-prepend text-center mx-auto">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" value="I" name="category" id="I"
 					<%=("I".equals(byStatus))?"checked":"" %>
 						aria-label="Checkbox for following text input">
 						<label class="custom-control-label" for="I">입고 보기</label>
 				</div>
 			</div>
-			<div class="input-group-prepend">
-				<div class="custom-control custom-switch">
-					<input type="checkbox" value="O" class="custom-control-input" name="category" id="O"
+			&nbsp;
+			<div class="input-group-prepend text-center mx-auto">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" value="O" name="category" id="O"
 					<%=("O".equals(byStatus))?"checked":"" %>
 						aria-label="Checkbox for following text input">
 						<label class="custom-control-label" for="O">출고 보기</label>

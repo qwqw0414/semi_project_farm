@@ -6,21 +6,32 @@
 <%
 	Product p = (Product)request.getAttribute("product");
 %>
-<h1 class="text-center">상품 상세보기</h1>
+<h1 class="text-center main-color">상품 상세보기</h1>
+<hr class="divide" />
 <input type="hidden" name="isAdmin" value="<%=memberLoggedIn!=null?memberLoggedIn.isAdmin():false %>"/>
 <div class="card mb-3 text-right border-light" style="max-width: 100%;">
 	<div class="row no-gutters">
 		<div class="col-md-4">
-			<img src='/farm/<%=(p.getPhoto() == null) ? "images/no.png" : "upload/product/" + p.getPhoto()%>' width="450px">
+			<img src='/farm/<%=(p.getPhoto() == null) ? "images/no.png" : "upload/product/" + p.getPhoto()%>' width="100%">
 		</div>
 		<div class="col-md-8">
 			<div class="card-body">
-				<h5 class="card-title text-center"><%=p.getpName()%></h5>
+				<h4 class="card-title text-center font-weight-bold"><%=p.getpName()%></h4>
 				<p class="card-text text-center">
 					할인율:
 					<%=p.getDiscount()%><br> 상품 상세정보:
-					<%=p.getpInfo() != null ? p.getpInfo() : ""%></p>
-				<p class="card-text text-right">
+					<%=p.getpInfo() != null ? p.getpInfo() : ""%> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsam assumenda ipsum corrupti repellendus pariatur neque quasi nobis quod eveniet tempora iusto ex deleniti dolor nemo porro cupiditate iste aut?</p>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<p class="card-text">
 					<label for="amount">수량 :</label> <input type="number" name="amount"
 						id="amount" min="1" max="<%=p.getStock()%>" step="1" /> <br>
 					<span>재고:<%=p.getStock()%></span> <br>
@@ -31,8 +42,10 @@
 		</div>
 	</div>
 	<div class="card-footer bg-transparent border-light">
+	<hr class="divide-sub"/>
 		<div class="review-container">
-			<h5 class="mt-0 text-left">리뷰를 작성해 보세요</h5>
+			<h5 class="mt-0 text-left font-weight-bold">리뷰를 작성해 보세요</h5>
+			<hr class="divide" />
 			<form
 				action="<%=request.getContextPath()%>/product/productCommentInsert"
 				method="POST" name="productCommentFrm">
@@ -88,7 +101,11 @@ function showComments() {
 			let $ul = $("#comment-wrapper");
 			let html = "<br>";
 			$(data).each((idx,data)=>{
-				html += "<li class='media'><img src='<%=request.getContextPath()%>/images/icon.png' class='mr-3' width='55px'><div class='media-body'><h5 class='mt-0 mb-1'>"+data.memberId+" <sub>"+data.commentDate+" </sub>";
+				if($isAdmin=="true"&&data.memberId==$memberId){
+					html += "<li class='media'><img src='<%=request.getContextPath()%>/images/icon.png' class='mr-3' width='55px'><div class='media-body'><h5 class='mt-0 mb-1'><span class='badge badge-light sub-color'>관리자</span><sub>"+data.commentDate+" </sub>";
+				} else {
+					html += "<li class='media'><img src='<%=request.getContextPath()%>/images/icon.png' class='mr-3' width='55px'><div class='media-body'><h5 class='mt-0 mb-1'>"+data.memberId+" <sub>"+data.commentDate+" </sub>";
+				}
 				if(data.commentDate==recentDate){
 					html += "<sub class='badge badge-warning'>NEW</sub>";
 				}
