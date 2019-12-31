@@ -102,6 +102,12 @@ $(()=>{
 				<label for="vegetable">채소</label>
 				<input type="radio" id="fruit" name="searchKeyword" value="F"/>
 				<label for="fruit">과일</label>
+				<input type="radio" id="mushroom" name="searchKeyword" value="M"/>
+				<label for="fruit">버섯</label>
+				<input type="radio" id="seafood" name="searchKeyword" value="S"/>
+				<label for="fruit">해산물</label>
+				<input type="radio" id="gogi" name="searchKeyword" value="G"/>
+				<label for="fruit">육류</label>
 				<input type="submit" value="검색" />
 			</form>
 		</div>
@@ -149,9 +155,9 @@ $(()=>{
      </tbody>   
 </table>
 
-<div id="pageBar">
-		<%=pageBar %>
-	</div>
+<ul class="pagination justify-content-center" style="margin:50px 0 150px 0">
+	<%=pageBar%>
+</ul>
 
 
 </section>
