@@ -16,7 +16,6 @@
 #search-container{
 	margin: 0 0 10px 0; 
 	padding: 3px;
-	background-color: rgba(0,188,212,.3);
 }
 #search-pName {display: inline-block;}
 #search-Category {display: none;}
@@ -73,13 +72,17 @@ $(()=>{
 
 
 <section id="productList-container">
-<h2>상품리스트</h2>
-<div id="search-container">
+<h2 class="main-color text-center">상품리스트</h2>
+<hr class="divide"/>
+<div class="form-inline mx-auto" >
+<div id="search-container" class="form-row align-items-center">
 		<label for="searchType">검색타입 : </label>
-		<select id="searchType">
+		<div class="col-auto by-1">
+			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName">상품명</option>
 			<option value="Category">카테고리</option>
 		</select>
+	</div>
 		
 		
 		<!-- 상품명 검색 -->
@@ -87,9 +90,10 @@ $(()=>{
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
 				<input type="hidden" name="searchType" value="pName" />
 				<input type="search" name="searchKeyword" 
-					   size="25" 
+					   size="25"
+					   class="form-control mr-sm-2"
 					   placeholder="검색할 삼품명을 입력하세요"/>
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
 		
@@ -108,14 +112,14 @@ $(()=>{
 				<label for="fruit">해산물</label>
 				<input type="radio" id="gogi" name="searchKeyword" value="G"/>
 				<label for="fruit">육류</label>
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
 		
 		
 	
 	</div>
-
+</div>
 
 <table class="table table-hover">
 <thead>
