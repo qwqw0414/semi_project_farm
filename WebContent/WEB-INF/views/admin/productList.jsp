@@ -63,7 +63,7 @@ $(()=>{
 
 
 <section id="productList-container">
-<h2 class="main-color text-center">상품리스트</h2>
+<h2 class="main-color text-center page-title">상품리스트</h2>
 <hr class="divide"/>
 <!-- <div class="form-inline mx-auto" > -->
 <div id="search-container" class="form-row align-items-center">
