@@ -29,7 +29,7 @@ $(()=>{
 });
 
 </script>
-<h2 class="main-color text-center">회원정보</h2>
+<h2 class="main-color text-center page-title">회원정보</h2>
 <hr class="divide"/>
 
 <div class="form-inline mx-auto" >

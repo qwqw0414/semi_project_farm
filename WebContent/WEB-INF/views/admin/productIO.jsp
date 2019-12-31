@@ -16,7 +16,7 @@
 	String byStatus = (String)request.getAttribute("byStatus");
 	System.out.println(byStatus);
 %>
-<h1 class="text-center main-color">입·출고 수행</h1>
+<h1 class="text-center main-color page-title">입·출고 수행</h1>
 <hr class="divide" />
 <div class="container">
 	<form action="productIO" method="POST"
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 	</form>
-	<h1 class="text-center main-color">입·출고 내역</h1>
+	<h1 class="text-center main-color page-title" >입·출고 내역</h1>
 	<hr class="divide"/>
 	<table class="table table-hover text-center">
 		<thead>

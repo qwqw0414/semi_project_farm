@@ -9,7 +9,10 @@
 #productList .card {
 	margin: 10px;
 }
-
+.page-title{
+	font-family: 'BMHANNAPro';
+	font-size: 2rm;
+}
 #contents {
 	/* font-family: 'Jua', sans-serif; */
 	/* font-family: 'Do Hyeon', sans-serif; */
