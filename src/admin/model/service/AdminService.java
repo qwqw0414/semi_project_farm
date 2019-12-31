@@ -273,6 +273,22 @@ public class AdminService {
 		return totalContent;
 	}
 
+	public List<OrderListProduct> selectAllOrderAndProduct() {
+		Connection conn = getConnection();
+		List<OrderListProduct> list = new AdminDAO().selectAllOrderAndProduct(conn);
+		close(conn);
+		
+		return list;
+	}
+
+	public List<OrderListProduct> researchDateIncom() {
+		Connection conn = getConnection();
+		List<OrderListProduct> list = new AdminDAO().researchDateIncom(conn);
+		close(conn);
+		
+		return list;
+	}
+
 }
 
 

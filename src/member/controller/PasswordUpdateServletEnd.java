@@ -30,9 +30,7 @@ public class PasswordUpdateServletEnd extends HttpServlet {
 		m.setPassword(pwd_new);
 		
 		int result = new MemberService().updatePassword(m);
-		
-		
-	
+
 		String view = "";
 		if(result > 0) {
 			HttpSession session = request.getSession(false);
@@ -43,10 +41,6 @@ public class PasswordUpdateServletEnd extends HttpServlet {
 			request.setAttribute("str", "<script>alert('비밀번호가 변경되었습니다.');</script>");
 			view = "/WEB-INF/views/member/memberLogin.jsp";
 		}
-		
-		
-		System.out.println(m+"11212312");
-		
 
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);

@@ -51,7 +51,7 @@ public class AdminProductOrderListServlet extends HttpServlet {
 				//pageBar += "<span>[이전]</span>"; 
 			}
 			else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?cPage="+(pageNo-1)+"'>[이전]</a></li> ";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?cPage="+(pageNo-1)+"'>≪</a></li> ";
 			}
 			
 			// pageNo section
@@ -70,7 +70,7 @@ public class AdminProductOrderListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?cPage="+pageNo+"'>[다음]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?cPage="+pageNo+"'>≫</a></li>";
 			}
 			request.setAttribute("list", list);
 			request.setAttribute("pageBar", pageBar);
@@ -99,7 +99,7 @@ public class AdminProductOrderListServlet extends HttpServlet {
 				//pageBar += "<span>[이전]</span>"; 
 			}
 			else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?status=N&cPage="+(pageNo-1)+"'>[이전]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?status=N&cPage="+(pageNo-1)+"'>≪</a></li>";
 			}
 			
 			// pageNo section
@@ -118,7 +118,7 @@ public class AdminProductOrderListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?status=N&cPage="+pageNo+"'>[다음]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productOrderList?status=N&cPage="+pageNo+"'>≫</a></li>";
 			}
 			request.setAttribute("list", list);
 			request.setAttribute("pageBar", pageBar);
