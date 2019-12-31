@@ -300,4 +300,7 @@ footer{
 	height: 1px;
 	background: #fE6F5F;
 }
-
+/* 회원리스트 폰트*/
+#search-container{
+	font-family: 'BMHANNAPro';
+}
