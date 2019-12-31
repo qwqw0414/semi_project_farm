@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import common.BaseData;
 import product.model.vo.Product;
 import product.model.vo.ProductIO;
 
@@ -25,7 +26,7 @@ public class ProductIOListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
-		final int numPerPage = 10;
+		final int numPerPage = new BaseData().getPagenum();
 		int cPage = 1;
 		
 		try {
@@ -42,14 +43,13 @@ public class ProductIOListServlet extends HttpServlet {
 		int totalContent = 0;
 		if(byStatus==null||"All".equals(byStatus)) {
 			totalContent = as.selectProductIOCount();
-			
 		} else {
 			totalContent = as.selectProductIOCountByStatus(byStatus);
 		}
 		int totalPage =  (int)Math.ceil((double)totalContent/numPerPage);
 		
 		String pageBar = "";
-		int pageBarSize = 5; 
+		int pageBarSize = new BaseData().getPAGEBARSIZE();
 		int pageStart = ((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd = pageStart+pageBarSize-1;
 		int pageNo = pageStart;
@@ -60,7 +60,7 @@ public class ProductIOListServlet extends HttpServlet {
 				//pageBar += "<span>[이전]</span>"; 
 			}
 			else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+(pageNo-1)+"'>[이전]</a></li> ";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+(pageNo-1)+"'>≪</a></li> ";
 			}
 			
 			// pageNo section
@@ -79,7 +79,7 @@ public class ProductIOListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>[다음]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?cPage="+pageNo+"'>≫</a></li>";
 			}
 		} else {
 			//입출고내역 입고, 출고로 조회할 경우 페이징바 처리
@@ -87,7 +87,7 @@ public class ProductIOListServlet extends HttpServlet {
 				//pageBar += "<span>[이전]</span>"; 
 			}
 			else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+(pageNo-1)+"'>[이전]</a></li> ";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+(pageNo-1)+"'>≪</a></li> ";
 			}
 			
 			// pageNo section
@@ -106,7 +106,7 @@ public class ProductIOListServlet extends HttpServlet {
 			if(pageNo > totalPage){
 				
 			} else {
-				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>[다음]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productIOList?byStatus="+byStatus+"&cPage="+pageNo+"'>≫</a></li>";
 			}
 			request.setAttribute("byStatus", byStatus);
 		}

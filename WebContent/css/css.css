@@ -36,6 +36,7 @@
 .wishList{
 	width: 100px;
 	color: antiquewhite;
+	background-color: #fE6F5F !important; 
 }
 
 #wishListNav{
@@ -187,11 +188,24 @@ footer{
 	color: #fE6F5F !important;
 }
 .main-bg{
-	background: #592F59 !important;
+	background-color: #592F59 !important;
 	color: white;
 }
 .sub-bg{
-	background: #fE6F5F !important;
+	background-color: #fE6F5F !important;
+}
+.btn-sub-bg{
+	background-color: #fE6F5F !important;
+	border-color: #fE6F5F !important;
+}
+/* 페이지 바 색상 */
+.page-item.active .page-link{
+	background-color: #592F59 !important;
+	border-color: #592F59 !important;
+	color: #fff !important;	
+}
+.page-link{
+	color: #592F59 !important;
 }
 
 /*로그인 화면*/
@@ -286,4 +300,7 @@ footer{
 	height: 1px;
 	background: #fE6F5F;
 }
-
+/* 회원리스트 폰트*/
+#search-container{
+	font-family: 'BMHANNAPro';
+}

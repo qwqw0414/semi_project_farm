@@ -50,7 +50,7 @@ public class ProductListServlet extends HttpServlet {
 		
 		//1.이전
 		if(pageNo != 1) {
-			pageBar += "<li class='page-item'><a class='page-link'href='"+request.getContextPath()+"/admin/productList?cPage="+(pageNo-1)+"'>이전</a></li>\n";
+			pageBar += "<li class='page-item'><a class='page-link'href='"+request.getContextPath()+"/admin/productList?cPage="+(pageNo-1)+"'>≪</a></li>\n";
 		}
 		
 		//2.pageNo
@@ -68,7 +68,7 @@ public class ProductListServlet extends HttpServlet {
 		
 		//3.다음
 		if(pageNo <= totalPage) {
-			pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productList?cPage="+pageNo+"'>다음</a></li>\n";							
+			pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productList?cPage="+pageNo+"'>≫</a></li>\n";							
 		}
 		
 		

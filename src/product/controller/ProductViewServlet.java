@@ -52,7 +52,7 @@ public class ProductViewServlet extends HttpServlet {
 
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord + "&cPage="
-					+ (pageNo - pageBarSize) + "'>이전</a></li>";
+					+ (pageNo - pageBarSize) + "'>≪</a></li>";
 		}
 
 		while (pageNo <= pageEnd && pageNo <= totalPage) {
@@ -69,13 +69,12 @@ public class ProductViewServlet extends HttpServlet {
 
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productView?keyWord=" + keyWord + "&cPage="
-					+ pageNo + "'>다음</a></li>";
+					+ pageNo + "'>≫</a></li>";
 		}
 		//3.view단 처리
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("cPage", cPage);
-		System.out.println(pageBar+"111"+cPage);
 		request.getRequestDispatcher("/WEB-INF/views/product/productView.jsp").forward(request, response);
 
 	}

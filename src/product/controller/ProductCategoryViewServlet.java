@@ -50,7 +50,7 @@ public class ProductCategoryViewServlet extends HttpServlet {
 
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productCategory?category=" + category + "&cPage="
-					+ (pageNo - pageBarSize) + "'>이전</a></li>";
+					+ (pageNo - pageBarSize) + "'>≪</a></li>";
 		}
 
 		while (pageNo <= pageEnd && pageNo <= totalPage) {
@@ -67,7 +67,7 @@ public class ProductCategoryViewServlet extends HttpServlet {
 
 		} else {
 			pageBar += "<li class='page-item'><a class='page-link' href='" + request.getContextPath() + "/product/productCategory?category=" + category + "&cPage="
-					+ pageNo + "'>다음</a></li>";
+					+ pageNo + "'>≫</a></li>";
 		}
 		
 
