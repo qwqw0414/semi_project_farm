@@ -65,7 +65,7 @@ $(()=>{
 <section id="productList-container">
 <h2 class="main-color text-center">상품리스트</h2>
 <hr class="divide"/>
-<div class="form-inline mx-auto" >
+<!-- <div class="form-inline mx-auto" > -->
 <div id="search-container" class="form-row align-items-center">
 		<label for="searchType">검색타입 : </label>
 		<div class="col-auto by-1">
@@ -110,7 +110,7 @@ $(()=>{
 		
 	
 	</div>
-</div>
+<!-- </div> -->
 
 <table class="table table-hover">
 <thead>
