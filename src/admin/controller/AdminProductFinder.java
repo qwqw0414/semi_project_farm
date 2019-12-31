@@ -52,8 +52,17 @@ public class AdminProductFinder extends HttpServlet {
 			if ("V".equals(searchKeyword) || "채소".equals(searchKeyword)) {
 				searchKeyword = "채소";
 			}
-			else {
+			else if("F".equals(searchKeyword) || "과일".equals(searchKeyword)) {
 				searchKeyword = "과일";
+			}
+			else if("M".equals(searchKeyword) || "버섯".equals(searchKeyword)) {
+				searchKeyword = "버섯";
+			}
+			else if("S".equals(searchKeyword) || "해산물".equals(searchKeyword)) {
+				searchKeyword = "해산물";
+			}
+			else if("G".equals(searchKeyword) || "육류".equals(searchKeyword)) {
+				searchKeyword = "육류";
 			}
 			list = adminService.selectProductByCategory(searchKeyword, cPage, numPerPage);break;
 		}
@@ -87,15 +96,15 @@ public class AdminProductFinder extends HttpServlet {
 
 				}
 				else {
-					pageBar += "<a href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+(pageNo-pageBarSize)+"'>[이전]</a> ";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+(pageNo-pageBarSize)+"'>이전</a></li> ";
 				}
 				// pageNo section
 				while(pageNo<=pageEnd && pageNo<=totalPage){
 					if(cPage ==  pageNo ){
-						pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+						pageBar += "<li class ='page-item active'><a class='page-link'>"+pageNo+"</a></li>\n";
 					} 
 					else {
-						pageBar += "<a href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
+						pageBar += "<li class='page-item'> <a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>"+pageNo+"</a></li> ";
 					}
 					pageNo++;
 				}
@@ -105,7 +114,7 @@ public class AdminProductFinder extends HttpServlet {
 					
 				} else {
 					
-					pageBar += "<a href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>[다음]</a>";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>다음</a></li>";
 				}
 				
 		

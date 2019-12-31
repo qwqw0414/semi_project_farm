@@ -10,15 +10,16 @@
 	String status = (String)request.getAttribute("status");
 	
 %>
-<h2>orderlist page</h2>
-	<div class="custom-control custom-switch">
+<h2 class="main-color text-center">orderlist page</h2>
+<hr class="divide"/>
+	<div class="custom-control custom-switch float-right">
 		<input type="checkbox" class="custom-control-input" id="orderByStatusN"
 		<%=status!=null?"checked":"" %>>
 		<label class="custom-control-label" for="orderByStatusN">미출고 주문보기</label>
 	</div>
-	<table class="table table-hover">
+	<table class="table table-hover text-center">
 	<thead>
-			<tr>
+			<tr class="main-color">
 				<th>주문번호</th>
 				<th>구매자 아이디</th>
 				<th>상품명</th>

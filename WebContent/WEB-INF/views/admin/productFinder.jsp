@@ -94,13 +94,32 @@ $(()=>{
 		<!-- 	카테고리별 검색 -->
 		<div id="search-Category">
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
-				<input type="hidden" name="searchType" value="Category" /> <input
-					type="radio" id="vegetable" name="searchKeyword" value="V"
-					<%="Category".equals(searchType) && "V".equals(searchKeyword) ? "checked" : ""%> />
+				<input type="hidden" name="searchType" value="Category" />
+				 
+				<input type="radio" id="vegetable" name="searchKeyword" value="V"
+				  <%="Category".equals(searchType) && "V".equals(searchKeyword) ? "checked" : ""%> />
 					<label for="vegetable">채소</label>
+					
 					<input type="radio" id="fruit" name="searchKeyword" value="F"
 					<%="Category".equals(searchType) && "F".equals(searchKeyword) ? "checked" : ""%> />
 					<label for="fruit">과일</label>
+					
+					<input type="radio" id="mushroom" name="searchKeyword" value="M"
+					<%="Category".equals(searchType) && "M".equals(searchKeyword) ? "checked" : ""%>/>
+					<label for="fruit">버섯</label>
+					
+					<input type="radio" id="seafood" name="searchKeyword" value="S"
+					<%="Category".equals(searchType) && "S".equals(searchKeyword) ? "checked" : ""%>/>
+					<label for="fruit">해산물</label>
+					
+					<input type="radio" id="gogi" name="searchKeyword" value="G"
+					<%="Category".equals(searchType) && "G".equals(searchKeyword) ? "checked" : ""%>/>
+					<label for="fruit">육류</label>
+
+
+
+
+
 					<input type="submit" value="검색" />
 			</form>
 		</div>
@@ -152,9 +171,9 @@ $(()=>{
 
 	</table>
 
-	<div id="pageBar">
-		<%=pageBar%>
-	</div>
+<ul class="pagination justify-content-center" style="margin:50px 0 150px 0">
+	<%=pageBar%>
+</ul>
 
 
 
