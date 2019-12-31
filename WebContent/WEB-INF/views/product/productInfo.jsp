@@ -6,43 +6,79 @@
 <%
 	Product p = (Product)request.getAttribute("product");
 %>
+<div class="container">
 <h1 class="text-center main-color">상품 상세보기</h1>
 <hr class="divide" />
 <input type="hidden" name="isAdmin" value="<%=memberLoggedIn!=null?memberLoggedIn.isAdmin():false %>"/>
-<div class="card mb-3 text-right border-light" style="max-width: 100%;">
-	<div class="row no-gutters">
-		<div class="col-md-4">
+<div class="card mb-3 border-light" style="max-width: 100%;">
+    
+    
+    <div class="row">
+		<div class="col-4">
 			<img src='/farm/<%=(p.getPhoto() == null) ? "images/no.png" : "upload/product/" + p.getPhoto()%>' width="100%">
 		</div>
-		<div class="col-md-8">
-			<div class="card-body">
-				<h4 class="card-title text-center font-weight-bold"><%=p.getpName()%></h4>
-				<p class="card-text text-center">
-					할인율:
-					<%=p.getDiscount()%><br> 상품 상세정보:
-					<%=p.getpInfo() != null ? p.getpInfo() : ""%> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsam assumenda ipsum corrupti repellendus pariatur neque quasi nobis quod eveniet tempora iusto ex deleniti dolor nemo porro cupiditate iste aut?</p>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<p class="card-text">
-					<label for="amount">수량 :</label> <input type="number" name="amount"
+		<div class="col-8">
+			<div>
+                
+                
+                <div class="goods-info">
+                    <h3><%=p.getpName()%></h3><br>
+                    <p class='goods-price-comment'>할인가격</p>
+                    <span class='price-info before-price'><%=p.getPrice()%>원</span>
+                    <span class='price-info'>-></span>
+                    <span class='price-info'><%=new Utils().numberFormat((int)(p.getPrice()-p.getPrice()*p.getDiscount()))%>원</span>
+                    <hr>
+                    <dl>
+                    <dt>상세정보</dt><span>
+				    <dd><%=p.getpInfo() != null ? p.getpInfo() : ""%> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsam assumenda ipsum corrupti repellendus pariatur neque quasi nobis quod eveniet tempora iusto ex deleniti dolor nemo porro cupiditate iste aut?</dd>
+                </span>
+                </dl>
+                    <hr>
+                    <label for="amount">주문수량 :</label> <input type="number" name="amount"
 						id="amount" min="1" max="<%=p.getStock()%>" step="1" /> <br>
-					<span>재고:<%=p.getStock()%></span> <br>
-					<button class="btn btn-danger" id="btn-order">구매하기</button>
-					<button class="btn btn-success" id="btn-WishList">장바구니</button>
-				</p>
+                    <span>재고:<%=p.getStock()%></span> <hr><br>
+                </div>
+                    
+                    <div class="something-btn">
+                        <button class="btn btn-outline-info btn-buy2" id="btn-WishList">장바구니</button>
+                        <button class="btn btn-info btn-buy1" id="btn-order">구매하기</button>
+                    </div>
 			</div>
-		</div>
-	</div>
-	<div class="card-footer bg-transparent border-light">
-	<hr class="divide-sub"/>
+        </div>
+    </div>
+    
+<style>
+    .btn-buy2{
+        width: 150px;
+    height: 54px;
+    }
+.btn-buy1{
+    width: 304px;
+    height: 54px;
+}
+
+.something-btn{
+    float: right;
+}
+
+    .goods-price-comment{
+        margin: 0;
+    }
+.price-info{
+    font-size: 25px;
+}
+.before-price{
+    color: rgb(170, 170, 170);
+    text-decoration:line-through
+}
+</style>
+
+    
+    
+    
+    
+    <div class="card-footer bg-transparent border-light">
+	<hr />
 		<div class="review-container">
 			<h5 class="mt-0 text-left font-weight-bold">리뷰를 작성해 보세요</h5>
 			<hr class="divide" />
@@ -67,6 +103,7 @@
 			<!-- 리뷰 댓글 종료 -->
 		</div>
 	</div>
+</div>
 </div>
 
 

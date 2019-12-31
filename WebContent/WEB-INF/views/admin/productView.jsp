@@ -4,13 +4,16 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	Product p = (Product)request.getAttribute("product");
-	System.out.println("productView.jsp="+p);
 %>
-
-
-
 <style>
     form #tag{width: 120px;}
+#oldFileName{
+    position: absolute; 
+    z-index: 1; 
+    background: white; 
+    left: 10px; 
+    width: 200px;
+}
 </style>
 
 <form action="<%=request.getContextPath()%>/admin/productUpdateEnd" 
@@ -26,10 +29,11 @@
         </div>
         <select class="custom-select" name="category" required>
             <option selected disabled hidden>카테고리 선택</option>
-            <option value="과일" <%=p.getCategory().equals("과일")? "selected='selected'":""%> >과일</option>
-            <option value="채소" <%=p.getCategory().equals("채소")? "selected='selected'":""%> >채소</option>
-            <option value="육류" <%=p.getCategory().equals("육류")? "selected='selected'":""%> >육류</option>
-            <option value="생선" <%=p.getCategory().equals("생선")? "selected='selected'":""%> >생선</option>
+            <option value="과일" <%="과일".equals(p.getCategory())? "selected='selected'":""%> >과일</option>
+            <option value="채소" <%="채소".equals(p.getCategory())? "selected='selected'":""%> >채소</option>
+            <option value="육류" <%="육류".equals(p.getCategory())? "selected='selected'":""%> >육류</option>
+            <option value="해산물" <%="해산물".equals(p.getCategory())? "selected='selected'":""%> >생선</option>
+            <option value="버섯" <%="버섯".equals(p.getCategory())? "selected='selected'":""%> >버섯</option>
         </select>
     </div>
     <div class="input-group mb-3">
@@ -54,9 +58,8 @@
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="photo" name="photo">
             <label class="custom-file-label" for="photo">상품 이미지 등록</label>
-            
-            <input type="hidden" name="oldPhotoName"
-						   value="<%=p.getPhoto()!=null?p.getPhoto():""%>" />			
+            <span id="oldFileName"><%= p.getPhoto() %></span>
+            <input type="hidden" value="<%= p.getPhoto() %>" name="oldPhotoName">
         </div>
     </div>
     <div class="input-group">
@@ -76,7 +79,16 @@ function deleteValidate(){
 	}
 	
 }
+$("#photo").change(function(){
 
+    if($(this).val() != ""){
+        $("#oldFileName").hide();
+    }
+    else{
+        $("#oldFileName").show();
+    }
+
+})
 
 
 
