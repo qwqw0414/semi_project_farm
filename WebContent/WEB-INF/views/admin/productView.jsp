@@ -5,17 +5,6 @@
 <%
 	Product p = (Product)request.getAttribute("product");
 %>
-<style>
-    form #tag{width: 120px;}
-#oldFileName{
-    position: absolute; 
-    z-index: 1; 
-    background: white; 
-    left: 10px; 
-    width: 200px;
-}
-</style>
-
 <form action="<%=request.getContextPath()%>/admin/productUpdateEnd" 
 	  method="post"
 	  enctype="multipart/form-data">

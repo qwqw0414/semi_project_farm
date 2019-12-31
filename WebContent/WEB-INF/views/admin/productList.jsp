@@ -11,17 +11,6 @@
 	 String pageBar = (String)request.getAttribute("pageBar"); 
 %>
 
-
-<style>
-#search-container{
-	margin: 0 0 10px 0; 
-	padding: 3px;
-	background-color: rgba(0,188,212,.3);
-}
-#search-pName {display: inline-block;}
-#search-Category {display: none;}
-</style>
-
 <script>
 $(()=>{
 	var $searchpName = $("#search-pName");

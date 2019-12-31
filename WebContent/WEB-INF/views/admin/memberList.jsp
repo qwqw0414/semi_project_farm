@@ -11,26 +11,7 @@
 	String pageBar = (String)request.getAttribute("pageBar");
 
 %>
-<style>
-#search-container{
-	margin: 0 0 10px 0;
-	padding: 3px;
-}
-#search-memberId {
-	display: none;
-}
-#search-memberName {
-	display: inline-block;
-}
-#search-phone {
-	display: none;
-}
-div#pageBar span.cPage{
-	margin-right: 10px;
-}
 
-
-</style>
 <script>
 $(()=>{
 	var $searchMemberId = $("#search-memberId");
@@ -117,9 +98,9 @@ $(()=>{
 			<%} %>
 		</tbody>
 </table>
-<div id="pageBar">
-		<%=pageBar %>
-</div>
+<ul class="pagination justify-content-center" style="margin:50px 0 150px 0">
+	<%=pageBar%>
+</ul>
 </section>
 
 
