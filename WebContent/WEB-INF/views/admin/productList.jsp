@@ -82,7 +82,6 @@ $(()=>{
 				<input type="hidden" name="searchType" value="pName" />
 				<input type="search" name="searchKeyword" 
 					   size="25"
-					   class="form-control mr-sm-2"
 					   placeholder="검색할 삼품명을 입력하세요"/>
 				<input type="submit" value="검색" class="btn btn-success" />
 			</form>

@@ -58,14 +58,17 @@ $(()=>{
 </script>
 
 <section id="productList-container">
-	<h2>상품리스트</h2>
-	<div id="search-container">
-		<label for="searchType">검색타입 : </label> <select id="searchType">
+	<h2 class="main-color text-center">상품리스트</h2>
+	<hr class="divide"/>
+	<div id="search-container"  class="form-row align-items-center">
+		<label for="searchType">검색타입 : </label> 
+			<div class="col-auto by-1">
+			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName" <%="pName".equals(searchType) ? "selected" : ""%>>상품명</option>
 			<option value="Category"
 				<%="Category".equals(searchType) ? "selected" : ""%>>카테고리</option>
 		</select>
-
+	</div>
 
 
 
@@ -73,11 +76,11 @@ $(()=>{
 		<!-- 상품명 검색 -->
 		<div id="search-pName">
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
-				<input type="hidden" name="searchType" value="pName" /> <input
-					type="search" name="searchKeyword" size="25"
+				<input type="hidden" name="searchType" value="pName" />
+				 <input type="search" name="searchKeyword" size="25"
 					placeholder="검색할 삼품명을 입력하세요"
 					value="<%="pName".equals(searchType) ? searchKeyword : ""%>" /> <input
-					type="submit" value="검색" />
+					type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
 
@@ -114,7 +117,7 @@ $(()=>{
 
 
 
-					<input type="submit" value="검색" />
+					<input type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
 
