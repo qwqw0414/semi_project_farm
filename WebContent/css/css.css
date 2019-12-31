@@ -186,7 +186,22 @@ footer{
 .sub-color{
 	color: #fE6F5F !important;
 }
-
+.main-bg{
+	background-color: #592F59 !important;
+	color: white;
+}
+.sub-bg{
+	background-color: #fE6F5F !important;
+}
+/* 페이지 바 색상 */
+.page-item.active .page-link{
+	background-color: #592F59 !important;
+	border-color: #592F59 !important;
+	color: #fff !important;	
+}
+.page-link{
+	color: #592F59 !important;
+}
 
 
 /*로그인 화면*/
