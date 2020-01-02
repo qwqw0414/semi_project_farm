@@ -4,12 +4,13 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div id="researchView">
-    <h1>수입 통계</h1>
+    <h1 class="main-color text-center page-title">수입 통계</h1>
+	<hr class="divide"/>
     <!-- 월간 총 수익 -->
-    <div class="row">
-        <div class="col">
 
-            <select id="selectYear">
+    <div class="form-row align-items-center mx-auto" style="width:20%;">
+        <div class="col-xs-2">
+            <select class="custom-select mr-sm-2" id="selectYear">
 <%
 	GregorianCalendar today = new GregorianCalendar ( );
    	int year = today.get(today.YEAR);
@@ -22,8 +23,9 @@
 	}
 %>
             </select>
-
-            <select id="selectMonth">
+		</div>
+		<div class="col-xs-2">
+            <select class="custom-select mr-sm-2" id="selectMonth">
                 <option value="0" selected>전체</option>
 <%
 	for(int i = 1; i <= 12; i++){
@@ -39,21 +41,24 @@
             </select>
         </div>
     </div>
+<br>
     <div class="row">
         <div class="col">
-            <span id="research-title"></span>
+            <h2 class="main-color page-title text-center" id="research-title"></h2>
         </div>
+        <h2 class="main-color page-title">|</h2>
         <div class="col">
-            <h2 id="totalMonth"></h2>
+            <h2 class="main-color page-title text-center" id="totalMonth"></h2>
         </div>
     </div>
 </div>
-
+ <hr class="divide-sm">
 <!-- 그래프 -->
 <!-- 선형 그래프 div -->
 <div id="chart_div" style="height: 400px;"></div>
+<hr class="divide-sub">
 <!-- 원형 그래프 div -->
-<div id="donutchart" style="width: 900px; height: 500px;"></div>
+<div class="mx-auto" id="donutchart" style="width: 900px; height: 500px;"></div>
 
 <script>
 $(()=>{

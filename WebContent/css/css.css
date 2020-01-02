@@ -452,3 +452,9 @@ div#pageBar span.cPage{
 .memberView-button{
 	margin-top:50px;
 }
+/* 수익 그래프 페이지 */
+#donutchart text:first-of-type{
+	font-family: 'BMHANNAPro';
+	font-size: 2rm !important;
+	color: #592F59;
+}
