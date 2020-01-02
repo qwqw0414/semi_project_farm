@@ -88,11 +88,6 @@ $(()=>{
 
 
 	</div>
-<<<<<<< HEAD
-
-=======
-	<!-- </div> -->
->>>>>>> 9b6964ffb63dc2dbe8c4fcf0a0714e904653059e
 
 	<table class="table table-hover">
 		<thead>
