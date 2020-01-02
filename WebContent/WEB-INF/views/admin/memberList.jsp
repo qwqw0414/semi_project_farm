@@ -43,7 +43,7 @@ $(()=>{
 			<option value="phone">전화번호</option>
 		</select>
 	</div>
-		<div id="search-memberName" class="input-group">
+		<div id="search-memberName" class="input-group" >
 			<form action="<%=request.getContextPath()%>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="memberName" />
 				<input type="search" name="searchKeyword" size="25" class="form-control mr-sm-2" 
