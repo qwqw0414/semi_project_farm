@@ -60,7 +60,7 @@ $(()=>{
 <section id="productList-container">
 	<h1 class="main-color text-center page-title">상품리스트</h1>
 	<hr class="divide"/>
-	<div id="search-container"  class="form-row align-items-center mx-auto" style="width:600px;">
+	<div id="search-container"  class="form-row align-items-center mx-auto" style="width:700px;">
 			<div class="col-auto by-1">
 			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName" <%="pName".equals(searchType) ? "selected" : ""%>>상품명</option>
@@ -80,7 +80,7 @@ $(()=>{
 					placeholder="검색할 삼품명을 입력하세요"
 					value="<%="pName".equals(searchType) ? searchKeyword : ""%>" /> <input
 					type="submit" value="검색" class="btn btn-success" />
-					<button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
+					<button type="button" class="btn btn-primary btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
 			</form>
 		</div>
 
@@ -118,7 +118,7 @@ $(()=>{
 
 
 					<input type="submit" value="검색" class="btn btn-success" />
-					<button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
+					<button type="button" class="btn btn-primary btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
 			</form>
 		</div>
 
