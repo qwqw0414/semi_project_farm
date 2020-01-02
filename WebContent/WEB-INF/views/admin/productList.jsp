@@ -67,7 +67,6 @@ $(()=>{
 <hr class="divide"/>
 <!-- <div class="form-inline mx-auto" > -->
 <div id="search-container" class="form-row align-items-center">
-		<label for="searchType">검색타입 : </label>
 		<div class="col-auto by-1">
 			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName">상품명</option>
