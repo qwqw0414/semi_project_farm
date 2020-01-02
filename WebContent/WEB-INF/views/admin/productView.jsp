@@ -58,8 +58,8 @@
         <textarea class="form-control" name="pInfo"><%=p.getpInfo()!=null?p.getpInfo():"" %></textarea>
     </div>
     <br>
-    <button type="submit" class="btn btn-danger btn-block">상품정보 수정</button>
-    <button type="button" class="btn btn-danger btn-block" onClick="deleteValidate()">상품 삭제</button>
+    <button type="submit" class="btn btn-danger btn-block btn-main-bg">상품정보 수정</button>
+    <button type="button" class="btn btn-danger btn-block btn-sub-bg" onClick="deleteValidate()">상품 삭제</button>
 </form>
 <script>
 function deleteValidate(){	

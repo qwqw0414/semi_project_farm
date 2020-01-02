@@ -51,6 +51,16 @@
 	background-color: #592F59 !important;
 	border-color: #592F59 !important;
 }
+.btn-main-bg:hover{
+	border-color: #592F59 !important;
+	background-color: #fff !important;
+	color: #592F59 !important;
+}
+.btn-sub-bg:hover{
+	border-color: #fE6F5F !important;
+	background-color: #fff !important;
+	color: #fE6F5F !important;
+}
 /* 페이지 바 색상 */
 .page-item.active .page-link{
 	background-color: #592F59 !important;

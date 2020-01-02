@@ -20,7 +20,7 @@
 				class="form-text text-muted">비밀번호 확인</small><br />
 		</div>
 		<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
-		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
+		<button type="submit" class="btn btn-primary btn-main-bg">비밀번호 변경</button>
 	</form>
 
 </div>

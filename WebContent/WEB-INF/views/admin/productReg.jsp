@@ -43,7 +43,7 @@
         <textarea class="form-control" name="pInfo"></textarea>
     </div>
     <br>
-    <button type="submit" class="btn btn-danger btn-block">상품 등록</button>
+    <button type="submit" class="btn btn-danger btn-block btn-main-bg">상품 등록</button>
 </form>
 
 

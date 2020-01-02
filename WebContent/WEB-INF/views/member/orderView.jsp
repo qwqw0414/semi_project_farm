@@ -59,7 +59,7 @@
 	
 	<%} %>
 </select>
-	<input type="submit" value="검색" class="btn btn-success"/>
+	<input type="submit" value="검색" class="btn btn-success btn-main-bg"/>
 </form>
 
 
