@@ -38,11 +38,11 @@
                     <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요."
                         required>
                 </div>
-        <button type="submit" class="btn btn-primary">수정 하기</button>
+        <button type="submit" class="btn btn-primary btn-main-bg">수정 하기</button>
         <%if(memberLoggedIn.getMemberId().equals(m.getMemberId())){ %>
-        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword?memberId='">비밀번호 수정</button>
+        <button type="button" class="btn btn-primary btn-main-bg" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword?memberId='">비밀번호 수정</button>
         <%} %>
-        <button type="button" class="btn btn-primary btn-member-delete" onclick="return confirm_delete()">회원탈퇴</button>
+        <button type="button" class="btn btn-primary btn-member-delete btn-sub-bg" onclick="return confirm_delete()">회원탈퇴</button>
     </form>
 </div>
 

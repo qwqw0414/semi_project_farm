@@ -6,7 +6,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <%if(memberLoggedIn != null){ %>
-<h1><%=memberLoggedIn.getMemberName()%>님의 wishList</h1>
+<h1 class="main-color text-center page-title"><%=memberLoggedIn.getMemberName()%>님의 장바구니</h1>
+<hr class="divide"/>
 <style>
 img{
 	width: 5rem;
@@ -15,21 +16,23 @@ img{
 <table class="table wishListView">
 	<thead class="thead-dark">
 		<tr>
-			<th scope="col"><input type="checkbox" id="checkAll" checked></th>
-			<th scope="col">이미지</th>
-			<th scope="col">상품명</th>
-			<th scope="col">수량</th>
-			<th scope="col">가격</th>
-			<th scope="col">취소</th>
+			<th class="main-bg-border" scope="col"><input type="checkbox" id="checkAll" checked></th>
+			<th class="main-bg-border" scope="col">이미지</th>
+			<th class="main-bg-border" scope="col">상품명</th>
+			<th class="main-bg-border" scope="col">수량</th>
+			<th class="main-bg-border" scope="col">가격</th>
+			<th class="main-bg-border" scope="col">취소</th>
 		</tr>
 	</thead>
 	<tbody>
 	</tbody>
 </table>
 <hr>
+<div class="float-right">
 <h3>합계금액 : <span id="sumPrice"></span></h3>
 <br>
-<input type="button" value="구입하기" class="btn btn-danger" id="btnOrder">
+<input type="button" value="구입하기" class="btn btn-danger btn-sub-bg" id="btnOrder">
+</div>
 <script>
 $(()=>{
 	loadWishList();
@@ -190,6 +193,8 @@ function loadWishList(){
 <%}else{%>
 <h1>로그인 필요</h1>
 <%} %>
-
+<br>
+<br>
+<br>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

@@ -40,6 +40,11 @@
 	background-color: #592F59 !important;
 	color: white;
 }
+.main-bg-border{
+	background-color: #592F59 !important;
+	color: white;
+	border-color:  #592F59 !important;
+}
 .sub-bg{
 	background-color: #fE6F5F !important;
 }
@@ -50,6 +55,16 @@
 .btn-main-bg{
 	background-color: #592F59 !important;
 	border-color: #592F59 !important;
+}
+.btn-main-bg:hover{
+	border-color: #592F59 !important;
+	background-color: #fff !important;
+	color: #592F59 !important;
+}
+.btn-sub-bg:hover{
+	border-color: #fE6F5F !important;
+	background-color: #fff !important;
+	color: #fE6F5F !important;
 }
 /* 페이지 바 색상 */
 .page-item.active .page-link{
@@ -378,6 +393,9 @@ div#pageBar span.cPage{
 #search-container{
 	font-family: 'BMHANNAPro';
 }
+.memberList-container{
+	width:700px;
+}
 
 /* 상품 정보 페이지  */
 #search-container {
@@ -395,6 +413,9 @@ div#pageBar span.cPage{
  form #tag{
  	width: 120px;
  }
+ .productReg-container{
+ 	width:750px;
+ }
  /* 상품 상세보기&수정 페이지(관리자) */
  #oldFileName{
     position: absolute; 
@@ -402,4 +423,7 @@ div#pageBar span.cPage{
     background: white; 
     left: 10px; 
     width: 200px;
+}
+.adminProductView-container{
+	width:750px;
 }

@@ -6,6 +6,8 @@
 	Member m = (Member)request.getAttribute("member");
 %>
 <div class="container find-id-container">
+<h2 class="main-color text-center page-title">아이디 찾기</h2>
+<hr class="divide"/>
 	<form action="<%=request.getContextPath()%>/member/memberFindIdEnd"
 		method="POST" onsubmit="return FindIdValidate();" <%=(m!=null)?"hidden":""%>>
 		<div class="form-group">
@@ -23,7 +25,7 @@
             <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처">
             <small class="form-text text-muted">연락처를 입력해주세요.</small>
         </div>
-         <button type="submit" class="btn btn-primary find-id-btn">확인</button>
+         <button type="submit" class="btn btn-primary find-id-btn btn-main-bg">확인</button>
 
 	</form>
 	
@@ -43,11 +45,6 @@
 	<%} %>
 
 </div>
-
-
-
-
-
 
 <script>
 function FindIdValidate(){
@@ -70,22 +67,7 @@ function FindIdValidate(){
 }
 
 </script>
-
-
-
-
-
-
-
+<br>
+<br>
+<br>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-

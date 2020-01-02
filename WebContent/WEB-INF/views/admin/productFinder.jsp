@@ -58,9 +58,9 @@ $(()=>{
 </script>
 
 <section id="productList-container">
-	<h2 class="main-color text-center page-title">상품리스트</h2>
+	<h1 class="main-color text-center page-title">상품리스트</h1>
 	<hr class="divide"/>
-	<div id="search-container"  class="form-row align-items-center">
+	<div id="search-container"  class="form-row align-items-center mx-auto" style="width:600px;">
 			<div class="col-auto by-1">
 			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName" <%="pName".equals(searchType) ? "selected" : ""%>>상품명</option>
@@ -80,6 +80,7 @@ $(()=>{
 					placeholder="검색할 삼품명을 입력하세요"
 					value="<%="pName".equals(searchType) ? searchKeyword : ""%>" /> <input
 					type="submit" value="검색" class="btn btn-success" />
+					<button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
 			</form>
 		</div>
 
@@ -102,21 +103,22 @@ $(()=>{
 					
 					<input type="radio" id="mushroom" name="searchKeyword" value="M"
 					<%="Category".equals(searchType) && "M".equals(searchKeyword) ? "checked" : ""%>/>
-					<label for="fruit">버섯</label>
+					<label for="mushroom">버섯</label>
 					
 					<input type="radio" id="seafood" name="searchKeyword" value="S"
 					<%="Category".equals(searchType) && "S".equals(searchKeyword) ? "checked" : ""%>/>
-					<label for="fruit">해산물</label>
+					<label for="seafood">해산물</label>
 					
 					<input type="radio" id="gogi" name="searchKeyword" value="G"
 					<%="Category".equals(searchType) && "G".equals(searchKeyword) ? "checked" : ""%>/>
-					<label for="fruit">육류</label>
+					<label for="gogi">육류</label>
 
-
+	
 
 
 
 					<input type="submit" value="검색" class="btn btn-success" />
+					<button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
 			</form>
 		</div>
 

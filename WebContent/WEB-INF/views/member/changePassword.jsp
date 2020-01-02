@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
+<h2 class="main-color text-center page-title">비밀번호 변경</h2>
+<hr class="divide"/>
+<div class="changePassword-container">
 <div class="container">
 	<form action="<%=request.getContextPath()%>/member/ChangePasswordEnd"
 		method="POST" onsubmit="return password2_validate();">
@@ -20,9 +22,9 @@
 				class="form-text text-muted">비밀번호 확인</small><br />
 		</div>
 		<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
-		<button type="submit" class="btn btn-primary">비밀번호 변경</button>
+		<button type="submit" class="btn btn-primary btn-main-bg">비밀번호 변경</button>
 	</form>
-
+</div>
 </div>
 <script>
 
