@@ -36,7 +36,6 @@ $(()=>{
 <section id="memberList-container">
 
 <div id="search-container" class="form-row align-items-center">
-		<label for="searchType">검색타입: </label>
 	<div class="col-auto my-1">
 		<select id="searchType" class="custom-select mr-sm-2" >
 			<option value="memberName" selected>이름</option>
@@ -68,7 +67,6 @@ $(()=>{
 				<input type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
-		<button onclick="location.href='<%=request.getContextPath()%>/admin/memberList'" class="btn btn-secondary" >전체검색</button>
 	</div> 
 </div>
 
