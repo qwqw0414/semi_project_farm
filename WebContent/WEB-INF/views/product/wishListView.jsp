@@ -129,6 +129,9 @@ function deleteWishList(btn){
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
 			console.log(jqxhr, textStatus, errorThrown);
+		},
+		complete: ()=>{
+			wishListNum();
 		}
 
 	});

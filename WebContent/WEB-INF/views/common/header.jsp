@@ -250,6 +250,9 @@ function wishListNum(){
 
 	$.ajax({
 		url: "<%=request.getContextPath()%>/product/wishListCount",
+		data: {
+			memberId:"<%=memberLoggedIn.getMemberId()%>"
+		},
 		success: data=>{
 			$wishNum.text(data.result);
 		},

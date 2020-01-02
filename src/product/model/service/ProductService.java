@@ -195,9 +195,9 @@ public class ProductService {
 		return checkPurchase;
 	}
 
-	public int countWishList() {
+	public int countWishList(String memberId) {
 		Connection conn = getConnection();
-		int result = new ProductDAO().countWishList(conn);
+		int result = new ProductDAO().countWishList(conn,memberId);
 		close(conn);
 		return result;
 	}

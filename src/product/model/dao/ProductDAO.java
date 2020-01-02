@@ -525,7 +525,7 @@ public class ProductDAO {
 		return checkPurchase;
 	}
 
-	public int countWishList(Connection conn) {
+	public int countWishList(Connection conn, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
@@ -533,6 +533,7 @@ public class ProductDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {

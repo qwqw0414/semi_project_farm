@@ -17,7 +17,8 @@ public class WishListCountServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int result = new ProductService().countWishList();
+		String memberId = request.getParameter("memberId");
+		int result = new ProductService().countWishList(memberId);
 		
 		JSONObject jsonResult = new JSONObject();
 		
