@@ -19,11 +19,11 @@ img{
 	display: block;
 	margin: 0px auto;
 	margin-top: 8vh;
-	/* width: 800px; */
+	width: 80%;
 }
 .error-title{
 	position: absolute;
-	top: 300px;
+	top: 85px;
 	z-index: 1;
 	text-align: center;
 	width: 100%;
@@ -46,15 +46,11 @@ img{
 }
 </style>
 <div class="row">
-	<div class="col">
-		<img src="<%=request.getContextPath()%>/images/serverError.jpg">
-	</div>
-</div>
 <div class="error-title">
 	<h3>죄송합니다. 현재 찾을 수 없는 페이지를 요청 하셨습니다.</h3>
 	<br>
 	<h6>
-		오류가 발생하였습니다 ｜ <%=msg %>
+		오류가 발생하였습니다 ｜ 오류 내용: <%=msg %>
 	</h6>
 	<h4>감사합니다.</h4>
 	<br>
@@ -67,7 +63,12 @@ img{
 		</div>
 	</div>
 </div>
+	<div class="col">
+		<img src="<%=request.getContextPath()%>/images/serverError.jpg">
+	</div>
+</div>
 <script>
+
 $("#btn-main").click(()=>{
 	location.href = "<%=request.getContextPath()%>/product/productView";
 })
