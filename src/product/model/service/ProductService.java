@@ -195,6 +195,13 @@ public class ProductService {
 		return checkPurchase;
 	}
 
+	public int countWishList() {
+		Connection conn = getConnection();
+		int result = new ProductDAO().countWishList(conn);
+		close(conn);
+		return result;
+	}
+
 }
 
 
