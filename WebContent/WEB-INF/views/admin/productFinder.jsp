@@ -80,7 +80,7 @@ $(()=>{
 					placeholder="검색할 삼품명을 입력하세요"
 					value="<%="pName".equals(searchType) ? searchKeyword : ""%>" /> <input
 					type="submit" value="검색" class="btn btn-success" />
-					<button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
+					<button type="button" class="btn btn-primary btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
 			</form>
 		</div>
 
@@ -118,7 +118,7 @@ $(()=>{
 
 
 					<input type="submit" value="검색" class="btn btn-success" />
-					<button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
+					<button type="button" class="btn btn-primary btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
 			</form>
 		</div>
 
