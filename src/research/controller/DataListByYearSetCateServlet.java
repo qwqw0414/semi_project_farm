@@ -16,16 +16,15 @@ import org.json.simple.JSONObject;
 import research.model.service.ResearchService;
 import research.model.vo.Research;
 
-@WebServlet("/research/dataListByMonthSetCate")
-public class DataListByMonthSetCateServlet extends HttpServlet {
+@WebServlet("/research/dataListByYearSetCate")
+public class DataListByYearSetCateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int year = Integer.parseInt(request.getParameter("year"));
-		int month = Integer.parseInt(request.getParameter("month"));
 		
 		List<Research> list = new ArrayList<>();
-		list = new ResearchService().selectDataListByMonthSetCate(year,month);
+		list = new ResearchService().selectDataListByYearSetCate(year);
 		
 		JSONArray jsonArr = new JSONArray();
 		

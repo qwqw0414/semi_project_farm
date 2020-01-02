@@ -153,6 +153,36 @@ public class ResearchDAO {
 			while(rset.next()) {
 				r = new Research();
 				r.setPrice(rset.getInt("total"));
+				r.setDate(rset.getString("year_"));
+				r.setCategory(rset.getString("category"));
+				list.add(r);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Research> selectDataListByMonthSetCate(Connection conn, int year, int month) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Research> list = new ArrayList<>();
+		Research r = null;
+		String query = prop.getProperty("selectDataListByMonthSetCate");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, year);
+			pstmt.setInt(2, month);
+			pstmt.setString(3, "Y");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				r = new Research();
+				r.setPrice(rset.getInt("total"));
 				r.setDate(rset.getString("month_"));
 				r.setCategory(rset.getString("category"));
 				list.add(r);

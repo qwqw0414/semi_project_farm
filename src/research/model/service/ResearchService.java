@@ -43,9 +43,17 @@ public class ResearchService {
 	}
 
 	public List<Research> selectDataListByYearSetCate(int year) {
-		//카테고리별 월간 수익 그래프
+		//카테고리별 년간 수익 그래프
 		Connection conn = getConnection();
 		List<Research> list = new ResearchDAO().selectDataListByYearSetCate(conn, year);
+		close(conn);
+		return list;
+	}
+
+	public List<Research> selectDataListByMonthSetCate(int year, int month) {
+		//카테고리별 월간 수익 그래프
+		Connection conn = getConnection();
+		List<Research> list = new ResearchDAO().selectDataListByMonthSetCate(conn, year, month);
 		close(conn);
 		return list;
 	}

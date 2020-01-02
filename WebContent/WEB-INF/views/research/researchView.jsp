@@ -50,19 +50,27 @@
 </div>
 
 <!-- 그래프 -->
+<!-- 선형 그래프 div -->
 <div id="chart_div" style="height: 400px;"></div>
+<!-- 원형 그래프 div -->
 <div id="donutchart" style="width: 900px; height: 500px;"></div>
+
 <script>
 $(()=>{
     var $totalMonth = $("#researchView #totalMonth");
     var $selectYear = $("#researchView #selectYear");
     var $selectMonth = $("#researchView #selectMonth");
+    var $researchTitle = $("#researchView #research-title");
 
     //이벤트
     $($selectYear).change(()=>{totalMonth()});
     $($selectYear).change(()=>{totalGraph()});
+    $($selectYear).change(()=>{categoryGraph()});
+    $($selectYear).change(()=>{researchTitle()});
     $($selectMonth).change(()=>{totalMonth()});
     $($selectMonth).change(()=>{totalGraph()});
+    $($selectMonth).change(()=>{categoryGraph()});
+    $($selectMonth).change(()=>{researchTitle()});
 
     function totalMonth(){
 
@@ -154,7 +162,7 @@ $(()=>{
                 url:"<%=request.getContextPath()%>/research/dataListByDay",
                 type: "post",
                 data: {year: $selectYear.val(),
-                    month: $selectMonth.val()},
+                       month: $selectMonth.val()},
                 dataType: "json",
                 success: result =>{
                     //내역 존재여부 확인
@@ -199,40 +207,142 @@ $(()=>{
     }
 
     function categoryGraph(){
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 11],
-                ['Eat', 2],
-                ['Commute', 2],
-                ['Watch TV', 2],
-                ['Sleep', 7]
-            ]);
+        if($selectMonth.val() == 0){
+        //카테고리별 년간 수익
+            $.ajax({
+                url:"<%=request.getContextPath()%>/research/dataListByYearSetCate",
+                type: "post",
+                data: {year: $selectYear.val()},
+                dataType: "json",
+                success: result =>{
+                    //내역 존재여부 확인
+                    if(result.length == 0){
+                        $("#donutchart").html("거래내역이 존재하지 않습니다.")
+                        return;
+                    }
+                    //데이터 전처리
+                    var vegetable = 0;
+                    var Fruit = 0;
+                    var Meat = 0;
+                    var seafood = 0;
+                    var mushroom = 0;
 
-            var options = {
-                title: '카테고리별 년간 수익',
-                pieHole: 0.4,
-            };
+                    $(result).each((idx,research)=>{
+                        switch (research.category) {
+                            case '채소': vegetable = research.price; break;
+                            case '과일': Fruit = research.price; break;
+                            case '육류': Meat = research.price; break;
+                            case '해산물': seafood = research.price; break;
+                            case '버섯': mushroom = research.price; break;
+                        }
+                    });
 
-            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-            chart.draw(data, options);
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Task', 'Hours per Day'],
+                            ['채소', vegetable],
+                            ['과일', Fruit],
+                            ['육류', Meat],
+                            ['해산물', seafood],
+                            ['버섯', mushroom]
+                        ]);
+
+                        var options = {
+                            title: '카테고리별 년간 수익',
+                            pieHole: 0.4,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                        chart.draw(data, options);
+                    }
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                },
+                error: (jqxhr, textStatus, errorThrown)=>{
+                    console.log(jqxhr, textStatus, errorThrown);
+                }
+            });
         }
-        google.charts.load("current", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(drawChart);
+        else{
+        //카테고리별 월간 수익
+            $.ajax({
+                url:"<%=request.getContextPath()%>/research/dataListByMonthSetCate",
+                type: "post",
+                data: {year: $selectYear.val(),
+                       month: $selectMonth.val()
+                       },
+                dataType: "json",
+                success: result =>{
+                    //내역 존재여부 확인
+                    if(result.length == 0){
+                        $("#donutchart").html("거래내역이 존재하지 않습니다.")
+                        return;
+                    }
+                    //데이터 전처리
+                    var vegetable = 0;
+                    var Fruit = 0;
+                    var Meat = 0;
+                    var seafood = 0;
+                    var mushroom = 0;
+
+                    $(result).each((idx,research)=>{
+                        switch (research.category) {
+                            case '채소': vegetable = research.price; break;
+                            case '과일': Fruit = research.price; break;
+                            case '육류': Meat = research.price; break;
+                            case '해산물': seafood = research.price; break;
+                            case '버섯': mushroom = research.price; break;
+                        }
+                    });
+
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Task', 'Hours per Day'],
+                            ['채소', vegetable],
+                            ['과일', Fruit],
+                            ['육류', Meat],
+                            ['해산물', seafood],
+                            ['버섯', mushroom]
+                        ]);
+
+                        var options = {
+                            title: '카테고리별 월간 수익',
+                            pieHole: 0.4,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                        chart.draw(data, options);
+                    }
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                },
+                error: (jqxhr, textStatus, errorThrown)=>{
+                    console.log(jqxhr, textStatus, errorThrown);
+                }
+            });
+        }
+    }
+
+    function researchTitle(){
+        var str = "";
+
+        str += $selectYear.val() + '년 '
+
+        if($selectMonth.val() != 0)
+            str += $selectMonth.val() + '월 '
+
+        str += '간 총 수입'
+        $researchTitle.text(str);
     }
 
     totalMonth();
     totalGraph();
     categoryGraph();
+    researchTitle();
 })
 
 </script>
-
-
-
-<script>
-</script>
-
-
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
