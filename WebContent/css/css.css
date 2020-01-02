@@ -388,6 +388,9 @@ div#pageBar span.cPage{
 #search-container{
 	font-family: 'BMHANNAPro';
 }
+.memberList-container{
+	width:700px;
+}
 
 /* 상품 정보 페이지  */
 #search-container {
@@ -405,6 +408,9 @@ div#pageBar span.cPage{
  form #tag{
  	width: 120px;
  }
+ .productReg-container{
+ 	width:750px;
+ }
  /* 상품 상세보기&수정 페이지(관리자) */
  #oldFileName{
     position: absolute; 
@@ -412,4 +418,7 @@ div#pageBar span.cPage{
     background: white; 
     left: 10px; 
     width: 200px;
+}
+.adminProductView-container{
+	width:750px;
 }

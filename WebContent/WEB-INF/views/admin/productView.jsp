@@ -5,13 +5,16 @@
 <%
 	Product p = (Product)request.getAttribute("product");
 %>
+
+<div class="adminProductView-container mx-auto">
+<h1 class="text-center main-color page-title">상품 등록</h1>
+<hr class="divide" />
 <form action="<%=request.getContextPath()%>/admin/productUpdateEnd" 
 	  method="post"
 	  enctype="multipart/form-data">
-	  
   <!--상품 수정을 위해 게시글 고유번호 전송 필수-->
 	<input type="hidden" name="pId" value="<%=p.getpId() %>" />
-	<h2>상품 상세정보</h2>
+
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="tag">분류</span>
@@ -61,6 +64,8 @@
     <button type="submit" class="btn btn-danger btn-block btn-main-bg">상품정보 수정</button>
     <button type="button" class="btn btn-danger btn-block btn-sub-bg" onClick="deleteValidate()">상품 삭제</button>
 </form>
+</div>
+
 <script>
 function deleteValidate(){	
 	if(confirm("정말로 상품을 삭제하시겠습니까?")){

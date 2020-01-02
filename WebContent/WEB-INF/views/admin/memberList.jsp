@@ -29,11 +29,11 @@ $(()=>{
 });
 
 </script>
-<h2 class="main-color text-center page-title">회원정보</h2>
+<h1 class="main-color text-center page-title">회원정보</h1>
 <hr class="divide"/>
 
-<div class="form-inline mx-auto" >
 <section id="memberList-container">
+<div class="form-inline mx-auto" style="width:600px;">
 
 <div id="search-container" class="form-row align-items-center">
 	<div class="col-auto my-1">
@@ -69,7 +69,6 @@ $(()=>{
 		</div>
 	</div> 
 </div>
-
 	<table class="table table-hover" id="member-table">
   <thead>
     <tr>

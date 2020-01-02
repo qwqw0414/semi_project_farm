@@ -61,12 +61,11 @@ $(()=>{
 
    
 
-
 <section id="productList-container">
-<h2 class="main-color text-center page-title">상품리스트</h2>
+<h1 class="main-color text-center page-title">상품리스트</h1>
 <hr class="divide"/>
 <!-- <div class="form-inline mx-auto" > -->
-<div id="search-container" class="form-row align-items-center">
+<div id="search-container" class="form-row align-items-center mx-auto" style="width:600px;">
 		<div class="col-auto by-1">
 			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName">상품명</option>
@@ -108,7 +107,7 @@ $(()=>{
 		
 	
 	</div>
-<!-- </div> -->
+
 
 <table class="table table-hover">
 <thead>

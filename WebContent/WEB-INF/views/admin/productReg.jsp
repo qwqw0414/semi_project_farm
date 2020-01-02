@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
+
+<div class="productReg-container mx-auto">
+<h1 class="text-center main-color page-title">상품 등록</h1>
+<hr class="divide" />
 <form action="<%=request.getContextPath()%>/admin/productRegEnd" 
 	  method="post"
 	  enctype="multipart/form-data">
@@ -45,7 +49,7 @@
     <br>
     <button type="submit" class="btn btn-danger btn-block btn-main-bg">상품 등록</button>
 </form>
-
+</div>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
