@@ -4,7 +4,7 @@
 
 <div class="memberEnroll" style="margin: auto;">
 
-    <div><h2>회원가입</h2></div>    
+    <div><h2 class="text-center">회원가입</h2><br /></div>    
     <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST"
         onsubmit="return enrollValidate()">
         <div class="form-group">
