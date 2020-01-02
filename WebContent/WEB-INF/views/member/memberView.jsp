@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<% Member m = (Member)request.getAttribute("member"); %>
+<div class="memberView-container mx-auto">
 <div class="container">
     <form action="<%=request.getContextPath()%>/member/memberUpdate" method="POST" onsubmit="return enrollValidate();">
         <div class="form-group">
@@ -38,14 +39,16 @@
                     <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요."
                         required>
                 </div>
+         <div class="text-center memberView-button">
         <button type="submit" class="btn btn-primary btn-main-bg">수정 하기</button>
         <%if(memberLoggedIn.getMemberId().equals(m.getMemberId())){ %>
         <button type="button" class="btn btn-primary btn-main-bg" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword?memberId='">비밀번호 수정</button>
         <%} %>
         <button type="button" class="btn btn-primary btn-member-delete btn-sub-bg" onclick="return confirm_delete()">회원탈퇴</button>
+    	</div>
     </form>
 </div>
-
+</div>
 
 <script>
 $('#zipcodeSearchBtn').click(function() {

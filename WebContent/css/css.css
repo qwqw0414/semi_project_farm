@@ -427,3 +427,10 @@ div#pageBar span.cPage{
 .adminProductView-container{
 	width:750px;
 }
+/* 내 정보 */
+.memberView-container{
+	width:750px;
+}
+.memberView-button{
+	margin-top:50px;
+}
