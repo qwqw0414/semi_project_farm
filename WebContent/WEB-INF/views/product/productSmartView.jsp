@@ -17,6 +17,8 @@
             /* <img src="/farm/images/no.png" class="card-img-top"> */
 	}else{
 %>
+<h1 class="main-color text-center page-title">알뜰 쇼핑</h1>
+<hr class="divide"/>
 <div id="productList">
     <div class="row w-100" style="margin: auto;">
 <%for(Product p : list){ %>
