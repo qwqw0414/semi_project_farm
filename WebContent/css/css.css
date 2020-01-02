@@ -40,6 +40,11 @@
 	background-color: #592F59 !important;
 	color: white;
 }
+.main-bg-border{
+	background-color: #592F59 !important;
+	color: white;
+	border-color:  #592F59 !important;
+}
 .sub-bg{
 	background-color: #fE6F5F !important;
 }
