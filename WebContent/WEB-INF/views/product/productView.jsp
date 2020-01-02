@@ -52,7 +52,7 @@
                         <%=new Utils().numberFormat(p.getPrice())%>원 
                     </span>
                     <span class="price"> 
-                        -> <%=new Utils().numberFormat((int)(p.getPrice()-p.getPrice()*p.getDiscount()))%>원
+                        → <%=new Utils().numberFormat((int)(p.getPrice()-p.getPrice()*p.getDiscount()))%>원
                     </span>
 <%} %>
                 </p>
@@ -86,7 +86,7 @@ $(".wishList").on("click",function(){
 
     //공통 자원 값 초기화
     $amount.text("0");
-    $priceSum.html("0<small>원</small>");
+//     $priceSum.html("0<small>원</small>");
     $(".modal-wish #product-id").val(pId);
 
     //모달 화면에 표시
