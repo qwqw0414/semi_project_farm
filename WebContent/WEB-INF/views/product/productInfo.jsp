@@ -266,9 +266,9 @@ $("#btn-WishList").click(()=>{
                             <div class="input-group-prepend">
                                 <span class="input-group-text">우편번호 & 주소</span>
                             </div>
-                            <input type="text" class="form-control" readonly id="member-zipcode">
+                            <input type="text" class="form-control" readonly id="zipCode">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary">검색</button>
+                                <button class="btn btn-outline-secondary" id="zipcodeSearchBtn">검색</button>
                             </div>
                         </div>
                     </div>
@@ -297,6 +297,17 @@ $("#btn-WishList").click(()=>{
     </div>
 </div>
 <script>
+$('#zipcodeSearchBtn').click(function() {
+    var url = "<%=request.getContextPath()%>/zipcode/search";
+    var title = "우편번호 검색";
+    var width = 600;
+    var height = 400;
+    var left = Math.ceil((window.screen.width - width) / 2);
+    var top = Math.ceil((window.screen.height - height) / 2);
+
+    open(url, title, "left=" + left + "px, top=" + top + "px, width=" + width + "px, height=" + height + "px");
+});
+
 //모달 비활성화
 $(".modal-order .close").click(() => {
     $(".modal-order").css("display", "none");
@@ -308,7 +319,7 @@ $(()=>{
     var $price = $(".modal-order #product-price");
     var $stock = $(".modal-order #product-stock");
     var $address = $(".modal-order #member-address");
-    var $zipcode = $(".modal-order #member-zipcode");
+    var $zipcode = $(".modal-order #zipCode");
     var memberId = "<%=memberLoggedIn.getMemberId()%>";
 
     if($stock.text() >= 100)

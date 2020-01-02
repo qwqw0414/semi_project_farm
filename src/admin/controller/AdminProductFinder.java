@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import common.BaseData;
 import product.model.vo.Product;
 
 /**
@@ -26,18 +27,14 @@ public class AdminProductFinder extends HttpServlet {
 		
 			//페이징바 파라미터 핸들링
 		int cPage = 1;
-		final int numPerPage = 10;
+		final int numPerPage = new BaseData().getPagenum();
 		
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));			
 		}catch(NumberFormatException e) {
 			
 		}
-		
-		
-		
-		
-		
+
 		//1.파라미터
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
@@ -66,10 +63,7 @@ public class AdminProductFinder extends HttpServlet {
 			}
 			list = adminService.selectProductByCategory(searchKeyword, cPage, numPerPage);break;
 		}
-		
-		
-		
-		
+
 		//페이징바 영역
 		int totalContent = 0;
 		switch(searchType) {
@@ -84,7 +78,8 @@ public class AdminProductFinder extends HttpServlet {
 				//페이지바 html코드
 				String pageBar = "";	
 				//페이지바 길이
-				int pageBarSize = 5;
+
+				int pageBarSize = new BaseData().getPAGEBARSIZE();
 				//(공식3)시작페이지 번호 세팅
 				int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
 				//종료페이지 번호 세팅
@@ -117,11 +112,6 @@ public class AdminProductFinder extends HttpServlet {
 					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>≫</a></li>";
 				}
 				
-		
-		
-		
-		
-		
 		//3.뷰단
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar",pageBar);

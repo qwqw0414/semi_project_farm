@@ -86,7 +86,7 @@ function loginGo() {
 					</div>
 					<div class="col-4">
 						<input type="hidden" id="product-id">
-						<input type="button" class="btn btn-info btn-block" value="장바구니" id="btn-wishlist">
+						<input type="button" class="btn btn-info btn-block btn-main-bg" value="장바구니" id="btn-wishlist">
 					</div>
 				</div>
 			</div>
@@ -174,6 +174,9 @@ $(()=>{
 				</div>
 			</li>
 	
+			<li class="nav-item">
+				<a class="nav-link" href="<%=request.getContextPath()%>/common/severError">서버에러페이지</a>
+			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=request.getContextPath()%>/common/error">에러페이지</a>
 			</li>

@@ -27,7 +27,7 @@
                             <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호"
                                 required>
                         </div>
-                        <input type="text" class="form-control" readonly name="addr" required>
+                        <input type="text" class="form-control" readonly name="addr" id="addr" required>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
                                 id="button-addon2">우편번호 검색</button>
@@ -38,16 +38,27 @@
                     <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요."
                         required>
                 </div>
-        <button type="submit" class="btn btn-primary">수정 하기</button>
+        <button type="submit" class="btn btn-primary btn-main-bg">수정 하기</button>
         <%if(memberLoggedIn.getMemberId().equals(m.getMemberId())){ %>
-        <button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword?memberId='">비밀번호 수정</button>
+        <button type="button" class="btn btn-primary btn-main-bg" onclick="location.href='<%=request.getContextPath()%>/member/ChangePassword?memberId='">비밀번호 수정</button>
         <%} %>
-        <button type="button" class="btn btn-primary btn-member-delete" onclick="return confirm_delete()">회원탈퇴</button>
+        <button type="button" class="btn btn-primary btn-member-delete btn-sub-bg" onclick="return confirm_delete()">회원탈퇴</button>
     </form>
 </div>
 
 
 <script>
+$('#zipcodeSearchBtn').click(function() {
+    var url = "<%=request.getContextPath()%>/zipcode/search";
+    var title = "우편번호 검색";
+    var width = 600;
+    var height = 400;
+    var left = Math.ceil((window.screen.width - width) / 2);
+    var top = Math.ceil((window.screen.height - height) / 2);
+
+    open(url, title, "left=" + left + "px, top=" + top + "px, width=" + width + "px, height=" + height + "px");
+});
+
 function confirm_delete(){
 	var bool = confirm("정말로 탈퇴하시겠습니까?")
 	

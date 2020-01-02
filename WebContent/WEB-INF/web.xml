@@ -83,20 +83,28 @@
     <servlet-name>wishListServlet</servlet-name>
     <url-pattern>/product/wishList</url-pattern>
   </servlet-mapping>
-    <error-page>
-	  <exception-type>java.lang.Exception</exception-type>
-	  <location>/views/common/error.jsp</location>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/views/common/serverError.jsp</location>
   </error-page>
   <error-page>
-	  <error-code>404</error-code>
-	  <location>/views/common/error.jsp</location>
+    <error-code>404</error-code>
+    <location>/views/common/error.jsp</location>
   </error-page>
-    <servlet>
+  <servlet>
     <servlet-name>errorServlet</servlet-name>
     <jsp-file>/WEB-INF/views/common/error.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>errorServlet</servlet-name>
     <url-pattern>/common/error</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>serverErrorServlet</servlet-name>
+    <jsp-file>/WEB-INF/views/common/serverError.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>serverErrorServlet</servlet-name>
+    <url-pattern>/common/severError</url-pattern>
   </servlet-mapping>
 </web-app>

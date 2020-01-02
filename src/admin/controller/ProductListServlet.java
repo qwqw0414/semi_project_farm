@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import common.BaseData;
 import product.model.vo.Product;
 
 /**
@@ -26,7 +27,7 @@ public class ProductListServlet extends HttpServlet {
 
 		//페이징바 처리
 		int cPage = 1;//초기값 설정
-		final int numPerPage = 10; 
+		final int numPerPage = new BaseData().getPagenum(); 
 		
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));			
@@ -39,7 +40,7 @@ public class ProductListServlet extends HttpServlet {
 		System.out.printf("totalContent=%s, totalPage=%s%n", totalContent, totalPage);
 		
 		String pageBar = "";
-		int pageBarSize = 5;   //테스트 페이징바에 2개만 표시  
+		int pageBarSize = new BaseData().getPAGEBARSIZE();   //테스트 페이징바에 2개만 표시  
 		
 		int pageStart = ((cPage-1)/pageBarSize)*pageBarSize + 1;
 		int pageEnd = pageStart+pageBarSize-1;
