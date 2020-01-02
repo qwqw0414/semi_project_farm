@@ -4,7 +4,7 @@
 
 <div class="memberEnroll" style="margin: auto;">
 
-    <div><h2>회원가입</h2></div>    
+    <div><h2 class="text-center">회원가입</h2><br /></div>    
     <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST"
         onsubmit="return enrollValidate()">
         <div class="form-group">
@@ -49,7 +49,7 @@
             <div id="address-msg"></div>
         </div>
         <input type="hidden" id="id-duple-chk" value="0">
-        <button type="submit" class="btn btn-block btn-primary">회원 가입</button>
+        <button type="submit" class="btn btn-block btn-primary btn-main-bg">회원 가입</button>
     </form>
 </div>
 
