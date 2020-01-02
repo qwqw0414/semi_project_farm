@@ -41,26 +41,7 @@ $(()=>{
 	
 });
 
-
-
-
-
-
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-   
-
 
 <section id="productList-container">
 <h2 class="main-color text-center page-title">상품리스트</h2>

@@ -11,6 +11,8 @@
 <%=(str!=null)?str:"" %>
 
 <div class="container pwd-update-container">
+<h2 class="main-color text-center page-title">비밀번호 찾기</h2>
+<hr class="divide"/>
 	<%if(m==null ){ %>
 	<form action="<%=request.getContextPath()%>/member/UpdatePasswordEnd"
 		method="POST" onsubmit="return password_validate();">
@@ -30,7 +32,7 @@
 				value="" placeholder="전화번호"> <small
 				class="form-text text-muted">전화번호를 입력하세요.</small>
 		</div>
-		<button type="submit" class="btn btn-primary pwd-find-btn">확인</button>
+		<button type="submit" class="btn btn-primary pwd-find-btn btn-main-bg">확인</button>
 	</form>
 	<% }else {%>
 	<form action="<%=request.getContextPath()%>/member/PasswordUpdateEnd"
@@ -98,9 +100,9 @@ function password2_validate(){
 }
 
 </script>
-
-
-
+	<br>
+	<br>
+	<br>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 
