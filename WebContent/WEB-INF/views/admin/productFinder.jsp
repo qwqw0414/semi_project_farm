@@ -60,7 +60,7 @@ $(()=>{
 <section id="productList-container">
 	<h1 class="main-color text-center page-title">상품리스트</h1>
 	<hr class="divide"/>
-	<div id="search-container"  class="form-row align-items-center mx-auto" style="width:600px;">
+	<div id="search-container"  class="form-row align-items-center mx-auto" style="width:700px;">
 			<div class="col-auto by-1">
 			<select id="searchType" class="custom-select mr-sm-2">
 			<option value="pName" <%="pName".equals(searchType) ? "selected" : ""%>>상품명</option>

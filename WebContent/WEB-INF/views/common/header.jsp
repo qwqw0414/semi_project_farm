@@ -146,6 +146,9 @@ $(()=>{
 			},
 			error: (jqxhr, textStatus, errorThrown)=>{
 				console.log(jqxhr, textStatus, errorThrown);
+			},
+			complete: ()=>{	
+				wishListNum();
 			}
 		});
 	});
@@ -236,9 +239,30 @@ $(()=>{
 <%			
 			}
 %>
+<%if(memberLoggedIn != null && !memberLoggedIn.isAdmin()){%>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=request.getContextPath()%>/product/wishList">장바구니</a>
+				<a class="nav-link" href="<%=request.getContextPath()%>/product/wishList">장바구니 <span class="badge badge-light" id="wishListNum"></span></a>
 			</li>
+<script>
+
+function wishListNum(){
+	var $wishNum = $("a.nav-link #wishListNum");
+
+	$.ajax({
+		url: "<%=request.getContextPath()%>/product/wishListCount",
+		success: data=>{
+			$wishNum.text(data.result);
+		},
+		error: (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
+		}
+
+	});
+}
+wishListNum();
+</script>
+<%}%>
+
 		</ul>
 	</nav>
 </header>

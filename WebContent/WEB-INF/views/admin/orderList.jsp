@@ -10,7 +10,7 @@
 	String status = (String)request.getAttribute("status");
 	
 %>
-<h2 class="main-color text-center page-title">주문 관리</h2>
+<h1 class="main-color text-center page-title">주문 관리</h1>
 <hr class="divide"/>
 	<div class="custom-control custom-switch float-right">
 		<input type="checkbox" class="custom-control-input" id="orderByStatusN"
