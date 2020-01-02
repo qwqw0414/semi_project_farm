@@ -113,7 +113,7 @@ $(()=>{
 					<%="Category".equals(searchType) && "G".equals(searchKeyword) ? "checked" : ""%>/>
 					<label for="gogi">육류</label>
 
-
+	
 
 
 
