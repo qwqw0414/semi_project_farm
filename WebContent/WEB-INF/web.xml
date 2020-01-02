@@ -84,16 +84,13 @@
     <url-pattern>/product/wishList</url-pattern>
   </servlet-mapping>
   <!-- 공용 에러 페이지 설정 -->
-  <error-page>
-    <exception-type>java.lang.Exception</exception-type>
-    <location>/views/common/serverError.jsp</location>
+ <error-page>
+ 
+    <location>/WEB-INF/views/common/error.jsp</location>
   </error-page>
-  <error-page>
-    <error-code>404</error-code>
-    <location>/views/common/error.jsp</location>
-  </error-page>
+ 
   <!-- 에러 페이지 임시 맵핑  -->
-  <servlet>
+<!--   <servlet>
     <servlet-name>errorServlet</servlet-name>
     <jsp-file>/WEB-INF/views/common/error.jsp</jsp-file>
   </servlet>
@@ -108,5 +105,5 @@
   <servlet-mapping>
     <servlet-name>serverErrorServlet</servlet-name>
     <url-pattern>/common/severError</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 </web-app>

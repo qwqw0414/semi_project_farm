@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isErrorPage="true"%>
+	<%
+	 int statusCode = response.getStatus();
+	 String msg = (exception==null)?String.valueOf(statusCode):exception.getMessage();
+%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/css.css">
