@@ -17,12 +17,14 @@
 <head>
 <meta charset="UTF-8">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/css.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>우편번호검색</title>
 </head>
 <body>
     <div class="container text-center">
-        <h2>우편번호 검색</h2>
+        <h2 class="main-color text-center page-title">우편번호 검색</h2>
+		<hr class="divide"/>
         <form action="<%=request.getContextPath()%>/zipcode/search" method="get">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
