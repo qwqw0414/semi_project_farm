@@ -19,7 +19,8 @@
             <option value="과일">과일</option>
             <option value="채소">채소</option>
             <option value="육류">육류</option>
-            <option value="생선">생선</option>
+            <option value="해산물">해산물</option>
+            <option value="버섯">버섯</option>
         </select>
     </div>
     <div class="input-group mb-3">
