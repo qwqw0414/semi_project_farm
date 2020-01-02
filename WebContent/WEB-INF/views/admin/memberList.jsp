@@ -57,7 +57,7 @@ $(()=>{
 				<input type="hidden" name="searchType" value="memberId"/>
 				<input type="search" name="searchKeyword" size="25" class="form-control mr-sm-2" 
 					   placeholder="검색할 아이디를 입력하세요"/>
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
 		<div id="search-phone">
@@ -65,7 +65,7 @@ $(()=>{
 				<input type="hidden" name="searchType" value="phone"/>
 				<input type="search" name="searchKeyword" size="25" class="form-control mr-sm-2" 
 					   placeholder="검색할 전화번호 입력하세요"/>
-				<input type="submit" value="검색" />
+				<input type="submit" value="검색" class="btn btn-success" />
 			</form>
 		</div>
 		<button onclick="location.href='<%=request.getContextPath()%>/admin/memberList'" class="btn btn-secondary" >전체검색</button>
