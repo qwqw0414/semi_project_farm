@@ -156,7 +156,7 @@ function loadWishList(){
 					html += "<tr><th><input type='checkbox' class='check-WishList' checked='checked'></th>";
 
 				html += "<td><img src='/farm/upload/product/" + wishList.photo + "'></td>";
-				html += "<td>" + wishList.pName + "</td>";
+				html += "<td><a href='<%=request.getContextPath()%>/product/productInfo?pId="+wishList.pId+"'>" + wishList.pName + "</a></td>";
 				
 				if((wishList.stock - wishList.amount)<0)
 					html += "<td><del><span class='amount'>" + wishList.amount + "</span> 개</del><br><span class='badge badge-danger'>재고 부족</span></td>";
