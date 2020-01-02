@@ -3,54 +3,52 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <div class="memberEnroll" style="margin: auto;">
-
-    <div><h2 class="text-center">회원가입</h2><br /></div>    
-    <form action="<%=request.getContextPath()%>/member/memberEnrollEnd" name="frmMemberEnroll" method="POST"
-        onsubmit="return enrollValidate()">
-        <div class="form-group">
-            <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
-            <div id="id-msg" class="invalid-feedback"></div>
+<div>
+    <h2 class="text-center">회원가입</h2><br />
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
+    <div id="id-msg" class="invalid-feedback"></div>
+</div>
+<div class="form-group">
+    <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호"> 
+    <div id="pwd-msg"></div>
+</div>
+<div class="form-group">
+    <input type="password" class="form-control" id="pwdck" placeholder="비밀번호 확인"> 
+    <div id="pwdck-msg"></div>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" id="memberName" name="memberName" placeholder="성명">
+    <div id="name-msg"></div>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일"
+        maxlength="6"> 
+    <div id="birth-msg"></div>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처"
+        maxlength="11"> 
+    <div id="phone-msg"></div>
+</div>
+<div class="form-group">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호">
         </div>
-        <div class="form-group">
-            <input type="password" class="form-control" id="pwd" name="password" placeholder="비밀번호"> 
-            <div id="pwd-msg"></div>
+        <input type="text" class="form-control" readonly name="addr" id="addr" required>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn">우편번호 검색</button>
         </div>
-        <div class="form-group">
-            <input type="password" class="form-control" id="pwdck" placeholder="비밀번호 확인"> 
-            <div id="pwdck-msg"></div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="memberName" name="memberName" placeholder="성명">
-            <div id="name-msg"></div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일"
-                maxlength="6"> 
-            <div id="birth-msg"></div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처"
-                maxlength="11"> 
-            <div id="phone-msg"></div>
-        </div>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호">
-                </div>
-                <input type="text" class="form-control" readonly name="addr" required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn">우편번호 검색</button>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요.">
-            <div id="address-msg"></div>
-        </div>
-        <input type="hidden" id="id-duple-chk" value="0">
-        <button type="submit" class="btn btn-block btn-primary btn-main-bg">회원 가입</button>
-    </form>
+    </div>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요.">
+    <div id="address-msg"></div>
+</div>
+<input type="hidden" id="id-duple-chk" value="0">
+<button class="btn btn-block btn-primary btn-main-bg" id="btn-memberEnroll">회원 가입</button>
 </div>
 
 </body>
@@ -78,6 +76,65 @@ var $phone_msg = $(".memberEnroll #phone-msg");
 var $zipcode = $(".memberEnroll #zipCode");
 var $address = $(".memberEnroll #address");
 var $address_msg = $(".memberEnroll #address-msg");
+var $addr = $(".memberEnroll #addr");
+
+// 회원가입
+// <%=request.getContextPath()%>/member/memberEnrollEnd
+$("#btn-memberEnroll").click(()=>{
+        if($idDupleChk.val() == 0){
+        $memberId.attr("class",invalid);
+        $memberId_msg.attr("class",invalidMsg);
+        $memberId_msg.text("아이디를 입력해주세요.");
+        $memberId.focus();
+        return;
+    }
+
+    //비밀번호 검사
+    if(!valid_pwd())
+        return;
+
+    //비밀번호 확인
+    if(!valid_pwdck())
+        return;
+
+    //성명 확인
+    if(!valid_name())
+        return;
+
+    //생년월일 확인
+    if(!valid_birth())
+        return;
+
+    //연락처 확인
+    if(!valid_phone())
+        return;
+
+    if(!valid_address()){
+        return;
+    }
+
+    $.ajax({
+		url:"<%=request.getContextPath()%>/member/memberEnrollEnd",
+		data:{memberId: $memberId.val(),
+              password: $pwd.val(),
+              memberName: $name.val(),
+              birth: $birth.val(),
+              phone: $phone.val(),
+              zipcode: $zipcode.val(),
+              addr: $addr.val(),
+              address: $address.val()
+        },
+		success: data =>{
+			
+        },
+		error : (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
+		},complete: data => {
+            location.href = "<%=request.getContextPath()%>/product/productView";
+        }
+    });
+
+});
 
 //이벤트 처리
 $($pwd).change(()=>{valid_pwd();});

@@ -70,8 +70,10 @@ btnSelect.onclick = function(){
     var code = $("#zipcodeSel").val();
     var frm = opener.frmMemberEnroll;
     var codeArr = code.split("|");
-    frm.zipcode.value = codeArr[0];
-    frm.addr.value = codeArr[1];
+    // opener.document.getElementById("zipcode").value = codeArr[0];
+    $("#zipCode", parent.opener.document).val(codeArr[0]);
+    $("#addr", parent.opener.document).val(codeArr[1]);
+    // frm.addr.value = codeArr[1];
     self.close();
 }
 </script>
