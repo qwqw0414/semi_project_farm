@@ -39,7 +39,7 @@ public class ProductListServlet extends HttpServlet {
 		System.out.printf("totalContent=%s, totalPage=%s%n", totalContent, totalPage);
 		
 		String pageBar = "";
-		int pageBarSize = 2;   //테스트 페이징바에 2개만 표시  
+		int pageBarSize = 5;   //테스트 페이징바에 2개만 표시  
 		
 		int pageStart = ((cPage-1)/pageBarSize)*pageBarSize + 1;
 		int pageEnd = pageStart+pageBarSize-1;
