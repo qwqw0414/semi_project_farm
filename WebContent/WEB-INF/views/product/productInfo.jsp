@@ -211,6 +211,11 @@ $("#btn-WishList").click(()=>{
         },
         error: (jqxhr, textStatus, errorThrown)=>{
             console.log(jqxhr, textStatus, errorThrown);
+        },
+        complete: ()=>{	
+            wishListNum();
+            $("#amount").val(0);
+            $("#buy-amount").text("0");
         }
     });
 });

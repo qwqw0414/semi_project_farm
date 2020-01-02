@@ -131,7 +131,7 @@ function deleteWishList(btn){
 			console.log(jqxhr, textStatus, errorThrown);
 		},
 		complete: ()=>{
-			wishListNum();
+			// wishListNum();
 		}
 
 	});
@@ -187,6 +187,8 @@ function loadWishList(){
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
 			console.log(jqxhr, textStatus, errorThrown);
+		},complete : ()=>{
+			wishListNum();
 		}
 
 	});
