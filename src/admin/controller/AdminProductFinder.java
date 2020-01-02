@@ -78,6 +78,7 @@ public class AdminProductFinder extends HttpServlet {
 				//페이지바 html코드
 				String pageBar = "";	
 				//페이지바 길이
+
 				int pageBarSize = new BaseData().getPAGEBARSIZE();
 				//(공식3)시작페이지 번호 세팅
 				int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
@@ -90,7 +91,7 @@ public class AdminProductFinder extends HttpServlet {
 
 				}
 				else {
-					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+(pageNo-pageBarSize)+"'>이전</a></li> ";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+(pageNo-pageBarSize)+"'>≪</a></li> ";
 				}
 				// pageNo section
 				while(pageNo<=pageEnd && pageNo<=totalPage){
@@ -108,7 +109,7 @@ public class AdminProductFinder extends HttpServlet {
 					
 				} else {
 					
-					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>다음</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/admin/productFinder?searchType="+searchType+"&searchKeyword="+searchKeyword+"&cPage="+pageNo+"'>≫</a></li>";
 				}
 				
 		//3.뷰단
