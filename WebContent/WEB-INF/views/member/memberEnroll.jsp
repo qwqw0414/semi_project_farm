@@ -4,7 +4,8 @@
 
 <div class="memberEnroll" style="margin: auto;">
 <div>
-    <h2 class="text-center">회원가입</h2><br />
+    <h1 class="main-color text-center page-title">회원가입</h1>
+<hr class="divide"/><br />
 </div>
 <div class="form-group">
     <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">

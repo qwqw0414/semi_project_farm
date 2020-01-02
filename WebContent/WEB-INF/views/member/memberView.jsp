@@ -3,6 +3,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<% Member m = (Member)request.getAttribute("member"); %>
 <div class="memberView-container mx-auto">
+<h1 class="main-color text-center page-title">마이 페이지</h1>
+<hr class="divide"/>
 <div class="container">
     <form action="<%=request.getContextPath()%>/member/memberUpdate" method="POST" onsubmit="return enrollValidate();">
         <div class="form-group">
@@ -10,7 +12,7 @@
             <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" readonly value=<%=m.getMemberId() %>>
         </div>
         <div class="form-group">
-                <small id="name_Msg">성명을 입력해주세요.</small>
+                <small id="name_Msg">성명</small>
                 <input type="text" class="form-control" id="memberName" name="memberName" placeholder="성명" required value=<%=m.getMemberName() %> >
         </div>
         <div class="form-group">
@@ -18,7 +20,7 @@
             <input type="text"" class="form-control" id="birth" name="birth" placeholder="생년월일"  readonly value=<%=m.getBirth() %>>
         </div>
         <div class="form-group">
-            <small id="phone_Msg">연락처를 입력해주세요.</small>
+            <small id="phone_Msg">연락처</small>
                 <input type="text" class="form-control" id="phone" name="phone" placeholder="연락처" required  value=<%=m.getPhone() %>
                     maxlength="11"> 
             </div>

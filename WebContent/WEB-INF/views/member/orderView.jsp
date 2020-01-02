@@ -35,7 +35,8 @@
 	System.out.println(year);
 	System.out.println(month);
 %>
-
+<h1 class="main-color text-center page-title">구매 내역 보기</h1>
+<hr class="divide"/>
 <form  class="form-inline" action="<%=request.getContextPath()%>/member/orderViewEnd?memberId=<%=memberLoggedIn.getMemberId()%>"
 	  method="post">
 <select name="year" id="year" class="custom-select my-1 mr-sm-2">
@@ -66,11 +67,11 @@
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-			<th scope="col">이미지</th>
-			<th scope="col">상품명</th>
-			<th scope="col">수량</th>
-			<th scope="col">가격</th>
-			<th scope="col">배송조회</th>
+			<th class="main-bg-border" scope="col">이미지</th>
+			<th class="main-bg-border" scope="col">상품명</th>
+			<th class="main-bg-border" scope="col">수량</th>
+			<th class="main-bg-border" scope="col">가격</th>
+			<th class="main-bg-border" scope="col">배송조회</th>
 		</tr>
 	</thead>
 	<tbody>
