@@ -42,7 +42,7 @@ public class MemberLoginAuthFilter implements Filter {
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		if(memberLoggedIn!=null) {
 			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/product/productView");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 				   .forward(request, response);
 			return;
