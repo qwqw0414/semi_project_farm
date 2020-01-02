@@ -85,25 +85,6 @@
   </servlet-mapping>
   <!-- 공용 에러 페이지 설정 -->
  <error-page>
- 
     <location>/WEB-INF/views/common/error.jsp</location>
   </error-page>
- 
-  <!-- 에러 페이지 임시 맵핑  -->
-<!--   <servlet>
-    <servlet-name>errorServlet</servlet-name>
-    <jsp-file>/WEB-INF/views/common/error.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>errorServlet</servlet-name>
-    <url-pattern>/common/error</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>serverErrorServlet</servlet-name>
-    <jsp-file>/WEB-INF/views/common/serverError.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>serverErrorServlet</servlet-name>
-    <url-pattern>/common/severError</url-pattern>
-  </servlet-mapping> -->
 </web-app>

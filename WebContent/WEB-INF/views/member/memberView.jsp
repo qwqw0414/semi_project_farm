@@ -28,7 +28,7 @@
                             <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호"
                                 required>
                         </div>
-                        <input type="text" class="form-control" readonly name="addr" id="addr" required>
+                        <input type="text" class="form-control" readonly name="addr" id="addr" value='<%=m.getZipcode() %>' required>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
                                 id="button-addon2">우편번호 검색</button>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="address" name="address" placeholder="나머지 주소를 입력해주세요."
+                    <input type="text" class="form-control" id="address" name="address" value='<%=m.getAddress() %>'
                         required>
                 </div>
          <div class="text-center memberView-button">
