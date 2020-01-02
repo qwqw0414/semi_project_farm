@@ -28,6 +28,40 @@
 	/* font-family: 'Noto Sans KR', sans-serif; */
 	/* font-family: 'BMHANNAPro'; */
 }
+
+/* 우리색상 */
+.main-color{
+	color: #592F59 !important;
+}
+.sub-color{
+	color: #fE6F5F !important;
+}
+.main-bg{
+	background-color: #592F59 !important;
+	color: white;
+}
+.sub-bg{
+	background-color: #fE6F5F !important;
+}
+.btn-sub-bg{
+	background-color: #fE6F5F !important;
+	border-color: #fE6F5F !important;
+}
+.btn-main-bg{
+	background-color: #592F59 !important;
+	border-color: #592F59 !important;
+}
+/* 페이지 바 색상 */
+.page-item.active .page-link{
+	background-color: #592F59 !important;
+	border-color: #592F59 !important;
+	color: #fff !important;	
+}
+.page-link{
+	color: #592F59 !important;
+}
+/* end of 우리색상 */
+
 #productList{
 	/* font-family: 'Do Hyeon', sans-serif; */
 	font-family: 'BMHANNAPro';
@@ -180,39 +214,6 @@ footer{
 	height:230px;
 }
 
-
-/* 우리색상 */
-.main-color{
-	color: #592F59 !important;
-}
-.sub-color{
-	color: #fE6F5F !important;
-}
-.main-bg{
-	background-color: #592F59 !important;
-	color: white;
-}
-.sub-bg{
-	background-color: #fE6F5F !important;
-}
-.btn-sub-bg{
-	background-color: #fE6F5F !important;
-	border-color: #fE6F5F !important;
-}
-.btn-main-bg{
-	background-color: #592F59 !important;
-	border-color: #592F59 !important;
-}
-/* 페이지 바 색상 */
-.page-item.active .page-link{
-	background-color: #592F59 !important;
-	border-color: #592F59 !important;
-	color: #fff !important;	
-}
-.page-link{
-	color: #592F59 !important;
-}
-
 /*로그인 화면*/
 .logincontainer{
 	width:380px;
@@ -239,6 +240,11 @@ footer{
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+.login-btn:hover{
+	border-color: #592F59 !important;
+	background-color: #fff !important;
+	color: #592F59 !important;
+}
 .enroll-btn{
 	width:348px;
 	padding: 0;
@@ -246,13 +252,23 @@ footer{
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+.enroll-btn:hover{
+	border-color: #fE6F5F !important;
+	background-color: #fff !important;
+	color: #fE6F5F !important;
+}
 .col-b{
 	font-size: 12px;
 }
 .col-a{
 	padding-left: 112px;
 }
-
+/* 회원 가입 화면 */
+.btn-block:hover{
+	border-color: #592F59 !important;
+	background-color: #fff !important;
+	color: #592F59 !important;
+}
 /*아이디 찾기 화면*/
 .find-id-container{
 	width:380px;
@@ -289,7 +305,7 @@ footer{
 	margin-top: 10px;
 }
 
-/* hr 실험용 */
+/* hr */
 .divide{
 	border: 0;
 	height: 3px;

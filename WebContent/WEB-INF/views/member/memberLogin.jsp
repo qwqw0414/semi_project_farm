@@ -43,8 +43,8 @@
 						<a class="find-pw-link" href='<%=request.getContextPath()%>/member/updatePassword'">비밀번호 찾기</a>
 					</div>
 			</div>
-			<button type="submit" class="btn btn-primary login-btn">로그인</button><br>
-	        <button type="button" class="btn btn-primary enroll-btn" onclick="location.href='<%=request.getContextPath()%>/member/memberEnroll'">회원가입</button>
+			<button type="submit" class="btn btn-primary login-btn btn-main-bg">로그인</button><br>
+	        <button type="button" class="btn btn-primary enroll-btn btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/member/memberEnroll'">회원가입</button>
         </form>
 </div>
 

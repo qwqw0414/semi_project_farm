@@ -49,7 +49,7 @@
             <div id="address-msg"></div>
         </div>
         <input type="hidden" id="id-duple-chk" value="0">
-        <button type="submit" class="btn btn-block btn-primary">회원 가입</button>
+        <button type="submit" class="btn btn-block btn-primary btn-main-bg">회원 가입</button>
     </form>
 </div>
 
