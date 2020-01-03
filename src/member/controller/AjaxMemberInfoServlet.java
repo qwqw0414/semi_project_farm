@@ -27,6 +27,7 @@ public class AjaxMemberInfoServlet extends HttpServlet {
 		jsonMember.put("memberName", m.getMemberName());
 		jsonMember.put("address", m.getAddress());
 		jsonMember.put("zipcode", m.getZipcode());
+		jsonMember.put("detail", m.getDetail());
 		jsonMember.put("phone", m.getPhone());
 		jsonMember.put("birth", m.getBirth());
 		

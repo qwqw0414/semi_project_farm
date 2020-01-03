@@ -202,6 +202,21 @@ public class ProductService {
 		return result;
 	}
 
+	public int insertOrderListDir(OrderList order) {
+		Connection conn = getConnection();
+		int result = 0;
+		result = new ProductDAO().insertOrderListDir(conn, order);
+		
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }
 
 

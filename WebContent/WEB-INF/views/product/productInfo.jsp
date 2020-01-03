@@ -268,10 +268,10 @@ $("#btn-WishList").click(()=>{
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">우편번호 & 주소</span>
+                            <div class="input-group-prepend" style="width: 100px;">
+                                <input type="text" readonly class="form-control" id="member-zipcode"></span>
                             </div>
-                            <input type="text" class="form-control" readonly id="zipCode">
+                            <input type="text" class="form-control" readonly id="member-address">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" id="zipcodeSearchBtn">검색</button>
                             </div>
@@ -280,7 +280,7 @@ $("#btn-WishList").click(()=>{
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" id="member-address">
+                        <input type="text" class="form-control" id="member-detail">
                     </div>
                 </div>
                 <hr>
@@ -305,9 +305,9 @@ $("#btn-WishList").click(()=>{
 $('.modal-order #zipcodeSearchBtn').click(function() {
     new daum.Postcode({
         oncomplete: function(data) {
-            $(".modal-order #zipCode").val(data.zonecode);
+            $(".modal-order #member-zipcode").val(data.zonecode);
             $(".modal-order #member-address").val(data.address);
-            $(".modal-order #member-address").focus();
+            $(".modal-order #member-detail").focus();
         }
     }).open();
 });
@@ -323,7 +323,8 @@ $(()=>{
     var $price = $(".modal-order #product-price");
     var $stock = $(".modal-order #product-stock");
     var $address = $(".modal-order #member-address");
-    var $zipcode = $(".modal-order #zipCode");
+    var $zipcode = $(".modal-order #member-zipcode");
+    var $detail = $(".modal-order #member-detail");
     var memberId = "<%=memberLoggedIn.getMemberId()%>";
 
     if($stock.text() >= 100)
@@ -348,6 +349,7 @@ $(()=>{
             success: data =>{
 
                 $address.val(data.address);
+                $detail.val(data.detail);
                 $zipcode.val(data.zipcode);
                 $(".modal-order").css("display","block");
             },
@@ -421,15 +423,22 @@ $(()=>{
             return;
         }
 
+        if($detail.val().length < 1){
+            alert("상세정보를 입력해주세요.");
+            $detail.focus();
+            return;
+        }
+
         $.ajax({
-            url:"<%=request.getContextPath()%>//product/directOrder",
+            url:"<%=request.getContextPath()%>/product/directOrder",
             type: "post",
             data: { amount: Number($amount.text()),
                     pId: pId,
                     memberId: memberId,
                     price: price,
                     address: $address.val(),
-                    zipcode: $zipcode.val()
+                    zipcode: $zipcode.val(),
+                    detail: $detail.val()
                   },
             dataType: "json",
             success: data =>{

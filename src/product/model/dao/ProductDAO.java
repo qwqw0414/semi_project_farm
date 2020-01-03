@@ -548,6 +548,31 @@ public class ProductDAO {
 		return result;
 	}
 
+	public int insertOrderListDir(Connection conn, OrderList order) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertOrderListDir");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, order.getMemberId());
+			pstmt.setInt(2, order.getpId());
+			pstmt.setInt(3, order.getPrice());
+			pstmt.setInt(4, order.getAmount());
+			pstmt.setString(5, order.getZipcode());
+			pstmt.setString(6, order.getAddress());
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
 
 
