@@ -89,7 +89,7 @@ $(()=>{
 				<td><%=m.getBirth() %></td>
 				<td><%=m.getPhone()%></td>
 				<td><%=m.getZipcode() %></td>
-				<td><%=m.getAddress()%></td>
+				<td><%=m.getAddress()%> <%=m.getDetail() %></td>
 				<td><%=m.getEnrolldate()%></td>
 			</tr>
 			<%} %>
