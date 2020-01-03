@@ -81,6 +81,7 @@ public class MemberDAO {
 			pstmt.setString(++cnt, m.getPhone());
 			pstmt.setString(++cnt, m.getZipcode());
 			pstmt.setString(++cnt, m.getAddress());
+			pstmt.setString(++cnt, m.getDetail());
 			
 			result = pstmt.executeUpdate();
 			

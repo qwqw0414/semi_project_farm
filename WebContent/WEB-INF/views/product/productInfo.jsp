@@ -302,15 +302,14 @@ $("#btn-WishList").click(()=>{
     </div>
 </div>
 <script>
-$('#zipcodeSearchBtn').click(function() {
-    var url = "<%=request.getContextPath()%>/zipcode/search";
-    var title = "우편번호 검색";
-    var width = 600;
-    var height = 400;
-    var left = Math.ceil((window.screen.width - width) / 2);
-    var top = Math.ceil((window.screen.height - height) / 2);
-
-    open(url, title, "left=" + left + "px, top=" + top + "px, width=" + width + "px, height=" + height + "px");
+$('.modal-order #zipcodeSearchBtn').click(function() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $(".modal-order #zipCode").val(data.zonecode);
+            $(".modal-order #member-address").val(data.address);
+            $(".modal-order #member-address").focus();
+        }
+    }).open();
 });
 
 //모달 비활성화

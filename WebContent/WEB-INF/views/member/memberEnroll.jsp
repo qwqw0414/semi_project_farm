@@ -312,14 +312,13 @@ $("#memberId").change(()=>{
 }
 
 $('#zipcodeSearchBtn').click(function() {
-    var url = "<%=request.getContextPath()%>/zipcode/search";
-    var title = "우편번호 검색";
-    var width = 600;
-    var height = 400;
-    var left = Math.ceil((window.screen.width - width) / 2);
-    var top = Math.ceil((window.screen.height - height) / 2);
-
-    open(url, title, "left=" + left + "px, top=" + top + "px, width=" + width + "px, height=" + height + "px");
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $(".memberEnroll #zipCode").val(data.zonecode);
+            $(".memberEnroll #addr").val(data.address);
+            $(".memberEnroll #address").focus();
+        }
+    }).open();
 });
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

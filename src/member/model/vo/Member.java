@@ -17,6 +17,7 @@ public class Member implements Serializable, HttpSessionBindingListener {
 	private String phone;
 	private String zipcode;
 	private String address;
+	private String detail;
 	private Date enrolldate;
 	private boolean isAdmin;
 
@@ -25,7 +26,8 @@ public class Member implements Serializable, HttpSessionBindingListener {
 	}
 
 	public Member(String memberId, String password, String memberName, String birth, String phone, String zipcode,
-			String address, Date enrolldate, boolean isAdmin) {
+			String address, String detail, Date enrolldate, boolean isAdmin) {
+		super();
 		this.memberId = memberId;
 		this.password = password;
 		this.memberName = memberName;
@@ -33,6 +35,7 @@ public class Member implements Serializable, HttpSessionBindingListener {
 		this.phone = phone;
 		this.zipcode = zipcode;
 		this.address = address;
+		this.detail = detail;
 		this.enrolldate = enrolldate;
 		this.isAdmin = isAdmin;
 	}
@@ -93,6 +96,14 @@ public class Member implements Serializable, HttpSessionBindingListener {
 		this.address = address;
 	}
 
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
 	public Date getEnrolldate() {
 		return enrolldate;
 	}
@@ -114,27 +125,26 @@ public class Member implements Serializable, HttpSessionBindingListener {
 	}
 
 	@Override
-	public void valueBound(HttpSessionBindingEvent event) {
-
-	}
-
-	@Override
-	public void valueUnbound(HttpSessionBindingEvent event) {
-
-	}
-
-	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName + ", birth="
-				+ birth + ", phone=" + phone + ", zipcode=" + zipcode + ", address=" + address + ", enrolldate="
-				+ enrolldate + ", isAdmin=" + isAdmin + "]";
+				+ birth + ", phone=" + phone + ", zipcode=" + zipcode + ", address=" + address + ", detail=" + detail
+				+ ", enrolldate=" + enrolldate + ", isAdmin=" + isAdmin + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
+		result = prime * result + ((detail == null) ? 0 : detail.hashCode());
+		result = prime * result + ((enrolldate == null) ? 0 : enrolldate.hashCode());
+		result = prime * result + (isAdmin ? 1231 : 1237);
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + ((memberName == null) ? 0 : memberName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
 
@@ -147,12 +157,68 @@ public class Member implements Serializable, HttpSessionBindingListener {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (birth == null) {
+			if (other.birth != null)
+				return false;
+		} else if (!birth.equals(other.birth))
+			return false;
+		if (detail == null) {
+			if (other.detail != null)
+				return false;
+		} else if (!detail.equals(other.detail))
+			return false;
+		if (enrolldate == null) {
+			if (other.enrolldate != null)
+				return false;
+		} else if (!enrolldate.equals(other.enrolldate))
+			return false;
+		if (isAdmin != other.isAdmin)
+			return false;
 		if (memberId == null) {
 			if (other.memberId != null)
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (memberName == null) {
+			if (other.memberName != null)
+				return false;
+		} else if (!memberName.equals(other.memberName))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (zipcode == null) {
+			if (other.zipcode != null)
+				return false;
+		} else if (!zipcode.equals(other.zipcode))
+			return false;
 		return true;
 	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

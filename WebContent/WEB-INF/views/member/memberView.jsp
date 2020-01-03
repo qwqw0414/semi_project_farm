@@ -27,10 +27,10 @@
             <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <input type="text" class="form-control" id="zipCode" readonly name="zipcode" placeholder="우편번호"
+                            <input type="text" class="form-control" readonly placeholder="우편번호"
                                 required>
                         </div>
-                        <input type="text" class="form-control" readonly name="addr" id="addr" value='<%=m.getZipcode() %>' required>
+                        <input type="text" class="form-control" readonly name="zipcode" id="zipCode" value='<%=m.getZipcode() %>' required>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
                                 id="button-addon2">우편번호 검색</button>
@@ -53,15 +53,13 @@
 </div>
 
 <script>
-$('#zipcodeSearchBtn').click(function() {
-    var url = "<%=request.getContextPath()%>/zipcode/search";
-    var title = "우편번호 검색";
-    var width = 600;
-    var height = 400;
-    var left = Math.ceil((window.screen.width - width) / 2);
-    var top = Math.ceil((window.screen.height - height) / 2);
-
-    open(url, title, "left=" + left + "px, top=" + top + "px, width=" + width + "px, height=" + height + "px");
+$('.memberView-container #zipcodeSearchBtn').click(function() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $(".memberView-container #zipCode").val(data.zonecode);
+            $(".memberView-container #addr").val(data.address);
+        }
+    }).open();
 });
 
 function confirm_delete(){
