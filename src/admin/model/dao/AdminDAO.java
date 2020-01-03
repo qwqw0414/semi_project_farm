@@ -159,6 +159,7 @@ public class AdminDAO {
 				m.setPhone(rset.getString("phone"));
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
+				m.setDetail(rset.getString("detail"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
 				
 				list.add(m);
@@ -195,6 +196,7 @@ public class AdminDAO {
 				m.setPhone(rset.getString("phone"));
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
+				m.setDetail(rset.getString("detail"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
 				list.add(m);
 			}
@@ -230,6 +232,7 @@ public class AdminDAO {
 				m.setPhone(rset.getString("phone"));
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
+				m.setDetail(rset.getString("detail"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
 				list.add(m);
 			}
@@ -248,7 +251,7 @@ public class AdminDAO {
 		List<Member> list = null;
 		ResultSet rset = null;
 		Member m = null;
-		String query = prop.getProperty("selectMemberByPhonByPaging");
+		String query = prop.getProperty("selectMemberByPhoneByPaging");
 		list = new ArrayList<>();
 		
 		try {
@@ -266,6 +269,7 @@ public class AdminDAO {
 				m.setPhone(rset.getString("phone"));
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
+				m.setDetail(rset.getString("detail"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
 				list.add(m);
 			}
@@ -649,8 +653,6 @@ public class AdminDAO {
 
 
 	public Product selectProductByPName(String pName, Connection conn) {
-		// TODO Auto-generated method stub
-		
 		Product p = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -716,12 +718,9 @@ public class AdminDAO {
 	}
 
 	public int deleteProduct(Product p, Connection conn) {
-		
 		int result = 0;		
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteProduct");
-		//System.out.println("query="+query);
-		//deleteProduct=DELETE FROM PRODUCT WHERE PID=?
 		
 		try {
 			pstmt = conn.prepareStatement(query);
