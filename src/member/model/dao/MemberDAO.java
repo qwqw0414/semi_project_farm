@@ -50,6 +50,7 @@ public class MemberDAO {
 				m.setPhone(rset.getString("phone"));
 				m.setZipcode(rset.getString("zipcode"));
 				m.setAddress(rset.getString("address"));
+				m.setDetail(rset.getString("detail"));
 				m.setEnrolldate(rset.getDate("enrollDate"));
 				if("Y".equals(rset.getString("admin_yn"))) {
 					m.setAdmin(true);		
@@ -286,7 +287,6 @@ public class MemberDAO {
 	public int memberUpdate(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("memberUpdate");
-		//memberUpdate=update member set membername=?, birth=?, phone=?, zipcode=?, address=? where memberid=?
 		int result = 0;
 		
 		try {
@@ -297,6 +297,7 @@ public class MemberDAO {
 			pstmt.setString(++cnt, m.getPhone());
 			pstmt.setString(++cnt, m.getZipcode());
 			pstmt.setString(++cnt, m.getAddress());
+			pstmt.setString(++cnt, m.getDetail());
 			pstmt.setString(++cnt, m.getMemberId());
 			
 			result = pstmt.executeUpdate();

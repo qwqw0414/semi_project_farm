@@ -31,18 +31,22 @@ public class MemberUpdateServlet extends HttpServlet {
 				//2.전송값 꺼내서 변수에 기록하기.
 				//String javax.servlet.ServletRequest.getParameter(String arg0)
 				String memberId = request.getParameter("memberId");
-//				String password = request.getParameter("password");
 				String memberName = request.getParameter("memberName");
 				String birth = request.getParameter("birth");
 				String phone = request.getParameter("phone");
 				String zipcode = request.getParameter("zipcode");
 				String address = request.getParameter("address");
-				boolean adminYN = false;
-				if("admin".equals(memberId)) {
-					adminYN = true;
-				}
+				String detail = request.getParameter("detail");
 				
-				Member m = new Member(memberId, null, memberName, birth, phone, zipcode, address, null, adminYN);
+				Member m = new Member();
+
+				m.setMemberId(memberId);
+				m.setMemberName(memberName);
+				m.setBirth(birth);
+				m.setPhone(phone);
+				m.setZipcode(zipcode);
+				m.setAddress(address);
+				m.setDetail(detail);
 				
 				//System.out.println("Member@MemberUpdateServlet="+m);
 				
@@ -52,7 +56,7 @@ public class MemberUpdateServlet extends HttpServlet {
 				
 				String view = "/WEB-INF/views/common/msg.jsp";
 				String msg = "";
-				String loc = "/product/productView";
+				String loc = "/member/memberView?memberId="+m.getMemberId();
 				
 
 				if(result > 0) {

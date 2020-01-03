@@ -27,10 +27,9 @@
             <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <input type="text" class="form-control" readonly placeholder="우편번호"
-                                required>
+                            <input type="text" class="form-control" readonly value="<%=m.getZipcode()%>" name="zipcode" id="zipcode">
                         </div>
-                        <input type="text" class="form-control" readonly name="zipcode" id="zipCode" value='<%=m.getZipcode() %>' required>
+                        <input type="text" class="form-control" readonly name="address" id="address" value='<%=m.getAddress() %>' required>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="zipcodeSearchBtn"
                                 id="button-addon2">우편번호 검색</button>
@@ -38,7 +37,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="address" name="address" value='<%=m.getAddress() %>'
+                    <input type="text" class="form-control" id="detail" name="detail" value='<%=m.getDetail()%>'
                         required>
                 </div>
          <div class="text-center memberView-button">
@@ -56,8 +55,9 @@
 $('.memberView-container #zipcodeSearchBtn').click(function() {
     new daum.Postcode({
         oncomplete: function(data) {
-            $(".memberView-container #zipCode").val(data.zonecode);
-            $(".memberView-container #addr").val(data.address);
+            $(".memberView-container #zipcode").val(data.zonecode);
+            $(".memberView-container #address").val(data.address);
+            $(".memberView-container #detail").focus();
         }
     }).open();
 });
