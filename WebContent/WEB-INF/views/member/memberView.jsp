@@ -25,6 +25,7 @@
                     maxlength="11"> 
             </div>
             <div class="form-group">
+                        <small id="zipcode-Msg">우편번호 ｜ 주소</small>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <input type="text" class="form-control" readonly value="<%=m.getZipcode()%>" name="zipcode" id="zipcode">
@@ -37,6 +38,7 @@
                     </div>
                 </div>
                 <div class="form-group">
+                <small id="detail-Msg">상세주소</small>
                     <input type="text" class="form-control" id="detail" name="detail" value='<%=m.getDetail()%>'
                         required>
                 </div>
