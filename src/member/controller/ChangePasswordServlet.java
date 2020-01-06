@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -34,19 +35,19 @@ public class ChangePasswordServlet extends HttpServlet {
 		String msg = "";
 		String loc = "";
 		String view = "/WEB-INF/views/common/msg.jsp";
-		
+		HttpSession session = request.getSession(false);
 		if(m != null) {
 			int result = new MemberService().changeUpdate(m,pwd_new);
 			if(result > 0) {
 				msg = "비밀번호가 변경되었습니다.";
 				loc = "/product/productView";
+				session.invalidate();
 			}
 			
 		}else {
 			msg = "비밀번호를 다시 확인해주세요.";
 			loc = "/member/ChangePassword";
 		}
-		
 		
 	
 		request.setAttribute("msg", msg);

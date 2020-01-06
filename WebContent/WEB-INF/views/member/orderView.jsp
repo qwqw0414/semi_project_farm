@@ -79,7 +79,9 @@
 		<tr>
 			<td><img src="<%=request.getContextPath() %>/upload/product/<%=o.getPhoto() %>" 
 				width="130px" /></td>
-			<td><%=o.getpName() %></td>
+			<td><a href="<%=request.getContextPath()%>/product/productInfo?pId=<%=o.getpId() %>">
+				<%=o.getpName() %></a>
+			</td>
 			<td><%=o.getAmount() %></td>
 			<td><%=o.getPrice() %></td>
 			<td><%="N".equals(o.getStatus())?"준비중":"배송완료" %></td>
