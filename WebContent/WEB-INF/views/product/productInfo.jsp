@@ -21,14 +21,18 @@
 			<div>
                 <div class="goods-info">
                     <h3><%=p.getpName()%></h3><br>
-                    <p class='goods-price-comment'>할인가격</p>
+                    <p class='goods-price-comment'>가격</p>
+<%if(p.getDiscount() > 0){%>
                     <span class='price-info before-price'><%=p.getPrice()%>원</span>
                     <span class='price-info'>→</span>
                     <span class='price-info'><%=new Utils().numberFormat((int)(p.getPrice()-p.getPrice()*p.getDiscount()))%>원</span>
+<%}else{%>
+                    <span class='price-info'><%=new Utils().numberFormat(p.getPrice())%><small>원</small></span>
+<%}%>
                     <hr class="divide-sm">
                     <dl>
                     <dt>상세정보</dt><span>
-				    <dd><%=p.getpInfo() != null ? p.getpInfo() : ""%> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsam assumenda ipsum corrupti repellendus pariatur neque quasi nobis quod eveniet tempora iusto ex deleniti dolor nemo porro cupiditate iste aut?</dd>
+				    <dd><%=p.getpInfo() != null ? p.getpInfo() : ""%></dd>
                 </span>
                 </dl>
                     <hr class="divide-sm">

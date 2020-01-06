@@ -37,9 +37,12 @@
     </div>
     <div class="input-group mb-3">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" id="photo" name="photo">
+            <input type="file" class="custom-file-input" id="photo" name="photo" onchange="LoadImg(this);" required>
             <label class="custom-file-label" for="photo">상품 이미지 등록</label>
         </div>
+    </div>
+    <div class="input-group mb-3 mx-auto">
+        <img src="" id="img-viewer" style="width: 300px;">
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
@@ -52,7 +55,26 @@
 </form>
 </div>
 
+<script>
+function LoadImg(f) {
+    console.dir(f);
+    console.dir(f.files[0]);
 
+    if (f.files && f.files[0]) {
+        let reader = new FileReader();
+        //파일읽기, 읽기완료시 load event 발생
+        reader.readAsDataURL(f.files[0]);
+
+        reader.onload = e => {
+            // 파일컨텐츠는 e.target.resut속성에 담겨있음.
+            $("#img-viewer").attr("src", e.target.result);
+        }
+    }
+    else {
+        $("#img-viewer").attr("src", "");
+    }
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 
