@@ -83,7 +83,12 @@
 			<td><%=o.getAmount() %></td>
 			<td><%=o.getPrice() %></td>
 			<td><%="N".equals(o.getStatus())?"준비중":"배송완료" %></td>
+			<%if(o.getStatus()!=null&&"N".equals(o.getStatus())){ %>
 			<td><button onclick="deleteOrder(<%=o.getOrderId()%>);">x</button></td>
+			<%} else { %>
+			<td></td>
+			<%} %>
+			
 		</tr>
 		<% } %>
 	</tbody>
