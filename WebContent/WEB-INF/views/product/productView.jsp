@@ -36,9 +36,9 @@
             <!-- 세일 표시 -->
 <%if(p.getDiscount() > 0 && p.getStock() > 0){%>
             <span class="sale-view">SALE<br><h4><%=(int)(p.getDiscount()*100)%><small>%</small></h4></span>
-<%}else if(p.getDiscount() > 0 && p.getStock() == 0){%>
+<%}else if(p.getStock() == 0){%>
             <div class="sold-out-view my-auto">
-                <p class="sold-out-msg">재고<br>준비중</p>
+                <p class="sold-out-msg">입고<br>준비중</p>
             </div>
 <%}%>
             <!-- 상품 이미지 -->
