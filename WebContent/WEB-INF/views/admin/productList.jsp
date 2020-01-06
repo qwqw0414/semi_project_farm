@@ -61,7 +61,7 @@ $(()=>{
 		<div id="search-pName">
 			<form action="<%=request.getContextPath()%>/admin/productFinder" >
 				<input type="hidden" name="searchType" value="pName" /> <input
-					type="search" name="searchKeyword" size="15" class="form-control mr-sm-2" 
+					type="search" name="searchKeyword" size="14" class="form-control mr-sm-2" 
 					placeholder="검색할 삼품명을 입력하세요" /> <input type="submit" value="검색"
 					class="btn btn-success" />
 					<button type="button" class="btn btn-primary btn-sub-bg" onclick="location.href='<%=request.getContextPath()%>/admin/productReg'">새상품 추가하기</button>
