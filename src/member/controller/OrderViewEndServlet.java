@@ -59,7 +59,7 @@ public class OrderViewEndServlet extends HttpServlet {
 			int pageNo = pageStart;
 			//1.이전
 				if(pageNo!=1) {
-					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&cPage="+(pageNo-1)+"'≪</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&cPage="+(pageNo-1)+"'>≪</a></li>";
 					
 				}
 			//2.pageNo
@@ -93,7 +93,7 @@ public class OrderViewEndServlet extends HttpServlet {
 			int pageNo = pageStart;
 			//1.이전
 				if(pageNo!=1) {
-					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&year="+year+"&month="+month+"&cPage="+(pageNo-1)+"'≪</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/member/orderViewEnd?memberId="+memberId+"&year="+year+"&month="+month+"&cPage="+(pageNo-1)+"'>≪</a></li>";
 					
 				}
 			//2.pageNo

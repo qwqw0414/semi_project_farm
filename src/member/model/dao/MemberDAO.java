@@ -371,7 +371,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(totalContent+"dao11");
 
 		return totalContent;
 	}
@@ -393,8 +392,6 @@ public class MemberDAO {
 			if(rset.next()) {
 					result=rset.getInt("cnt");
 			}
-			
-			
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -464,7 +461,7 @@ public class MemberDAO {
 
 			if(rset.next()) {
 				totalContent = rset.getInt("cnt");
-				System.out.println(totalContent+"daodaodao");
+
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -472,7 +469,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(totalContent+"dao11");
 
 		return totalContent;
 	}
