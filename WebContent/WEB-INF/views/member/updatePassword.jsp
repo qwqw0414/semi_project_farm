@@ -49,7 +49,7 @@
 				class="form-text text-muted">비밀번호 확인</small><br />
 		</div>
 
-		<button type="submit" class="btn btn-primary pwd-find-btn">비밀번호 변경</button>
+		<button type="submit" class="btn btn-primary pwd-find-btn btn-main-bg">비밀번호 변경</button>
 	</form>
 	<%} %>
 

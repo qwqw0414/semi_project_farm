@@ -14,7 +14,6 @@
 	}
 	String pageBar = (String)request.getAttribute("pageBar");
 	String byStatus = (String)request.getAttribute("byStatus");
-	System.out.println(byStatus);
 %>
 <h1 class="text-center main-color page-title">입·출고 수행</h1>
 <hr class="divide" />
@@ -32,7 +31,7 @@
 				<option value="" disabled selected hidden>상품 선택</option>
 				<%=option %>
 			</select>
-			<input type="number" id="amount" name="amount" placeholder="수량" min="0" required>
+			<input type="number" id="amount" name="amount" placeholder="수량" min="0" max="100000" required>
 			<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
 			<div class="input-group-append">
 			<input type="hidden" name="byStatus" id="byStatus" />
@@ -117,12 +116,15 @@ function productIOValidate(){
 		$amount.focus();
 		return false;
 	}
+
 	return true;
 }
 function viewProductIO(byStatus){
 	location.href="<%=request.getContextPath()%>/admin/productIOList?byStatus="+byStatus;
 }
 $(()=>{
+	var $amount = $("#amount");
+	console.log($amount);
 	$("input:checkbox").on('click', function(){
 		var $box = $(this);
 		if($box.is(":checked")){

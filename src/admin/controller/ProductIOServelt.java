@@ -28,6 +28,9 @@ public class ProductIOServelt extends HttpServlet {
 		String status = request.getParameter("selectIO");
 		String memberId = request.getParameter("memberId");
 		System.out.println("입출고@pId="+pId);
+		System.out.println("입출고@amount="+amount);
+		System.out.println("입출고@status="+status);
+		System.out.println("입출고@memberId="+memberId);
 		ProductIO pIO = new ProductIO(0,pId,memberId,status,amount,null);
 		
 		//2. 업무로직

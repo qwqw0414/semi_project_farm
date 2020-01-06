@@ -210,7 +210,7 @@ $(()=>{
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productList">상품 관리</a>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productIOList">재고 관리</a>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/productOrderList">주문 관리</a>
-					<a class="dropdown-item" href="<%=request.getContextPath()%>/research/researchView">수입 통계</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/research/researchView">수익 통계</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/admin/memberList">회원 관리 리스트</a>
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView?memberId=<%=memberLoggedIn.getMemberId()%>">내 정보</a>
