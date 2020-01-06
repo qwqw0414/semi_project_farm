@@ -12,7 +12,6 @@
 <%
 	List<OrderListProduct> list = (List<OrderListProduct>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
-	System.out.println("pageBar= "+pageBar);
 	
 	Date date = new Date();	
 	SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM");
@@ -30,10 +29,7 @@
 		year = tYear;
 		month = tMonth;
 	}
-	
-	System.out.println(tMonth);
-	System.out.println(year);
-	System.out.println(month);
+
 %>
 <h1 class="main-color text-center page-title">구매 내역 보기</h1>
 <hr class="divide"/>
@@ -51,14 +47,16 @@
 </select>
 <select name="month" id="month" class="custom-select my-1 mr-sm-2">
 	<% for(int i=1;i<=12;i++) { 
-		if(month != tMonth && month==i){%>
+		if(month == tMonth&&month==i){%>
 			<option value="<%=i%>" selected="selected"><%=i %>월</option>
-		<% continue; } else if(month == tMonth){ %>
+		<% 
+		} else {
+			if((month != tMonth) && (month==i)){%>
 			<option value="<%=i%>" selected="selected"><%=i %>월</option>
-		<% continue; }%>
-		
-		<option value="<%=i%>"><%=i %>월</option>
-	
+			<%}%>
+			<option value="<%=i%>"><%=i %>월</option>
+		<%}%>
+
 	<%} %>
 </select>
 	<input type="submit" value="검색" class="btn btn-success btn-main-bg"/>

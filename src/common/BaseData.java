@@ -2,7 +2,7 @@ package common;
 
 public class BaseData {
 	private final int INDEXPAGENUM = 12; 
-	private final int PAGENUM = 8; //numPerPage
+	private final int PAGENUM = 10; //numPerPage
 	private final int PAGEBARSIZE = 5; //pageBarSize
 	
 	public BaseData() {
