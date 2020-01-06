@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import admin.model.service.AdminService;
 import product.model.vo.OrderListProduct;
 
-@WebServlet("/admin/productResearch")
+@WebServlet(urlPatterns="/admin/productResearch", name ="ProductResearchServlet")
 public class ProductResearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -16,7 +16,7 @@ import product.model.vo.OrderList;
 /**
  * Servlet implementation class AdminProductOrderListServlet
  */
-@WebServlet("/admin/productOrderList")
+@WebServlet(urlPatterns="/admin/productOrderList", name ="AdminProductOrderListServlet")
 public class AdminProductOrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

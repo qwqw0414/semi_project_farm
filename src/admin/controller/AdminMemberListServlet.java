@@ -18,7 +18,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class AdminMemberListServlet
  */
-@WebServlet("/admin/memberList")
+@WebServlet(urlPatterns="/admin/memberList", name ="AdminMemberListServlet")
 public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -62,7 +62,9 @@
     position: relative;
 }
 </style>
-
+<script>
+location.href = "<%=request.getContextPath()%>/product/productView";
+</script>
 <title>semi-project</title>
 </head>
 <body>

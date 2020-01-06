@@ -17,7 +17,7 @@ import product.model.vo.Product;
 /**
  * Servlet implementation class AdminProductUpdateServlet
  */
-@WebServlet("/admin/productUpdate")
+@WebServlet(urlPatterns="/admin/productUpdate", name ="AdminProductUpdateServlet")
 public class AdminProductUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
