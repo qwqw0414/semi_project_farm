@@ -1,4 +1,5 @@
 
+<%@page import="common.util.Utils"%>
 <%@page import="com.sun.org.apache.bcel.internal.generic.GETSTATIC"%>
 <%@page import="product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -94,7 +95,6 @@ $(()=>{
 			<tr>
 				<th>카테고리</th>
 				<th>상품명</th>
-				<th>상품정보</th>
 				<th>가격</th>
 				<th>할인</th>
 				<th>재고</th>
@@ -115,9 +115,12 @@ $(()=>{
 			<tr>
 				<td><%=p.getCategory() %></td>
 				<td><%=p.getpName() %></td>
-				<td><%=p.getpInfo() %></td>
-				<td><%=p.getPrice() %></td>
-				<td><%=p.getDiscount() %></td>
+				<td><%=new Utils().numberFormat(p.getPrice())%>원</td>
+<%if(p.getDiscount() > 0){%>
+				<td><%=(int)(p.getDiscount()*100)%>%</td>
+<%}else{%>
+				<td>-</td>
+<%} %>
 				<td><%=p.getStock() %></td>
 			</tr>
 
