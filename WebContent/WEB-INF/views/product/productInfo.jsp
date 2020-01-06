@@ -1,3 +1,4 @@
+<%@page import="product.model.vo.OrderList"%>
 <%@page import="common.util.Utils"%>
 <%@page import="product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,7 @@
 <%@ include file ="/WEB-INF/views/common/header.jsp"%>
 <%
 	Product p = (Product)request.getAttribute("product");
+	OrderList list = (OrderList)request.getAttribute("checkPurchase");
 %>
 <div class="container">
 <h1 class="text-center main-color">상품 상세보기</h1>
@@ -72,7 +74,8 @@
 					value="<%=memberLoggedIn != null ? memberLoggedIn.getMemberId() : ""%>" />
 				<div class="input-group mb-3">
 				<input type="text" class="form-control" name="comments"
-					placeholder="리뷰를 입력하세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+					placeholder='<%=list==null?"구매자만 입력할 수 있습니다":"리뷰를 작성해 주세요" %>' <%=list==null?"readonly":"" %>
+					aria-label="Recipient's username" aria-describedby="button-addon2">
 					<div class="input-group-append">
 						<button class="btn btn-success" type="submit"
 							id="btn-insert">작성</button>

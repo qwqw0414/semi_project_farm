@@ -47,7 +47,6 @@
 			<tr>
 				<th>입·출고</th>
 				<th>상품명</th>
-				<th>담당자 아이디</th>
 				<th>수량</th>
 				<th>입·출고일</th>
 			</tr>
@@ -90,7 +89,6 @@
 			<tr >
 				<td><%=("I".equals(pIO.getStatus()))?"<h5><span class='badge badge-pill badge-success'>입고</span></h5>":"<h5><span class='badge badge-pill badge-danger'>출고</span></h5>" %></td>
 				<td><%=pIO.getpName() %></td>
-				<td><%=pIO.getMemberId() %></td>
 				<td><%=pIO.getAmount() %></td>
 				<td><%=pIO.getIoDate() %></td>
 			</tr>
