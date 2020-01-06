@@ -73,6 +73,7 @@
 			<th class="main-bg-border" scope="col">수량</th>
 			<th class="main-bg-border" scope="col">가격</th>
 			<th class="main-bg-border" scope="col">배송조회</th>
+			<th class="main-bg-border" scope="col">주문취소</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -84,6 +85,7 @@
 			<td><%=o.getAmount() %></td>
 			<td><%=o.getPrice() %></td>
 			<td><%="N".equals(o.getStatus())?"준비중":"배송완료" %></td>
+			<td><button onclick="deleteOrder(<%=o.getOrderId()%>);">x</button></td>
 		</tr>
 		<% } %>
 	</tbody>
@@ -93,6 +95,12 @@
 	<%=pageBar%>
 </ul>
 
+<script>
+function deleteOrder(orderId){
+	var memberId = "<%=memberLoggedIn.getMemberId()%>";
+	location.href = "<%=request.getContextPath()%>/member/deleteOrder?orderId="+orderId;
+}
 
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

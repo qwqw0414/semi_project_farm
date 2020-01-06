@@ -178,6 +178,22 @@ public class MemberService {
 		return totalContent;
 		
 	}
+
+	public int deleteOrder(int orderId) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().deleteOrder(conn, orderId);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 }
