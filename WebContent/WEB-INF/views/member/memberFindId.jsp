@@ -39,7 +39,7 @@
 			아이디 : <%=m.getMemberId() %>
 		</h6>	
 
-		<button type="button" class="btn btn-primary enroll-btn" onclick="location.href='<%=request.getContextPath()%>/member/memberLogin'">로그인 하러가기</button>
+		<button type="button" class="btn btn-primary enroll-btn btn-main-bg" onclick="location.href='<%=request.getContextPath()%>/member/memberLogin'">로그인 하러가기</button>
 	</div>
 	
 	<%} %>

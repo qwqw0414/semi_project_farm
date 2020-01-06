@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div id="researchView">
-    <h1 class="main-color text-center page-title">수입 통계</h1>
+    <h1 class="main-color text-center page-title">수익 통계</h1>
 	<hr class="divide"/>
     <!-- 월간 총 수익 -->
 
