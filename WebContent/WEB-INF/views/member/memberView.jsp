@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<% Member m = (Member)request.getAttribute("member"); %>
 <div class="memberView-container mx-auto">
-<h1 class="main-color text-center page-title">마이 페이지</h1>
+<h1 class="main-color text-center page-title">회원 정보</h1>
 <hr class="divide"/>
 <div class="container">
     <form action="<%=request.getContextPath()%>/member/memberUpdate" method="POST" onsubmit="return enrollValidate();">

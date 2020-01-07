@@ -7,7 +7,7 @@
 %>
 
 <div class="adminProductView-container mx-auto">
-<h1 class="text-center main-color page-title">상품 등록</h1>
+<h1 class="text-center main-color page-title">상품 정보</h1>
 <hr class="divide" />
 <form action="<%=request.getContextPath()%>/admin/productUpdateEnd" 
 	  method="post"
