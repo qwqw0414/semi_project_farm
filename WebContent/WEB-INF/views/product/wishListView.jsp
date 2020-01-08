@@ -39,7 +39,7 @@ $(()=>{
 
 	$("#btnOrder").click(()=>{
 
-		if(!confirm("구입?"))
+		if(!confirm("구입 하시겠습니까?"))
 			return;
 
 		var $check = $(".check-WishList");
