@@ -14,7 +14,7 @@ import product.model.vo.ProductIO;
 /**
  * Servlet implementation class inputProductIOServlet
  */
-@WebServlet("/admin/productIO")
+@WebServlet(urlPatterns="/admin/productIO", name ="ProductIOServelt")
 public class ProductIOServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

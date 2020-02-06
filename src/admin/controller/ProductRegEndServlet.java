@@ -14,7 +14,7 @@ import admin.model.service.AdminService;
 import common.MvcFileRenamePolicy;
 import product.model.vo.Product;
 
-@WebServlet("/admin/productRegEnd")
+@WebServlet(urlPatterns="/admin/productRegEnd", name ="ProductRegEndServlet")
 public class ProductRegEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

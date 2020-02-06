@@ -18,7 +18,7 @@ import product.model.vo.Product;
 /**
  * Servlet implementation class AdminProductDeleteServlet
  */
-@WebServlet("/admin/productDelete")
+@WebServlet(urlPatterns="/admin/productDelete", name ="AdminProductDeleteServlet")
 public class AdminProductDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

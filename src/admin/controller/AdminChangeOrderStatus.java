@@ -21,7 +21,7 @@ import product.model.vo.OrderListProduct;
 /**
  * Servlet implementation class AdminChangeOrderStatus
  */
-@WebServlet("/admin/changeOrderStatus")
+@WebServlet(urlPatterns="/admin/changeOrderStatus", name ="AdminChangeOrderStatus")
 public class AdminChangeOrderStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
