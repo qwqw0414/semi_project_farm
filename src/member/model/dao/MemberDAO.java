@@ -448,6 +448,35 @@ public class MemberDAO {
 		return list;
 	}
 
+	public int ordertotalContentByDate(Connection conn, String memberId, int year, int month) {
+		int totalContent = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("ordertotalContentByDate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, year);
+			pstmt.setInt(3, month);
+			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				totalContent = rset.getInt("cnt");
+				System.out.println(totalContent+"daodaodao");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(totalContent+"dao11");
+
+		return totalContent;
+	}
+
 
 	
 	

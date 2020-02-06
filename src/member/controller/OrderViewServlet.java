@@ -56,7 +56,7 @@ public class OrderViewServlet extends HttpServlet {
 				if(cPage==pageNo) {
 					pageBar += "<li class='page-item active'><a class='page-link'>"+pageNo+"</a></li>";
 				} else {
-					pageBar += "<a href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a>\n";
+					pageBar += "<li class='page-item'><a class='page-link' href='"+request.getContextPath()+"/member/orderView?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a></li>";
 				}
 				pageNo++;
 			}

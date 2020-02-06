@@ -170,6 +170,14 @@ public class MemberService {
 		return result;
 
 	}
+
+	public int ordertotalContentByDate(String memberId, int year, int month) {
+		Connection conn = getConnection();
+		int totalContent = new MemberDAO().ordertotalContentByDate(conn,memberId, year, month);
+		close(conn);
+		return totalContent;
+		
+	}
 	
 	
 }

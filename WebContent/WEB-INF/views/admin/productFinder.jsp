@@ -74,7 +74,7 @@ $(()=>{
 		<div id="search-pName">
 			<form action="<%=request.getContextPath()%>/admin/productFinder">
 				<input type="hidden" name="searchType" value="pName" />
-				 <input type="search" name="searchKeyword" size="15"
+				 <input type="search" name="searchKeyword" size="14"
 					placeholder="검색할 삼품명을 입력하세요" class="form-control mr-sm-2" 
 					value="<%="pName".equals(searchType) ? searchKeyword : ""%>" /> <input
 					type="submit" value="검색" class="btn btn-success" />

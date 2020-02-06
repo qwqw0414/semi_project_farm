@@ -56,6 +56,7 @@
 		<% continue; } else if(month == tMonth){ %>
 			<option value="<%=i%>" selected="selected"><%=i %>월</option>
 		<% continue; }%>
+		
 		<option value="<%=i%>"><%=i %>월</option>
 	
 	<%} %>
